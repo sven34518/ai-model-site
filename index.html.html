@@ -3,461 +3,378 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VADYA OFM CLUB</title>
+  <title>AI Model Business</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          colors: {
-            ink: "#050505",
-            ember: "#ff7a1a",
-            emberSoft: "#ff9d52",
-            panel: "rgba(255,255,255,0.06)",
-            line: "rgba(255,255,255,0.1)"
-          },
           boxShadow: {
-            glow: "0 0 0 1px rgba(255,122,26,0.22), 0 0 24px rgba(255,122,26,0.28), 0 0 64px rgba(255,122,26,0.18)",
-            card: "0 18px 50px rgba(0,0,0,0.38)"
-          },
-          backgroundImage: {
-            mesh: "radial-gradient(circle at top, rgba(255,122,26,0.16), transparent 32%), radial-gradient(circle at 80% 20%, rgba(255,122,26,0.12), transparent 24%), linear-gradient(180deg, #0a0a0a 0%, #050505 52%, #020202 100%)"
+            glow: "0 0 0 1px rgba(255,122,26,.18),0 12px 32px rgba(255,122,26,.22),0 0 72px rgba(255,122,26,.16)",
+            soft: "0 24px 60px rgba(0,0,0,.35)"
           }
         }
       }
     };
   </script>
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
-
+    :root { color-scheme: dark; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background-color: #050505;
+      margin: 0;
+      font-family: "Manrope", sans-serif;
+      background:
+        radial-gradient(circle at top center, rgba(255,122,26,.18), transparent 28%),
+        radial-gradient(circle at 85% 15%, rgba(255,122,26,.1), transparent 22%),
+        linear-gradient(180deg, #0a0a0a 0%, #050505 45%, #070707 100%);
+      background-color: #070707;
     }
-
     .glass {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
     }
-
+    .soft-card {
+      background: linear-gradient(180deg, rgba(30,30,30,.95), rgba(20,20,20,.95));
+      border: 1px solid rgba(255,255,255,.07);
+      box-shadow: 0 16px 40px rgba(0,0,0,.3);
+    }
+    .hero-grid {
+      background-image:
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,.85), transparent 92%);
+    }
     .glow-button {
       position: relative;
       overflow: hidden;
+      transition: transform .25s ease, box-shadow .25s ease, background-color .25s ease;
     }
-
+    .glow-button:hover { transform: translateY(-2px); }
     .glow-button::after {
       content: "";
       position: absolute;
-      inset: -120%;
-      background: radial-gradient(circle, rgba(255,255,255,0.22) 0%, transparent 55%);
+      inset: -140%;
+      background: radial-gradient(circle, rgba(255,255,255,.22) 0%, transparent 55%);
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: opacity .25s ease;
     }
-
     .glow-button:hover::after,
-    .glow-button:focus-visible::after {
+    .glow-button:focus-visible::after { opacity: 1; }
+    .section-reveal {
+      opacity: 0;
+      transform: translateY(34px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .section-reveal.is-visible {
       opacity: 1;
+      transform: translateY(0);
+    }
+    .accent-text {
+      background: linear-gradient(180deg, #ffb066 0%, #ff7a1a 70%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .review-text {
+      font-style: italic;
+      letter-spacing: -.02em;
+    }
+    .price-outline {
+      box-shadow: inset 0 0 0 1px rgba(255,122,26,.3), 0 18px 42px rgba(255,122,26,.12);
     }
   </style>
 </head>
-<body class="bg-ink bg-mesh text-white antialiased">
+<body class="text-white antialiased">
   <div class="relative overflow-hidden">
-    <div class="pointer-events-none absolute inset-x-0 top-0 h-[32rem] bg-[radial-gradient(circle_at_top,rgba(255,122,26,0.18),transparent_42%)]"></div>
+    <div class="hero-grid pointer-events-none absolute inset-0 opacity-40"></div>
+    <div class="pointer-events-none absolute left-1/2 top-0 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-orange-500/10 blur-3xl"></div>
     <div class="mx-auto max-w-7xl px-4 pb-16 pt-4 sm:px-6 lg:px-8">
-      <header class="glass sticky top-4 z-30 rounded-full px-4 py-3 shadow-card">
-        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <a href="#top" class="text-sm font-semibold uppercase tracking-[0.3em] text-white/85">AI MODEL BUSINESS</a>
-          <nav class="flex flex-wrap items-center gap-2 text-sm text-white/65">
+      <header class="glass sticky top-3 z-30 rounded-full px-4 py-3 shadow-soft">
+        <div class="flex items-center justify-between gap-4">
+          <a href="#top" class="text-xs font-semibold uppercase tracking-[.34em] text-white/85 sm:text-sm">AI MODEL BUSINESS</a>
+          <nav class="hidden items-center gap-2 text-sm text-white/65 md:flex">
             <a href="#program" class="rounded-full px-3 py-2 transition hover:text-white">Программа</a>
-            <a href="#cases" class="rounded-full px-3 py-2 transition hover:text-white">Кейсы</a>
-            <a href="#pricing" class="rounded-full px-3 py-2 transition hover:text-white">Тарифы</a>
+            <a href="#results" class="rounded-full px-3 py-2 transition hover:text-white">Результаты</a>
+            <a href="#pricing" class="rounded-full px-3 py-2 transition hover:text-white">Форматы</a>
             <a href="#faq" class="rounded-full px-3 py-2 transition hover:text-white">FAQ</a>
+            <a href="#reviews" class="rounded-full px-3 py-2 transition hover:text-white">Отзывы</a>
           </nav>
+          <a href="#pricing" class="hidden rounded-full bg-orange-500 px-4 py-2 text-sm font-semibold text-black shadow-glow transition hover:bg-orange-400 sm:inline-flex">Купить</a>
         </div>
       </header>
-
       <main id="top" class="pt-8 sm:pt-10">
-        <section class="grid items-center gap-8 py-10 sm:py-16 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12">
-          <div>
-            <p class="mb-4 inline-flex rounded-full border border-orange-400/25 bg-orange-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-orange-200">
-              [VADYA OFM]
-            </p>
-            <h1 class="max-w-4xl text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-7xl">
-              Создай AI-модель. Запусти на западный рынок. Зарабатывай в долларах.
+        <section class="section-reveal py-8 sm:py-14">
+          <div class="mx-auto max-w-5xl text-center">
+            <div class="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-3 sm:gap-4">
+              <div class="glass inline-flex min-h-12 items-center rounded-full px-4 py-2 text-sm font-semibold uppercase tracking-[.18em] text-orange-200 sm:min-h-14 sm:px-6 sm:text-base">⚡ Пошаговая система запуска</div>
+              <div class="glass inline-flex min-h-12 items-center rounded-full px-4 py-2 text-sm font-medium text-white/88 sm:min-h-14 sm:px-6 sm:text-base">🔒 Анонимно</div>
+              <div class="glass inline-flex min-h-12 items-center rounded-full px-4 py-2 text-sm font-medium text-white/88 sm:min-h-14 sm:px-6 sm:text-base">🌍 Из любой точки мира</div>
+              <div class="glass inline-flex min-h-12 items-center rounded-full px-4 py-2 text-sm font-medium text-white/88 sm:min-h-14 sm:px-6 sm:text-base">💳 Минимум вложений</div>
+            </div>
+            <h1 class="mx-auto mt-10 max-w-5xl text-5xl font-extrabold leading-[.94] tracking-[-.06em] sm:text-6xl lg:text-8xl">
+              Собери и<br class="hidden sm:block" />
+              монетизируй свою<br />
+              <span class="accent-text">AI-модель</span> по шагам
             </h1>
-            <p class="mt-5 max-w-2xl text-base leading-7 text-white/70 sm:text-lg">
-              Пошаговая система монетизации виртуальных инфлюенсеров через TikTok и Instagram USA — от генерации первого изображения до $3,000–$10,000/мес на автопилоте.
+            <p class="mx-auto mt-6 max-w-3xl text-lg leading-8 text-white/62 sm:mt-8 sm:text-2xl sm:leading-10">
+              Пошаговая система от создания модели до продаж, которая подходит как новичкам, так и опытным.
             </p>
-            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a href="#pricing" class="glow-button inline-flex min-h-14 items-center justify-center rounded-2xl bg-orange-500 px-6 text-base font-semibold text-black shadow-glow transition hover:-translate-y-0.5 hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-300">
-                Войти в программу →
-              </a>
-              <a href="#program" class="inline-flex min-h-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-6 text-base font-semibold text-white transition hover:border-orange-400/40 hover:bg-white/10">
-                Посмотреть программу
-              </a>
-            </div>
-            <div class="mt-8 grid gap-3 sm:grid-cols-3">
-              <div class="glass rounded-3xl p-4">
-                <p class="text-2xl font-semibold text-orange-300">[01]</p>
-                <p class="mt-2 text-sm text-white/65">[КЛЮЧЕВАЯ МЕТРИКА / ПРЕИМУЩЕСТВО]</p>
-              </div>
-              <div class="glass rounded-3xl p-4">
-                <p class="text-2xl font-semibold text-orange-300">[02]</p>
-                <p class="mt-2 text-sm text-white/65">[КЛЮЧЕВАЯ МЕТРИКА / ПРЕИМУЩЕСТВО]</p>
-              </div>
-              <div class="glass rounded-3xl p-4">
-                <p class="text-2xl font-semibold text-orange-300">[03]</p>
-                <p class="mt-2 text-sm text-white/65">[КЛЮЧЕВАЯ МЕТРИКА / ПРЕИМУЩЕСТВО]</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="glass relative rounded-[2rem] p-5 shadow-card sm:p-6">
-            <div class="rounded-[1.5rem] border border-white/10 bg-black/50 p-5">
-              <div class="flex items-center justify-between">
-                <span class="rounded-full border border-orange-400/20 bg-orange-500/10 px-3 py-1 text-xs uppercase tracking-[0.24em] text-orange-200">
-                  [PREVIEW]
-                </span>
-                <span class="text-xs text-white/40">[ДАТА / LABEL]</span>
-              </div>
-              <div class="mt-6 space-y-4">
-                <div class="rounded-3xl border border-white/10 bg-white/[0.03] p-4">
-                  <p class="text-sm uppercase tracking-[0.22em] text-orange-200/90">[SCREEN / KPI]</p>
-                  <p class="mt-3 text-3xl font-semibold text-white">[ЗНАЧЕНИЕ]</p>
-                  <p class="mt-2 text-sm text-white/50">[ПОЯСНЕНИЕ]</p>
-                </div>
-                <div class="grid gap-4 sm:grid-cols-2">
-                  <div class="rounded-3xl border border-white/10 bg-white/[0.03] p-4">
-                    <p class="text-sm text-white/45">[ЛЕВЫЙ БЛОК]</p>
-                    <p class="mt-3 text-lg font-medium">[ТЕКСТ / ВЫГОДА]</p>
-                  </div>
-                  <div class="rounded-3xl border border-white/10 bg-white/[0.03] p-4">
-                    <p class="text-sm text-white/45">[ПРАВЫЙ БЛОК]</p>
-                    <p class="mt-3 text-lg font-medium">[ТЕКСТ / ВЫГОДА]</p>
-                  </div>
-                </div>
-                <div class="rounded-3xl border border-orange-400/20 bg-orange-500/10 p-4">
-                  <p class="text-sm text-orange-100/85">[КРАТКОЕ УТП / СПЕЦПРЕДЛОЖЕНИЕ]</p>
-                </div>
-              </div>
+            <div class="mx-auto mt-10 grid max-w-3xl gap-4 sm:mt-12">
+              <a href="#pricing" class="glow-button soft-card flex min-h-[76px] items-center justify-center rounded-[1.75rem] px-6 text-center text-xl font-extrabold tracking-[-.03em] text-white sm:min-h-[88px] sm:text-2xl">Купить "Самостоятельный"</a>
+              <a href="#advanced-form" class="glow-button flex min-h-[84px] items-center justify-center rounded-[1.75rem] bg-orange-500 px-6 text-center text-xl font-extrabold tracking-[-.03em] text-black shadow-glow sm:min-h-[96px] sm:text-3xl">Подать заявку на "Продвинутый"</a>
             </div>
           </div>
         </section>
-
-        <section class="grid gap-4 py-6 sm:grid-cols-2 lg:grid-cols-4">
-          <div class="glass rounded-[1.75rem] p-5">
-            <p class="text-sm uppercase tracking-[0.2em] text-orange-200">[ЭТАП 01]</p>
-            <p class="mt-3 text-lg font-medium">[КРАТКОЕ ОПИСАНИЕ БЛОКА]</p>
+        <section id="program" class="section-reveal py-14 sm:py-24">
+          <div class="mx-auto max-w-3xl text-center">
+            <p class="inline-flex rounded-full border border-orange-400/25 bg-orange-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-[.34em] text-orange-200 sm:text-sm">Программа обучения</p>
+            <h2 class="mt-6 text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">Освой систему<br /><span class="accent-text">по модулям</span></h2>
+            <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/60 sm:text-xl sm:leading-9">Каждый модуль раскрывается по нажатию и оформлен списком, чтобы на телефоне все читалось так же удобно, как на ПК.</p>
           </div>
-          <div class="glass rounded-[1.75rem] p-5">
-            <p class="text-sm uppercase tracking-[0.2em] text-orange-200">[ЭТАП 02]</p>
-            <p class="mt-3 text-lg font-medium">[КРАТКОЕ ОПИСАНИЕ БЛОКА]</p>
-          </div>
-          <div class="glass rounded-[1.75rem] p-5">
-            <p class="text-sm uppercase tracking-[0.2em] text-orange-200">[ЭТАП 03]</p>
-            <p class="mt-3 text-lg font-medium">[КРАТКОЕ ОПИСАНИЕ БЛОКА]</p>
-          </div>
-          <div class="glass rounded-[1.75rem] p-5">
-            <p class="text-sm uppercase tracking-[0.2em] text-orange-200">[ЭТАП 04]</p>
-            <p class="mt-3 text-lg font-medium">[КРАТКОЕ ОПИСАНИЕ БЛОКА]</p>
-          </div>
-        </section>
-
-        <!-- ПРОГРАММА -->
-        <section id="program" class="py-16 sm:py-24">
-          <div class="max-w-3xl">
-            <p class="text-sm font-semibold uppercase tracking-[0.28em] text-orange-200">Программа</p>
-            <h2 class="mt-4 text-3xl font-semibold sm:text-5xl">Структура обучения по модулям</h2>
-            <p class="mt-4 text-base leading-7 text-white/65">
-              7 разделов + бонусные материалы, которые проведут тебя от нуля к стабильному доходу
-            </p>
-          </div>
-
-          <div class="mt-8 space-y-4">
-            <article class="glass overflow-hidden rounded-[1.75rem] border border-white/10">
-              <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-7" aria-expanded="false">
-                <span>
-                  <span class="block text-sm uppercase tracking-[0.22em] text-orange-200">00</span>
-                  <span class="mt-2 block text-xl font-medium">Введение: старт и подготовка</span>
-                </span>
-                <span class="accordion-icon text-2xl text-orange-300 transition-transform">+</span>
+          <div class="mx-auto mt-10 max-w-5xl space-y-4">
+            <article class="soft-card overflow-hidden rounded-[2rem]">
+              <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-6" aria-expanded="false">
+                <span><span class="block text-sm uppercase tracking-[.32em] text-orange-200">00</span><span class="mt-2 block text-xl font-extrabold tracking-[-.03em] sm:text-2xl">Введение: рынок, деньги, правила игры</span></span>
+                <span class="accordion-icon flex h-11 w-11 items-center justify-center rounded-full border border-orange-400/20 bg-orange-500/10 text-2xl text-orange-300">+</span>
               </button>
-              <div class="accordion-content hidden border-t border-white/10 px-5 py-5 text-white/70 sm:px-7">
-                <p>Обзор программы и стратегия прохождения
-Список необходимых инструментов и регистраций
-Первичная настройка VPN
-Создание необходимых аккаунтов</p>
+              <div class="accordion-content hidden border-t border-white/10 px-5 pb-6 pt-1 sm:px-8">
+                <ul class="space-y-3 text-sm leading-7 text-white/72 sm:text-base sm:leading-8">
+                  <li>• Анатомия рынка: Fanvue, Passes, Patreon, OnlyFans и реальные цифры выручки.</li>
+                  <li>• Бизнес-модели: подписка, PPV, чаевые, брендовые интеграции и продажа ассетов.</li>
+                  <li>• Легальный фрейм и как не получить бан за AI-контент.</li>
+                  <li>• Финансовая модель новичка: от старта до первых $500 и дальше к $5k+.</li>
+                </ul>
               </div>
             </article>
-
-            <article class="glass overflow-hidden rounded-[1.75rem] border border-white/10">
-              <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-7" aria-expanded="false">
-                <span>
-                  <span class="block text-sm uppercase tracking-[0.22em] text-orange-200">01</span>
-                  <span class="mt-2 block text-xl font-medium">Создание уникальной AI-модели</span>
-                </span>
-                <span class="accordion-icon text-2xl text-orange-300 transition-transform">+</span>
+            <article class="soft-card overflow-hidden rounded-[2rem]">
+              <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-6" aria-expanded="false">
+                <span><span class="block text-sm uppercase tracking-[.32em] text-orange-200">01</span><span class="mt-2 block text-xl font-extrabold tracking-[-.03em] sm:text-2xl">Создание уникальной AI-модели</span></span>
+                <span class="accordion-icon flex h-11 w-11 items-center justify-center rounded-full border border-orange-400/20 bg-orange-500/10 text-2xl text-orange-300">+</span>
               </button>
-              <div class="accordion-content hidden border-t border-white/10 px-5 py-5 text-white/70 sm:px-7">
-                <p>[ТЕКСТ МОДУЛЯ / СПИСОК ТЕМ]</p>
+              <div class="accordion-content hidden border-t border-white/10 px-5 pb-6 pt-1 sm:px-8">
+                <ul class="space-y-3 text-sm leading-7 text-white/72 sm:text-base sm:leading-8">
+                  <li>• Концепция персонажа и выбор архетипа под западную аудиторию.</li>
+                  <li>• Генерация базового образа через Flux и настройка фотореализма.</li>
+                  <li>• LoRA: датасет, тегирование, обучение и консистентность образа.</li>
+                  <li>• Видео-контент для Reels и TikTok через Kling, Runway или Pika.</li>
+                </ul>
               </div>
             </article>
-
-            <article class="glass overflow-hidden rounded-[1.75rem] border border-white/10">
-              <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-7" aria-expanded="false">
-                <span>
-                  <span class="block text-sm uppercase tracking-[0.22em] text-orange-200">02</span>
-                  <span class="mt-2 block text-xl font-medium">Облачный деплой и техническая инфраструктура</span>
-                </span>
-                <span class="accordion-icon text-2xl text-orange-300 transition-transform">+</span>
+            <article class="soft-card overflow-hidden rounded-[2rem]">
+              <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-6" aria-expanded="false">
+                <span><span class="block text-sm uppercase tracking-[.32em] text-orange-200">02</span><span class="mt-2 block text-xl font-extrabold tracking-[-.03em] sm:text-2xl">Облачный деплой и инфраструктура</span></span>
+                <span class="accordion-icon flex h-11 w-11 items-center justify-center rounded-full border border-orange-400/20 bg-orange-500/10 text-2xl text-orange-300">+</span>
               </button>
-              <div class="accordion-content hidden border-t border-white/10 px-5 py-5 text-white/70 sm:px-7">
-                <p>[ТЕКСТ МОДУЛЯ / СПИСОК ТЕМ]</p>
+              <div class="accordion-content hidden border-t border-white/10 px-5 pb-6 pt-1 sm:px-8">
+                <ul class="space-y-3 text-sm leading-7 text-white/72 sm:text-base sm:leading-8">
+                  <li>• RunPod, Vast.ai, Replicate, Colab Pro: что дешевле и стабильнее.</li>
+                  <li>• Деплой ComfyUI, кастомные ноды и автоматизация batch-генерации.</li>
+                  <li>• Хранение контента, CDN, резервные копии и мониторинг 24/7.</li>
+                </ul>
               </div>
             </article>
-
-            <article class="glass overflow-hidden rounded-[1.75rem] border border-white/10">
-              <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-7" aria-expanded="false">
-                <span>
-                  <span class="block text-sm uppercase tracking-[0.22em] text-orange-200">03</span>
-                  <span class="mt-2 block text-xl font-medium">Прогрев аккаунтов и выход на западную аудиторию</span>
-                </span>
-                <span class="accordion-icon text-2xl text-orange-300 transition-transform">+</span>
+            <article class="soft-card overflow-hidden rounded-[2rem]">
+              <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-6" aria-expanded="false">
+                <span><span class="block text-sm uppercase tracking-[.32em] text-orange-200">03</span><span class="mt-2 block text-xl font-extrabold tracking-[-.03em] sm:text-2xl">Прогрев аккаунтов и выход на USA</span></span>
+                <span class="accordion-icon flex h-11 w-11 items-center justify-center rounded-full border border-orange-400/20 bg-orange-500/10 text-2xl text-orange-300">+</span>
               </button>
-              <div class="accordion-content hidden border-t border-white/10 px-5 py-5 text-white/70 sm:px-7">
-                <p>[ТЕКСТ МОДУЛЯ / СПИСОК ТЕМ]</p>
+              <div class="accordion-content hidden border-t border-white/10 px-5 pb-6 pt-1 sm:px-8">
+                <ul class="space-y-3 text-sm leading-7 text-white/72 sm:text-base sm:leading-8">
+                  <li>• Фазы прогрева TikTok и Instagram по неделям.</li>
+                  <li>• Действия в первые 72 часа и безопасная техническая подготовка аккаунта.</li>
+                  <li>• Хэштеги, гео, прогретые аккаунты и аналитика роста.</li>
+                </ul>
               </div>
             </article>
-
-            <article class="glass overflow-hidden rounded-[1.75rem] border border-white/10">
-              <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-7" aria-expanded="false">
-                <span>
-                  <span class="block text-sm uppercase tracking-[0.22em] text-orange-200">04</span>
-                  <span class="mt-2 block text-xl font-medium">Трафик USA: органика и платное продвижение</span>
-                </span>
-                <span class="accordion-icon text-2xl text-orange-300 transition-transform">+</span>
+            <article class="soft-card overflow-hidden rounded-[2rem]">
+              <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-6" aria-expanded="false">
+                <span><span class="block text-sm uppercase tracking-[.32em] text-orange-200">04</span><span class="mt-2 block text-xl font-extrabold tracking-[-.03em] sm:text-2xl">Трафик USA: органика и платное продвижение</span></span>
+                <span class="accordion-icon flex h-11 w-11 items-center justify-center rounded-full border border-orange-400/20 bg-orange-500/10 text-2xl text-orange-300">+</span>
               </button>
-              <div class="accordion-content hidden border-t border-white/10 px-5 py-5 text-white/70 sm:px-7">
-                <p>[ТЕКСТ МОДУЛЯ / СПИСОК ТЕМ]</p>
+              <div class="accordion-content hidden border-t border-white/10 px-5 pb-6 pt-1 sm:px-8">
+                <ul class="space-y-3 text-sm leading-7 text-white/72 sm:text-base sm:leading-8">
+                  <li>• Вирусные видео для TikTok и отличия стратегии в Instagram Reels.</li>
+                  <li>• Reddit и форумы как дополнительный источник органики.</li>
+                  <li>• Meta Ads, whitelist-кампании и аналитика воронки.</li>
+                </ul>
               </div>
             </article>
-
-            <article class="glass overflow-hidden rounded-[1.75rem] border border-white/10">
-              <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-7" aria-expanded="false">
-                <span>
-                  <span class="block text-sm uppercase tracking-[0.22em] text-orange-200">05</span>
-                  <span class="mt-2 block text-xl font-medium">Монетизация и работа с офферами</span>
-                </span>
-                <span class="accordion-icon text-2xl text-orange-300 transition-transform">+</span>
+            <article class="soft-card overflow-hidden rounded-[2rem]">
+              <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-6" aria-expanded="false">
+                <span><span class="block text-sm uppercase tracking-[.32em] text-orange-200">05</span><span class="mt-2 block text-xl font-extrabold tracking-[-.03em] sm:text-2xl">Монетизация и работа с офферами</span></span>
+                <span class="accordion-icon flex h-11 w-11 items-center justify-center rounded-full border border-orange-400/20 bg-orange-500/10 text-2xl text-orange-300">+</span>
               </button>
-              <div class="accordion-content hidden border-t border-white/10 px-5 py-5 text-white/70 sm:px-7">
-                <p>[ТЕКСТ МОДУЛЯ / СПИСОК ТЕМ]</p>
+              <div class="accordion-content hidden border-t border-white/10 px-5 pb-6 pt-1 sm:px-8">
+                <ul class="space-y-3 text-sm leading-7 text-white/72 sm:text-base sm:leading-8">
+                  <li>• Fanvue, Passes и OnlyFans: комиссии, правила и выплаты.</li>
+                  <li>• Воронка от бесплатного трафика до подписки и PPV.</li>
+                  <li>• Автоответы, кастомные запросы и брендовые интеграции.</li>
+                </ul>
               </div>
             </article>
-
-            <article class="glass overflow-hidden rounded-[1.75rem] border border-white/10">
-              <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-7" aria-expanded="false">
-                <span>
-                  <span class="block text-sm uppercase tracking-[0.22em] text-orange-200">06</span>
-                  <span class="mt-2 block text-xl font-medium">Получение выплат из СНГ</span>
-                </span>
-                <span class="accordion-icon text-2xl text-orange-300 transition-transform">+</span>
+            <article class="soft-card overflow-hidden rounded-[2rem]">
+              <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-6" aria-expanded="false">
+                <span><span class="block text-sm uppercase tracking-[.32em] text-orange-200">06</span><span class="mt-2 block text-xl font-extrabold tracking-[-.03em] sm:text-2xl">Получение выплат из СНГ</span></span>
+                <span class="accordion-icon flex h-11 w-11 items-center justify-center rounded-full border border-orange-400/20 bg-orange-500/10 text-2xl text-orange-300">+</span>
               </button>
-              <div class="accordion-content hidden border-t border-white/10 px-5 py-5 text-white/70 sm:px-7">
-                <p>[ТЕКСТ МОДУЛЯ / СПИСОК ТЕМ]</p>
+              <div class="accordion-content hidden border-t border-white/10 px-5 pb-6 pt-1 sm:px-8">
+                <ul class="space-y-3 text-sm leading-7 text-white/72 sm:text-base sm:leading-8">
+                  <li>• Wise, Payoneer, Capitalist, USDT и другие рабочие способы вывода.</li>
+                  <li>• KYC, W-8BEN, работа через партнера и базовая легализация.</li>
+                  <li>• Как сокращать потери на конвертации и хранении валюты.</li>
+                </ul>
               </div>
             </article>
-
-            <article class="glass overflow-hidden rounded-[1.75rem] border border-white/10">
-              <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-7" aria-expanded="false">
-                <span>
-                  <span class="block text-sm uppercase tracking-[0.22em] text-orange-200">07</span>
-                  <span class="mt-2 block text-xl font-medium">Масштабирование и автоматизация</span>
-                </span>
-                <span class="accordion-icon text-2xl text-orange-300 transition-transform">+</span>
+            <article class="soft-card overflow-hidden rounded-[2rem]">
+              <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-6" aria-expanded="false">
+                <span><span class="block text-sm uppercase tracking-[.32em] text-orange-200">07</span><span class="mt-2 block text-xl font-extrabold tracking-[-.03em] sm:text-2xl">Масштабирование и автоматизация</span></span>
+                <span class="accordion-icon flex h-11 w-11 items-center justify-center rounded-full border border-orange-400/20 bg-orange-500/10 text-2xl text-orange-300">+</span>
               </button>
-              <div class="accordion-content hidden border-t border-white/10 px-5 py-5 text-white/70 sm:px-7">
-                <p>[ТЕКСТ МОДУЛЯ / СПИСОК ТЕМ]</p>
+              <div class="accordion-content hidden border-t border-white/10 px-5 pb-6 pt-1 sm:px-8">
+                <ul class="space-y-3 text-sm leading-7 text-white/72 sm:text-base sm:leading-8">
+                  <li>• Автоматизация публикаций и коммуникации через n8n / Make.</li>
+                  <li>• Делегирование, мини-агентство и управление несколькими персонажами.</li>
+                  <li>• MRR, churn, LTV, продажа ассетов и рост в систему.</li>
+                </ul>
               </div>
             </article>
           </div>
         </section>
-
-        <!-- КЕЙСЫ -->
-        <section id="cases" class="py-16 sm:py-24">
-          <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div class="max-w-2xl">
-              <p class="text-sm font-semibold uppercase tracking-[0.28em] text-orange-200">Кейсы</p>
-              <h2 class="mt-4 text-3xl font-semibold sm:text-5xl">Результаты учеников и примеры роста</h2>
+        <section id="results" class="section-reveal py-14 sm:py-24">
+          <div class="mx-auto max-w-3xl text-center">
+            <h2 class="text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">Результаты<br /><span class="accent-text">учеников</span></h2>
+            <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/60 sm:text-xl sm:leading-9">Примеры реализации системы на практике. Шесть карточек в стиле твоих скринов: крупная цифра, эмодзи-иконка и аккуратная подача.</p>
+          </div>
+          <div class="mx-auto mt-10 grid max-w-6xl gap-5 md:grid-cols-2 xl:grid-cols-3">
+            <article class="soft-card rounded-[2rem] p-7"><div class="mb-8 flex h-16 w-16 items-center justify-center rounded-full bg-orange-500/12 text-3xl">💸</div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$200</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">за один день</p><p class="mt-6 text-lg leading-9 text-white/60">Спустя 3 недели после внедрения системы. До покупки программы модель уже была, но не было понимания, как на ней заработать.</p><p class="mt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, 3 недели в AI Model Business</p></article>
+            <article class="soft-card rounded-[2rem] p-7"><div class="mb-8 flex h-16 w-16 items-center justify-center rounded-full bg-orange-500/12 text-3xl">📈</div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">+1,900</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">целевых подписчиков</p><p class="mt-6 text-lg leading-9 text-white/60">Через 3 дня после внедрения стратегии из раздела по трафику. Результат превзошел ожидания и дал сильный толчок в продажах.</p><p class="mt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, 1 неделя в программе</p></article>
+            <article class="soft-card rounded-[2rem] p-7"><div class="mb-8 flex h-16 w-16 items-center justify-center rounded-full bg-orange-500/12 text-3xl">🤖</div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$1,500/мес</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">на автопилоте</p><p class="mt-6 text-lg leading-9 text-white/60">За 3 месяца выстроил систему, подключил ассистента по инструкциям из раздела масштабирования и стабилизировал выплаты.</p><p class="mt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, 3 месяца в системе</p></article>
+            <article class="soft-card rounded-[2rem] p-7"><div class="mb-8 flex h-16 w-16 items-center justify-center rounded-full bg-orange-500/12 text-3xl">🔥</div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$2,698/мес</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">через 6 недель</p><p class="mt-6 text-lg leading-9 text-white/60">Создана AI-фитнес модель, настроен TikTok и Fanvue через партнера. 180 платных подписчиков по $14.99 и 2–3 часа работы в день.</p><p class="mt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Дмитрий, Харьков</p></article>
+            <article class="soft-card rounded-[2rem] p-7"><div class="mb-8 flex h-16 w-16 items-center justify-center rounded-full bg-orange-500/12 text-3xl">🌍</div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$2,400/мес</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">через Instagram USA</p><p class="mt-6 text-lg leading-9 text-white/60">Эстетичная lifestyle AI-модель, рост до 11,000 подписчиков, брендовые коллаборации и стабильные подписки на Passes.</p><p class="mt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Алина, Алматы</p></article>
+            <article class="soft-card rounded-[2rem] p-7"><div class="mb-8 flex h-16 w-16 items-center justify-center rounded-full bg-orange-500/12 text-3xl">🚀</div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$9,200/мес</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">с мини-агентства</p><p class="mt-6 text-lg leading-9 text-white/60">После внедрения модуля по автоматизации собрал 4 персонажа, часть отдал партнерам и вышел на системную выручку.</p><p class="mt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Тимур, Ташкент</p></article>
+          </div>
+        </section>
+        <section id="pricing" class="section-reveal py-14 sm:py-24">
+          <div class="mx-auto max-w-3xl text-center">
+            <h2 class="text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">Форматы<br /><span class="accent-text">обучения</span></h2>
+            <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/60 sm:text-xl sm:leading-9">Выбирай под свой темп и цели. Продвинутый формат специально сделан самым ярким и заметным.</p>
+          </div>
+          <div class="mx-auto mt-10 grid max-w-7xl gap-6 xl:grid-cols-3">
+            <article class="soft-card rounded-[2rem] p-7">
+              <div class="mx-auto mb-6 inline-flex rounded-full bg-[#34313c] px-5 py-2 text-sm font-extrabold uppercase tracking-[.25em] text-white/90">Базовый</div>
+              <h3 class="text-4xl font-extrabold tracking-[-.05em]">Самостоятельный</h3>
+              <div class="mt-5"><p class="text-7xl font-extrabold tracking-[-.07em]">$249</p><p class="mt-1 text-3xl text-white/40">≈ 20,000 ₽</p></div>
+              <ul class="mt-8 space-y-4 text-lg text-white/82">
+                <li>✅ Все 7 разделов обучения</li><li>✅ 500+ промптов для генерации</li><li>✅ 50 скриптов продаж</li><li>✅ Контент-план на 30 дней</li><li>✅ Чек-листы для каждого этапа</li><li>✅ Доступ к материалам навсегда</li><li class="text-white/35">✕ Обновления программы</li><li class="text-white/35">✕ Личная поддержка</li><li class="text-white/35">✕ Общий чат с учениками</li>
+              </ul>
+              <a href="[ССЫЛКА_НА_ОПЛАТУ_САМОСТОЯТЕЛЬНЫЙ]" class="glow-button mt-8 flex min-h-[76px] items-center justify-center rounded-[1.5rem] border border-white/10 bg-white/5 px-6 text-center text-xl font-extrabold text-white">Купить сейчас</a>
+            </article>
+            <article class="price-outline relative rounded-[2rem] bg-[#161616] p-[1px] shadow-glow">
+              <div class="rounded-[calc(2rem-1px)] bg-[#151515] p-7">
+                <div class="mx-auto mb-6 inline-flex rounded-full border border-orange-400/30 bg-orange-500 px-5 py-2 text-sm font-extrabold uppercase tracking-[.25em] text-black">После отбора</div>
+                <h3 class="text-4xl font-extrabold tracking-[-.05em]">Продвинутый</h3>
+                <div class="mt-5"><p class="text-7xl font-extrabold tracking-[-.07em] text-white">$549</p><p class="mt-1 text-3xl text-white/40">≈ 49,000 ₽</p></div>
+                <ul class="mt-8 space-y-4 text-lg text-white/88">
+                  <li>✅ Всё из тарифа "Самостоятельный"</li><li>✅ Постоянные обновления программы</li><li>✅ Новые уроки и материалы бесплатно</li><li>✅ Личная поддержка в Telegram</li><li>✅ Ответы на вопросы в течение 24 часов</li><li>✅ Созвоны по запросу при необходимости</li><li>✅ Доступ в закрытый чат учеников</li><li>✅ Нетворкинг и обмен опытом</li><li>✅ Дополнительные материалы и кейсы</li><li>✅ Доступ навсегда</li>
+                </ul>
+                <a href="#advanced-form" class="glow-button mt-8 flex min-h-[84px] items-center justify-center rounded-[1.5rem] bg-orange-500 px-6 text-center text-2xl font-extrabold text-black shadow-glow">Подать заявку →</a>
+              </div>
+            </article>
+            <article class="soft-card rounded-[2rem] p-7">
+              <div class="mx-auto mb-6 inline-flex rounded-full bg-[#34313c] px-5 py-2 text-sm font-extrabold uppercase tracking-[.25em] text-white/90">Ограниченно</div>
+              <h3 class="text-4xl font-extrabold tracking-[-.05em]">Менторство</h3>
+              <div class="mt-5"><p class="text-7xl font-extrabold tracking-[-.07em]">$1,499</p><p class="mt-1 text-3xl text-white/40">≈ 119,000 ₽</p></div>
+              <ul class="mt-8 space-y-4 text-lg text-white/82">
+                <li>✅ Всё из тарифа "Продвинутый"</li><li>✅ Личная работа 1 на 1</li><li>✅ Персональный план запуска модели</li><li>✅ Еженедельные созвоны по прогрессу</li><li>✅ Проверка и корректировка контента</li><li>✅ Помощь с настройкой аккаунтов</li><li>✅ Работаем вместе до первого результата</li><li>✅ Приоритетная поддержка 24/7</li><li>✅ Прямой доступ в личные сообщения</li>
+              </ul>
+              <a href="[ССЫЛКА_НА_ОБСУЖДЕНИЕ_МЕНТОРСТВА]" class="glow-button mt-8 flex min-h-[76px] items-center justify-center rounded-[1.5rem] border border-orange-400/20 bg-orange-500/10 px-6 text-center text-xl font-extrabold text-orange-100">Обсудить формат</a>
+            </article>
+          </div>
+        </section>
+        <section id="advanced-form" class="section-reveal py-14 sm:py-24">
+          <div class="mx-auto max-w-4xl rounded-[2.2rem] border border-orange-400/20 bg-[#171717] p-7 shadow-glow sm:p-10">
+            <div class="mx-auto inline-flex rounded-full border border-orange-400/25 bg-orange-500/10 px-5 py-2 text-sm font-extrabold uppercase tracking-[.25em] text-orange-200">Отбор на продвинутый формат</div>
+            <div class="mx-auto mt-8 max-w-3xl text-center">
+              <h2 class="text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">Заявка на<br /><span class="accent-text">"Продвинутый"</span></h2>
+              <p class="mt-6 text-lg leading-9 text-white/62 sm:text-2xl">Чтобы сохранить качество поддержки, мы не берем всех. Процесс: анкета → решение → созвон → оплата. Мы можем отказать, если формат обучения вам не подходит.</p>
             </div>
-            <p class="max-w-xl text-white/60">Здесь можно вручную вставить реальные кейсы, цифры, фотографии, скриншоты и короткие истории трансформации.</p>
-          </div>
-
-          <div class="mt-8 grid gap-5 lg:grid-cols-3">
-            <article class="glass rounded-[1.75rem] p-6">
-              <p class="text-sm uppercase tracking-[0.2em] text-orange-200">[КЕЙС 01]</p>
-              <h3 class="mt-3 text-2xl font-medium">[ИМЯ / ГОРОД / ВОЗРАСТ]</h3>
-              <p class="mt-4 text-sm leading-7 text-white/65">[ТОЧКА А / ЧТО СДЕЛАЛ / ТОЧКА Б]</p>
-            </article>
-            <article class="glass rounded-[1.75rem] p-6">
-              <p class="text-sm uppercase tracking-[0.2em] text-orange-200">[КЕЙС 02]</p>
-              <h3 class="mt-3 text-2xl font-medium">[ИМЯ / ГОРОД / ВОЗРАСТ]</h3>
-              <p class="mt-4 text-sm leading-7 text-white/65">[ТОЧКА А / ЧТО СДЕЛАЛ / ТОЧКА Б]</p>
-            </article>
-            <article class="glass rounded-[1.75rem] p-6">
-              <p class="text-sm uppercase tracking-[0.2em] text-orange-200">[КЕЙС 03]</p>
-              <h3 class="mt-3 text-2xl font-medium">[ИМЯ / ГОРОД / ВОЗРАСТ]</h3>
-              <p class="mt-4 text-sm leading-7 text-white/65">[ТОЧКА А / ЧТО СДЕЛАЛ / ТОЧКА Б]</p>
-            </article>
-            <article class="glass rounded-[1.75rem] p-6">
-              <p class="text-sm uppercase tracking-[0.2em] text-orange-200">[КЕЙС 04]</p>
-              <h3 class="mt-3 text-2xl font-medium">[ИМЯ / ГОРОД / ВОЗРАСТ]</h3>
-              <p class="mt-4 text-sm leading-7 text-white/65">[ТОЧКА А / ЧТО СДЕЛАЛ / ТОЧКА Б]</p>
-            </article>
-            <article class="glass rounded-[1.75rem] p-6">
-              <p class="text-sm uppercase tracking-[0.2em] text-orange-200">[КЕЙС 05]</p>
-              <h3 class="mt-3 text-2xl font-medium">[ИМЯ / ГОРОД / ВОЗРАСТ]</h3>
-              <p class="mt-4 text-sm leading-7 text-white/65">[ТОЧКА А / ЧТО СДЕЛАЛ / ТОЧКА Б]</p>
-            </article>
-            <article class="rounded-[1.75rem] border border-dashed border-orange-400/25 bg-orange-500/5 p-6">
-              <p class="text-sm uppercase tracking-[0.2em] text-orange-200">[ДОП. БЛОК]</p>
-              <h3 class="mt-3 text-2xl font-medium">[ОТЗЫВ / СКРИН / СОЦИАЛЬНОЕ ДОКАЗАТЕЛЬСТВО]</h3>
-              <p class="mt-4 text-sm leading-7 text-white/65">[СОДЕРЖИМОЕ]</p>
-            </article>
-          </div>
-        </section>
-
-        <!-- ТАРИФЫ -->
-        <section id="pricing" class="py-16 sm:py-24">
-          <div class="max-w-2xl">
-            <p class="text-sm font-semibold uppercase tracking-[0.28em] text-orange-200">Тарифы</p>
-            <h2 class="mt-4 text-3xl font-semibold sm:text-5xl">Форматы участия и офферы</h2>
-            <p class="mt-4 text-base leading-7 text-white/65">В этом блоке оставлены заметные места для ручной замены цены, состава, бонусов и дедлайнов.</p>
-          </div>
-
-          <div class="mt-8 grid gap-6 lg:grid-cols-2">
-            <article class="glass rounded-[2rem] p-6 shadow-card">
-              <p class="text-sm uppercase tracking-[0.22em] text-orange-200">[ТАРИФ 01]</p>
-              <div class="mt-4 flex items-end justify-between gap-4">
-                <h3 class="text-3xl font-semibold">[НАЗВАНИЕ ТАРИФА]</h3>
-                <span class="text-xl font-medium text-orange-300">[ЦЕНА]</span>
-              </div>
-              <p class="mt-4 text-white/65">[ДЛЯ КОГО / КОРОТКОЕ ОПИСАНИЕ]</p>
-              <div class="mt-6 rounded-[1.5rem] border border-white/10 bg-black/30 p-5 text-sm leading-7 text-white/75">
-                <p>[ЧТО ВХОДИТ / СПИСОК]</p>
-              </div>
-              <a href="#cta" class="glow-button mt-6 inline-flex min-h-14 w-full items-center justify-center rounded-2xl bg-white px-6 text-base font-semibold text-black transition hover:bg-orange-100">
-                [КНОПКА ТАРИФА]
-              </a>
-            </article>
-
-            <article class="glass relative rounded-[2rem] border border-orange-400/25 p-6 shadow-glow">
-              <div class="absolute right-5 top-5 rounded-full bg-orange-500 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-black">
-                [POPULAR]
-              </div>
-              <p class="text-sm uppercase tracking-[0.22em] text-orange-200">[ТАРИФ 02]</p>
-              <div class="mt-4 flex items-end justify-between gap-4">
-                <h3 class="text-3xl font-semibold">[НАЗВАНИЕ ТАРИФА]</h3>
-                <span class="text-xl font-medium text-orange-300">[ЦЕНА]</span>
-              </div>
-              <p class="mt-4 text-white/65">[ДЛЯ КОГО / КОРОТКОЕ ОПИСАНИЕ]</p>
-              <div class="mt-6 rounded-[1.5rem] border border-white/10 bg-black/30 p-5 text-sm leading-7 text-white/75">
-                <p>[ЧТО ВХОДИТ / СПИСОК]</p>
-              </div>
-              <div class="mt-5 rounded-[1.5rem] border border-orange-400/20 bg-orange-500/10 p-4 text-sm text-orange-100/90">
-                [БОНУС / УСИЛИТЕЛЬ ОФФЕРА]
-              </div>
-              <a href="#cta" class="glow-button mt-6 inline-flex min-h-14 w-full items-center justify-center rounded-2xl bg-orange-500 px-6 text-base font-semibold text-black shadow-glow transition hover:bg-orange-400">
-                [КНОПКА ТАРИФА]
-              </a>
-            </article>
-          </div>
-        </section>
-
-        <!-- FAQ -->
-        <section id="faq" class="py-16 sm:py-24">
-          <div class="max-w-2xl">
-            <p class="text-sm font-semibold uppercase tracking-[0.28em] text-orange-200">FAQ</p>
-            <h2 class="mt-4 text-3xl font-semibold sm:text-5xl">Частые вопросы и возражения</h2>
-          </div>
-
-          <div class="mt-8 grid gap-4">
-            <article class="glass rounded-[1.75rem] p-5 sm:p-6">
-              <p class="text-lg font-medium">[ВОПРОС 01]</p>
-              <p class="mt-3 text-sm leading-7 text-white/65">[ОТВЕТ 01]</p>
-            </article>
-            <article class="glass rounded-[1.75rem] p-5 sm:p-6">
-              <p class="text-lg font-medium">[ВОПРОС 02]</p>
-              <p class="mt-3 text-sm leading-7 text-white/65">[ОТВЕТ 02]</p>
-            </article>
-            <article class="glass rounded-[1.75rem] p-5 sm:p-6">
-              <p class="text-lg font-medium">[ВОПРОС 03]</p>
-              <p class="mt-3 text-sm leading-7 text-white/65">[ОТВЕТ 03]</p>
-            </article>
-            <article class="glass rounded-[1.75rem] p-5 sm:p-6">
-              <p class="text-lg font-medium">[ВОПРОС 04]</p>
-              <p class="mt-3 text-sm leading-7 text-white/65">[ОТВЕТ 04]</p>
-            </article>
-          </div>
-        </section>
-
-        <section id="cta" class="py-16 sm:py-24">
-          <div class="glass rounded-[2rem] border border-orange-400/20 p-6 shadow-glow sm:p-10">
-            <div class="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
-              <div>
-                <p class="text-sm font-semibold uppercase tracking-[0.28em] text-orange-200">[ФИНАЛЬНЫЙ CTA]</p>
-                <h2 class="mt-4 text-3xl font-semibold sm:text-5xl">Рынок не ждёт. Следующий поток — [ДАТА].</h2>
-                <p class="mt-4 max-w-2xl text-base leading-7 text-white/70">
-                  Количество мест в менторском тарифе ограничено — 15 человек на поток. Каждый новый месяц ожидания — это месяц, когда другой уже строит свою систему.
-                </p>
-              </div>
-              <div class="flex flex-col gap-3">
-                <a href="[ССЫЛКА_НА_ОПЛАТУ]" class="glow-button inline-flex min-h-16 items-center justify-center rounded-2xl bg-orange-500 px-6 text-lg font-semibold text-black shadow-glow transition hover:bg-orange-400">
-                  Занять место →
-                </a>
-                <a href="[ССЫЛКА_НА_TELEGRAM]" class="inline-flex min-h-16 items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-6 text-center text-base font-semibold text-white transition hover:border-orange-400/40 hover:bg-white/10">
-                  Остались вопросы? Напиши нам в Telegram
-                </a>
-                <p class="text-center text-sm text-white/45">[ПОДСКАЗКА / ДЕДЛАЙН / ГАРАНТИЯ]</p>
-              </div>
+            <div class="mx-auto mt-8 grid max-w-3xl gap-4 sm:grid-cols-2">
+              <div class="soft-card rounded-[1.6rem] p-5 text-center text-lg font-semibold">✅ Анкета за 2 минуты</div>
+              <div class="soft-card rounded-[1.6rem] p-5 text-center text-lg font-semibold">✅ Решение в течение суток</div>
+              <div class="soft-card rounded-[1.6rem] p-5 text-center text-lg font-semibold">✅ Короткий созвон-знакомство</div>
+              <div class="soft-card rounded-[1.6rem] p-5 text-center text-lg font-semibold">✅ Разбор возможностей и желания</div>
             </div>
+            <a href="[ССЫЛКА_НА_АНКЕТУ]" class="glow-button mx-auto mt-8 flex min-h-[84px] max-w-xl items-center justify-center rounded-[1.7rem] bg-orange-500 px-8 text-center text-2xl font-extrabold text-black shadow-glow">Заполнить анкету →</a>
+          </div>
+        </section>
+        <section id="faq" class="section-reveal py-14 sm:py-24">
+          <div class="mx-auto max-w-3xl text-center">
+            <h2 class="text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">Частые<br /><span class="accent-text">вопросы</span></h2>
+            <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/60 sm:text-xl sm:leading-9">Темные карточки, акцентные иконки и удобное чтение на мобильном, как ты просил.</p>
+          </div>
+          <div class="mx-auto mt-10 max-w-5xl space-y-4">
+            <article class="soft-card overflow-hidden rounded-[2rem]"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-6" aria-expanded="false"><span class="text-lg font-extrabold tracking-[-.03em] sm:text-2xl">Это легально? Я не нарушаю закон, создавая AI-персонажа?</span><span class="faq-icon flex h-11 w-11 items-center justify-center rounded-full border border-orange-400/20 bg-orange-500/10 text-2xl text-orange-300">+</span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-6 pt-1 text-sm leading-7 text-white/70 sm:px-8 sm:text-base sm:leading-8">Да, если соблюдать правила платформ и не использовать реальные лица без согласия. В программе отдельно разобран правовой фрейм, маркировка AI-контента и безопасная работа с площадками.</div></article>
+            <article class="soft-card overflow-hidden rounded-[2rem]"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-6" aria-expanded="false"><span class="text-lg font-extrabold tracking-[-.03em] sm:text-2xl">Нужны ли технические знания и мощный компьютер?</span><span class="faq-icon flex h-11 w-11 items-center justify-center rounded-full border border-orange-400/20 bg-orange-500/10 text-2xl text-orange-300">+</span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-6 pt-1 text-sm leading-7 text-white/70 sm:px-8 sm:text-base sm:leading-8">Нет. Генерация и тренировка идут в облаке. Достаточно обычного ноутбука и браузера.</div></article>
+            <article class="soft-card overflow-hidden rounded-[2rem]"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-6" aria-expanded="false"><span class="text-lg font-extrabold tracking-[-.03em] sm:text-2xl">Сколько денег нужно на старт?</span><span class="faq-icon flex h-11 w-11 items-center justify-center rounded-full border border-orange-400/20 bg-orange-500/10 text-2xl text-orange-300">+</span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-6 pt-1 text-sm leading-7 text-white/70 sm:px-8 sm:text-base sm:leading-8">Минимальный старт около $50–100: облачный GPU для LoRA и прокси. Рекламный бюджет на старте не обязателен.</div></article>
+            <article class="soft-card overflow-hidden rounded-[2rem]"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-6" aria-expanded="false"><span class="text-lg font-extrabold tracking-[-.03em] sm:text-2xl">Как получать выплаты, если я из СНГ?</span><span class="faq-icon flex h-11 w-11 items-center justify-center rounded-full border border-orange-400/20 bg-orange-500/10 text-2xl text-orange-300">+</span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-6 pt-1 text-sm leading-7 text-white/70 sm:px-8 sm:text-base sm:leading-8">Разбираем Wise, Payoneer, Capitalist, USDT и работу через партнера. Это один из ключевых модулей программы.</div></article>
+            <article class="soft-card overflow-hidden rounded-[2rem]"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-6" aria-expanded="false"><span class="text-lg font-extrabold tracking-[-.03em] sm:text-2xl">Рынок не перегрет? Не поздно ли входить?</span><span class="faq-icon flex h-11 w-11 items-center justify-center rounded-full border border-orange-400/20 bg-orange-500/10 text-2xl text-orange-300">+</span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-6 pt-1 text-sm leading-7 text-white/70 sm:px-8 sm:text-base sm:leading-8">Платящая аудитория продолжает расти, а большинство конкурентов работают без стратегии и автоматизации. Хороший вход по-прежнему дает сильное преимущество.</div></article>
+            <article class="soft-card overflow-hidden rounded-[2rem]"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-6" aria-expanded="false"><span class="text-lg font-extrabold tracking-[-.03em] sm:text-2xl">Сколько времени нужно уделять в день?</span><span class="faq-icon flex h-11 w-11 items-center justify-center rounded-full border border-orange-400/20 bg-orange-500/10 text-2xl text-orange-300">+</span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-6 pt-1 text-sm leading-7 text-white/70 sm:px-8 sm:text-base sm:leading-8">На старте 2–4 часа в день, после настройки процессов и автоматизации обычно остается 30–60 минут на контроль.</div></article>
+          </div>
+        </section>
+        <section id="reviews" class="section-reveal py-14 sm:py-24">
+          <div class="mx-auto max-w-3xl text-center">
+            <h2 class="text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">Отзывы<br /><span class="accent-text">участников</span></h2>
+            <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/60 sm:text-xl sm:leading-9">Шесть отзывов с оранжевыми звездами и более выразительной типографикой.</p>
+          </div>
+          <div class="mx-auto mt-10 grid max-w-6xl gap-5 md:grid-cols-2 xl:grid-cols-3">
+            <article class="soft-card rounded-[2rem] p-7"><div class="text-3xl text-orange-400">★★★★★</div><p class="review-text mt-6 text-2xl leading-10 text-white/92">"Вообще начинал пробовать еще до покупки курса, собирал инфу по кускам. Здесь все максимально детально, и это сразу дало результат."</p><p class="mt-8 text-sm font-semibold uppercase tracking-[.18em] text-white/32">Ученик курса • результат за 3 дня</p></article>
+            <article class="soft-card rounded-[2rem] p-7"><div class="text-3xl text-orange-400">★★★★★</div><p class="review-text mt-6 text-2xl leading-10 text-white/92">"Больше всего понравилось, что не просто учат делать картинки. Здесь реально показывают, как из этого сделать систему и деньги."</p><p class="mt-8 text-sm font-semibold uppercase tracking-[.18em] text-white/32">Участница • TikTok + Fanvue</p></article>
+            <article class="soft-card rounded-[2rem] p-7"><div class="text-3xl text-orange-400">★★★★★</div><p class="review-text mt-6 text-2xl leading-10 text-white/92">"Зашел почти с нулем в технике. За неделю уже был готов персонаж, а дальше по шагам начал выстраивать трафик и продажи."</p><p class="mt-8 text-sm font-semibold uppercase tracking-[.18em] text-white/32">Ученик • старт с нуля</p></article>
+            <article class="soft-card rounded-[2rem] p-7"><div class="text-3xl text-orange-400">★★★★★</div><p class="review-text mt-6 text-2xl leading-10 text-white/92">"Отдельный плюс за модуль по выплатам. Без него я бы так и не понял, как все это легально и удобно вывести в своей стране."</p><p class="mt-8 text-sm font-semibold uppercase tracking-[.18em] text-white/32">Участник • СНГ выплаты</p></article>
+            <article class="soft-card rounded-[2rem] p-7"><div class="text-3xl text-orange-400">★★★★★</div><p class="review-text mt-6 text-2xl leading-10 text-white/92">"Продвинутый формат реально ускоряет. Не сидишь в сомнениях, просто делаешь шаги и быстро получаешь обратную связь по стратегии."</p><p class="mt-8 text-sm font-semibold uppercase tracking-[.18em] text-white/32">Участница • продвинутый формат</p></article>
+            <article class="soft-card rounded-[2rem] p-7"><div class="text-3xl text-orange-400">★★★★★</div><p class="review-text mt-6 text-2xl leading-10 text-white/92">"Самая сильная часть для меня была в автоматизации. Когда видишь, как это начинает работать почти без тебя, совсем иначе воспринимаешь весь проект."</p><p class="mt-8 text-sm font-semibold uppercase tracking-[.18em] text-white/32">Участник • автоматизация</p></article>
           </div>
         </section>
       </main>
     </div>
   </div>
-
   <script>
-    const accordionButtons = document.querySelectorAll(".accordion-toggle");
-
-    accordionButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const content = button.nextElementSibling;
-        const icon = button.querySelector(".accordion-icon");
-        const isOpen = button.getAttribute("aria-expanded") === "true";
-
-        accordionButtons.forEach((otherButton) => {
-          const otherContent = otherButton.nextElementSibling;
-          const otherIcon = otherButton.querySelector(".accordion-icon");
-
-          otherButton.setAttribute("aria-expanded", "false");
-          otherContent.classList.add("hidden");
-          otherIcon.textContent = "+";
-          otherIcon.classList.remove("rotate-45");
+    function setupAccordion(buttonSelector, iconSelector) {
+      const buttons = document.querySelectorAll(buttonSelector);
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const content = button.nextElementSibling;
+          const icon = button.querySelector(iconSelector);
+          const isOpen = button.getAttribute("aria-expanded") === "true";
+          buttons.forEach((otherButton) => {
+            const otherContent = otherButton.nextElementSibling;
+            const otherIcon = otherButton.querySelector(iconSelector);
+            otherButton.setAttribute("aria-expanded", "false");
+            otherContent.classList.add("hidden");
+            otherIcon.textContent = "+";
+          });
+          if (!isOpen) {
+            button.setAttribute("aria-expanded", "true");
+            content.classList.remove("hidden");
+            icon.textContent = "−";
+          }
         });
-
-        if (!isOpen) {
-          button.setAttribute("aria-expanded", "true");
-          content.classList.remove("hidden");
-          icon.textContent = "×";
-          icon.classList.add("rotate-45");
-        }
       });
-    });
+    }
+    setupAccordion(".accordion-toggle", ".accordion-icon");
+    setupAccordion(".faq-toggle", ".faq-icon");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add("is-visible");
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".section-reveal").forEach((section) => observer.observe(section));
   </script>
 </body>
 </html>
