@@ -27,10 +27,10 @@
       margin: 0;
       font-family: "Manrope", sans-serif;
       background:
-        radial-gradient(circle at top center, rgba(255,122,26,.18), transparent 28%),
-        radial-gradient(circle at 85% 15%, rgba(255,122,26,.1), transparent 22%),
-        linear-gradient(180deg, #0a0a0a 0%, #050505 45%, #070707 100%);
-      background-color: #070707;
+        radial-gradient(circle at top center, rgba(255,122,26,.08), transparent 22%),
+        radial-gradient(circle at 82% 12%, rgba(255,122,26,.045), transparent 18%),
+        linear-gradient(180deg, #0d0d0d 0%, #090909 38%, #070707 100%);
+      background-color: #0d0d0d;
     }
     .glass {
       background: rgba(255,255,255,.05);
@@ -53,7 +53,7 @@
     .glow-button {
       position: relative;
       overflow: hidden;
-      transition: transform .25s ease, box-shadow .25s ease, background-color .25s ease;
+      transition: transform .3s ease, box-shadow .3s ease, background-color .3s ease;
     }
     .glow-button:hover { transform: translateY(-2px); }
     .glow-button::after {
@@ -62,7 +62,7 @@
       inset: -140%;
       background: radial-gradient(circle, rgba(255,255,255,.22) 0%, transparent 55%);
       opacity: 0;
-      transition: opacity .25s ease;
+      transition: opacity .3s ease;
     }
     .glow-button:hover::after,
     .glow-button:focus-visible::after { opacity: 1; }
@@ -89,7 +89,7 @@
       box-shadow: inset 0 0 0 1px rgba(255,122,26,.3), 0 18px 42px rgba(255,122,26,.12);
     }
     .nav-link {
-      transition: color .2s ease, opacity .2s ease;
+      transition: color .3s ease, opacity .3s ease;
     }
     .nav-link:hover { color: #fff; }
     .icon-badge {
@@ -106,6 +106,11 @@
       height: 1.15rem;
       color: #ff7a1a;
       flex-shrink: 0;
+    }
+    .hero-badge {
+      background: linear-gradient(180deg, rgba(31,18,10,.95), rgba(20,14,12,.9));
+      border: 1px solid rgba(255,122,26,.22);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.03), 0 18px 30px rgba(0,0,0,.16);
     }
     .module-card {
       background: linear-gradient(180deg, rgba(22,22,22,.98), rgba(14,14,14,.98));
@@ -142,11 +147,23 @@
     .feature-off::before {
       display: none !important;
     }
+    .feature-off .x-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.15rem;
+      height: 1.15rem;
+      margin-right: .9rem;
+      color: rgba(184,184,190,.78);
+      vertical-align: middle;
+    }
     .accordion-icon,
     .faq-icon {
       flex-shrink: 0;
-      width: 3rem;
-      height: 3rem;
+      width: 2.25rem;
+      height: 2.25rem;
+      color: rgba(158,158,165,.84);
+      transition: transform .3s ease, color .3s ease;
     }
     .question-card {
       background: linear-gradient(180deg, rgba(24,24,24,.98), rgba(16,16,16,.98));
@@ -171,7 +188,7 @@
         transform: translateY(-12px);
         opacity: 0;
         pointer-events: none;
-        transition: opacity .25s ease, transform .25s ease;
+        transition: opacity .3s ease, transform .3s ease;
       }
       .mobile-panel.is-open {
         transform: translateY(0);
@@ -183,18 +200,12 @@
 </head>
 <body class="text-white antialiased">
   <div class="relative overflow-hidden">
-    <div class="hero-grid pointer-events-none absolute inset-0 opacity-40"></div>
-    <div class="pointer-events-none absolute left-1/2 top-0 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-orange-500/10 blur-3xl"></div>
+    <div class="hero-grid pointer-events-none absolute inset-0 opacity-30"></div>
+    <div class="pointer-events-none absolute left-1/2 top-0 h-[22rem] w-[22rem] -translate-x-1/2 rounded-full bg-orange-500/10 blur-3xl sm:h-[26rem] sm:w-[26rem]"></div>
     <div class="mx-auto max-w-7xl px-4 pb-16 pt-4 sm:px-6 lg:px-8">
       <header class="glass sticky top-3 z-40 rounded-[1.9rem] px-4 py-3 shadow-soft">
         <div class="flex items-center justify-between gap-4">
           <a href="#top" class="flex items-center gap-3">
-            <span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-500 text-black shadow-glow">
-              <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="7" y="7" width="10" height="10" rx="2"></rect>
-                <path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 15h3M1 9h3M1 15h3"></path>
-              </svg>
-            </span>
             <span class="text-lg font-extrabold tracking-[-.04em] text-white sm:text-2xl">
               VADYA <span class="text-orange-400">OFM</span> CLUB
             </span>
@@ -218,7 +229,7 @@
             </button>
           </div>
         </div>
-        <div id="mobile-menu-panel" class="mobile-panel mt-4 overflow-hidden rounded-[1.8rem] border border-white/8 bg-[#111111] p-5 md:hidden">
+        <div id="mobile-menu-panel" class="mobile-panel hidden mt-4 overflow-hidden rounded-[1.8rem] border border-white/8 bg-[#111111] p-5 md:hidden">
           <div class="grid gap-6 text-[2rem] font-extrabold tracking-[-.04em] text-white/90">
             <a href="#top" class="mobile-nav-link">О курсе</a>
             <a href="#program" class="mobile-nav-link">Программа</a>
@@ -233,7 +244,7 @@
         <section class="section-reveal py-8 sm:py-14">
           <div class="mx-auto max-w-5xl text-center">
             <div class="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-3 sm:gap-4">
-              <div class="glass inline-flex min-h-12 items-center gap-3 rounded-full px-4 py-2 text-sm font-semibold uppercase tracking-[.18em] text-orange-200 sm:min-h-14 sm:px-6 sm:text-base">
+              <div class="hero-badge inline-flex min-h-12 items-center gap-3 rounded-full px-4 py-2 text-sm font-semibold uppercase tracking-[.18em] text-orange-300 sm:min-h-14 sm:px-6 sm:text-base">
                 <svg viewBox="0 0 24 24" class="chip-icon" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"></path></svg>
                 Пошаговая система запуска
               </div>
@@ -274,7 +285,9 @@
             <article class="module-card overflow-hidden rounded-[2rem]">
               <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
                 <span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm">МОДУЛЬ 0</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Введение: рынок, деньги, правила игры</span></span>
-                <span class="accordion-icon flex items-center justify-center rounded-full border border-orange-400/20 bg-orange-500/10 text-2xl font-light text-orange-300">+</span>
+                <span class="accordion-icon flex items-center justify-center">
+                  <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+                </span>
               </button>
               <div class="accordion-content hidden border-t border-white/10 px-5 pb-7 pt-2 sm:px-8">
                 <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
@@ -288,7 +301,9 @@
             <article class="module-card overflow-hidden rounded-[2rem]">
               <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
                 <span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm">МОДУЛЬ 1</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Создание уникальной AI-модели</span></span>
-                <span class="accordion-icon flex items-center justify-center rounded-full border border-orange-400/20 bg-orange-500/10 text-2xl font-light text-orange-300">+</span>
+                <span class="accordion-icon flex items-center justify-center">
+                  <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+                </span>
               </button>
               <div class="accordion-content hidden border-t border-white/10 px-5 pb-7 pt-2 sm:px-8">
                 <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
@@ -302,7 +317,9 @@
             <article class="module-card overflow-hidden rounded-[2rem]">
               <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
                 <span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm">МОДУЛЬ 2</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Облачный деплой и инфраструктура</span></span>
-                <span class="accordion-icon flex items-center justify-center rounded-full border border-orange-400/20 bg-orange-500/10 text-2xl font-light text-orange-300">+</span>
+                <span class="accordion-icon flex items-center justify-center">
+                  <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+                </span>
               </button>
               <div class="accordion-content hidden border-t border-white/10 px-5 pb-7 pt-2 sm:px-8">
                 <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
@@ -315,7 +332,9 @@
             <article class="module-card overflow-hidden rounded-[2rem]">
               <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
                 <span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm">МОДУЛЬ 3</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Прогрев аккаунтов и выход на USA</span></span>
-                <span class="accordion-icon flex items-center justify-center rounded-full border border-orange-400/20 bg-orange-500/10 text-2xl font-light text-orange-300">+</span>
+                <span class="accordion-icon flex items-center justify-center">
+                  <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+                </span>
               </button>
               <div class="accordion-content hidden border-t border-white/10 px-5 pb-7 pt-2 sm:px-8">
                 <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
@@ -328,7 +347,9 @@
             <article class="module-card overflow-hidden rounded-[2rem]">
               <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
                 <span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm">МОДУЛЬ 4</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Трафик USA: органика и платное продвижение</span></span>
-                <span class="accordion-icon flex items-center justify-center rounded-full border border-orange-400/20 bg-orange-500/10 text-2xl font-light text-orange-300">+</span>
+                <span class="accordion-icon flex items-center justify-center">
+                  <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+                </span>
               </button>
               <div class="accordion-content hidden border-t border-white/10 px-5 pb-7 pt-2 sm:px-8">
                 <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
@@ -341,7 +362,9 @@
             <article class="module-card overflow-hidden rounded-[2rem]">
               <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
                 <span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm">МОДУЛЬ 5</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Монетизация и работа с офферами</span></span>
-                <span class="accordion-icon flex items-center justify-center rounded-full border border-orange-400/20 bg-orange-500/10 text-2xl font-light text-orange-300">+</span>
+                <span class="accordion-icon flex items-center justify-center">
+                  <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+                </span>
               </button>
               <div class="accordion-content hidden border-t border-white/10 px-5 pb-7 pt-2 sm:px-8">
                 <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
@@ -354,7 +377,9 @@
             <article class="module-card overflow-hidden rounded-[2rem]">
               <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
                 <span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm">МОДУЛЬ 6</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Получение выплат из СНГ</span></span>
-                <span class="accordion-icon flex items-center justify-center rounded-full border border-orange-400/20 bg-orange-500/10 text-2xl font-light text-orange-300">+</span>
+                <span class="accordion-icon flex items-center justify-center">
+                  <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+                </span>
               </button>
               <div class="accordion-content hidden border-t border-white/10 px-5 pb-7 pt-2 sm:px-8">
                 <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
@@ -367,7 +392,9 @@
             <article class="module-card overflow-hidden rounded-[2rem]">
               <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
                 <span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm">МОДУЛЬ 7</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Масштабирование и автоматизация</span></span>
-                <span class="accordion-icon flex items-center justify-center rounded-full border border-orange-400/20 bg-orange-500/10 text-2xl font-light text-orange-300">+</span>
+                <span class="accordion-icon flex items-center justify-center">
+                  <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+                </span>
               </button>
               <div class="accordion-content hidden border-t border-white/10 px-5 pb-7 pt-2 sm:px-8">
                 <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
@@ -404,7 +431,7 @@
               <h3 class="text-4xl font-extrabold tracking-[-.05em]">Самостоятельный</h3>
               <div class="mt-5"><p class="text-7xl font-extrabold tracking-[-.07em]">$249</p><p class="mt-1 text-3xl text-white/40">≈ 20,000 ₽</p></div>
               <ul class="feature-list mt-8 space-y-4 text-lg text-white/82">
-                <li>Все 7 разделов обучения</li><li>500+ промптов для генерации</li><li>50 скриптов продаж</li><li>Контент-план на 30 дней</li><li>Чек-листы для каждого этапа</li><li>Доступ к материалам навсегда</li><li class="feature-off text-white/35">Обновления программы</li><li class="feature-off text-white/35">Личная поддержка</li><li class="feature-off text-white/35">Общий чат с учениками</li>
+                <li>Все 7 разделов обучения</li><li>500+ промптов для генерации</li><li>50 скриптов продаж</li><li>Контент-план на 30 дней</li><li>Чек-листы для каждого этапа</li><li>Доступ к материалам навсегда</li><li class="feature-off text-white/35"><span class="x-icon"><svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></span>Обновления программы</li><li class="feature-off text-white/35"><span class="x-icon"><svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></span>Личная поддержка</li><li class="feature-off text-white/35"><span class="x-icon"><svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></span>Общий чат с учениками</li>
               </ul>
               <a href="[ССЫЛКА_НА_ОПЛАТУ_САМОСТОЯТЕЛЬНЫЙ]" class="glow-button mt-8 flex min-h-[76px] items-center justify-center rounded-[1.5rem] border border-white/10 bg-white/5 px-6 text-center text-xl font-extrabold text-white">Купить сейчас</a>
             </article>
@@ -432,7 +459,7 @@
         </section>
         <section class="section-reveal py-8 sm:py-12">
           <div class="mx-auto max-w-4xl text-center">
-            <p class="module-kicker text-xs font-extrabold sm:text-sm">Следующий этап</p>
+            <p class="mx-auto inline-flex rounded-full border border-white/12 bg-white/5 px-5 py-2 text-xs font-extrabold uppercase tracking-[.24em] text-white/70 sm:text-sm">Следующий этап</p>
             <h2 class="mt-4 text-4xl font-extrabold tracking-[-.05em] text-white sm:text-6xl">Отбор на<br /><span class="accent-text">продвинутый формат</span></h2>
             <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/56 sm:text-xl sm:leading-9">Ниже начинается отдельный блок отбора. Он отделен визуально, чтобы сразу было понятно: дальше идет заявка и условия входа в продвинутый формат.</p>
           </div>
@@ -445,10 +472,10 @@
               <p class="mt-6 text-lg leading-9 text-white/62 sm:text-2xl">Чтобы сохранить качество поддержки, мы не берем всех. Процесс: анкета → решение → созвон → оплата. Мы можем отказать, если формат обучения вам не подходит.</p>
             </div>
             <div class="mx-auto mt-8 grid max-w-3xl gap-4 sm:grid-cols-2">
-              <div class="soft-card rounded-[1.6rem] p-5 text-center text-lg font-semibold text-white/86">Анкета за 2 минуты</div>
-              <div class="soft-card rounded-[1.6rem] p-5 text-center text-lg font-semibold text-white/86">Решение в течение суток</div>
-              <div class="soft-card rounded-[1.6rem] p-5 text-center text-lg font-semibold text-white/86">Короткий созвон-знакомство</div>
-              <div class="soft-card rounded-[1.6rem] p-5 text-center text-lg font-semibold text-white/86">Разбор возможностей и желания</div>
+              <div class="glass rounded-[1.6rem] p-5 transition duration-300 hover:border-orange-400/25 hover:shadow-glow"><div class="flex items-start gap-4"><span class="icon-badge mt-1"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></span><div><p class="text-lg font-extrabold text-white">Анкета за 2 минуты</p><p class="mt-2 text-sm leading-6 text-white/45">Короткая форма без лишних шагов.</p></div></div></div>
+              <div class="glass rounded-[1.6rem] p-5 transition duration-300 hover:border-orange-400/25 hover:shadow-glow"><div class="flex items-start gap-4"><span class="icon-badge mt-1"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></span><div><p class="text-lg font-extrabold text-white">Решение в течение суток</p><p class="mt-2 text-sm leading-6 text-white/45">Обычно возвращаемся с ответом быстро.</p></div></div></div>
+              <div class="glass rounded-[1.6rem] p-5 transition duration-300 hover:border-orange-400/25 hover:shadow-glow"><div class="flex items-start gap-4"><span class="icon-badge mt-1"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></span><div><p class="text-lg font-extrabold text-white">Короткий созвон-знакомство</p><p class="mt-2 text-sm leading-6 text-white/45">Сверяем ожидания и формат участия.</p></div></div></div>
+              <div class="glass rounded-[1.6rem] p-5 transition duration-300 hover:border-orange-400/25 hover:shadow-glow"><div class="flex items-start gap-4"><span class="icon-badge mt-1"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></span><div><p class="text-lg font-extrabold text-white">Разбор возможностей</p><p class="mt-2 text-sm leading-6 text-white/45">Понимаем, подходит ли формат именно вам.</p></div></div></div>
             </div>
             <ul class="selection-list mx-auto mt-8 max-w-2xl space-y-4 text-lg leading-8 text-[#b1b1b6]">
               <li>Заполняете короткую анкету, чтобы мы увидели ваши цели и стартовую точку.</li>
@@ -468,12 +495,12 @@
             <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/56 sm:text-xl sm:leading-9">Обновил дизайн ответов: заголовки стали чище, иконки одинаковые на телефоне, а сами тексты легче сканировать взглядом.</p>
           </div>
           <div class="mx-auto mt-10 max-w-5xl space-y-4">
-            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Это легально? Я не нарушаю закон, создавая AI-персонажа?</span><span class="faq-icon flex items-center justify-center rounded-full border border-orange-400/20 bg-orange-500/10 text-2xl font-light text-orange-300">+</span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">Да, если соблюдать правила платформ и не использовать реальные лица без согласия. В программе отдельно разобран правовой фрейм, маркировка AI-контента и безопасная работа с площадками.</div></article>
-            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Нужны ли технические знания и мощный компьютер?</span><span class="faq-icon flex items-center justify-center rounded-full border border-orange-400/20 bg-orange-500/10 text-2xl font-light text-orange-300">+</span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">Нет. Генерация и тренировка идут в облаке. Достаточно обычного ноутбука и браузера.</div></article>
-            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Сколько денег нужно на старт?</span><span class="faq-icon flex items-center justify-center rounded-full border border-orange-400/20 bg-orange-500/10 text-2xl font-light text-orange-300">+</span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">Минимальный старт около $50–100: облачный GPU для LoRA и прокси. Рекламный бюджет на старте не обязателен.</div></article>
-            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Как получать выплаты, если я из СНГ?</span><span class="faq-icon flex items-center justify-center rounded-full border border-orange-400/20 bg-orange-500/10 text-2xl font-light text-orange-300">+</span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">Разбираем Wise, Payoneer, Capitalist, USDT и работу через партнера. Это один из ключевых модулей программы.</div></article>
-            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Рынок не перегрет? Не поздно ли входить?</span><span class="faq-icon flex items-center justify-center rounded-full border border-orange-400/20 bg-orange-500/10 text-2xl font-light text-orange-300">+</span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">Платящая аудитория продолжает расти, а большинство конкурентов работают без стратегии и автоматизации. Хороший вход по-прежнему дает сильное преимущество.</div></article>
-            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Сколько времени нужно уделять в день?</span><span class="faq-icon flex items-center justify-center rounded-full border border-orange-400/20 bg-orange-500/10 text-2xl font-light text-orange-300">+</span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">На старте 2–4 часа в день, после настройки процессов и автоматизации обычно остается 30–60 минут на контроль.</div></article>
+            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Это легально? Я не нарушаю закон, создавая AI-персонажа?</span><span class="faq-icon flex items-center justify-center"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">Да, если соблюдать правила платформ и не использовать реальные лица без согласия. В программе отдельно разобран правовой фрейм, маркировка AI-контента и безопасная работа с площадками.</div></article>
+            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Нужны ли технические знания и мощный компьютер?</span><span class="faq-icon flex items-center justify-center"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">Нет. Генерация и тренировка идут в облаке. Достаточно обычного ноутбука и браузера.</div></article>
+            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Сколько денег нужно на старт?</span><span class="faq-icon flex items-center justify-center"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">Минимальный старт около $50–100: облачный GPU для LoRA и прокси. Рекламный бюджет на старте не обязателен.</div></article>
+            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Как получать выплаты, если я из СНГ?</span><span class="faq-icon flex items-center justify-center"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">Разбираем Wise, Payoneer, Capitalist, USDT и работу через партнера. Это один из ключевых модулей программы.</div></article>
+            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Рынок не перегрет? Не поздно ли входить?</span><span class="faq-icon flex items-center justify-center"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">Платящая аудитория продолжает расти, а большинство конкурентов работают без стратегии и автоматизации. Хороший вход по-прежнему дает сильное преимущество.</div></article>
+            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Сколько времени нужно уделять в день?</span><span class="faq-icon flex items-center justify-center"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">На старте 2–4 часа в день, после настройки процессов и автоматизации обычно остается 30–60 минут на контроль.</div></article>
           </div>
         </section>
         <section id="reviews" class="section-reveal py-14 sm:py-24">
@@ -532,12 +559,12 @@
             const otherIcon = otherButton.querySelector(iconSelector);
             otherButton.setAttribute("aria-expanded", "false");
             otherContent.classList.add("hidden");
-            otherIcon.textContent = "+";
+            otherIcon.style.transform = "rotate(0deg)";
           });
           if (!isOpen) {
             button.setAttribute("aria-expanded", "true");
             content.classList.remove("hidden");
-            icon.textContent = "−";
+            icon.style.transform = "rotate(180deg)";
           }
         });
       });
@@ -552,6 +579,7 @@
     function setMobileMenuState(isOpen) {
       if (!mobileMenuButton || !mobileMenuPanel) return;
       mobileMenuButton.setAttribute("aria-expanded", String(isOpen));
+      mobileMenuPanel.classList.toggle("hidden", !isOpen);
       mobileMenuPanel.classList.toggle("is-open", isOpen);
       mobileMenuOpen.classList.toggle("hidden", isOpen);
       mobileMenuClose.classList.toggle("hidden", !isOpen);
