@@ -183,6 +183,26 @@
       transition: color .2s ease;
     }
     .footer-link:hover { color: #fff; }
+    .results-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+    .result-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 4rem;
+      height: 4rem;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,122,26,.16), rgba(255,122,26,.05));
+      color: #ff7a1a;
+      box-shadow: inset 0 0 0 1px rgba(255,122,26,.08);
+    }
+    .result-icon svg {
+      width: 1.55rem;
+      height: 1.55rem;
+    }
     @media (max-width: 767px) {
       .mobile-panel {
         transform: translateY(-12px);
@@ -202,8 +222,8 @@
   <div class="relative overflow-hidden">
     <div class="hero-grid pointer-events-none absolute inset-0 opacity-30"></div>
     <div class="pointer-events-none absolute left-1/2 top-0 h-[22rem] w-[22rem] -translate-x-1/2 rounded-full bg-orange-500/10 blur-3xl sm:h-[26rem] sm:w-[26rem]"></div>
-    <div class="mx-auto max-w-7xl px-4 pb-16 pt-4 sm:px-6 lg:px-8">
-      <header class="glass sticky top-3 z-40 rounded-[1.9rem] px-4 py-3 shadow-soft">
+    <div class="fixed left-1/2 top-3 z-50 w-[calc(100%-1.25rem)] max-w-[76rem] -translate-x-1/2 px-0 sm:top-4 sm:w-[calc(100%-2rem)]">
+      <header class="glass relative rounded-[1.9rem] px-4 py-3 shadow-soft sm:px-5">
         <div class="flex items-center justify-between gap-4">
           <a href="#top" class="flex items-center gap-3">
             <span class="text-lg font-extrabold tracking-[-.04em] text-white sm:text-2xl">
@@ -240,7 +260,9 @@
           <a href="#pricing" class="glow-button mt-8 flex min-h-[78px] items-center justify-center rounded-[1.6rem] bg-orange-500 px-6 text-center text-2xl font-extrabold text-black shadow-glow">Начать обучение</a>
         </div>
       </header>
-      <main id="top" class="pt-8 sm:pt-10">
+    </div>
+    <div class="mx-auto max-w-[76rem] px-5 pb-16 pt-24 sm:px-7 sm:pb-20 sm:pt-28 lg:px-10">
+      <main id="top" class="pt-4 sm:pt-6">
         <section class="section-reveal py-8 sm:py-14">
           <div class="mx-auto max-w-5xl text-center">
             <div class="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-3 sm:gap-4">
@@ -411,13 +433,13 @@
             <h2 class="text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">Результаты<br /><span class="accent-text">учеников</span></h2>
             <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/60 sm:text-xl sm:leading-9">Примеры реализации системы на практике</p>
           </div>
-          <div class="mx-auto mt-10 grid max-w-6xl gap-5 md:grid-cols-2 xl:grid-cols-3">
-            <article class="soft-card rounded-[2rem] p-7"><div class="mb-8 flex h-16 w-16 items-center justify-center rounded-full bg-orange-500/12 text-3xl">💸</div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$200</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">за один день</p><p class="mt-6 text-lg leading-9 text-white/60">Спустя 3 недели после внедрения системы. До покупки программы модель уже была, но не было понимания, как на ней заработать.</p><p class="mt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, 3 недели в AI Model Business</p></article>
-            <article class="soft-card rounded-[2rem] p-7"><div class="mb-8 flex h-16 w-16 items-center justify-center rounded-full bg-orange-500/12 text-3xl">📈</div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">+1,900</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">целевых подписчиков</p><p class="mt-6 text-lg leading-9 text-white/60">Через 3 дня после внедрения стратегии из раздела по трафику. Результат превзошел ожидания и дал сильный толчок в продажах.</p><p class="mt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, 1 неделя в программе</p></article>
-            <article class="soft-card rounded-[2rem] p-7"><div class="mb-8 flex h-16 w-16 items-center justify-center rounded-full bg-orange-500/12 text-3xl">🤖</div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$1,500/мес</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">на автопилоте</p><p class="mt-6 text-lg leading-9 text-white/60">За 3 месяца выстроил систему, подключил ассистента по инструкциям из раздела масштабирования и стабилизировал выплаты.</p><p class="mt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, 3 месяца в системе</p></article>
-            <article class="soft-card rounded-[2rem] p-7"><div class="mb-8 flex h-16 w-16 items-center justify-center rounded-full bg-orange-500/12 text-3xl">🔥</div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$2,698/мес</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">через 6 недель</p><p class="mt-6 text-lg leading-9 text-white/60">Создана AI-фитнес модель, настроен TikTok и Fanvue через партнера. 180 платных подписчиков по $14.99 и 2–3 часа работы в день.</p><p class="mt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Дмитрий, Харьков</p></article>
-            <article class="soft-card rounded-[2rem] p-7"><div class="mb-8 flex h-16 w-16 items-center justify-center rounded-full bg-orange-500/12 text-3xl">🌍</div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$2,400/мес</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">через Instagram USA</p><p class="mt-6 text-lg leading-9 text-white/60">Эстетичная lifestyle AI-модель, рост до 11,000 подписчиков, брендовые коллаборации и стабильные подписки на Passes.</p><p class="mt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Алина, Алматы</p></article>
-            <article class="soft-card rounded-[2rem] p-7"><div class="mb-8 flex h-16 w-16 items-center justify-center rounded-full bg-orange-500/12 text-3xl">🚀</div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$9,200/мес</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">с мини-агентства</p><p class="mt-6 text-lg leading-9 text-white/60">После внедрения модуля по автоматизации собрал 4 персонажа, часть отдал партнерам и вышел на системную выручку.</p><p class="mt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Тимур, Ташкент</p></article>
+          <div class="mx-auto mt-10 grid max-w-[72rem] gap-5 md:grid-cols-2 xl:grid-cols-3">
+            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7"><div class="result-icon mb-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"></circle><path d="M12 8v8M15 10.2c0-1.1-1.34-2-3-2s-3 .9-3 2 1.34 2 3 2 3 .9 3 2-1.34 2-3 2-3-.9-3-2"></path></svg></div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$200</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">за один день</p><p class="mt-6 text-lg leading-9 text-white/60">Спустя 3 недели после внедрения системы. До покупки программы модель уже была, но не было понимания, как на ней заработать.</p><p class="mt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, 3 недели в AI Model Business</p></article>
+            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7"><div class="result-icon mb-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16l5-5 3 3 6-6"></path><path d="M14 8h5v5"></path></svg></div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">+1,900</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">целевых подписчиков</p><p class="mt-6 text-lg leading-9 text-white/60">Через 3 дня после внедрения стратегии из раздела по трафику. Результат превзошел ожидания и дал сильный толчок в продажах.</p><p class="mt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, 1 неделя в программе</p></article>
+            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7"><div class="result-icon mb-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16"></path><path d="M16 7.5c0-1.7-1.79-3-4-3s-4 1.3-4 3 1.79 3 4 3 4 1.3 4 3-1.79 3-4 3-4-1.3-4-3"></path></svg></div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$1,500/мес</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">на автопилоте</p><p class="mt-6 text-lg leading-9 text-white/60">За 3 месяца выстроил систему, подключил ассистента по инструкциям из раздела масштабирования и стабилизировал выплаты.</p><p class="mt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, 3 месяца в системе</p></article>
+            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7"><div class="result-icon mb-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"></path></svg></div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$2,698/мес</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">через 6 недель</p><p class="mt-6 text-lg leading-9 text-white/60">Создана AI-фитнес модель, настроен TikTok и Fanvue через партнера. 180 платных подписчиков по $14.99 и 2–3 часа работы в день.</p><p class="mt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Дмитрий, Харьков</p></article>
+            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7"><div class="result-icon mb-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"></circle><path d="M3.5 12h17"></path><path d="M12 4a14 14 0 0 1 0 16"></path><path d="M12 4a14 14 0 0 0 0 16"></path></svg></div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$2,400/мес</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">через Instagram USA</p><p class="mt-6 text-lg leading-9 text-white/60">Эстетичная lifestyle AI-модель, рост до 11,000 подписчиков, брендовые коллаборации и стабильные подписки на Passes.</p><p class="mt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Алина, Алматы</p></article>
+            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7"><div class="result-icon mb-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3.5"></circle><circle cx="12" cy="12" r="1"></circle></svg></div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$9,200/мес</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">с мини-агентства</p><p class="mt-6 text-lg leading-9 text-white/60">После внедрения модуля по автоматизации собрал 4 персонажа, часть отдал партнерам и вышел на системную выручку.</p><p class="mt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Тимур, Ташкент</p></article>
           </div>
         </section>
         <section id="pricing" class="section-reveal py-14 sm:py-24">
@@ -425,35 +447,35 @@
             <h2 class="text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">Форматы<br /><span class="accent-text">обучения</span></h2>
             <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/60 sm:text-xl sm:leading-9">Выбирай под свой темп и цели</p>
           </div>
-          <div class="mx-auto mt-10 grid max-w-7xl gap-6 xl:grid-cols-3">
-            <article class="soft-card rounded-[2rem] p-7">
+          <div class="mx-auto mt-10 grid max-w-[74rem] gap-6 xl:grid-cols-3">
+            <article class="soft-card flex h-full flex-col rounded-[2rem] p-6 sm:p-7">
               <div class="mx-auto mb-6 inline-flex rounded-full bg-[#34313c] px-5 py-2 text-sm font-extrabold uppercase tracking-[.25em] text-white/90">Базовый</div>
               <h3 class="text-4xl font-extrabold tracking-[-.05em]">Самостоятельный</h3>
               <div class="mt-5"><p class="text-7xl font-extrabold tracking-[-.07em]">$249</p><p class="mt-1 text-3xl text-white/40">≈ 20,000 ₽</p></div>
               <ul class="feature-list mt-8 space-y-4 text-lg text-white/82">
                 <li>Все 7 разделов обучения</li><li>500+ промптов для генерации</li><li>50 скриптов продаж</li><li>Контент-план на 30 дней</li><li>Чек-листы для каждого этапа</li><li>Доступ к материалам навсегда</li><li class="feature-off text-white/35"><span class="x-icon"><svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></span>Обновления программы</li><li class="feature-off text-white/35"><span class="x-icon"><svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></span>Личная поддержка</li><li class="feature-off text-white/35"><span class="x-icon"><svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></span>Общий чат с учениками</li>
               </ul>
-              <a href="[ССЫЛКА_НА_ОПЛАТУ_САМОСТОЯТЕЛЬНЫЙ]" class="glow-button mt-8 flex min-h-[76px] items-center justify-center rounded-[1.5rem] border border-white/10 bg-white/5 px-6 text-center text-xl font-extrabold text-white">Купить сейчас</a>
+              <a href="[ССЫЛКА_НА_ОПЛАТУ_САМОСТОЯТЕЛЬНЫЙ]" class="glow-button mt-auto flex min-h-[76px] items-center justify-center rounded-[1.5rem] border border-white/10 bg-white/5 px-6 text-center text-xl font-extrabold text-white">Купить сейчас</a>
             </article>
-            <article class="price-outline relative rounded-[2rem] bg-[#161616] p-[1px] shadow-glow">
-              <div class="rounded-[calc(2rem-1px)] bg-[#151515] p-7">
+            <article class="price-outline relative flex h-full rounded-[2rem] bg-[#161616] p-[1px] shadow-glow">
+              <div class="flex h-full flex-col rounded-[calc(2rem-1px)] bg-[#151515] p-6 sm:p-7">
                 <div class="mx-auto mb-6 inline-flex rounded-full border border-orange-400/30 bg-orange-500 px-5 py-2 text-sm font-extrabold uppercase tracking-[.25em] text-black">После отбора</div>
                 <h3 class="text-4xl font-extrabold tracking-[-.05em]">Продвинутый</h3>
                 <div class="mt-5"><p class="text-7xl font-extrabold tracking-[-.07em] text-white">$549</p><p class="mt-1 text-3xl text-white/40">≈ 49,000 ₽</p></div>
                 <ul class="feature-list mt-8 space-y-4 text-lg text-white/88">
                   <li>Всё из тарифа "Самостоятельный"</li><li>Постоянные обновления программы</li><li>Новые уроки и материалы бесплатно</li><li>Личная поддержка в Telegram</li><li>Ответы на вопросы в течение 24 часов</li><li>Созвоны по запросу при необходимости</li><li>Доступ в закрытый чат учеников</li><li>Нетворкинг и обмен опытом</li><li>Дополнительные материалы и кейсы</li><li>Доступ навсегда</li>
                 </ul>
-                <a href="https://forms.gle/fzENGbVLnxN61Guh9" class="glow-button mt-8 flex min-h-[84px] items-center justify-center rounded-[1.5rem] bg-orange-500 px-6 text-center text-2xl font-extrabold text-black shadow-glow">Подать заявку →</a>
+                <a href="#advanced-form" class="glow-button mt-auto flex min-h-[84px] items-center justify-center rounded-[1.5rem] bg-orange-500 px-6 text-center text-2xl font-extrabold text-black shadow-glow">Подать заявку →</a>
               </div>
             </article>
-            <article class="soft-card rounded-[2rem] p-7">
+            <article class="soft-card flex h-full flex-col rounded-[2rem] p-6 sm:p-7">
               <div class="mx-auto mb-6 inline-flex rounded-full bg-[#34313c] px-5 py-2 text-sm font-extrabold uppercase tracking-[.25em] text-white/90">Ограниченно</div>
               <h3 class="text-4xl font-extrabold tracking-[-.05em]">Менторство</h3>
               <div class="mt-5"><p class="text-7xl font-extrabold tracking-[-.07em]">$1,499</p><p class="mt-1 text-3xl text-white/40">≈ 119,000 ₽</p></div>
               <ul class="feature-list mt-8 space-y-4 text-lg text-white/82">
                 <li>Всё из тарифа "Продвинутый"</li><li>Личная работа 1 на 1</li><li>Персональный план запуска модели</li><li>Еженедельные созвоны по прогрессу</li><li>Проверка и корректировка контента</li><li>Помощь с настройкой аккаунтов</li><li>Работаем вместе до первого результата</li><li>Приоритетная поддержка 24/7</li><li>Прямой доступ в личные сообщения</li>
               </ul>
-              <a href="[ССЫЛКА_НА_ОБСУЖДЕНИЕ_МЕНТОРСТВА]" class="glow-button mt-8 flex min-h-[76px] items-center justify-center rounded-[1.5rem] border border-orange-400/20 bg-orange-500/10 px-6 text-center text-xl font-extrabold text-orange-100">Обсудить формат</a>
+              <a href="[ССЫЛКА_НА_ОБСУЖДЕНИЕ_МЕНТОРСТВА]" class="glow-button mt-auto flex min-h-[76px] items-center justify-center rounded-[1.5rem] border border-orange-400/20 bg-orange-500/10 px-6 text-center text-xl font-extrabold text-orange-100">Обсудить формат</a>
             </article>
           </div>
         </section>
