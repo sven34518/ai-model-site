@@ -150,12 +150,12 @@
     .feature-off .x-icon {
       position: absolute;
       left: 0;
-      top: .28rem;
+      top: .62rem;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 1.15rem;
-      height: 1.15rem;
+      width: .8rem;
+      height: .8rem;
       color: rgba(184,184,190,.78);
     }
     .accordion-icon,
@@ -185,6 +185,11 @@
     }
     .footer-link:hover { color: #fff; }
     .results-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+    .review-card {
       display: flex;
       flex-direction: column;
       min-height: 100%;
@@ -307,22 +312,6 @@
           <div class="mx-auto mt-10 max-w-5xl space-y-4">
             <article class="module-card overflow-hidden rounded-[2rem]">
               <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
-                <span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm">МОДУЛЬ 0</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Введение: рынок, деньги, правила игры</span></span>
-                <span class="accordion-icon flex items-center justify-center">
-                  <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
-                </span>
-              </button>
-              <div class="accordion-content hidden border-t border-white/10 px-5 pb-7 pt-2 sm:px-8">
-                <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
-                  <li>Анатомия рынка: Fanvue, Passes, Patreon, OnlyFans и реальные цифры выручки.</li>
-                  <li>Бизнес-модели: подписка, PPV, чаевые, брендовые интеграции и продажа ассетов.</li>
-                  <li>Легальный фрейм и как не получить бан за AI-контент.</li>
-                  <li>Финансовая модель новичка: от старта до первых $500 и дальше к $5k+.</li>
-                </ul>
-              </div>
-            </article>
-            <article class="module-card overflow-hidden rounded-[2rem]">
-              <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
                 <span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm">МОДУЛЬ 1</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Создание уникальной AI-модели</span></span>
                 <span class="accordion-icon flex items-center justify-center">
                   <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
@@ -439,6 +428,24 @@
                 </ul>
               </div>
             </article>
+            <article class="module-card overflow-hidden rounded-[2rem]">
+              <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
+                <span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm">БОНУСНЫЕ МАТЕРИАЛЫ</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Дополнительные инструменты для быстрого запуска</span></span>
+                <span class="accordion-icon flex items-center justify-center">
+                  <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+                </span>
+              </button>
+              <div class="accordion-content hidden border-t border-white/10 px-5 pb-7 pt-2 sm:px-8">
+                <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
+                  <li>500+ работающих промптов для генерации</li>
+                  <li>База из 50 скриптов продаж на английском</li>
+                  <li>Excel-калькулятор доходности проекта</li>
+                  <li>Контент-план на 30 дней</li>
+                  <li>Чек-листы для каждого этапа</li>
+                  <li>Таблица ценообразования для разных рынков</li>
+                </ul>
+              </div>
+            </article>
           </div>
         </section>
         <section id="results" class="section-reveal py-14 sm:py-24">
@@ -447,12 +454,12 @@
             <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/60 sm:text-xl sm:leading-9">Примеры реализации системы на практике</p>
           </div>
           <div class="mx-auto mt-10 grid max-w-[72rem] gap-5 md:grid-cols-2 xl:grid-cols-3">
-            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7"><div class="result-icon mb-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"></circle><path d="M12 8v8M15 10.2c0-1.1-1.34-2-3-2s-3 .9-3 2 1.34 2 3 2 3 .9 3 2-1.34 2-3 2-3-.9-3-2"></path></svg></div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$200</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">за один день</p><p class="mt-6 text-lg leading-9 text-white/60">Спустя 3 недели после внедрения системы. До покупки программы модель уже была, но не было понимания, как на ней заработать.</p><p class="mt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, 3 недели в VADYA OFM CLUB</p></article>
-            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7"><div class="result-icon mb-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16l5-5 3 3 6-6"></path><path d="M14 8h5v5"></path></svg></div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">+1,900</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">целевых подписчиков</p><p class="mt-6 text-lg leading-9 text-white/60">Через 3 дня после внедрения стратегии из раздела по трафику. Результат превзошел ожидания и дал сильный толчок в продажах.</p><p class="mt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, 1 неделя в программе</p></article>
-            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7"><div class="result-icon mb-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16"></path><path d="M16 7.5c0-1.7-1.79-3-4-3s-4 1.3-4 3 1.79 3 4 3 4 1.3 4 3-1.79 3-4 3-4-1.3-4-3"></path></svg></div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$1,500/мес</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">на автопилоте</p><p class="mt-6 text-lg leading-9 text-white/60">За 3 месяца выстроил систему, подключил ассистента по инструкциям из раздела масштабирования и стабилизировал выплаты.</p><p class="mt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, 3 месяца в системе</p></article>
-            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7"><div class="result-icon mb-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"></path></svg></div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">11 дней</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">до первой продажи</p><p class="mt-6 text-lg leading-9 text-white/60">Полный новичок в нейросетях. Следовал пошаговым инструкциям — и уже на 11-й день получил первый платёж.</p><p class="mt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, новичок</p></article>
-            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7"><div class="result-icon mb-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"></circle><path d="M3.5 12h17"></path><path d="M12 4a14 14 0 0 1 0 16"></path><path d="M12 4a14 14 0 0 0 0 16"></path></svg></div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$2,400/мес</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">из СНГ на рынке USA</p><p class="mt-6 text-lg leading-9 text-white/60">Работает удалённо из России. Не понимал, как монетизировать трафик — всё решил с помощью одного раздела.</p><p class="mt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, 3 месяца в VADYA OFM CLUB</p></article>
-            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7"><div class="result-icon mb-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3.5"></circle><circle cx="12" cy="12" r="1"></circle></svg></div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$50</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">первый кастомный заказ</p><p class="mt-6 text-lg leading-9 text-white/60">Через 14 дней после старта. Следовал скриптам из раздела продаж — клиент сам попросил сделать кастомный сет.</p><p class="mt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, 2 недели в VADYA OFM CLUB</p></article>
+            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7"><div class="result-icon mb-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"></circle><path d="M12 8v8M15 10.2c0-1.1-1.34-2-3-2s-3 .9-3 2 1.34 2 3 2 3 .9 3 2-1.34 2-3 2-3-.9-3-2"></path></svg></div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$200</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">за один день</p><p class="mt-6 text-lg leading-9 text-white/60">Спустя 3 недели после внедрения системы. До покупки программы модель уже была, но не было понимания, как на ней заработать.</p><p class="mt-auto pt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, 3 недели в VADYA OFM CLUB</p></article>
+            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7"><div class="result-icon mb-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16l5-5 3 3 6-6"></path><path d="M14 8h5v5"></path></svg></div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">+1,900</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">целевых подписчиков</p><p class="mt-6 text-lg leading-9 text-white/60">Через 3 дня после внедрения стратегии из раздела по трафику. Результат превзошел ожидания и дал сильный толчок в продажах.</p><p class="mt-auto pt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, 1 неделя в программе</p></article>
+            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7"><div class="result-icon mb-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16"></path><path d="M16 7.5c0-1.7-1.79-3-4-3s-4 1.3-4 3 1.79 3 4 3 4 1.3 4 3-1.79 3-4 3-4-1.3-4-3"></path></svg></div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$1,500/мес</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">на автопилоте</p><p class="mt-6 text-lg leading-9 text-white/60">За 3 месяца выстроил систему, подключил ассистента по инструкциям из раздела масштабирования и стабилизировал выплаты.</p><p class="mt-auto pt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, 3 месяца в системе</p></article>
+            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7"><div class="result-icon mb-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"></path></svg></div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">11 дней</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">до первой продажи</p><p class="mt-6 text-lg leading-9 text-white/60">Полный новичок в нейросетях. Следовал пошаговым инструкциям — и уже на 11-й день получил первый платёж.</p><p class="mt-auto pt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, новичок</p></article>
+            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7"><div class="result-icon mb-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"></circle><path d="M3.5 12h17"></path><path d="M12 4a14 14 0 0 1 0 16"></path><path d="M12 4a14 14 0 0 0 0 16"></path></svg></div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$2,400/мес</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">из СНГ на рынке USA</p><p class="mt-6 text-lg leading-9 text-white/60">Работает удалённо из России. Не понимал, как монетизировать трафик — всё решил с помощью одного раздела.</p><p class="mt-auto pt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, 3 месяца в VADYA OFM CLUB</p></article>
+            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7"><div class="result-icon mb-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3.5"></circle><circle cx="12" cy="12" r="1"></circle></svg></div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$50</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">первый кастомный заказ</p><p class="mt-6 text-lg leading-9 text-white/60">Через 14 дней после старта. Следовал скриптам из раздела продаж — клиент сам попросил сделать кастомный сет.</p><p class="mt-auto pt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, 2 недели в VADYA OFM CLUB</p></article>
           </div>
         </section>
         <section id="pricing" class="section-reveal py-14 sm:py-24">
@@ -551,12 +558,12 @@
             <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/60 sm:text-xl sm:leading-9">Результаты, которые говорят сами за себя</p>
           </div>
           <div class="mx-auto mt-10 grid max-w-6xl gap-5 md:grid-cols-2 xl:grid-cols-3">
-            <article class="soft-card relative rounded-[2rem] p-7"><div class="quote-mark">“</div><div class="relative text-3xl text-orange-400">★★★★★</div><p class="review-text relative mt-6 text-[1.7rem] leading-[1.7] text-white/94">"Вообще начинал пробовать еще до покупки курса, собирал инфу по кускам. Здесь все максимально детально, и это сразу дало результат."</p><p class="mt-8 text-xs font-semibold uppercase tracking-[.18em] text-white/30">Ученик курса • результат за 3 дня</p></article>
-            <article class="soft-card relative rounded-[2rem] p-7"><div class="quote-mark">“</div><div class="relative text-3xl text-orange-400">★★★★★</div><p class="review-text relative mt-6 text-[1.7rem] leading-[1.7] text-white/94">"Это лучшее обучение, которое я покупал за последнее время. Столько информации, поэтапно, структурировано и понятно — просто невозможно что-то не понять. Дошёл до 4-го дня включительно, всё понятно. Очень благодарен!"</p><p class="mt-8 text-xs font-semibold uppercase tracking-[.18em] text-white/30">Ученик курса • Тариф Продвинутый</p></article>
-            <article class="soft-card relative rounded-[2rem] p-7"><div class="quote-mark">“</div><div class="relative text-3xl text-orange-400">★★★★★</div><p class="review-text relative mt-6 text-[1.7rem] leading-[1.7] text-white/94">"Хотел глубже разобраться в нейронках, прошёл уже большую часть и впечатлён объёмом материала! За такую цену честно не ожидал получить настолько детальный разбор. Всё разложено по полочкам, каждый день новый блок информации."</p><p class="mt-8 text-xs font-semibold uppercase tracking-[.18em] text-white/30">Ученик • старт с нуля</p></article>
-            <article class="soft-card relative rounded-[2rem] p-7"><div class="quote-mark">“</div><div class="relative text-3xl text-orange-400">★★★★★</div><p class="review-text relative mt-6 text-[1.7rem] leading-[1.7] text-white/94">"Взял обучение в самом начале, прошёл 7 дней обучения — уже продал первую подписку. Особенно зацепило то, что в обучении не просто теория, а каждый шаг разжёван. У меня вообще не было опыта с нейронками, но благодаря такой подаче научился с ними работать."</p><p class="mt-8 text-xs font-semibold uppercase tracking-[.18em] text-white/30">Ученик курса • Первая продажа за 7 дней</p></article>
-            <article class="soft-card relative rounded-[2rem] p-7"><div class="quote-mark">“</div><div class="relative text-3xl text-orange-400">★★★★★</div><p class="review-text relative mt-6 text-[1.7rem] leading-[1.7] text-white/94">"Брал платный курс по ИИ моделям — не пожалел от слова совсем. Продвинутый формат реально ускоряет. Всё настолько подробно расписано, что справится даже ребёнок. Рекомендую 100%"</p><p class="mt-8 text-xs font-semibold uppercase tracking-[.18em] text-white/30">Ученик курса</p></article>
-            <article class="soft-card relative rounded-[2rem] p-7"><div class="quote-mark">“</div><div class="relative text-3xl text-orange-400">★★★★★</div><p class="review-text relative mt-6 text-[1.7rem] leading-[1.7] text-white/94">"В целом всё очень понравилось, удивился такой поддержке на всех этапах и быстрыми, подробными ответами в личке. Самая сильная часть для меня была в автоматизации. Когда видишь, как это начинает работать почти без тебя, совсем иначе воспринимаешь данную нишу)."</p><p class="mt-8 text-xs font-semibold uppercase tracking-[.18em] text-white/30">Участник • автоматизация</p></article>
+            <article class="soft-card review-card relative rounded-[2rem] p-7"><div class="quote-mark">“</div><div class="relative text-3xl text-orange-400">★★★★★</div><p class="review-text relative mt-6 text-[1.7rem] leading-[1.7] text-white/94">"Вообще начинал пробовать еще до покупки курса, собирал инфу по кускам. Здесь все максимально детально, и это сразу дало результат."</p><p class="mt-auto pt-8 text-xs font-semibold uppercase tracking-[.18em] text-white/30">Ученик курса • результат за 3 дня</p></article>
+            <article class="soft-card review-card relative rounded-[2rem] p-7"><div class="quote-mark">“</div><div class="relative text-3xl text-orange-400">★★★★★</div><p class="review-text relative mt-6 text-[1.7rem] leading-[1.7] text-white/94">"Это лучшее обучение, которое я покупал за последнее время. Столько информации, поэтапно, структурировано и понятно — просто невозможно что-то не понять. Дошёл до 4-го дня включительно, всё понятно. Очень благодарен!"</p><p class="mt-auto pt-8 text-xs font-semibold uppercase tracking-[.18em] text-white/30">Ученик курса • Тариф Продвинутый</p></article>
+            <article class="soft-card review-card relative rounded-[2rem] p-7"><div class="quote-mark">“</div><div class="relative text-3xl text-orange-400">★★★★★</div><p class="review-text relative mt-6 text-[1.7rem] leading-[1.7] text-white/94">"Хотел глубже разобраться в нейронках, прошёл уже большую часть и впечатлён объёмом материала! За такую цену честно не ожидал получить настолько детальный разбор. Всё разложено по полочкам, каждый день новый блок информации."</p><p class="mt-auto pt-8 text-xs font-semibold uppercase tracking-[.18em] text-white/30">Ученик • старт с нуля</p></article>
+            <article class="soft-card review-card relative rounded-[2rem] p-7"><div class="quote-mark">“</div><div class="relative text-3xl text-orange-400">★★★★★</div><p class="review-text relative mt-6 text-[1.7rem] leading-[1.7] text-white/94">"Взял обучение в самом начале, прошёл 7 дней обучения — уже продал первую подписку. Особенно зацепило то, что в обучении не просто теория, а каждый шаг разжёван. У меня вообще не было опыта с нейронками, но благодаря такой подаче научился с ними работать."</p><p class="mt-auto pt-8 text-xs font-semibold uppercase tracking-[.18em] text-white/30">Ученик курса • Первая продажа за 7 дней</p></article>
+            <article class="soft-card review-card relative rounded-[2rem] p-7"><div class="quote-mark">“</div><div class="relative text-3xl text-orange-400">★★★★★</div><p class="review-text relative mt-6 text-[1.7rem] leading-[1.7] text-white/94">"Брал платный курс по ИИ моделям — не пожалел от слова совсем. Продвинутый формат реально ускоряет. Всё настолько подробно расписано, что справится даже ребёнок. Рекомендую 100%"</p><p class="mt-auto pt-8 text-xs font-semibold uppercase tracking-[.18em] text-white/30">Ученик курса</p></article>
+            <article class="soft-card review-card relative rounded-[2rem] p-7"><div class="quote-mark">“</div><div class="relative text-3xl text-orange-400">★★★★★</div><p class="review-text relative mt-6 text-[1.7rem] leading-[1.7] text-white/94">"В целом всё очень понравилось, удивился такой поддержке на всех этапах и быстрыми, подробными ответами в личке. Самая сильная часть для меня была в автоматизации. Когда видишь, как это начинает работать почти без тебя, совсем иначе воспринимаешь данную нишу)."</p><p class="mt-auto pt-8 text-xs font-semibold uppercase tracking-[.18em] text-white/30">Участник • автоматизация</p></article>
           </div>
         </section>
         <section class="section-reveal py-14 sm:py-24">
