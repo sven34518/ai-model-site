@@ -1,0 +1,17 @@
+{
+  "name": "ai-model-site",
+  "version": "1.0.0",
+  "description": "VADYA OFM CLUB website",
+  "type": "module",
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'Static site - no build required'",
+    "lint": "echo 'No linter configured for static HTML'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/analytics": "^1.4.1"
+  }
+}
