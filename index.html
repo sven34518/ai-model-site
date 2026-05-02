@@ -4,657 +4,417 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VADYA OFM CLUB — пошаговая система запуска</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <!-- Vercel Web Analytics -->
+  <link rel="preload" href="https://cdn.fontshare.com/wf/BFBSY7LX5W2U2EROCLVVTQP4VS7S4PC3/IIUX4FGTMD2LK2VWD3RVTAS4SSMUN7B5/53RZKGODFYDW3QHTIL7IPOWTBCSUEZK7.woff2" as="font" type="font/woff2" crossorigin />
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
-  <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          boxShadow: {
-            glow: "0 0 0 1px rgba(255,122,26,.18),0 12px 32px rgba(255,122,26,.22),0 0 72px rgba(255,122,26,.16)",
-            soft: "0 24px 60px rgba(0,0,0,.35)"
-          }
-        }
-      }
-    };
-  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
   <style>
-    :root { color-scheme: dark; }
+    @font-face { font-family: "Clash Display"; src: url("https://cdn.fontshare.com/wf/2GQIT54GKQY3JRFTSHS4ARTRNRQISSAA/3CIP5EBHRRHE5FVQU3VFROPUERNDSTDF/JTSL5QESUXATU47LCPUNHZQBDDIWDOSW.woff2") format("woff2"), url("https://cdn.fontshare.com/wf/2GQIT54GKQY3JRFTSHS4ARTRNRQISSAA/3CIP5EBHRRHE5FVQU3VFROPUERNDSTDF/JTSL5QESUXATU47LCPUNHZQBDDIWDOSW.woff") format("woff"); font-style: normal; font-weight: 500; font-display: swap; }
+    @font-face { font-family: "Clash Display"; src: url("https://cdn.fontshare.com/wf/FPDAZ2S6SW4QMSRIIKNNGTPM6VIXYMKO/5HNPQ453FRLIQWV2FNOBUU3FKTDZQVSG/Z3MGHFHX6DCTLQ55LJYRJ5MDCZPMFZU6.woff2") format("woff2"), url("https://cdn.fontshare.com/wf/FPDAZ2S6SW4QMSRIIKNNGTPM6VIXYMKO/5HNPQ453FRLIQWV2FNOBUU3FKTDZQVSG/Z3MGHFHX6DCTLQ55LJYRJ5MDCZPMFZU6.woff") format("woff"); font-style: normal; font-weight: 600; font-display: swap; }
+    @font-face { font-family: "Clash Display"; src: url("https://cdn.fontshare.com/wf/BFBSY7LX5W2U2EROCLVVTQP4VS7S4PC3/IIUX4FGTMD2LK2VWD3RVTAS4SSMUN7B5/53RZKGODFYDW3QHTIL7IPOWTBCSUEZK7.woff2") format("woff2"), url("https://cdn.fontshare.com/wf/BFBSY7LX5W2U2EROCLVVTQP4VS7S4PC3/IIUX4FGTMD2LK2VWD3RVTAS4SSMUN7B5/53RZKGODFYDW3QHTIL7IPOWTBCSUEZK7.woff") format("woff"); font-style: normal; font-weight: 700; font-display: swap; }
+    @font-face { font-family: "Satoshi"; src: url("https://cdn.fontshare.com/wf/TTX2Z3BF3P6Y5BQT3IV2VNOK6FL22KUT/7QYRJOI3JIMYHGY6CH7SOIFRQLZOLNJ6/KFIAZD4RUMEZIYV6FQ3T3GP5PDBDB6JY.woff2") format("woff2"), url("https://cdn.fontshare.com/wf/TTX2Z3BF3P6Y5BQT3IV2VNOK6FL22KUT/7QYRJOI3JIMYHGY6CH7SOIFRQLZOLNJ6/KFIAZD4RUMEZIYV6FQ3T3GP5PDBDB6JY.woff") format("woff"); font-style: normal; font-weight: 400; font-display: swap; }
+    @font-face { font-family: "Satoshi"; src: url("https://cdn.fontshare.com/wf/P2LQKHE6KA6ZP4AAGN72KDWMHH6ZH3TA/ZC32TK2P7FPS5GFTL46EU6KQJA24ZYDB/7AHDUZ4A7LFLVFUIFSARGIWCRQJHISQP.woff2") format("woff2"), url("https://cdn.fontshare.com/wf/P2LQKHE6KA6ZP4AAGN72KDWMHH6ZH3TA/ZC32TK2P7FPS5GFTL46EU6KQJA24ZYDB/7AHDUZ4A7LFLVFUIFSARGIWCRQJHISQP.woff") format("woff"); font-style: normal; font-weight: 500; font-display: swap; }
+    @font-face { font-family: "Satoshi"; src: url("https://cdn.fontshare.com/wf/LAFFD4SDUCDVQEXFPDC7C53EQ4ZELWQI/PXCT3G6LO6ICM5I3NTYENYPWJAECAWDD/GHM6WVH6MILNYOOCXHXB5GTSGNTMGXZR.woff2") format("woff2"), url("https://cdn.fontshare.com/wf/LAFFD4SDUCDVQEXFPDC7C53EQ4ZELWQI/PXCT3G6LO6ICM5I3NTYENYPWJAECAWDD/GHM6WVH6MILNYOOCXHXB5GTSGNTMGXZR.woff") format("woff"); font-style: normal; font-weight: 700; font-display: swap; }
+    :root {
+      color-scheme: dark;
+      --color-bg: #0B0F14; --color-surface: #151C24; --color-surface-2: #1C2530; --color-text: #F4EFE7; --color-muted: rgba(244, 239, 231, 0.56); --color-accent: #C96B3B; --color-accent-alt: #8FE3C2; --color-border: rgba(244, 239, 231, 0.08);
+      --space-xs: 8px; --space-sm: 16px; --space-md: 24px; --space-lg: 48px; --space-xl: 80px; --space-2xl: 120px;
+      --radius-card: 12px; --radius-button: 8px; --radius-pill: 6px; --shadow-card: 0 1px 3px rgba(0,0,0,0.4), 0 4px 16px rgba(0,0,0,0.2);
+      --container-width: 1200px; --font-heading: "Clash Display", "Inter", sans-serif; --font-body: "Satoshi", "Inter", sans-serif; --transition-base: 220ms ease;
+    }
+    * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: "Manrope", sans-serif;
-      background:
-        radial-gradient(circle at top center, rgba(255,122,26,.08), transparent 22%),
-        radial-gradient(circle at 82% 12%, rgba(255,122,26,.045), transparent 18%),
-        linear-gradient(180deg, #0d0d0d 0%, #090909 38%, #070707 100%);
-      background-color: #0d0d0d;
+    body { margin: 0; font-family: var(--font-body); font-size: 18px; line-height: 1.7; font-weight: 400; color: var(--color-text); background: radial-gradient(circle at top center, rgba(201,107,59,0.12), transparent 34%), radial-gradient(circle at 85% 10%, rgba(143,227,194,0.07), transparent 18%), linear-gradient(180deg, #0B0F14 0%, #10161D 100%); background-color: var(--color-bg); }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea, select { font: inherit; color: inherit; }
+    img, svg { display: block; max-width: 100%; }
+    [hidden] { display: none !important; }
+    .icon-sprite { position: absolute; width: 0; height: 0; overflow: hidden; pointer-events: none; }
+    .site-shell { position: relative; min-height: 100vh; overflow-x: hidden; }
+    .site-shell::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(244,239,231,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(244,239,231,0.025) 1px, transparent 1px); background-size: 32px 32px; mask-image: linear-gradient(180deg, rgba(0,0,0,0.5), transparent 80%); opacity: 0.28; pointer-events: none; }
+    .container { width: min(calc(100% - 40px), var(--container-width)); margin: 0 auto; }
+    .page-main { position: relative; z-index: 1; padding-top: 116px; }
+    .site-header { position: fixed; top: var(--space-sm); left: 0; right: 0; z-index: 50; padding: 0 20px; }
+    .site-header__card { position: relative; display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); padding: 14px 18px; border: 1px solid var(--color-border); border-radius: var(--radius-card); background: rgba(21,28,36,0.94); box-shadow: var(--shadow-card); }
+    .brand { display: inline-flex; align-items: center; font-family: var(--font-heading); font-size: 32px; line-height: 1; letter-spacing: -0.03em; font-weight: 700; white-space: nowrap; }
+    .brand__accent, .text-accent { color: var(--color-accent); }
+    .site-nav { display: flex; align-items: center; gap: 4px; }
+    .site-nav__link, .footer-nav__link, .mobile-nav__link { color: var(--color-muted); transition: color var(--transition-base), background-color var(--transition-base); }
+    .site-nav__link { padding: 10px 12px; border-radius: var(--radius-pill); font-size: 14px; line-height: 1.6; font-weight: 500; }
+    .site-nav__link:hover, .site-nav__link:focus-visible, .footer-nav__link:hover, .footer-nav__link:focus-visible, .mobile-nav__link:hover, .mobile-nav__link:focus-visible { color: var(--color-text); }
+    .site-header__actions { display: flex; align-items: center; gap: 12px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; padding: 16px 24px; border: 1px solid transparent; border-radius: var(--radius-button); text-align: center; font-weight: 700; line-height: 1.2; transition: transform var(--transition-base), border-color var(--transition-base), background-color var(--transition-base), color var(--transition-base); box-shadow: var(--shadow-card); }
+    .btn:hover, .btn:focus-visible { transform: translateY(-1px); }
+    .btn-primary { background: var(--color-accent); color: var(--color-bg); }
+    .btn-secondary { background: linear-gradient(180deg, rgba(28,37,48,0.92), rgba(21,28,36,0.98)); border-color: var(--color-border); color: var(--color-text); }
+    .btn-outline { background: rgba(21,28,36,0.82); border-color: rgba(201,107,59,0.34); color: var(--color-text); }
+    .btn-header { min-height: 48px; padding: 12px 18px; font-size: 14px; }
+    .menu-toggle { display: none; align-items: center; justify-content: center; width: 48px; height: 48px; padding: 0; border: 1px solid var(--color-border); border-radius: var(--radius-button); background: rgba(28,37,48,0.9); box-shadow: var(--shadow-card); cursor: pointer; }
+    .icon { width: 20px; height: 20px; flex-shrink: 0; }
+    .icon--small { width: 18px; height: 18px; }
+    .icon--medium { width: 24px; height: 24px; }
+    .icon--accent { color: var(--color-accent); }
+    .icon--accent-alt { color: var(--color-accent-alt); }
+    .mobile-nav { position: absolute; top: calc(100% + 12px); left: 0; right: 0; padding: var(--space-md); border: 1px solid var(--color-border); border-radius: var(--radius-card); background: rgba(21,28,36,0.98); box-shadow: var(--shadow-card); }
+    .mobile-nav__links { display: grid; gap: 12px; }
+    .mobile-nav__link { padding: 10px 0; font-family: var(--font-heading); font-size: 28px; line-height: 1.05; letter-spacing: -0.03em; font-weight: 600; }
+    .mobile-nav__cta { width: 100%; margin-top: var(--space-md); }
+    .section { position: relative; padding: var(--space-2xl) 0; }
+    .section--hero { padding-top: calc(var(--space-xl) + 24px); }
+    .section--compact { padding: var(--space-xl) 0; }
+    .section-intro { max-width: 760px; margin: 0 auto var(--space-lg); text-align: center; }
+    .section-intro--wide { max-width: 840px; }
+    .eyebrow { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 10px 14px; border: 1px solid var(--color-border); border-radius: var(--radius-pill); background: rgba(28,37,48,0.82); color: var(--color-text); font-size: 14px; line-height: 1.6; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; }
+    .eyebrow--accent { border-color: rgba(201,107,59,0.34); color: #F0D5C5; background: rgba(201,107,59,0.08); }
+    h1, h2, h3 { margin: 0; font-family: var(--font-heading); color: var(--color-text); }
+    h1 { font-size: 72px; line-height: 0.94; letter-spacing: -0.03em; font-weight: 700; }
+    h2 { font-size: 48px; line-height: 1; letter-spacing: -0.02em; font-weight: 600; }
+    h3 { font-size: 28px; line-height: 1.15; letter-spacing: -0.01em; font-weight: 600; }
+    p { margin: 0; }
+    .muted { color: var(--color-muted); }
+    .hero { max-width: 960px; margin: 0 auto; text-align: center; }
+    .hero__pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 40px; }
+    .hero-pill { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 10px 14px; border: 1px solid var(--color-border); border-radius: var(--radius-pill); background: rgba(28,37,48,0.8); color: var(--color-text); font-size: 14px; line-height: 1.6; font-weight: 500; box-shadow: var(--shadow-card); }
+    .hero-pill--lead { border-color: rgba(201,107,59,0.34); background: rgba(201,107,59,0.1); color: #F0D5C5; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; }
+    .hero__title { max-width: 920px; margin: 0 auto; }
+    .hero__copy { max-width: 760px; margin: var(--space-md) auto 0; color: var(--color-muted); }
+    .hero__actions { display: grid; gap: var(--space-sm); max-width: 720px; margin: 40px auto 0; }
+    .hero__action { width: 100%; min-height: 76px; font-size: 24px; }
+    .line-break-desktop { display: inline; }
+    .card { border: 1px solid var(--color-border); border-radius: var(--radius-card); background: linear-gradient(180deg, rgba(28,37,48,0.92), rgba(21,28,36,0.98)); box-shadow: var(--shadow-card); }
+    .accordion-list, .faq-list { display: grid; gap: var(--space-sm); max-width: 1040px; margin: 0 auto; }
+    .accordion-item, .faq-item { overflow: hidden; }
+    .accordion-trigger, .faq-trigger { width: 100%; display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-md); padding: var(--space-md); border: 0; background: transparent; text-align: left; cursor: pointer; }
+    .accordion-heading { min-width: 0; }
+    .accordion-kicker { display: block; margin-bottom: 12px; color: var(--color-accent-alt); font-size: 14px; line-height: 1.6; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; }
+    .trigger-icon { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 1px solid var(--color-border); border-radius: var(--radius-pill); color: var(--color-text); transition: transform var(--transition-base), border-color var(--transition-base), background-color var(--transition-base); flex-shrink: 0; }
+    .accordion-trigger[aria-expanded="true"] .trigger-icon, .faq-trigger[aria-expanded="true"] .trigger-icon { transform: rotate(180deg); border-color: rgba(143,227,194,0.4); background: rgba(143,227,194,0.08); }
+    .accordion-panel, .faq-panel { border-top: 1px solid var(--color-border); padding: 0 var(--space-md) var(--space-md); }
+    .accordion-panel__inner, .faq-panel__inner { padding-top: 20px; color: var(--color-muted); }
+    .faq-panel__inner { font-size: 18px; line-height: 1.7; }
+    .bullet-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+    .bullet-list li { position: relative; padding-left: 24px; color: var(--color-muted); }
+    .bullet-list li::before { content: ""; position: absolute; left: 0; top: 0.74em; width: 8px; height: 8px; border-radius: 2px; background: var(--color-accent-alt); }
+    .feature-list li.is-unavailable::before { display: none; }
+    .list-icon { position: absolute; left: 0; top: 4px; display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; color: var(--color-muted); }
+    .results-grid, .reviews-grid, .pricing-grid, .selection-grid { display: grid; gap: 20px; }
+    .results-grid, .reviews-grid, .pricing-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .selection-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 920px; margin: 0 auto; }
+    .result-card, .review-card, .pricing-card, .selection-card { display: flex; flex-direction: column; min-height: 100%; padding: 28px; }
+    .result-icon, .selection-card__icon { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border: 1px solid var(--color-border); border-radius: var(--radius-pill); background: rgba(28,37,48,0.86); box-shadow: var(--shadow-card); margin-bottom: var(--space-md); }
+    .result-value { font-family: var(--font-heading); font-size: 56px; line-height: 0.96; letter-spacing: -0.04em; font-weight: 700; color: var(--color-accent); }
+    .result-title { margin-top: 12px; font-family: var(--font-heading); font-size: 28px; line-height: 1.15; letter-spacing: -0.01em; font-weight: 600; }
+    .result-copy { margin-top: var(--space-md); color: var(--color-muted); }
+    .meta, .review-meta { margin-top: auto; padding-top: 32px; color: var(--color-muted); font-size: 14px; line-height: 1.6; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; }
+    .pricing-card--featured { border-color: rgba(201,107,59,0.42); background: linear-gradient(180deg, rgba(33,27,24,0.98), rgba(21,28,36,0.98)); }
+    .tier-badge { align-self: flex-start; display: inline-flex; align-items: center; min-height: 36px; padding: 8px 14px; border-radius: var(--radius-pill); background: rgba(28,37,48,0.92); color: var(--color-text); font-size: 14px; line-height: 1.6; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; }
+    .tier-badge--featured { border: 1px solid rgba(201,107,59,0.34); background: rgba(201,107,59,0.14); color: #F0D5C5; }
+    .tier-price { margin-top: 20px; }
+    .tier-price__value { font-family: var(--font-heading); font-size: 68px; line-height: 0.94; letter-spacing: -0.05em; font-weight: 700; }
+    .tier-price__meta { margin-top: 6px; color: var(--color-muted); font-size: 18px; line-height: 1.7; font-weight: 400; }
+    .feature-list { margin-top: 28px; }
+    .pricing-card__action { margin-top: auto; padding-top: 40px; }
+    .pricing-card__action .btn { width: 100%; min-height: 72px; font-size: 22px; }
+    .selection-card__title { font-family: var(--font-heading); font-size: 24px; line-height: 1.15; letter-spacing: -0.01em; font-weight: 600; }
+    .selection-card__copy { margin-top: 10px; color: var(--color-muted); font-size: 14px; line-height: 1.6; font-weight: 400; }
+    .selection-list { max-width: 760px; margin: var(--space-lg) auto 0; }
+    .review-card { position: relative; gap: 18px; }
+    .review-card::before { content: "“"; position: absolute; top: 18px; left: 24px; font-family: var(--font-heading); font-size: 78px; line-height: 1; color: rgba(201,107,59,0.18); pointer-events: none; }
+    .review-rating { position: relative; color: var(--color-accent); font-size: 28px; line-height: 1; letter-spacing: 0.08em; }
+    .review-copy { position: relative; font-size: 28px; line-height: 1.7; letter-spacing: -0.02em; font-style: italic; }
+    .cta-panel { padding: 40px; border-color: rgba(201,107,59,0.28); background: linear-gradient(180deg, rgba(201,107,59,0.12), rgba(21,28,36,0.98)), linear-gradient(180deg, rgba(28,37,48,0.92), rgba(21,28,36,0.98)); text-align: center; }
+    .cta-panel__actions { display: grid; gap: var(--space-sm); max-width: 620px; margin: 32px auto 0; }
+    .cta-panel__actions .btn { width: 100%; min-height: 72px; font-size: 24px; }
+    .site-footer { position: relative; z-index: 1; padding: var(--space-lg) 0; }
+    .site-footer__card { display: flex; align-items: center; justify-content: space-between; gap: var(--space-lg); padding: 28px; border: 1px solid var(--color-border); border-radius: var(--radius-card); background: rgba(21,28,36,0.94); box-shadow: var(--shadow-card); }
+    .site-footer__title { font-family: var(--font-heading); font-size: 36px; line-height: 1; letter-spacing: -0.03em; font-weight: 700; }
+    .site-footer__copy { margin-top: 10px; color: var(--color-muted); font-size: 14px; line-height: 1.6; font-weight: 400; }
+    .footer-nav { display: flex; flex-wrap: wrap; gap: 20px; justify-content: flex-end; }
+    .footer-nav__link { font-size: 14px; line-height: 1.6; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 1100px) {
+      .page-main { padding-top: 108px; }
+      .site-nav, .btn-header { display: none; }
+      .menu-toggle { display: inline-flex; }
+      .results-grid, .reviews-grid, .pricing-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .section { padding: var(--space-xl) 0; }
+      .section--hero { padding-top: calc(var(--space-xl) + 12px); }
     }
-    .glass {
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.08);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+    @media (max-width: 768px) {
+      body { font-size: 17px; }
+      .container { width: min(calc(100% - 24px), var(--container-width)); }
+      .site-header { top: 12px; padding: 0 12px; }
+      .site-header__card { padding: 12px 14px; }
+      .brand { font-size: 26px; }
+      .page-main { padding-top: 96px; }
+      h1 { font-size: 48px; }
+      h2 { font-size: 36px; }
+      h3, .result-title, .selection-card__title { font-size: 24px; }
+      .hero__pills { gap: 8px; margin-bottom: 32px; }
+      .line-break-desktop { display: none; }
+      .hero__action, .cta-panel__actions .btn { min-height: 68px; font-size: 20px; }
+      .accordion-trigger, .faq-trigger, .result-card, .review-card, .pricing-card, .selection-card, .cta-panel, .site-footer__card { padding: 22px; }
+      .results-grid, .reviews-grid, .pricing-grid, .selection-grid { grid-template-columns: 1fr; }
+      .result-value, .tier-price__value { font-size: 54px; }
+      .review-copy { font-size: 22px; }
+      .site-footer__card { flex-direction: column; align-items: flex-start; }
+      .footer-nav { justify-content: flex-start; }
     }
-    .soft-card {
-      background: linear-gradient(180deg, rgba(30,30,30,.95), rgba(20,20,20,.95));
-      border: 1px solid rgba(255,255,255,.07);
-      box-shadow: 0 16px 40px rgba(0,0,0,.3);
-    }
-    .hero-grid {
-      background-image:
-        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
-      background-size: 28px 28px;
-      mask-image: linear-gradient(180deg, rgba(0,0,0,.85), transparent 92%);
-    }
-    .glow-button {
-      position: relative;
-      overflow: hidden;
-      transition: transform .3s ease, box-shadow .3s ease, background-color .3s ease;
-    }
-    .glow-button:hover { transform: translateY(-2px); }
-    .glow-button::after {
-      content: "";
-      position: absolute;
-      inset: -140%;
-      background: radial-gradient(circle, rgba(255,255,255,.22) 0%, transparent 55%);
-      opacity: 0;
-      transition: opacity .3s ease;
-    }
-    .glow-button:hover::after,
-    .glow-button:focus-visible::after { opacity: 1; }
-    .section-reveal {
-      opacity: 0;
-      transform: translateY(34px);
-      transition: opacity .7s ease, transform .7s ease;
-    }
-    .section-reveal.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .accent-text {
-      background: linear-gradient(180deg, #ffb066 0%, #ff7a1a 70%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .review-text {
-      font-style: italic;
-      letter-spacing: -.02em;
-    }
-    .price-outline {
-      box-shadow: inset 0 0 0 1px rgba(255,122,26,.3), 0 18px 42px rgba(255,122,26,.12);
-    }
-    .nav-link {
-      transition: color .3s ease, opacity .3s ease;
-    }
-    .nav-link:hover { color: #fff; }
-    .icon-badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 1.2rem;
-      height: 1.2rem;
-      color: #ff7a1a;
-      flex-shrink: 0;
-    }
-    .chip-icon {
-      width: 1.15rem;
-      height: 1.15rem;
-      color: #ff7a1a;
-      flex-shrink: 0;
-    }
-    .hero-badge {
-      background: linear-gradient(180deg, rgba(31,18,10,.95), rgba(20,14,12,.9));
-      border: 1px solid rgba(255,122,26,.22);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.03), 0 18px 30px rgba(0,0,0,.16);
-    }
-    .module-card {
-      background: linear-gradient(180deg, rgba(22,22,22,.98), rgba(14,14,14,.98));
-      border: 1px solid rgba(255,255,255,.07);
-      box-shadow: 0 18px 44px rgba(0,0,0,.28);
-    }
-    .module-kicker {
-      color: #ff7a1a;
-      letter-spacing: .26em;
-      text-transform: uppercase;
-    }
-    .module-list li,
-    .feature-list li,
-    .selection-list li {
-      position: relative;
-      padding-left: 2.1rem;
-    }
-    .module-list li::before,
-    .feature-list li::before,
-    .selection-list li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: .62rem;
-      width: .8rem;
-      height: .8rem;
-      border-radius: 999px;
-      background: linear-gradient(180deg, #ffb066 0%, #ff7a1a 100%);
-      box-shadow: 0 0 0 4px rgba(255,122,26,.09);
-    }
-    .feature-off {
-      padding-left: 2.1rem !important;
-    }
-    .feature-off::before {
-      display: none !important;
-    }
-    .feature-off .x-icon {
-      position: absolute;
-      left: 0;
-      top: .62rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: .8rem;
-      height: .8rem;
-      color: rgba(184,184,190,.78);
-    }
-    .accordion-icon,
-    .faq-icon {
-      flex-shrink: 0;
-      width: 2.25rem;
-      height: 2.25rem;
-      color: rgba(158,158,165,.84);
-      transition: transform .3s ease, color .3s ease;
-    }
-    .question-card {
-      background: linear-gradient(180deg, rgba(24,24,24,.98), rgba(16,16,16,.98));
-    }
-    .quote-mark {
-      position: absolute;
-      left: 1.5rem;
-      top: 1rem;
-      font-size: 5rem;
-      line-height: 1;
-      color: rgba(255,122,26,.12);
-      font-weight: 800;
-      pointer-events: none;
-    }
-    .footer-link {
-      color: rgba(255,255,255,.55);
-      transition: color .2s ease;
-    }
-    .footer-link:hover { color: #fff; }
-    .results-card {
-      display: flex;
-      flex-direction: column;
-      min-height: 100%;
-    }
-    .review-card {
-      display: flex;
-      flex-direction: column;
-      min-height: 100%;
-    }
-    .result-icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 4rem;
-      height: 4rem;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, rgba(255,122,26,.16), rgba(255,122,26,.05));
-      color: #ff7a1a;
-      box-shadow: inset 0 0 0 1px rgba(255,122,26,.08);
-    }
-    .result-icon svg {
-      width: 1.55rem;
-      height: 1.55rem;
-    }
-    @media (max-width: 767px) {
-      .mobile-panel {
-        transform: translateY(-12px);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity .3s ease, transform .3s ease;
-      }
-      .mobile-panel.is-open {
-        transform: translateY(0);
-        opacity: 1;
-        pointer-events: auto;
-      }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .btn, .trigger-icon, .reveal { transition: none; }
+      .reveal { opacity: 1; transform: none; }
     }
   </style>
 </head>
-<body class="text-white antialiased">
-  <div class="relative overflow-hidden">
-    <div class="hero-grid pointer-events-none absolute inset-0 opacity-30"></div>
-    <div class="pointer-events-none absolute left-1/2 top-0 h-[22rem] w-[22rem] -translate-x-1/2 rounded-full bg-orange-500/10 blur-3xl sm:h-[26rem] sm:w-[26rem]"></div>
-    <div class="fixed left-1/2 top-3 z-50 w-[calc(100%-1.25rem)] max-w-[76rem] -translate-x-1/2 px-0 sm:top-4 sm:w-[calc(100%-2rem)]">
-      <header class="glass relative rounded-[1.9rem] px-4 py-3 shadow-soft sm:px-5">
-        <div class="flex items-center justify-between gap-4">
-          <a href="#top" class="flex items-center gap-3">
-            <span class="text-lg font-extrabold tracking-[-.04em] text-white sm:text-2xl">
-              VADYA <span class="text-orange-400">OFM</span> CLUB
-            </span>
-          </a>
-          <nav class="hidden items-center gap-1 text-sm md:flex">
-            <a href="#top" class="nav-link rounded-full px-3 py-2 text-white/65">О курсе</a>
-            <a href="#program" class="nav-link rounded-full px-3 py-2 text-white/65">Программа</a>
-            <a href="#results" class="nav-link rounded-full px-3 py-2 text-white/65">Результаты</a>
-            <a href="#pricing" class="nav-link rounded-full px-3 py-2 text-white/65">Тарифы</a>
-            <a href="#footer-contact" class="nav-link rounded-full px-3 py-2 text-white/65">Контакты</a>
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" class="icon-sprite" aria-hidden="true" focusable="false">
+    <symbol id="icon-bolt" viewBox="0 0 24 24"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"></path></symbol>
+    <symbol id="icon-lock" viewBox="0 0 24 24"><path d="M7 11V8a5 5 0 0 1 10 0v3" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"></path><rect x="5" y="11" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2.1"></rect></symbol>
+    <symbol id="icon-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.1"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"></path></symbol>
+    <symbol id="icon-card" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2.1"></rect><path d="M3 10h18" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"></path></symbol>
+    <symbol id="icon-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></symbol>
+    <symbol id="icon-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"></path></symbol>
+    <symbol id="icon-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path></symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path></symbol>
+    <symbol id="icon-dollar-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2.1"></circle><path d="M12 8v8M15 10.2c0-1.1-1.34-2-3-2s-3 .9-3 2 1.34 2 3 2 3 .9 3 2-1.34 2-3 2-3-.9-3-2" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"></path></symbol>
+    <symbol id="icon-chart" viewBox="0 0 24 24"><path d="M5 16l5-5 3 3 6-6" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"></path><path d="M14 8h5v5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"></path></symbol>
+    <symbol id="icon-currency" viewBox="0 0 24 24"><path d="M12 4v16" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"></path><path d="M16 7.5c0-1.7-1.79-3-4-3s-4 1.3-4 3 1.79 3 4 3 4 1.3 4 3-1.79 3-4 3-4-1.3-4-3" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"></path></symbol>
+    <symbol id="icon-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2.1"></circle><circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="2.1"></circle><circle cx="12" cy="12" r="1" fill="currentColor"></circle></symbol>
+  </svg>
+  <div class="site-shell">
+    <header class="site-header">
+      <div class="container">
+        <div class="site-header__card">
+          <a href="#top" class="brand">VADYA <span class="brand__accent">OFM</span> CLUB</a>
+          <nav class="site-nav" aria-label="Основная навигация">
+            <a href="#top" class="site-nav__link">О курсе</a>
+            <a href="#program" class="site-nav__link">Программа</a>
+            <a href="#results" class="site-nav__link">Результаты</a>
+            <a href="#pricing" class="site-nav__link">Тарифы</a>
+            <a href="#footer-contact" class="site-nav__link">Контакты</a>
           </nav>
-          <div class="flex items-center gap-3">
-            <a href="#pricing" class="hidden rounded-full bg-orange-500 px-5 py-3 text-sm font-extrabold text-black shadow-glow transition hover:bg-orange-400 md:inline-flex">Начать обучение</a>
-            <button id="mobile-menu-button" type="button" class="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white md:hidden" aria-label="Открыть меню" aria-expanded="false">
-              <svg id="mobile-menu-open" viewBox="0 0 24 24" class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
-                <path d="M4 7h16M4 12h16M4 17h16"></path>
-              </svg>
-              <svg id="mobile-menu-close" viewBox="0 0 24 24" class="hidden h-7 w-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
-                <path d="M6 6l12 12M18 6L6 18"></path>
-              </svg>
+          <div class="site-header__actions">
+            <a href="#pricing" class="btn btn-primary btn-header">Начать обучение</a>
+            <button id="mobile-menu-button" class="menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false">
+              <svg id="mobile-menu-open" class="icon icon--medium" aria-hidden="true"><use href="#icon-menu"></use></svg>
+              <svg id="mobile-menu-close" class="icon icon--medium" aria-hidden="true" hidden><use href="#icon-close"></use></svg>
             </button>
           </div>
-        </div>
-        <div id="mobile-menu-panel" class="mobile-panel hidden mt-4 overflow-hidden rounded-[1.8rem] border border-white/8 bg-[#111111] p-5 md:hidden">
-          <div class="grid gap-6 text-[2rem] font-extrabold tracking-[-.04em] text-white/90">
-            <a href="#top" class="mobile-nav-link">О курсе</a>
-            <a href="#program" class="mobile-nav-link">Программа</a>
-            <a href="#results" class="mobile-nav-link">Результаты</a>
-            <a href="#pricing" class="mobile-nav-link">Тарифы</a>
-            <a href="#footer-contact" class="mobile-nav-link">Контакты</a>
-          </div>
-          <a href="#pricing" class="glow-button mt-8 flex min-h-[78px] items-center justify-center rounded-[1.6rem] bg-orange-500 px-6 text-center text-2xl font-extrabold text-black shadow-glow">Начать обучение</a>
-        </div>
-      </header>
-    </div>
-    <div class="mx-auto max-w-[76rem] px-5 pb-16 pt-24 sm:px-7 sm:pb-20 sm:pt-28 lg:px-10">
-      <main id="top" class="pt-4 sm:pt-6">
-        <section class="section-reveal py-8 sm:py-14">
-          <div class="mx-auto max-w-5xl text-center">
-            <div class="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-3 sm:gap-4">
-              <div class="hero-badge inline-flex min-h-12 items-center gap-3 rounded-full px-4 py-2 text-sm font-semibold uppercase tracking-[.18em] text-orange-300 sm:min-h-14 sm:px-6 sm:text-base">
-                <svg viewBox="0 0 24 24" class="chip-icon" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"></path></svg>
-                Пошаговая система запуска
-              </div>
-              <div class="glass inline-flex min-h-12 items-center gap-3 rounded-full px-4 py-2 text-sm font-medium text-white/88 sm:min-h-14 sm:px-6 sm:text-base">
-                <svg viewBox="0 0 24 24" class="chip-icon" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M7 11V8a5 5 0 0 1 10 0v3"></path><rect x="5" y="11" width="14" height="10" rx="2"></rect></svg>
-                Анонимно
-              </div>
-              <div class="glass inline-flex min-h-12 items-center gap-3 rounded-full px-4 py-2 text-sm font-medium text-white/88 sm:min-h-14 sm:px-6 sm:text-base">
-                <svg viewBox="0 0 24 24" class="chip-icon" fill="none" stroke="currentColor" stroke-width="2.1"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg>
-                Из любой точки мира
-              </div>
-              <div class="glass inline-flex min-h-12 items-center gap-3 rounded-full px-4 py-2 text-sm font-medium text-white/88 sm:min-h-14 sm:px-6 sm:text-base">
-                <svg viewBox="0 0 24 24" class="chip-icon" fill="none" stroke="currentColor" stroke-width="2.1"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 10h18"></path></svg>
-                Минимум вложений
-              </div>
+          <div id="mobile-menu-panel" class="mobile-nav" hidden>
+            <div class="mobile-nav__links">
+              <a href="#top" class="mobile-nav__link">О курсе</a>
+              <a href="#program" class="mobile-nav__link">Программа</a>
+              <a href="#results" class="mobile-nav__link">Результаты</a>
+              <a href="#pricing" class="mobile-nav__link">Тарифы</a>
+              <a href="#footer-contact" class="mobile-nav__link">Контакты</a>
             </div>
-            <h1 class="mx-auto mt-10 max-w-5xl text-5xl font-extrabold leading-[.94] tracking-[-.06em] sm:text-6xl lg:text-8xl">
-              Собери и<br class="hidden sm:block" />
-              монетизируй свою<br />
-              <span class="accent-text">AI-модель</span> по шагам
-            </h1>
-            <p class="mx-auto mt-6 max-w-3xl text-lg leading-8 text-white/62 sm:mt-8 sm:text-2xl sm:leading-10">
-              Пошаговая система от создания модели до продаж, которая подходит как новичкам, так и опытным.
-            </p>
-            <div class="mx-auto mt-10 grid max-w-3xl gap-4 sm:mt-12">
-              <a href="#pricing" class="glow-button soft-card flex min-h-[76px] items-center justify-center rounded-[1.75rem] px-6 text-center text-xl font-extrabold tracking-[-.03em] text-white sm:min-h-[88px] sm:text-2xl">Купить "Самостоятельный"</a>
-              <a href="#advanced-form" class="glow-button flex min-h-[84px] items-center justify-center rounded-[1.75rem] bg-orange-500 px-6 text-center text-xl font-extrabold tracking-[-.03em] text-black shadow-glow sm:min-h-[96px] sm:text-3xl">Подать заявку на "Продвинутый"</a>
+            <a href="#pricing" class="btn btn-primary mobile-nav__cta">Начать обучение</a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main id="top" class="page-main">
+      <section class="section section--hero reveal">
+        <div class="container">
+          <div class="hero">
+            <div class="hero__pills">
+              <div class="hero-pill hero-pill--lead"><svg class="icon icon--small icon--accent" aria-hidden="true"><use href="#icon-bolt"></use></svg>Пошаговая система запуска</div>
+              <div class="hero-pill"><svg class="icon icon--small icon--accent" aria-hidden="true"><use href="#icon-lock"></use></svg>Анонимно</div>
+              <div class="hero-pill"><svg class="icon icon--small icon--accent" aria-hidden="true"><use href="#icon-globe"></use></svg>Из любой точки мира</div>
+              <div class="hero-pill"><svg class="icon icon--small icon--accent" aria-hidden="true"><use href="#icon-card"></use></svg>Минимум вложений</div>
+            </div>
+            <h1 class="hero__title">Собери и<br class="line-break-desktop" />монетизируй свою<br /><span class="text-accent">AI-модель</span> по шагам</h1>
+            <p class="hero__copy">Пошаговая система от создания модели до продаж, которая подходит как новичкам, так и опытным.</p>
+            <div class="hero__actions">
+              <a href="#pricing" class="btn btn-secondary hero__action">Купить "Самостоятельный"</a>
+              <a href="#advanced-form" class="btn btn-primary hero__action">Подать заявку на "Продвинутый"</a>
             </div>
           </div>
-        </section>
-        <section id="program" class="section-reveal py-14 sm:py-24">
-          <div class="mx-auto max-w-3xl text-center">
-            <p class="inline-flex rounded-full border border-orange-400/25 bg-orange-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-[.34em] text-orange-200 sm:text-sm">Программа обучения</p>
-            <h2 class="mt-6 text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">Освой систему<br /><span class="accent-text">по модулям</span></h2>
-            <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/56 sm:text-xl sm:leading-9">Комплексная программа из 7 модулей и эксклюзивных материалов для перехода от первых шагов к системному заработку на AI-моделях</p>
+        </div>
+      </section>
+      <section id="program" class="section reveal">
+        <div class="container">
+          <div class="section-intro">
+            <p class="eyebrow eyebrow--accent">Программа обучения</p>
+            <h2>Освой систему<br /><span class="text-accent">по модулям</span></h2>
+            <p class="muted">Комплексная программа из 7 модулей и эксклюзивных материалов для перехода от первых шагов к системному заработку на AI-моделях</p>
           </div>
-          <div class="mx-auto mt-10 max-w-5xl space-y-4">
-            <article class="module-card overflow-hidden rounded-[2rem]">
-              <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
-                <span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm">МОДУЛЬ 1</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Создание уникальной AI-модели</span></span>
-                <span class="accordion-icon flex items-center justify-center">
-                  <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
-                </span>
-              </button>
-              <div class="accordion-content hidden border-t border-white/10 px-5 pb-7 pt-2 sm:px-8">
-                <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
-                  <li>Поиск референсов реальных моделей</li>
-                  <li>Генерация уникального лица через текстовые промпты</li>
-                  <li>Технология FaceSwap</li>
-                  <li>Работа с первыми нейросетями</li>
-                  <li>Создание фотосессий</li>
-                </ul>
-              </div>
-            </article>
-            <article class="module-card overflow-hidden rounded-[2rem]">
-              <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
-                <span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm">МОДУЛЬ 2</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Генерация видео</span></span>
-                <span class="accordion-icon flex items-center justify-center">
-                  <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
-                </span>
-              </button>
-              <div class="accordion-content hidden border-t border-white/10 px-5 pb-7 pt-2 sm:px-8">
-                <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
-                  <li>Введение в AI-видео</li>
-                  <li>Работа с нейросетями для видео</li>
-                  <li>Создание видео для Reels/TikTok</li>
-                  <li>Создание премиум видео для продаж</li>
-                </ul>
-              </div>
-            </article>
-            <article class="module-card overflow-hidden rounded-[2rem]">
-              <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
-                <span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm">МОДУЛЬ 3</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Площадки для монетизации</span></span>
-                <span class="accordion-icon flex items-center justify-center">
-                  <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
-                </span>
-              </button>
-              <div class="accordion-content hidden border-t border-white/10 px-5 pb-7 pt-2 sm:px-8">
-                <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
-                  <li>Обзор платформ монетизации</li>
-                  <li>Создание и настройка Telegram-канала</li>
-                  <li>Западная платформа для AI-моделей</li>
-                  <li>Instagram как воронка трафика</li>
-                  <li>TikTok — генератор вирусного трафика</li>
-                </ul>
-              </div>
-            </article>
-            <article class="module-card overflow-hidden rounded-[2rem]">
-              <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
-                <span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm">МОДУЛЬ 4</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">NSFW-контент</span></span>
-                <span class="accordion-icon flex items-center justify-center">
-                  <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
-                </span>
-              </button>
-              <div class="accordion-content hidden border-t border-white/10 px-5 pb-7 pt-2 sm:px-8">
-                <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
-                  <li>Психология покупателей премиум-контента</li>
-                  <li>Создание откровенного контента и Implied Nude</li>
-                  <li>Storytelling и сценарии для продаж</li>
-                  <li>Создание тематических сетов</li>
-                  <li>Работа с кастомными заказами</li>
-                </ul>
-              </div>
-            </article>
-            <article class="module-card overflow-hidden rounded-[2rem]">
-              <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
-                <span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm">МОДУЛЬ 5</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Трафик USA</span></span>
-                <span class="accordion-icon flex items-center justify-center">
-                  <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
-                </span>
-              </button>
-              <div class="accordion-content hidden border-t border-white/10 px-5 pb-7 pt-2 sm:px-8">
-                <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
-                  <li>Настройка VPN и американской личности</li>
-                  <li>Instagram для USA-аудитории</li>
-                  <li>TikTok — захват американского рынка</li>
-                  <li>Хештеги и алгоритмы для USA</li>
-                  <li>Конвертация трафика в деньги</li>
-                </ul>
-              </div>
-            </article>
-            <article class="module-card overflow-hidden rounded-[2rem]">
-              <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
-                <span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm">МОДУЛЬ 6</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Продажи и коммуникация</span></span>
-                <span class="accordion-icon flex items-center justify-center">
-                  <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
-                </span>
-              </button>
-              <div class="accordion-content hidden border-t border-white/10 px-5 pb-7 pt-2 sm:px-8">
-                <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
-                  <li>Психология покупателя Adult-контента</li>
-                  <li>Структура продающего диалога</li>
-                  <li>Готовые скрипты для продаж</li>
-                  <li>Работа с возражениями</li>
-                  <li>Допродажи и удержание</li>
-                </ul>
-              </div>
-            </article>
-            <article class="module-card overflow-hidden rounded-[2rem]">
-              <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
-                <span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm">МОДУЛЬ 7</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Масштабирование и автоматизация</span></span>
-                <span class="accordion-icon flex items-center justify-center">
-                  <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
-                </span>
-              </button>
-              <div class="accordion-content hidden border-t border-white/10 px-5 pb-7 pt-2 sm:px-8">
-                <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
-                  <li>Построение команды</li>
-                  <li>Где искать и как нанимать ассистентов</li>
-                  <li>Собеседование и обучение персонала</li>
-                  <li>Автоматизация процессов</li>
-                  <li>Масштабирование до нескольких моделей</li>
-                </ul>
-              </div>
-            </article>
-            <article class="module-card overflow-hidden rounded-[2rem]">
-              <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
-                <span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm">БОНУСНЫЕ МАТЕРИАЛЫ</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Дополнительные инструменты для быстрого запуска</span></span>
-                <span class="accordion-icon flex items-center justify-center">
-                  <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
-                </span>
-              </button>
-              <div class="accordion-content hidden border-t border-white/10 px-5 pb-7 pt-2 sm:px-8">
-                <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
-                  <li>500+ работающих промптов для генерации</li>
-                  <li>База из 50 скриптов продаж на английском</li>
-                  <li>Excel-калькулятор доходности проекта</li>
-                  <li>Контент-план на 30 дней</li>
-                  <li>Чек-листы для каждого этапа</li>
-                  <li>Таблица ценообразования для разных рынков</li>
-                </ul>
-              </div>
-            </article>
+          <div class="accordion-list">
+            <article class="accordion-item card"><button class="accordion-trigger module-trigger" type="button" aria-expanded="false" aria-controls="module-1-panel"><span class="accordion-heading"><span class="accordion-kicker">МОДУЛЬ 1</span><span>Создание уникальной AI-модели</span></span><span class="trigger-icon" aria-hidden="true"><svg class="icon"><use href="#icon-chevron"></use></svg></span></button><div id="module-1-panel" class="accordion-panel" hidden><div class="accordion-panel__inner"><ul class="bullet-list"><li>Поиск референсов реальных моделей</li><li>Генерация уникального лица через текстовые промпты</li><li>Технология FaceSwap</li><li>Работа с первыми нейросетями</li><li>Создание фотосессий</li></ul></div></div></article>
+            <article class="accordion-item card"><button class="accordion-trigger module-trigger" type="button" aria-expanded="false" aria-controls="module-2-panel"><span class="accordion-heading"><span class="accordion-kicker">МОДУЛЬ 2</span><span>Генерация видео</span></span><span class="trigger-icon" aria-hidden="true"><svg class="icon"><use href="#icon-chevron"></use></svg></span></button><div id="module-2-panel" class="accordion-panel" hidden><div class="accordion-panel__inner"><ul class="bullet-list"><li>Введение в AI-видео</li><li>Работа с нейросетями для видео</li><li>Создание видео для Reels/TikTok</li><li>Создание премиум видео для продаж</li></ul></div></div></article>
+            <article class="accordion-item card"><button class="accordion-trigger module-trigger" type="button" aria-expanded="false" aria-controls="module-3-panel"><span class="accordion-heading"><span class="accordion-kicker">МОДУЛЬ 3</span><span>Площадки для монетизации</span></span><span class="trigger-icon" aria-hidden="true"><svg class="icon"><use href="#icon-chevron"></use></svg></span></button><div id="module-3-panel" class="accordion-panel" hidden><div class="accordion-panel__inner"><ul class="bullet-list"><li>Обзор платформ монетизации</li><li>Создание и настройка Telegram-канала</li><li>Западная платформа для AI-моделей</li><li>Instagram как воронка трафика</li><li>TikTok — генератор вирусного трафика</li></ul></div></div></article>
+            <article class="accordion-item card"><button class="accordion-trigger module-trigger" type="button" aria-expanded="false" aria-controls="module-4-panel"><span class="accordion-heading"><span class="accordion-kicker">МОДУЛЬ 4</span><span>NSFW-контент</span></span><span class="trigger-icon" aria-hidden="true"><svg class="icon"><use href="#icon-chevron"></use></svg></span></button><div id="module-4-panel" class="accordion-panel" hidden><div class="accordion-panel__inner"><ul class="bullet-list"><li>Психология покупателей премиум-контента</li><li>Создание откровенного контента и Implied Nude</li><li>Storytelling и сценарии для продаж</li><li>Создание тематических сетов</li><li>Работа с кастомными заказами</li></ul></div></div></article>
+            <article class="accordion-item card"><button class="accordion-trigger module-trigger" type="button" aria-expanded="false" aria-controls="module-5-panel"><span class="accordion-heading"><span class="accordion-kicker">МОДУЛЬ 5</span><span>Трафик USA</span></span><span class="trigger-icon" aria-hidden="true"><svg class="icon"><use href="#icon-chevron"></use></svg></span></button><div id="module-5-panel" class="accordion-panel" hidden><div class="accordion-panel__inner"><ul class="bullet-list"><li>Настройка VPN и американской личности</li><li>Instagram для USA-аудитории</li><li>TikTok — захват американского рынка</li><li>Хештеги и алгоритмы для USA</li><li>Конвертация трафика в деньги</li></ul></div></div></article>
+            <article class="accordion-item card"><button class="accordion-trigger module-trigger" type="button" aria-expanded="false" aria-controls="module-6-panel"><span class="accordion-heading"><span class="accordion-kicker">МОДУЛЬ 6</span><span>Продажи и коммуникация</span></span><span class="trigger-icon" aria-hidden="true"><svg class="icon"><use href="#icon-chevron"></use></svg></span></button><div id="module-6-panel" class="accordion-panel" hidden><div class="accordion-panel__inner"><ul class="bullet-list"><li>Психология покупателя Adult-контента</li><li>Структура продающего диалога</li><li>Готовые скрипты для продаж</li><li>Работа с возражениями</li><li>Допродажи и удержание</li></ul></div></div></article>
+            <article class="accordion-item card"><button class="accordion-trigger module-trigger" type="button" aria-expanded="false" aria-controls="module-7-panel"><span class="accordion-heading"><span class="accordion-kicker">МОДУЛЬ 7</span><span>Масштабирование и автоматизация</span></span><span class="trigger-icon" aria-hidden="true"><svg class="icon"><use href="#icon-chevron"></use></svg></span></button><div id="module-7-panel" class="accordion-panel" hidden><div class="accordion-panel__inner"><ul class="bullet-list"><li>Построение команды</li><li>Где искать и как нанимать ассистентов</li><li>Собеседование и обучение персонала</li><li>Автоматизация процессов</li><li>Масштабирование до нескольких моделей</li></ul></div></div></article>
+            <article class="accordion-item card"><button class="accordion-trigger module-trigger" type="button" aria-expanded="false" aria-controls="module-8-panel"><span class="accordion-heading"><span class="accordion-kicker">БОНУСНЫЕ МАТЕРИАЛЫ</span><span>Дополнительные инструменты для быстрого запуска</span></span><span class="trigger-icon" aria-hidden="true"><svg class="icon"><use href="#icon-chevron"></use></svg></span></button><div id="module-8-panel" class="accordion-panel" hidden><div class="accordion-panel__inner"><ul class="bullet-list"><li>500+ работающих промптов для генерации</li><li>База из 50 скриптов продаж на английском</li><li>Excel-калькулятор доходности проекта</li><li>Контент-план на 30 дней</li><li>Чек-листы для каждого этапа</li><li>Таблица ценообразования для разных рынков</li></ul></div></div></article>
           </div>
-        </section>
-        <section id="results" class="section-reveal py-14 sm:py-24">
-          <div class="mx-auto max-w-3xl text-center">
-            <h2 class="text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">Результаты<br /><span class="accent-text">учеников</span></h2>
-            <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/60 sm:text-xl sm:leading-9">Примеры реализации системы на практике</p>
+        </div>
+      </section>
+      <section id="results" class="section reveal">
+        <div class="container">
+          <div class="section-intro"><h2>Результаты<br /><span class="text-accent">учеников</span></h2><p class="muted">Примеры реализации системы на практике</p></div>
+          <div class="results-grid">
+            <article class="card result-card"><span class="result-icon"><svg class="icon icon--medium icon--accent" aria-hidden="true"><use href="#icon-dollar-circle"></use></svg></span><p class="result-value">$200</p><p class="result-title">за один день</p><p class="result-copy">Спустя 3 недели после внедрения системы. До покупки программы модель уже была, но не было понимания, как на ней заработать.</p><p class="meta">Участник, 3 недели в VADYA OFM CLUB</p></article>
+            <article class="card result-card"><span class="result-icon"><svg class="icon icon--medium icon--accent-alt" aria-hidden="true"><use href="#icon-chart"></use></svg></span><p class="result-value">+1,900</p><p class="result-title">целевых подписчиков</p><p class="result-copy">Через 3 дня после внедрения стратегии из раздела по трафику. Результат превзошел ожидания и дал сильный толчок в продажах.</p><p class="meta">Участник, 1 неделя в программе</p></article>
+            <article class="card result-card"><span class="result-icon"><svg class="icon icon--medium icon--accent" aria-hidden="true"><use href="#icon-currency"></use></svg></span><p class="result-value">$1,500/мес</p><p class="result-title">на автопилоте</p><p class="result-copy">За 3 месяца выстроил систему, подключил ассистента по инструкциям из раздела масштабирования и стабилизировал выплаты.</p><p class="meta">Участник, 3 месяца в системе</p></article>
+            <article class="card result-card"><span class="result-icon"><svg class="icon icon--medium icon--accent" aria-hidden="true"><use href="#icon-bolt"></use></svg></span><p class="result-value">11 дней</p><p class="result-title">до первой продажи</p><p class="result-copy">Полный новичок в нейросетях. Следовал пошаговым инструкциям — и уже на 11-й день получил первый платёж.</p><p class="meta">Участник, новичок</p></article>
+            <article class="card result-card"><span class="result-icon"><svg class="icon icon--medium icon--accent-alt" aria-hidden="true"><use href="#icon-globe"></use></svg></span><p class="result-value">$2,400/мес</p><p class="result-title">из СНГ на рынке USA</p><p class="result-copy">Работает удалённо из России. Не понимал, как монетизировать трафик — всё решил с помощью одного раздела.</p><p class="meta">Участник, 3 месяца в VADYA OFM CLUB</p></article>
+            <article class="card result-card"><span class="result-icon"><svg class="icon icon--medium icon--accent" aria-hidden="true"><use href="#icon-target"></use></svg></span><p class="result-value">$50</p><p class="result-title">первый кастомный заказ</p><p class="result-copy">Через 14 дней после старта. Следовал скриптам из раздела продаж — клиент сам попросил сделать кастомный сет.</p><p class="meta">Участник, 2 недели в VADYA OFM CLUB</p></article>
           </div>
-          <div class="mx-auto mt-10 grid max-w-[72rem] gap-5 md:grid-cols-2 xl:grid-cols-3">
-            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7"><div class="result-icon mb-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"></circle><path d="M12 8v8M15 10.2c0-1.1-1.34-2-3-2s-3 .9-3 2 1.34 2 3 2 3 .9 3 2-1.34 2-3 2-3-.9-3-2"></path></svg></div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$200</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">за один день</p><p class="mt-6 text-lg leading-9 text-white/60">Спустя 3 недели после внедрения системы. До покупки программы модель уже была, но не было понимания, как на ней заработать.</p><p class="mt-auto pt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, 3 недели в VADYA OFM CLUB</p></article>
-            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7"><div class="result-icon mb-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16l5-5 3 3 6-6"></path><path d="M14 8h5v5"></path></svg></div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">+1,900</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">целевых подписчиков</p><p class="mt-6 text-lg leading-9 text-white/60">Через 3 дня после внедрения стратегии из раздела по трафику. Результат превзошел ожидания и дал сильный толчок в продажах.</p><p class="mt-auto pt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, 1 неделя в программе</p></article>
-            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7"><div class="result-icon mb-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16"></path><path d="M16 7.5c0-1.7-1.79-3-4-3s-4 1.3-4 3 1.79 3 4 3 4 1.3 4 3-1.79 3-4 3-4-1.3-4-3"></path></svg></div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$1,500/мес</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">на автопилоте</p><p class="mt-6 text-lg leading-9 text-white/60">За 3 месяца выстроил систему, подключил ассистента по инструкциям из раздела масштабирования и стабилизировал выплаты.</p><p class="mt-auto pt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, 3 месяца в системе</p></article>
-            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7"><div class="result-icon mb-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"></path></svg></div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">11 дней</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">до первой продажи</p><p class="mt-6 text-lg leading-9 text-white/60">Полный новичок в нейросетях. Следовал пошаговым инструкциям — и уже на 11-й день получил первый платёж.</p><p class="mt-auto pt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, новичок</p></article>
-            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7"><div class="result-icon mb-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"></circle><path d="M3.5 12h17"></path><path d="M12 4a14 14 0 0 1 0 16"></path><path d="M12 4a14 14 0 0 0 0 16"></path></svg></div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$2,400/мес</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">из СНГ на рынке USA</p><p class="mt-6 text-lg leading-9 text-white/60">Работает удалённо из России. Не понимал, как монетизировать трафик — всё решил с помощью одного раздела.</p><p class="mt-auto pt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, 3 месяца в VADYA OFM CLUB</p></article>
-            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7"><div class="result-icon mb-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3.5"></circle><circle cx="12" cy="12" r="1"></circle></svg></div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$50</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">первый кастомный заказ</p><p class="mt-6 text-lg leading-9 text-white/60">Через 14 дней после старта. Следовал скриптам из раздела продаж — клиент сам попросил сделать кастомный сет.</p><p class="mt-auto pt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, 2 недели в VADYA OFM CLUB</p></article>
-          </div>
-        </section>
-        <section id="pricing" class="section-reveal py-14 sm:py-24">
-          <div class="mx-auto max-w-3xl text-center">
-            <h2 class="text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">Форматы<br /><span class="accent-text">обучения</span></h2>
-            <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/60 sm:text-xl sm:leading-9">Выбирай под свой темп и цели</p>
-          </div>
-          <div class="mx-auto mt-10 grid max-w-[74rem] gap-6 xl:grid-cols-3">
-            <article class="soft-card flex h-full flex-col rounded-[2rem] p-6 sm:p-7">
-              <div class="mx-auto mb-6 inline-flex rounded-full bg-[#34313c] px-5 py-2 text-sm font-extrabold uppercase tracking-[.25em] text-white/90">Базовый</div>
-              <h3 class="text-4xl font-extrabold tracking-[-.05em]">Самостоятельный</h3>
-              <div class="mt-5"><p class="text-7xl font-extrabold tracking-[-.07em]">$249</p><p class="mt-1 text-3xl text-white/40">≈ 20,000 ₽</p></div>
-              <ul class="feature-list mt-8 space-y-4 text-lg text-white/82">
-                <li>Все 7 разделов обучения</li><li>500+ промптов для генерации</li><li>50 скриптов продаж</li><li>Контент-план на 30 дней</li><li>Чек-листы для каждого этапа</li><li>Доступ к материалам навсегда</li><li class="feature-off text-white/35"><span class="x-icon"><svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></span>Обновления программы</li><li class="feature-off text-white/35"><span class="x-icon"><svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></span>Личная поддержка</li><li class="feature-off text-white/35"><span class="x-icon"><svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></span>Общий чат с учениками</li>
+        </div>
+      </section>
+      <section id="pricing" class="section reveal">
+        <div class="container">
+          <div class="section-intro"><h2>Форматы<br /><span class="text-accent">обучения</span></h2><p class="muted">Выбирай под свой темп и цели</p></div>
+          <div class="pricing-grid">
+            <article class="card pricing-card">
+              <div class="tier-badge">Базовый</div><h3>Самостоятельный</h3><div class="tier-price"><p class="tier-price__value">$249</p><p class="tier-price__meta">≈ 20,000 ₽</p></div>
+              <ul class="bullet-list feature-list">
+                <li>Все 7 разделов обучения</li><li>500+ промптов для генерации</li><li>50 скриптов продаж</li><li>Контент-план на 30 дней</li><li>Чек-листы для каждого этапа</li><li>Доступ к материалам навсегда</li>
+                <li class="is-unavailable"><span class="list-icon" aria-hidden="true"><svg class="icon icon--small"><use href="#icon-close"></use></svg></span>Обновления программы</li>
+                <li class="is-unavailable"><span class="list-icon" aria-hidden="true"><svg class="icon icon--small"><use href="#icon-close"></use></svg></span>Личная поддержка</li>
+                <li class="is-unavailable"><span class="list-icon" aria-hidden="true"><svg class="icon icon--small"><use href="#icon-close"></use></svg></span>Общий чат с учениками</li>
               </ul>
-              <div class="mt-auto pt-10 sm:pt-12">
-                <a href="https://web.tribute.tg/s/TcC" class="glow-button flex min-h-[76px] items-center justify-center rounded-[1.5rem] border border-white/10 bg-white/5 px-6 text-center text-xl font-extrabold text-white">Купить сейчас</a>
-              </div>
+              <div class="pricing-card__action"><a href="https://web.tribute.tg/s/TcC" class="btn btn-secondary">Купить сейчас</a></div>
             </article>
-            <article class="price-outline relative flex h-full rounded-[2rem] bg-[#161616] p-[1px] shadow-glow">
-              <div class="flex h-full flex-col rounded-[calc(2rem-1px)] bg-[#151515] p-6 sm:p-7">
-                <div class="mx-auto mb-6 inline-flex rounded-full border border-orange-400/30 bg-orange-500 px-5 py-2 text-sm font-extrabold uppercase tracking-[.25em] text-black">После отбора</div>
-                <h3 class="text-4xl font-extrabold tracking-[-.05em]">Продвинутый</h3>
-                <div class="mt-5"><p class="text-7xl font-extrabold tracking-[-.07em] text-white">$549</p><p class="mt-1 text-3xl text-white/40">≈ 49,000 ₽</p></div>
-                <ul class="feature-list mt-8 space-y-4 text-lg text-white/88">
-                  <li>Всё из тарифа "Самостоятельный"</li><li>Постоянные обновления программы</li><li>Новые уроки и материалы бесплатно</li><li>Личная поддержка в Telegram</li><li>Ответы на вопросы в течение 1 часа</li><li>Созвоны по запросу при необходимости</li><li>Доступ в закрытый чат учеников</li><li>Нетворкинг и обмен опытом</li><li>Дополнительные материалы и кейсы</li><li>Доступ навсегда</li>
-                </ul>
-                <div class="mt-auto pt-10 sm:pt-12">
-                  <a href="#advanced-form" class="glow-button flex min-h-[84px] items-center justify-center rounded-[1.5rem] bg-orange-500 px-6 text-center text-2xl font-extrabold text-black shadow-glow">Подать заявку →</a>
-                </div>
-              </div>
+            <article class="card pricing-card pricing-card--featured">
+              <div class="tier-badge tier-badge--featured">После отбора</div><h3>Продвинутый</h3><div class="tier-price"><p class="tier-price__value">$549</p><p class="tier-price__meta">≈ 49,000 ₽</p></div>
+              <ul class="bullet-list feature-list"><li>Всё из тарифа "Самостоятельный"</li><li>Постоянные обновления программы</li><li>Новые уроки и материалы бесплатно</li><li>Личная поддержка в Telegram</li><li>Ответы на вопросы в течение 1 часа</li><li>Созвоны по запросу при необходимости</li><li>Доступ в закрытый чат учеников</li><li>Нетворкинг и обмен опытом</li><li>Дополнительные материалы и кейсы</li><li>Доступ навсегда</li></ul>
+              <div class="pricing-card__action"><a href="#advanced-form" class="btn btn-primary">Подать заявку →</a></div>
             </article>
-            <article class="soft-card flex h-full flex-col rounded-[2rem] p-6 sm:p-7">
-              <div class="mx-auto mb-6 inline-flex rounded-full bg-[#34313c] px-5 py-2 text-sm font-extrabold uppercase tracking-[.25em] text-white/90">Ограниченно</div>
-              <h3 class="text-4xl font-extrabold tracking-[-.05em]">Менторство</h3>
-              <div class="mt-5"><p class="text-7xl font-extrabold tracking-[-.07em]">$1,499</p><p class="mt-1 text-3xl text-white/40">≈ 119,000 ₽</p></div>
-              <ul class="feature-list mt-8 space-y-4 text-lg text-white/82">
-                <li>Всё из тарифа "Продвинутый"</li><li>Личная работа 1 на 1</li><li>Персональный план запуска модели</li><li>Созвоны раз в 2 дня по прогрессу</li><li>Проверка и корректировка контента</li><li>Помощь с настройкой аккаунтов</li><li>Работаем вместе до первого результата</li><li>Приоритетная поддержка 24/7</li><li>Гарантия успеха</li><li>Прямой доступ в личные сообщения</li>
-              </ul>
-              <div class="mt-auto pt-10 sm:pt-12">
-                <a href="https://t.me/m/1g3IeXGjOWQy" class="glow-button flex min-h-[76px] items-center justify-center rounded-[1.5rem] border border-orange-400/20 bg-orange-500/10 px-6 text-center text-xl font-extrabold text-orange-100">Обсудить формат</a>
-              </div>
+            <article class="card pricing-card">
+              <div class="tier-badge">Ограниченно</div><h3>Менторство</h3><div class="tier-price"><p class="tier-price__value">$1,499</p><p class="tier-price__meta">≈ 119,000 ₽</p></div>
+              <ul class="bullet-list feature-list"><li>Всё из тарифа "Продвинутый"</li><li>Личная работа 1 на 1</li><li>Персональный план запуска модели</li><li>Созвоны раз в 2 дня по прогрессу</li><li>Проверка и корректировка контента</li><li>Помощь с настройкой аккаунтов</li><li>Работаем вместе до первого результата</li><li>Приоритетная поддержка 24/7</li><li>Гарантия успеха</li><li>Прямой доступ в личные сообщения</li></ul>
+              <div class="pricing-card__action"><a href="https://t.me/m/1g3IeXGjOWQy" class="btn btn-outline">Обсудить формат</a></div>
             </article>
-          </div>
-        </section>
-        <section class="section-reveal py-8 sm:py-12">
-          <div class="mx-auto max-w-4xl text-center">
-            <p class="mx-auto inline-flex rounded-full border border-white/12 bg-white/5 px-5 py-2 text-xs font-extrabold uppercase tracking-[.24em] text-white/70 sm:text-sm">Следующий этап</p>
-            <h2 class="mt-4 text-4xl font-extrabold tracking-[-.05em] text-white sm:text-6xl">Отбор на<br /><span class="accent-text">продвинутый формат</span></h2>
-            <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/56 sm:text-xl sm:leading-9">Переход на следующий уровень требует личного разбора. Ознакомься с условиями участия и оставь заявку на вступление</p>
-          </div>
-        </section>
-        <section id="advanced-form" class="section-reveal py-14 sm:py-24">
-          <div class="mx-auto max-w-4xl rounded-[2.2rem] border border-orange-400/20 bg-[#171717] p-7 shadow-glow sm:p-10">
-            <div class="mx-auto inline-flex rounded-full border border-orange-400/25 bg-orange-500/10 px-5 py-2 text-sm font-extrabold uppercase tracking-[.25em] text-orange-200">Отбор на продвинутый формат</div>
-            <div class="mx-auto mt-8 max-w-3xl text-center">
-              <h2 class="text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">Заявка на<br /><span class="accent-text">"Продвинутый"</span></h2>
-              <p class="mt-6 text-lg leading-9 text-white/62 sm:text-2xl">Чтобы сохранить качество поддержки, мы не берем всех. Процесс: анкета → решение → созвон → оплата. Мы можем отказать, если формат обучения вам не подходит.</p>
-            </div>
-            <div class="mx-auto mt-8 grid max-w-3xl gap-4 sm:grid-cols-2">
-              <div class="glass rounded-[1.6rem] p-5 transition duration-300 hover:border-orange-400/25 hover:shadow-glow"><div class="flex items-start gap-4"><span class="icon-badge mt-1"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></span><div><p class="text-lg font-extrabold text-white">Анкета за 2 минуты</p><p class="mt-2 text-sm leading-6 text-white/45">Короткая форма без лишних шагов.</p></div></div></div>
-              <div class="glass rounded-[1.6rem] p-5 transition duration-300 hover:border-orange-400/25 hover:shadow-glow"><div class="flex items-start gap-4"><span class="icon-badge mt-1"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></span><div><p class="text-lg font-extrabold text-white">Решение в течение часа</p><p class="mt-2 text-sm leading-6 text-white/45">Обычно возвращаемся с ответом быстро.</p></div></div></div>
-              <div class="glass rounded-[1.6rem] p-5 transition duration-300 hover:border-orange-400/25 hover:shadow-glow"><div class="flex items-start gap-4"><span class="icon-badge mt-1"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></span><div><p class="text-lg font-extrabold text-white">Короткий созвон-знакомство</p><p class="mt-2 text-sm leading-6 text-white/45">Сверяем ожидания и формат участия.</p></div></div></div>
-              <div class="glass rounded-[1.6rem] p-5 transition duration-300 hover:border-orange-400/25 hover:shadow-glow"><div class="flex items-start gap-4"><span class="icon-badge mt-1"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></span><div><p class="text-lg font-extrabold text-white">Разбор возможностей</p><p class="mt-2 text-sm leading-6 text-white/45">Понимаем, подходит ли формат именно вам.</p></div></div></div>
-            </div>
-            <ul class="selection-list mx-auto mt-8 max-w-2xl space-y-4 text-lg leading-8 text-[#b1b1b6]">
-              <li>Заполняете короткую анкету, чтобы мы увидели ваши цели и стартовую точку.</li>
-              <li>Возвращаемся с решением обычно в течение часа.</li>
-              <li>Если формат подходит, назначаем короткий созвон и подтверждаем участие.</li>
-              <li>После этого фиксируем место и отправляем детали по оплате.</li>
-            </ul>
-            <div class="mx-auto max-w-xl">
-              <a href="https://forms.gle/fzENGbVLnxN61Guh9" class="glow-button mx-auto mt-8 flex min-h-[84px] items-center justify-center rounded-[1.7rem] bg-orange-500 px-8 text-center text-2xl font-extrabold text-black shadow-glow">Заполнить анкету →</a>
-              <p class="mt-4 text-center text-sm text-white/40">Обычно отвечаем в течение часа</p>
-            </div>
-          </div>
-        </section>
-        <section id="faq" class="section-reveal py-14 sm:py-24">
-          <div class="mx-auto max-w-3xl text-center">
-            <h2 class="text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">Частые<br /><span class="accent-text">вопросы</span></h2>
-            <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/56 sm:text-xl sm:leading-9">Остались вопросы? У нас есть ответы</p>
-          </div>
-          <div class="mx-auto mt-10 max-w-5xl space-y-4">
-            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Это легально?</span><span class="faq-icon flex items-center justify-center"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">Да. AI-модели — это цифровой продукт. Ты создаёшь уникальный образ с помощью нейросетей и монетизируешь контент. Это легальный онлайн-бизнес, который не нарушает законы.</div></article>
-            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Нужны ли технические знания и мощный компьютер?</span><span class="faq-icon flex items-center justify-center"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">Нет. Генерация и тренировка идут в облаке. Достаточно обычного телефона и браузера.</div></article>
-            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Сколько денег нужно на старт?</span><span class="faq-icon flex items-center justify-center"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">Минимальный старт около $15: базовые нейросети и личный VPN сервер. Рекламный бюджет на старте не обязателен.</div></article>
-            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Как получать выплаты, если я из СНГ?</span><span class="faq-icon flex items-center justify-center"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">В курсе подробно разобраны все способы: криптовалюта, иностранные карты, выплаты в рублях. Настройка занимает пару часов, всё показано пошагово.</div></article>
-            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Рынок не перегрет? Не поздно ли входить?</span><span class="faq-icon flex items-center justify-center"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">Платящая аудитория продолжает расти, а большинство конкурентов работают без стратегии и автоматизации. Хороший вход по-прежнему дает сильное преимущество.</div></article>
-            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Сколько времени нужно уделять в день?</span><span class="faq-icon flex items-center justify-center"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">На старте 2–4 часа в день, после настройки процессов и автоматизации обычно остается 30–60 минут на контроль.</div></article>
-            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Когда будут первые результаты?</span><span class="faq-icon flex items-center justify-center"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">Первых подписчиков можно получить уже в первую неделю. Первые продажи — в течение пары недель при активной работе. Некоторые ученики делают первую продажу уже на 5-7 день.</div></article>
-          </div>
-        </section>
-        <section id="reviews" class="section-reveal py-14 sm:py-24">
-          <div class="mx-auto max-w-3xl text-center">
-            <h2 class="text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">Отзывы<br /><span class="accent-text">участников</span></h2>
-            <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/60 sm:text-xl sm:leading-9">Результаты, которые говорят сами за себя</p>
-          </div>
-          <div class="mx-auto mt-10 grid max-w-6xl gap-5 md:grid-cols-2 xl:grid-cols-3">
-            <article class="soft-card review-card relative rounded-[2rem] p-7"><div class="quote-mark">“</div><div class="relative text-3xl text-orange-400">★★★★★</div><p class="review-text relative mt-6 text-[1.7rem] leading-[1.7] text-white/94">"Вообще начинал пробовать еще до покупки курса, собирал инфу по кускам. Здесь все максимально детально, и это сразу дало результат."</p><p class="mt-auto pt-8 text-xs font-semibold uppercase tracking-[.18em] text-white/30">Ученик курса • результат за 3 дня</p></article>
-            <article class="soft-card review-card relative rounded-[2rem] p-7"><div class="quote-mark">“</div><div class="relative text-3xl text-orange-400">★★★★★</div><p class="review-text relative mt-6 text-[1.7rem] leading-[1.7] text-white/94">"Это лучшее обучение, которое я покупал за последнее время. Столько информации, поэтапно, структурировано и понятно — просто невозможно что-то не понять. Дошёл до 4-го дня включительно, всё понятно. Очень благодарен!"</p><p class="mt-auto pt-8 text-xs font-semibold uppercase tracking-[.18em] text-white/30">Ученик курса • Тариф Продвинутый</p></article>
-            <article class="soft-card review-card relative rounded-[2rem] p-7"><div class="quote-mark">“</div><div class="relative text-3xl text-orange-400">★★★★★</div><p class="review-text relative mt-6 text-[1.7rem] leading-[1.7] text-white/94">"Хотел глубже разобраться в нейронках, прошёл уже большую часть и впечатлён объёмом материала! За такую цен�� честно не ожидал получить настолько детальный разбор. Всё разложено по полочкам, каждый день новый блок информации."</p><p class="mt-auto pt-8 text-xs font-semibold uppercase tracking-[.18em] text-white/30">Ученик • старт с нуля</p></article>
-            <article class="soft-card review-card relative rounded-[2rem] p-7"><div class="quote-mark">“</div><div class="relative text-3xl text-orange-400">★★★★★</div><p class="review-text relative mt-6 text-[1.7rem] leading-[1.7] text-white/94">"Взял обучение в самом начале, прошёл 7 дней обучения — уже продал первую подписку. Особенно зацепило то, что в обучении не просто теория, а каждый шаг разжёван. У меня вообще не было опыта с нейронками, но благодаря такой подаче научился с ними работать."</p><p class="mt-auto pt-8 text-xs font-semibold uppercase tracking-[.18em] text-white/30">Ученик курса • Первая продажа за 7 дней</p></article>
-            <article class="soft-card review-card relative rounded-[2rem] p-7"><div class="quote-mark">“</div><div class="relative text-3xl text-orange-400">★★★★★</div><p class="review-text relative mt-6 text-[1.7rem] leading-[1.7] text-white/94">"Брал платный курс по ИИ моделям — не пожалел от слова совсем. Продвинутый формат реально ускоряет. Всё настолько подробно расписано, что справится даже ребёнок. Рекомендую 100%"</p><p class="mt-auto pt-8 text-xs font-semibold uppercase tracking-[.18em] text-white/30">Ученик курса</p></article>
-            <article class="soft-card review-card relative rounded-[2rem] p-7"><div class="quote-mark">“</div><div class="relative text-3xl text-orange-400">★★★★★</div><p class="review-text relative mt-6 text-[1.7rem] leading-[1.7] text-white/94">"В целом всё очень понравилось, удивился такой поддержке на всех этапах и быстрыми, подробными ответами в личке. Самая сильная часть для меня была в автоматизации. Когда видишь, как это начинает работать почти без тебя, совсем иначе воспринимаешь данную нишу)."</p><p class="mt-auto pt-8 text-xs font-semibold uppercase tracking-[.18em] text-white/30">Участник • автоматизация</p></article>
-          </div>
-        </section>
-        <section class="section-reveal py-14 sm:py-24">
-          <div class="mx-auto max-w-5xl rounded-[2.4rem] border border-orange-400/20 bg-[linear-gradient(180deg,rgba(255,122,26,.12),rgba(255,122,26,.05))] p-7 shadow-glow sm:p-10">
-            <div class="mx-auto max-w-3xl text-center">
-              <h2 class="text-4xl font-extrabold tracking-[-.05em] sm:text-6xl"><span class="text-white">Готов</span> <span class="accent-text">Начать?</span></h2>
-              <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/70 sm:text-xl sm:leading-9">Выбирай удобный формат и заходи в обучение. Если нужно быстро уточнить детали, можно сразу написать в Telegram.</p>
-            </div>
-            <div class="mx-auto mt-8 grid max-w-2xl gap-4">
-              <a href="#pricing" class="glow-button flex min-h-[82px] items-center justify-center rounded-[1.7rem] bg-orange-500 px-6 text-center text-2xl font-extrabold text-black shadow-glow">Выбрать тариф</a>
-              <a href="https://t.me/preludik" class="glow-button flex min-h-[72px] items-center justify-center rounded-[1.6rem] border border-white/10 bg-[#121212] px-6 text-center text-xl font-extrabold text-white">Связаться в TG</a>
-            </div>
-          </div>
-        </section>
-      </main>
-      <footer id="footer-contact" class="section-reveal border-t border-white/8 py-10 sm:py-14">
-        <div class="mx-auto flex max-w-6xl flex-col gap-8 rounded-[2rem] bg-[#121212] px-6 py-8 sm:px-8 lg:flex-row lg:items-center lg:justify-between">
-          <div>
-            <p class="text-2xl font-extrabold tracking-[-.04em] text-white sm:text-3xl">VADYA <span class="text-orange-400">OFM</span> CLUB</p>
-            <p class="mt-3 text-sm text-white/38 sm:text-base">Пошаговая система запуска и монетизации AI-моделей.</p>
-          </div>
-          <div class="flex flex-wrap gap-5 text-sm font-semibold uppercase tracking-[.16em] sm:text-base">
-            <a href="#top" class="footer-link">О курсе</a>
-            <a href="#program" class="footer-link">Программа</a>
-            <a href="#pricing" class="footer-link">Тарифы</a>
-            <a href="#footer-contact" class="footer-link">Контакты</a>
           </div>
         </div>
-      </footer>
-    </div>
+      </section>
+      <section class="section section--compact reveal">
+        <div class="container">
+          <div class="section-intro"><p class="eyebrow">Следующий этап</p><h2>Отбор на<br /><span class="text-accent">продвинутый формат</span></h2><p class="muted">Переход на следующий уровень требует личного разбора. Ознакомься с условиями участия и оставь заявку на вступление</p></div>
+        </div>
+      </section>
+      <section id="advanced-form" class="section reveal">
+        <div class="container">
+          <div class="card cta-panel">
+            <p class="eyebrow eyebrow--accent">Отбор на продвинутый формат</p>
+            <div class="section-intro section-intro--wide" style="margin-top:32px;margin-bottom:32px;">
+              <h2>Заявка на<br /><span class="text-accent">"Продвинутый"</span></h2>
+              <p class="muted">Чтобы сохранить качество поддержки, мы не берем всех. Процесс: анкета → решение → созвон → оплата. Мы можем отказать, если формат обучения вам не подходит.</p>
+            </div>
+            <div class="selection-grid">
+              <article class="card selection-card"><span class="selection-card__icon"><svg class="icon icon--medium icon--accent" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></span><p class="selection-card__title">Анкета за 2 минуты</p><p class="selection-card__copy">Короткая форма без лишних шагов.</p></article>
+              <article class="card selection-card"><span class="selection-card__icon"><svg class="icon icon--medium icon--accent" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></span><p class="selection-card__title">Решение в течение часа</p><p class="selection-card__copy">Обычно возвращаемся с ответом быстро.</p></article>
+              <article class="card selection-card"><span class="selection-card__icon"><svg class="icon icon--medium icon--accent" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></span><p class="selection-card__title">Короткий созвон-знакомство</p><p class="selection-card__copy">Сверяем ожидания и формат участия.</p></article>
+              <article class="card selection-card"><span class="selection-card__icon"><svg class="icon icon--medium icon--accent" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></span><p class="selection-card__title">Разбор возможностей</p><p class="selection-card__copy">Понимаем, подходит ли формат именно вам.</p></article>
+            </div>
+            <ul class="bullet-list selection-list"><li>Заполняете короткую анкету, чтобы мы увидели ваши цели и стартовую точку.</li><li>Возвращаемся с решением обычно в течение часа.</li><li>Если формат подходит, назначаем короткий созвон и подтверждаем участие.</li><li>После этого фиксируем место и отправляем детали по оплате.</li></ul>
+            <div class="cta-panel__actions"><a href="https://forms.gle/fzENGbVLnxN61Guh9" class="btn btn-primary">Заполнить анкету →</a><p class="muted" style="font-size:14px;line-height:1.6;">Обычно отвечаем в течение часа</p></div>
+          </div>
+        </div>
+      </section>
+      <section id="faq" class="section reveal">
+        <div class="container">
+          <div class="section-intro"><h2>Частые<br /><span class="text-accent">вопросы</span></h2><p class="muted">Остались вопросы? У нас есть ответы</p></div>
+          <div class="faq-list">
+            <article class="faq-item card"><button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-1-panel"><span>Это легально?</span><span class="trigger-icon" aria-hidden="true"><svg class="icon"><use href="#icon-chevron"></use></svg></span></button><div id="faq-1-panel" class="faq-panel" hidden><div class="faq-panel__inner">Да. AI-модели — это цифровой продукт. Ты создаёшь уникальный образ с помощью нейросетей и монетизируешь контент. Это легальный онлайн-бизнес, который не нарушает законы.</div></div></article>
+            <article class="faq-item card"><button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-2-panel"><span>Нужны ли технические знания и мощный компьютер?</span><span class="trigger-icon" aria-hidden="true"><svg class="icon"><use href="#icon-chevron"></use></svg></span></button><div id="faq-2-panel" class="faq-panel" hidden><div class="faq-panel__inner">Нет. Генерация и тренировка идут в облаке. Достаточно обычного телефона и браузера.</div></div></article>
+            <article class="faq-item card"><button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-3-panel"><span>Сколько денег нужно на старт?</span><span class="trigger-icon" aria-hidden="true"><svg class="icon"><use href="#icon-chevron"></use></svg></span></button><div id="faq-3-panel" class="faq-panel" hidden><div class="faq-panel__inner">Минимальный старт около $15: базовые нейросети и личный VPN сервер. Рекламный бюджет на старте не обязателен.</div></div></article>
+            <article class="faq-item card"><button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-4-panel"><span>Как получать выплаты, если я из СНГ?</span><span class="trigger-icon" aria-hidden="true"><svg class="icon"><use href="#icon-chevron"></use></svg></span></button><div id="faq-4-panel" class="faq-panel" hidden><div class="faq-panel__inner">В курсе подробно разобраны все способы: криптовалюта, иностранные карты, выплаты в рублях. Настройка занимает пару часов, всё показано пошагово.</div></div></article>
+            <article class="faq-item card"><button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-5-panel"><span>Рынок не перегрет? Не поздно ли входить?</span><span class="trigger-icon" aria-hidden="true"><svg class="icon"><use href="#icon-chevron"></use></svg></span></button><div id="faq-5-panel" class="faq-panel" hidden><div class="faq-panel__inner">Платящая аудитория продолжает расти, а большинство конкурентов работают без стратегии и автоматизации. Хороший вход по-прежнему дает сильное преимущество.</div></div></article>
+            <article class="faq-item card"><button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-6-panel"><span>Сколько времени нужно уделять в день?</span><span class="trigger-icon" aria-hidden="true"><svg class="icon"><use href="#icon-chevron"></use></svg></span></button><div id="faq-6-panel" class="faq-panel" hidden><div class="faq-panel__inner">На старте 2–4 часа в день, после настройки процессов и автоматизации обычно остается 30–60 минут на контроль.</div></div></article>
+            <article class="faq-item card"><button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-7-panel"><span>Когда будут первые результаты?</span><span class="trigger-icon" aria-hidden="true"><svg class="icon"><use href="#icon-chevron"></use></svg></span></button><div id="faq-7-panel" class="faq-panel" hidden><div class="faq-panel__inner">Первых подписчиков можно получить уже в первую неделю. Первые продажи — в течение пары недель при активной работе. Некоторые ученики делают первую продажу уже на 5-7 день.</div></div></article>
+          </div>
+        </div>
+      </section>
+      <section id="reviews" class="section reveal">
+        <div class="container">
+          <div class="section-intro"><h2>Отзывы<br /><span class="text-accent">участников</span></h2><p class="muted">Результаты, которые говорят сами за себя</p></div>
+          <div class="reviews-grid">
+            <article class="card review-card"><p class="review-rating">★★★★★</p><p class="review-copy">"Вообще начинал пробовать еще до покупки курса, собирал инфу по кускам. Здесь все максимально детально, и это сразу дало результат."</p><p class="review-meta">Ученик курса • результат за 3 дня</p></article>
+            <article class="card review-card"><p class="review-rating">★★★★★</p><p class="review-copy">"Это лучшее обучение, которое я покупал за последнее время. Столько информации, поэтапно, структурировано и понятно — просто невозможно что-то не понять. Дошёл до 4-го дня включительно, всё понятно. Очень благодарен!"</p><p class="review-meta">Ученик курса • Тариф Продвинутый</p></article>
+            <article class="card review-card"><p class="review-rating">★★★★★</p><p class="review-copy">"Хотел глубже разобраться в нейронках, прошёл уже большую часть и впечатлён объёмом материала! За такую цену честно не ожидал получить настолько детальный разбор. Всё разложено по полочкам, каждый день новый блок информации."</p><p class="review-meta">Ученик • старт с нуля</p></article>
+            <article class="card review-card"><p class="review-rating">★★★★★</p><p class="review-copy">"Взял обучение в самом начале, прошёл 7 дней обучения — уже продал первую подписку. Особенно зацепило то, что в обучении не просто теория, а каждый шаг разжёван. У меня вообще не было опыта с нейронками, но благодаря такой подаче научился с ними работать."</p><p class="review-meta">Ученик курса • Первая продажа за 7 дней</p></article>
+            <article class="card review-card"><p class="review-rating">★★★★★</p><p class="review-copy">"Брал платный курс по ИИ моделям — не пожалел от слова совсем. Продвинутый формат реально ускоряет. Всё настолько подробно расписано, что справится даже ребёнок. Рекомендую 100%"</p><p class="review-meta">Ученик курса</p></article>
+            <article class="card review-card"><p class="review-rating">★★★★★</p><p class="review-copy">"В целом всё очень понравилось, удивился такой поддержке на всех этапах и быстрыми, подробными ответами в личке. Самая сильная часть для меня была в автоматизации. Когда видишь, как это начинает работать почти без тебя, совсем иначе воспринимаешь данную нишу)."</p><p class="review-meta">Участник • автоматизация</p></article>
+          </div>
+        </div>
+      </section>
+      <section class="section reveal">
+        <div class="container">
+          <div class="card cta-panel">
+            <div class="section-intro" style="margin-bottom:0;"><h2><span>Готов</span> <span class="text-accent">Начать?</span></h2><p class="muted">Выбирай удобный формат и заходи в обучение. Если нужно быстро уточнить детали, можно сразу написать в Telegram.</p></div>
+            <div class="cta-panel__actions"><a href="#pricing" class="btn btn-primary">Выбрать тариф</a><a href="https://t.me/preludik" class="btn btn-secondary">Связаться в TG</a></div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer id="footer-contact" class="site-footer reveal">
+      <div class="container">
+        <div class="site-footer__card">
+          <div><p class="site-footer__title">VADYA <span class="brand__accent">OFM</span> CLUB</p><p class="site-footer__copy">Пошаговая система запуска и монетизации AI-моделей.</p></div>
+          <nav class="footer-nav" aria-label="Навигация в подвале"><a href="#top" class="footer-nav__link">О курсе</a><a href="#program" class="footer-nav__link">Программа</a><a href="#pricing" class="footer-nav__link">Тарифы</a><a href="#footer-contact" class="footer-nav__link">Контакты</a></nav>
+        </div>
+      </div>
+    </footer>
   </div>
   <script>
-    function setupAccordion(buttonSelector, iconSelector) {
+    function setupAccordion(buttonSelector) {
       const buttons = document.querySelectorAll(buttonSelector);
       buttons.forEach((button) => {
         button.addEventListener("click", () => {
-          const content = button.nextElementSibling;
-          const icon = button.querySelector(iconSelector);
+          const panelId = button.getAttribute("aria-controls");
+          const panel = panelId ? document.getElementById(panelId) : null;
           const isOpen = button.getAttribute("aria-expanded") === "true";
           buttons.forEach((otherButton) => {
-            const otherContent = otherButton.nextElementSibling;
-            const otherIcon = otherButton.querySelector(iconSelector);
+            const otherPanelId = otherButton.getAttribute("aria-controls");
+            const otherPanel = otherPanelId ? document.getElementById(otherPanelId) : null;
             otherButton.setAttribute("aria-expanded", "false");
-            otherContent.classList.add("hidden");
-            otherIcon.style.transform = "rotate(0deg)";
+            if (otherPanel) otherPanel.hidden = true;
           });
-          if (!isOpen) {
+          if (!isOpen && panel) {
             button.setAttribute("aria-expanded", "true");
-            content.classList.remove("hidden");
-            icon.style.transform = "rotate(180deg)";
+            panel.hidden = false;
           }
         });
       });
     }
-    setupAccordion(".accordion-toggle", ".accordion-icon");
-    setupAccordion(".faq-toggle", ".faq-icon");
-    const mobileMenuButton = document.querySelector("#mobile-menu-button");
-    const mobileMenuPanel = document.querySelector("#mobile-menu-panel");
-    const mobileMenuOpen = document.querySelector("#mobile-menu-open");
-    const mobileMenuClose = document.querySelector("#mobile-menu-close");
-    const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+    setupAccordion(".module-trigger");
+    setupAccordion(".faq-trigger");
+    const mobileMenuButton = document.getElementById("mobile-menu-button");
+    const mobileMenuPanel = document.getElementById("mobile-menu-panel");
+    const mobileMenuOpen = document.getElementById("mobile-menu-open");
+    const mobileMenuClose = document.getElementById("mobile-menu-close");
+    const mobileNavLinks = document.querySelectorAll(".mobile-nav__link");
     function setMobileMenuState(isOpen) {
-      if (!mobileMenuButton || !mobileMenuPanel) return;
+      if (!mobileMenuButton || !mobileMenuPanel || !mobileMenuOpen || !mobileMenuClose) return;
       mobileMenuButton.setAttribute("aria-expanded", String(isOpen));
-      mobileMenuPanel.classList.toggle("hidden", !isOpen);
-      mobileMenuPanel.classList.toggle("is-open", isOpen);
-      mobileMenuOpen.classList.toggle("hidden", isOpen);
-      mobileMenuClose.classList.toggle("hidden", !isOpen);
+      mobileMenuPanel.hidden = !isOpen;
+      mobileMenuOpen.hidden = isOpen;
+      mobileMenuClose.hidden = !isOpen;
     }
     if (mobileMenuButton) {
       mobileMenuButton.addEventListener("click", () => {
         const isOpen = mobileMenuButton.getAttribute("aria-expanded") === "true";
         setMobileMenuState(!isOpen);
       });
-      mobileNavLinks.forEach((link) => {
-        link.addEventListener("click", () => setMobileMenuState(false));
-      });
+      mobileNavLinks.forEach((link) => link.addEventListener("click", () => setMobileMenuState(false)));
     }
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add("is-visible");
-      });
-    }, { threshold: 0.12 });
-    document.querySelectorAll(".section-reveal").forEach((section) => observer.observe(section));
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add("is-visible");
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll(".reveal").forEach((section) => observer.observe(section));
+    } else {
+      document.querySelectorAll(".reveal").forEach((section) => section.classList.add("is-visible"));
+    }
   </script>
 </body>
 </html>
-
-
