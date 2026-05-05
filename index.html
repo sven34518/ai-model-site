@@ -9,12 +9,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <!-- Vercel Web Analytics -->
-  <div id="image-modal" class="image-modal" aria-hidden="true">
-    <div class="image-modal__inner">
-      <button id="image-modal-close" class="image-modal__close" type="button" aria-label="Закрыть изображение">×</button>
-      <img id="image-modal-img" class="image-modal__img" src="" alt="" />
-    </div>
-  </div>
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
@@ -1750,6 +1744,13 @@
   </style>
 </head>
 <body class="text-white antialiased">
+  <!-- Image Modal -->
+  <div id="image-modal" class="image-modal" aria-hidden="true">
+    <div class="image-modal__inner">
+      <button id="image-modal-close" class="image-modal__close" type="button" aria-label="Закрыть изображение">×</button>
+      <img id="image-modal-img" class="image-modal__img" src="" alt="" />
+    </div>
+  </div>
   <div class="relative overflow-hidden">
     <div class="hero-grid pointer-events-none absolute inset-0 opacity-30"></div>
     <div class="pointer-events-none absolute left-1/2 top-0 h-[22rem] w-[22rem] -translate-x-1/2 rounded-full bg-orange-500/10 blur-3xl sm:h-[26rem] sm:w-[26rem]"></div>
