@@ -9,6 +9,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <!-- Vercel Web Analytics -->
+  <div id="image-modal" class="image-modal" aria-hidden="true">
+    <div class="image-modal__inner">
+      <button id="image-modal-close" class="image-modal__close" type="button" aria-label="Закрыть изображение">×</button>
+      <img id="image-modal-img" class="image-modal__img" src="" alt="" />
+    </div>
+  </div>
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
@@ -199,6 +205,62 @@
       flex-direction: column;
       min-height: 100%;
     }
+    .results-card .case-list {
+      flex: 1 1 auto;
+    }
+    .review-card .review-photo {
+      margin-bottom: 1.4rem;
+    }
+    .review-card .review-kicker {
+      margin-top: 0;
+      margin-bottom: .95rem;
+    }
+    .review-quote {
+      min-height: 0;
+      font-size: 1.02rem !important;
+      line-height: 1.62 !important;
+      color: #4a3b31 !important;
+      max-width: 18ch;
+    }
+    .review-context {
+      margin-top: 1rem;
+      font-size: .96rem !important;
+      line-height: 1.78 !important;
+      color: rgba(110,98,88,.92) !important;
+      max-width: 31ch;
+    }
+    .review-card .review-shell {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      flex: 1 1 auto;
+    }
+    .pricing-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      min-height: 100%;
+    }
+    .pricing-card__intro {
+      min-height: 8.6rem;
+    }
+    .pricing-card__price {
+      min-height: 7.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .pricing-card__list {
+      min-height: 23.5rem;
+    }
+    .pricing-card__meta {
+      display: none;
+    }
+    .pricing-card__cta {
+      margin-top: auto;
+      padding-top: 2rem;
+    }
     .result-icon {
       display: inline-flex;
       align-items: center;
@@ -213,6 +275,1464 @@
     .result-icon svg {
       width: 1.55rem;
       height: 1.55rem;
+    }
+    .trust-card,
+    .process-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+    .trust-icon,
+    .process-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 4rem;
+      height: 4rem;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,122,26,.16), rgba(255,122,26,.05));
+      color: #ff7a1a;
+      box-shadow: inset 0 0 0 1px rgba(255,122,26,.08);
+    }
+    .trust-icon svg,
+    .process-icon svg {
+      width: 1.55rem;
+      height: 1.55rem;
+    }
+    .case-list li,
+    .process-list li {
+      position: relative;
+      padding-left: 2.1rem;
+    }
+    .case-list li::before,
+    .process-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: .62rem;
+      width: .8rem;
+      height: .8rem;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #ffb066 0%, #ff7a1a 100%);
+      box-shadow: 0 0 0 4px rgba(255,122,26,.09);
+    }
+    .proof-shot,
+    .review-photo {
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border: 1px dashed rgba(255,255,255,.14);
+    }
+    .proof-shot {
+      padding: 0;
+      background: transparent;
+      border: 0;
+    }
+    .case-photo {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.96), rgba(247,243,238,.96));
+      border: 1px solid rgba(24, 20, 18, .10);
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.8);
+    }
+    .review-photo {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      padding: 18px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.96), rgba(247,243,238,.96));
+      border: 1px solid rgba(24, 20, 18, .10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.8);
+    }
+    .case-photo::before,
+    .review-photo::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border-radius: 1.15rem;
+      border: 1px solid rgba(18, 18, 18, .08);
+      pointer-events: none;
+    }
+    .case-photo::after,
+    .review-photo::after {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border-radius: 1.15rem;
+      pointer-events: none;
+      background:
+        linear-gradient(#11100f, #11100f) left 4px top 4px / 30px 1px no-repeat,
+        linear-gradient(#11100f, #11100f) left 4px top 4px / 1px 30px no-repeat,
+        linear-gradient(#11100f, #11100f) right 4px top 4px / 30px 1px no-repeat,
+        linear-gradient(#11100f, #11100f) right 4px top 4px / 1px 30px no-repeat,
+        linear-gradient(#11100f, #11100f) left 4px bottom 4px / 30px 1px no-repeat,
+        linear-gradient(#11100f, #11100f) left 4px bottom 4px / 1px 30px no-repeat,
+        linear-gradient(#11100f, #11100f) right 4px bottom 4px / 30px 1px no-repeat,
+        linear-gradient(#11100f, #11100f) right 4px bottom 4px / 1px 30px no-repeat,
+        linear-gradient(90deg, rgba(17,16,15,.0), rgba(17,16,15,.58), rgba(255,255,255,.92), rgba(17,16,15,.58), rgba(17,16,15,.0)) center top 16px / 84px 1px no-repeat,
+        linear-gradient(90deg, rgba(17,16,15,.0), rgba(17,16,15,.58), rgba(255,255,255,.92), rgba(17,16,15,.58), rgba(17,16,15,.0)) center bottom 16px / 84px 1px no-repeat,
+        linear-gradient(180deg, rgba(17,16,15,.0), rgba(17,16,15,.58), rgba(255,255,255,.92), rgba(17,16,15,.58), rgba(17,16,15,.0)) left 16px center / 1px 84px no-repeat,
+        linear-gradient(180deg, rgba(17,16,15,.0), rgba(17,16,15,.58), rgba(255,255,255,.92), rgba(17,16,15,.58), rgba(17,16,15,.0)) right 16px center / 1px 84px no-repeat,
+        radial-gradient(circle at 16px 16px, rgba(255,255,255,.95) 0 2px, transparent 2.5px),
+        radial-gradient(circle at calc(100% - 16px) 16px, rgba(255,255,255,.95) 0 2px, transparent 2.5px),
+        radial-gradient(circle at 16px calc(100% - 16px), rgba(255,255,255,.95) 0 2px, transparent 2.5px),
+        radial-gradient(circle at calc(100% - 16px) calc(100% - 16px), rgba(255,255,255,.95) 0 2px, transparent 2.5px);
+      opacity: .76;
+    }
+    .review-photo img,
+    .proof-shot img,
+    .case-photo img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 1rem;
+      background: transparent;
+      cursor: zoom-in;
+      object-fit: contain;
+      object-position: center;
+      transition: transform .25s ease, opacity .25s ease;
+    }
+    .review-photo img:hover,
+    .proof-shot img:hover,
+    .case-photo img:hover {
+      transform: translateY(-2px);
+      opacity: .96;
+    }
+    .image-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(0,0,0,.82);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .image-modal.is-open {
+      display: flex;
+    }
+    .image-modal__inner {
+      position: relative;
+      width: min(100%, 1200px);
+      max-height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .image-modal__img {
+      max-width: 100%;
+      max-height: calc(100vh - 64px);
+      width: auto;
+      height: auto;
+      border-radius: 1rem;
+      box-shadow: 0 24px 60px rgba(0,0,0,.45);
+    }
+    .image-modal__close {
+      position: absolute;
+      top: -12px;
+      right: -12px;
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 999px;
+      background: rgba(18,18,18,.92);
+      color: #fff;
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .cookie-banner {
+      position: fixed;
+      left: 1.25rem;
+      bottom: 1.25rem;
+      z-index: 120;
+      width: min(30rem, calc(100vw - 2rem));
+      padding: 1.35rem 1.35rem 1.2rem;
+      border-radius: 1.55rem;
+      border: 1px solid rgba(86, 67, 50, .12);
+      background:
+        radial-gradient(circle at 92% 92%, rgba(229,125,47,.16), transparent 22%),
+        linear-gradient(180deg, rgba(255,250,243,.98), rgba(244,236,225,.98));
+      box-shadow: 0 22px 46px rgba(52, 37, 25, .16);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      opacity: 0;
+      transform: translateY(16px);
+      pointer-events: none;
+      transition: opacity .28s ease, transform .28s ease;
+    }
+    .cookie-banner.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .cookie-banner__title {
+      margin: 0;
+      font-size: 1.1rem;
+      line-height: 1.35;
+      font-weight: 700;
+      color: #1d1714;
+    }
+    .cookie-banner__text {
+      margin: .8rem 0 0;
+      font-size: .98rem;
+      line-height: 1.65;
+      color: rgba(73,57,45,.82);
+    }
+    .cookie-banner__link {
+      color: #1d1714;
+      text-decoration: none;
+      border-bottom: 1px solid #1d1714;
+      cursor: default;
+      pointer-events: none;
+    }
+    .cookie-banner__actions {
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+    .cookie-banner__button {
+      min-height: 3rem;
+      padding: 0 1.35rem;
+      border: 1px solid rgba(17,15,13,.12);
+      border-radius: 999px;
+      background: #11100f;
+      color: #fff7ed;
+      font-size: 1rem;
+      font-weight: 800;
+      box-shadow: 0 14px 26px rgba(17, 15, 13, .14);
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .cookie-banner__button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 30px rgba(17, 15, 13, .18);
+    }
+    @media (max-width: 640px) {
+      .cookie-banner {
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+        width: auto;
+        padding: 1.15rem 1.1rem 1rem;
+        border-radius: 1.35rem;
+      }
+      .cookie-banner__title {
+        font-size: 1.02rem;
+      }
+      .cookie-banner__text {
+        font-size: .92rem;
+        line-height: 1.6;
+      }
+      .cookie-banner__button {
+        width: 100%;
+      }
+    }
+    .pricing-featured {
+      background: linear-gradient(180deg, rgba(42,20,8,.94), rgba(20,16,14,.96));
+      border-color: rgba(255,122,26,.28);
+      box-shadow: 0 20px 48px rgba(0,0,0,.32), 0 0 0 1px rgba(255,122,26,.12);
+    }
+    .pricing-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.04);
+    }
+    .faq-note {
+      border-left: 3px solid rgba(255,122,26,.45);
+    }
+    :root {
+      color-scheme: light;
+      --page-bg: #f6f0e8;
+      --page-bg-soft: #efe6da;
+      --surface: #fffaf4;
+      --surface-strong: #f3eadf;
+      --surface-dark: #151210;
+      --surface-dark-2: #1c1815;
+      --text-main: #201916;
+      --text-soft: #6e6258;
+      --text-soft-2: #93867a;
+      --line: rgba(49, 36, 28, .12);
+      --line-strong: rgba(49, 36, 28, .18);
+      --line-dark: rgba(255, 243, 228, .12);
+      --accent: #e57d2f;
+      --accent-soft: rgba(229, 125, 47, .12);
+      --shadow-soft: 0 18px 38px rgba(45, 31, 20, .08);
+      --shadow-card: 0 24px 54px rgba(38, 28, 22, .10);
+      --shadow-dark: 0 26px 60px rgba(0, 0, 0, .28);
+    }
+    body {
+      color: var(--text-main);
+      background:
+        radial-gradient(circle at top center, rgba(229,125,47,.10), transparent 22%),
+        radial-gradient(circle at 14% 18%, rgba(237,201,165,.35), transparent 22%),
+        linear-gradient(180deg, #f9f3ea 0%, #f4eee5 38%, #efe6da 100%);
+      background-color: var(--page-bg);
+    }
+    .hero-grid {
+      background-image:
+        linear-gradient(rgba(110,98,88,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(110,98,88,.06) 1px, transparent 1px);
+      mask-image: linear-gradient(180deg, rgba(0,0,0,.30), transparent 94%);
+    }
+    .accent-text {
+      background: none;
+      color: var(--accent);
+      font-family: Georgia, "Times New Roman", serif;
+      font-style: italic;
+      font-weight: 600;
+      letter-spacing: -.03em;
+    }
+    .site-header {
+      background: rgba(255, 250, 243, .82);
+      border: 1px solid rgba(78, 61, 46, .10);
+      box-shadow: 0 14px 38px rgba(60, 42, 30, .10);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+    .site-header [class~="text-white"],
+    .site-header [class*="text-white/"] {
+      color: var(--text-main) !important;
+    }
+    .site-header [class*="text-orange-"] {
+      color: var(--accent) !important;
+    }
+    .site-header .nav-link {
+      color: var(--text-soft);
+    }
+    .site-header .nav-link:hover {
+      color: var(--text-main);
+    }
+    .header-cta {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      min-height: 3.5rem;
+      padding-inline: 1.65rem !important;
+      color: #fff7ed !important;
+      box-shadow: 0 16px 36px rgba(17, 15, 13, .20) !important;
+    }
+    .site-header a.header-cta {
+      background: #11100f !important;
+      color: #fff7ed !important;
+      border-color: rgba(17, 15, 13, .12) !important;
+    }
+    .header-cta:hover {
+      background: #1a1512 !important;
+      color: #fff7ed !important;
+    }
+    .site-header a.header-cta:hover {
+      background: #1a1512 !important;
+      color: #fff7ed !important;
+    }
+    .site-mobile-panel {
+      background: rgba(255, 249, 241, .96) !important;
+      border-color: rgba(78, 61, 46, .10) !important;
+      box-shadow: 0 16px 34px rgba(45, 31, 20, .10);
+    }
+    .site-mobile-panel [class~="mobile-nav-link"] {
+      color: var(--text-main);
+    }
+    a.header-cta,
+    a.mobile-cta,
+    a.glow-button,
+    a.btn-dark,
+    button.btn-dark,
+    .btn-dark {
+      border: 1px solid rgba(17, 15, 13, .12);
+      border-radius: 999px !important;
+      background: #11100f !important;
+      color: #f8efe4 !important;
+      box-shadow: 0 14px 30px rgba(17, 15, 13, .14) !important;
+    }
+    a.btn-light,
+    button.btn-light,
+    .btn-light {
+      border: 1px solid rgba(17, 15, 13, .12) !important;
+      border-radius: 999px !important;
+      background: rgba(255, 250, 243, .96) !important;
+      color: var(--text-main) !important;
+      box-shadow: 0 12px 24px rgba(70, 49, 34, .08) !important;
+    }
+    .hero-btn {
+      gap: .8rem;
+      padding-inline: 1.75rem !important;
+    }
+    .btn-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.15rem;
+      height: 1.15rem;
+      flex-shrink: 0;
+    }
+    .btn-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+    .btn-copy {
+      display: inline-flex;
+      align-items: center;
+      gap: .65rem;
+    }
+    .btn-meta {
+      font-size: .82rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      opacity: .56;
+    }
+    .btn-light:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 28px rgba(70, 49, 34, .12) !important;
+    }
+    .glow-button::after {
+      display: none;
+    }
+    .glow-button:hover,
+    .header-cta:hover,
+    .mobile-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 34px rgba(17, 15, 13, .18) !important;
+    }
+    .light-section,
+    .hero-section,
+    .warm-section,
+    .dark-section,
+    .warm-cta-section,
+    .dark-footer {
+      position: relative;
+    }
+    .dark-section::before,
+    .dark-footer::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 100vw;
+      transform: translateX(-50%);
+      background:
+        radial-gradient(circle at top center, rgba(229,125,47,.10), transparent 26%),
+        linear-gradient(180deg, #151210 0%, #120f0d 100%);
+      z-index: 0;
+    }
+    .warm-section::before,
+    .warm-cta-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 100vw;
+      transform: translateX(-50%);
+      background:
+        radial-gradient(circle at top center, rgba(229,125,47,.12), transparent 28%),
+        linear-gradient(180deg, #f7efe4 0%, #efe4d5 100%);
+      z-index: 0;
+    }
+    .light-section > *,
+    .hero-section > *,
+    .warm-section > *,
+    .dark-section > *,
+    .warm-cta-section > *,
+    .dark-footer > * {
+      position: relative;
+      z-index: 1;
+    }
+    .hero-section h1,
+    .light-section h2,
+    .light-section h3,
+    .warm-section h2,
+    .warm-section h3,
+    .warm-cta-section h2,
+    .warm-cta-section h3,
+    .site-header a,
+    .light-section [class~="text-white"],
+    .warm-section [class~="text-white"],
+    .warm-cta-section [class~="text-white"] {
+      color: var(--text-main) !important;
+    }
+    .hero-section {
+      min-height: calc(100svh - 6.75rem);
+      padding-top: 1.5rem;
+      padding-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+    }
+    .hero-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(320px, .98fr);
+      align-items: center;
+      gap: 2.5rem;
+      text-align: left;
+    }
+    .hero-copy {
+      max-width: 38rem;
+    }
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: .7rem;
+      padding: .85rem 1.35rem;
+      border-radius: 999px;
+      border: 1px solid rgba(229,125,47,.28);
+      background: rgba(255, 248, 240, .9);
+      color: var(--accent);
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+    }
+    .hero-kicker::before {
+      content: "";
+      width: .42rem;
+      height: .42rem;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(229,125,47,.10);
+    }
+    .hero-title {
+      margin-top: 1.65rem;
+      max-width: 36rem;
+      font-size: clamp(3.4rem, 6.5vw, 5.95rem);
+      line-height: .88;
+      letter-spacing: -.06em;
+      font-weight: 800;
+    }
+    .hero-title .accent-text {
+      display: inline-block;
+      transform: translateY(.02em);
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1.85rem;
+    }
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0;
+      margin-top: 2.2rem;
+      max-width: 35rem;
+      padding-top: 1.45rem;
+      border-top: 1px solid rgba(49,36,28,.12);
+    }
+    .hero-stat {
+      padding-right: 1.1rem;
+      text-align: center;
+      border-right: 1px solid rgba(49,36,28,.12);
+    }
+    .hero-stat:last-child {
+      padding-right: 0;
+      border-right: 0;
+    }
+    .hero-stat strong {
+      display: block;
+      font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+      line-height: 1;
+      color: var(--text-main);
+      letter-spacing: -.05em;
+    }
+    .hero-stat span {
+      display: block;
+      margin-top: .5rem;
+      max-width: 8.8rem;
+      margin-inline: auto;
+      font-size: .68rem;
+      line-height: 1.45;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--text-soft-2);
+    }
+    .hero-visual {
+      position: relative;
+      min-height: 27rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-visual-orbit {
+      position: absolute;
+      inset: 6% 4% 8% 8%;
+      border-radius: 2.4rem;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(255,255,255,.55), transparent 18%),
+        linear-gradient(180deg, #141110 0%, #0f0c0a 100%);
+      box-shadow: 0 34px 70px rgba(24, 17, 13, .22);
+      transform: rotate(-2.4deg);
+    }
+    .hero-floating-proof {
+      position: relative;
+      z-index: 2;
+      width: min(100%, 26rem);
+      border-radius: 2rem;
+      padding: 1.15rem;
+      background: linear-gradient(180deg, rgba(30,25,22,.98), rgba(18,15,13,.98));
+      border: 1px solid rgba(255, 243, 228, .10);
+      box-shadow: 0 28px 56px rgba(0,0,0,.28);
+      transform: rotate(4.6deg) translateY(.35rem);
+      animation: heroFloat 6.5s ease-in-out infinite;
+    }
+    .hero-floating-proof::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      border: 1px solid rgba(255,255,255,.04);
+      pointer-events: none;
+    }
+    .hero-proof-badge {
+      position: absolute;
+      top: -1rem;
+      right: 1.5rem;
+      z-index: 3;
+      padding: .65rem 1rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #1d130e;
+      font-size: .8rem;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      box-shadow: 0 12px 24px rgba(229,125,47,.22);
+    }
+    .hero-proof-inner {
+      border-radius: 1.55rem;
+      background: linear-gradient(180deg, rgba(39,32,28,.94), rgba(23,19,16,.96));
+      border: 1px solid rgba(255,255,255,.06);
+      padding: 1.3rem;
+    }
+    .hero-proof-meta {
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      color: rgba(247,239,228,.92);
+    }
+    .hero-proof-avatar {
+      width: 3.2rem;
+      height: 3.2rem;
+      border-radius: 999px;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 32% 30%, #fff7ef 0 20%, transparent 21%),
+        radial-gradient(circle at 68% 34%, rgba(255,255,255,.88) 0 12%, transparent 13%),
+        linear-gradient(135deg, #fff2e2 0%, #ffc98f 42%, #e57d2f 100%);
+      color: transparent;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.55), 0 8px 18px rgba(229,125,47,.16);
+    }
+    .hero-proof-avatar::before {
+      content: "";
+      position: absolute;
+      width: 1.2rem;
+      height: 1.2rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,.94);
+      top: .68rem;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .hero-proof-avatar::after {
+      content: "";
+      position: absolute;
+      width: 1.7rem;
+      height: .95rem;
+      border-radius: .95rem .95rem .55rem .55rem;
+      background: rgba(255,255,255,.94);
+      bottom: .55rem;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .hero-proof-name {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -.03em;
+    }
+    .hero-proof-role {
+      margin-top: .2rem;
+      font-size: .92rem;
+      color: rgba(247,239,228,.52);
+    }
+    .hero-proof-screen {
+      margin-top: 1.15rem;
+      min-height: 12.8rem;
+      border-radius: 1.4rem;
+      border: 1px solid rgba(255,255,255,.08);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)),
+        radial-gradient(circle at 30% 30%, rgba(229,125,47,.10), transparent 26%);
+      padding: 1.2rem;
+      color: rgba(247,239,228,.68);
+    }
+    .hero-proof-screen strong {
+      color: #fff3e4;
+      letter-spacing: -.03em;
+    }
+    .hero-proof-note {
+      margin-top: .85rem;
+      padding-left: .95rem;
+      border-left: 2px solid var(--accent);
+      color: rgba(247,239,228,.84);
+      font-style: italic;
+      line-height: 1.7;
+    }
+    .hero-proof-screen-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: .95rem;
+    }
+    .hero-proof-screen-label {
+      font-size: .72rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(247,239,228,.44);
+    }
+    .hero-proof-screen-pill {
+      padding: .4rem .72rem;
+      border-radius: 999px;
+      background: rgba(229,125,47,.14);
+      border: 1px solid rgba(229,125,47,.18);
+      color: #ffb878;
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .hero-proof-stat {
+      padding: 1.15rem 1.2rem;
+      border-radius: 1.1rem;
+      background: rgba(8,8,8,.34);
+      border: 1px solid rgba(255,255,255,.06);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
+    }
+    .hero-proof-amount {
+      display: inline-flex;
+      align-items: baseline;
+      gap: .7rem;
+      font-size: 2.4rem;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -.05em;
+      color: #fff8ef;
+    }
+    .hero-proof-delta {
+      padding: .42rem .7rem;
+      border-radius: 999px;
+      background: rgba(229,125,47,.16);
+      color: #ffb878;
+      font-size: .82rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .hero-proof-subline {
+      margin-top: .55rem;
+      color: rgba(247,239,228,.46);
+      font-size: .82rem;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+    .hero-proof-feed {
+      margin-top: .85rem;
+      display: grid;
+      gap: .75rem;
+    }
+    .hero-proof-item {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: .85rem;
+      padding: .72rem .8rem;
+      border-radius: .95rem;
+      background: rgba(255,255,255,.025);
+      border: 1px solid rgba(255,255,255,.05);
+    }
+    .hero-proof-avatar-mini {
+      width: 2.35rem;
+      height: 2.35rem;
+      border-radius: 999px;
+      background: #fff7ef;
+      color: #171310;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: .92rem;
+      flex-shrink: 0;
+    }
+    .hero-proof-avatar-mini--money {
+      font-size: 1.05rem;
+      font-weight: 900;
+    }
+    .hero-proof-item-title {
+      font-size: .98rem;
+      font-weight: 700;
+      color: #fff3e4;
+      line-height: 1.2;
+    }
+    .hero-proof-item-meta {
+      margin-top: .15rem;
+      font-size: .82rem;
+      color: rgba(247,239,228,.54);
+    }
+    .hero-proof-item-value {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #fff4e8;
+      letter-spacing: -.02em;
+    }
+    .hero-proof-growth {
+      display: grid;
+      gap: .4rem;
+      margin-top: .1rem;
+      padding: .95rem 1rem;
+      border-radius: 1rem;
+      background: linear-gradient(180deg, rgba(229,125,47,.10), rgba(255,255,255,.02));
+      border: 1px solid rgba(229,125,47,.14);
+    }
+    .hero-proof-growth-label {
+      font-size: .72rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(255,184,120,.72);
+    }
+    .hero-proof-growth-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #fff4e8;
+      letter-spacing: -.02em;
+    }
+    .hero-proof-growth-text {
+      font-size: .86rem;
+      line-height: 1.55;
+      color: rgba(247,239,228,.64);
+    }
+    @keyframes heroFloat {
+      0%, 100% { transform: rotate(4.6deg) translateY(.35rem); }
+      50% { transform: rotate(3.2deg) translateY(-.6rem); }
+    }
+    .hero-section p,
+    .light-section p,
+    .light-section li,
+    .warm-section p,
+    .warm-section li,
+    .warm-cta-section p {
+      color: var(--text-soft);
+    }
+    .dark-section h2,
+    .dark-section h3,
+    .dark-section [class~="text-white"],
+    .dark-footer [class~="text-white"] {
+      color: #f7efe4 !important;
+    }
+    .dark-section p,
+    .dark-section li,
+    .dark-section [class*="text-white/"],
+    .dark-footer p,
+    .dark-footer [class*="text-white/"] {
+      color: rgba(247, 239, 228, .76) !important;
+    }
+    .light-section [class*="text-orange-"],
+    .warm-section [class*="text-orange-"],
+    .warm-cta-section [class*="text-orange-"],
+    .dark-section [class*="text-orange-"],
+    .dark-footer [class*="text-orange-"] {
+      color: var(--accent) !important;
+    }
+    .glass,
+    .hero-badge {
+      background: rgba(255, 248, 240, .78);
+      border: 1px solid rgba(86, 67, 50, .10);
+      box-shadow: 0 10px 24px rgba(53, 38, 28, .06);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .soft-card {
+      background: linear-gradient(180deg, rgba(255,251,246,.96), rgba(247,239,229,.98));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-card);
+    }
+    .module-card,
+    .question-card {
+      border: 1px solid var(--line-dark);
+      box-shadow: var(--shadow-dark);
+    }
+    .light-section .soft-card,
+    .hero-section .soft-card,
+    .warm-section .soft-card,
+    .warm-cta-section .soft-card {
+      background: linear-gradient(180deg, rgba(255,251,246,.96), rgba(247,239,229,.98));
+      border-color: var(--line);
+      box-shadow: var(--shadow-card);
+    }
+    .dark-section .soft-card,
+    .dark-footer .soft-card,
+    .dark-section .module-card,
+    .dark-section .question-card {
+      background: linear-gradient(180deg, rgba(28,24,21,.96), rgba(19,16,14,.98));
+      border-color: var(--line-dark);
+      box-shadow: var(--shadow-dark);
+    }
+    .light-section .module-card h3,
+    .light-section .module-card .accordion-toggle span,
+    .light-section .module-card .accordion-content,
+    .light-section .module-card [class~="text-white"],
+    .light-section .module-card [class*="text-white/"] {
+      color: #f7efe4 !important;
+    }
+    .light-section .module-card .module-list li,
+    .light-section .module-card .accordion-content {
+      color: rgba(247,239,228,.72) !important;
+    }
+    .module-card {
+      overflow: hidden;
+      border-radius: 2rem;
+    }
+    .module-card .accordion-toggle {
+      position: relative;
+      min-height: 7.8rem;
+      padding-top: 1.7rem;
+      padding-bottom: 1.7rem;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.015), rgba(255,255,255,0)),
+        linear-gradient(180deg, rgba(21,18,16,.98), rgba(18,15,13,.98));
+    }
+    .module-card .accordion-toggle::before {
+      content: "";
+      position: absolute;
+      left: 2rem;
+      right: 7rem;
+      top: 1.7rem;
+      height: 1rem;
+      border-radius: .2rem;
+      background: linear-gradient(90deg, rgba(111,77,52,.42), rgba(111,77,52,.12));
+      pointer-events: none;
+    }
+    .module-card .accordion-toggle .min-w-0 {
+      position: relative;
+      z-index: 1;
+    }
+    .module-number-bg {
+      position: absolute;
+      right: 6.2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: clamp(4.4rem, 8vw, 6.8rem);
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -.08em;
+      color: #ffffff;
+      opacity: .04;
+      pointer-events: none;
+      z-index: 0;
+      user-select: none;
+    }
+    .module-card .accordion-toggle .module-kicker {
+      display: inline-flex;
+      align-items: center;
+      padding: .14rem .3rem .14rem 0;
+      font-size: .78rem;
+      letter-spacing: .22em;
+      color: #f08a3c !important;
+      text-shadow: none;
+      background: transparent !important;
+      position: relative;
+      z-index: 2;
+      opacity: 1 !important;
+    }
+    .module-card .accordion-toggle .min-w-0 > span:last-child,
+    .module-card .accordion-toggle .text-white,
+    .module-card .accordion-toggle [class*="text-white"] {
+      margin-top: .95rem !important;
+      display: block;
+      font-size: clamp(1.7rem, 2.2vw, 2.55rem);
+      line-height: 1.02;
+      letter-spacing: -.045em;
+      color: #fff3e4 !important;
+      text-wrap: balance;
+    }
+    .module-card .accordion-icon {
+      width: 2.8rem;
+      height: 2.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,243,228,.08);
+      background: rgba(255,255,255,.02);
+      color: #ffb26f;
+    }
+    .module-card .accordion-content {
+      background: linear-gradient(180deg, rgba(24,20,18,.98), rgba(18,15,13,.98));
+      color: rgba(247,239,228,.74) !important;
+    }
+    .module-card .module-list li {
+      padding-left: 1.45rem;
+      color: rgba(247,239,228,.76) !important;
+    }
+    .module-card .module-list li::before {
+      width: .38rem;
+      height: .38rem;
+      top: .92rem;
+      left: 0;
+      background: rgba(255,255,255,.26);
+      box-shadow: none;
+    }
+    .question-card .faq-content {
+      color: rgba(247,239,228,.72) !important;
+    }
+    .question-card .faq-toggle span:first-child {
+      color: #fff3e4 !important;
+    }
+    .case-list strong,
+    .feature-list strong,
+    .selection-list strong {
+      color: #fff3e4 !important;
+    }
+    .site-header #mobile-menu-button {
+      color: var(--text-main) !important;
+      background: rgba(255,255,255,.58) !important;
+      border-color: rgba(78,61,46,.10) !important;
+    }
+    .trust-icon,
+    .process-icon,
+    .result-icon {
+      background: linear-gradient(180deg, rgba(229,125,47,.18), rgba(229,125,47,.08));
+      box-shadow: inset 0 0 0 1px rgba(229,125,47,.18);
+      color: var(--accent);
+    }
+    .module-kicker,
+    .pricing-kicker {
+      color: var(--accent);
+      border-color: rgba(229,125,47,.22);
+      background: rgba(229,125,47,.08);
+    }
+    .light-section a.btn-dark,
+    .light-section .btn-dark,
+    #pricing a.btn-dark,
+    #pricing .btn-dark {
+      background: #11100f !important;
+      color: #fff7ed !important;
+      border-color: rgba(17, 15, 13, .12) !important;
+    }
+    .light-section a.btn-dark:hover,
+    .light-section .btn-dark:hover,
+    #pricing a.btn-dark:hover,
+    #pricing .btn-dark:hover {
+      background: #1a1512 !important;
+      color: #fff7ed !important;
+    }
+    .proof-shot,
+    .case-photo,
+    .review-photo {
+      background: #fffdf9;
+      border: 1px solid rgba(73, 57, 45, .10);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.9);
+    }
+    .dark-section .case-photo,
+    .dark-section .review-photo,
+    .dark-section .proof-shot {
+      background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(244,239,232,.96));
+      border-color: rgba(255,255,255,.12);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.8);
+    }
+    .dark-section .case-photo::before,
+    .dark-section .review-photo::before {
+      border-color: rgba(18, 18, 18, .08);
+    }
+    .pricing-featured {
+      background: linear-gradient(180deg, rgba(255,245,233,.99), rgba(245,229,210,.99));
+      border-color: rgba(229,125,47,.72);
+      box-shadow: 0 34px 84px rgba(90, 61, 39, .22), 0 0 0 1px rgba(229,125,47,.18);
+      transform: translateY(-14px) scale(1.03);
+    }
+    .pricing-featured::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.52);
+    }
+    .pricing-featured::after {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      pointer-events: none;
+      box-shadow: 0 0 0 2px rgba(229,125,47,.16);
+    }
+    .pricing-featured .pricing-kicker {
+      background: rgba(229,125,47,.16);
+      border-color: rgba(229,125,47,.24);
+      color: #b85d24 !important;
+    }
+    .pricing-featured h3 {
+      color: #1f130d;
+    }
+    .pricing-featured .pricing-card__price p:first-child {
+      color: #d56f2a !important;
+    }
+    #pricing .pricing-featured .pricing-card__cta .glow-button {
+        background: var(--accent) !important;
+        color: #1d130e !important;
+        border-color: rgba(229,125,47,.24);
+        box-shadow: 0 18px 34px rgba(229,125,47,.24) !important;
+      }
+    .faq-note {
+        background: rgba(255, 250, 243, .72) !important;
+        border-color: rgba(73, 57, 45, .12) !important;
+        color: var(--text-soft) !important;
+        backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .dark-section .faq-note {
+      background: rgba(255,255,255,.04) !important;
+      border-color: rgba(255,243,228,.10) !important;
+      color: rgba(247, 239, 228, .72) !important;
+    }
+    .dark-section .faq-toggle,
+    .dark-section .accordion-toggle {
+      background: transparent;
+    }
+    #faq {
+      background: #0f0f10;
+    }
+    #faq .inline-flex {
+      position: relative;
+      padding: 0 .95rem !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      letter-spacing: .28em;
+      color: #d9772e !important;
+    }
+    #faq .inline-flex::before,
+    #faq .inline-flex::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 2rem;
+      height: 1px;
+      background: rgba(217,119,46,.74);
+      transform: translateY(-50%);
+    }
+    #faq .inline-flex::before {
+      right: 100%;
+      margin-right: .8rem;
+    }
+    #faq .inline-flex::after {
+      left: 100%;
+      margin-left: .8rem;
+    }
+    #program .inline-flex,
+    #results .inline-flex,
+    #pricing .inline-flex,
+    #reviews .inline-flex {
+      position: relative;
+      padding: 0 .95rem !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      letter-spacing: .28em;
+      color: #d9772e !important;
+    }
+    #program .inline-flex::before,
+    #program .inline-flex::after,
+    #results .inline-flex::before,
+    #results .inline-flex::after,
+    #pricing .inline-flex::before,
+    #pricing .inline-flex::after,
+    #reviews .inline-flex::before,
+    #reviews .inline-flex::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 2rem;
+      height: 1px;
+      background: rgba(217,119,46,.74);
+      transform: translateY(-50%);
+    }
+    #program .inline-flex::before,
+    #results .inline-flex::before,
+    #pricing .inline-flex::before,
+    #reviews .inline-flex::before {
+      right: 100%;
+      margin-right: .8rem;
+    }
+    #program .inline-flex::after,
+    #results .inline-flex::after,
+    #pricing .inline-flex::after,
+    #reviews .inline-flex::after {
+      left: 100%;
+      margin-left: .8rem;
+    }
+    #faq h2 {
+      color: #fff7ee;
+    }
+    #faq > div:first-child p:last-child {
+      color: rgba(245,234,223,.58) !important;
+    }
+    #faq .faq-note {
+      display: none;
+    }
+    #faq .faq-stack {
+      width: 100%;
+      max-width: 42.5rem;
+      margin: 3rem auto 0;
+    }
+    #faq .question-card {
+      background: transparent !important;
+      border: 0 !important;
+      border-bottom: 1px solid rgba(255,243,228,.11) !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      overflow: visible !important;
+    }
+    #faq .question-card:first-child {
+      border-top: 1px solid rgba(255,243,228,.11) !important;
+    }
+    #faq .faq-toggle {
+      padding: 1.65rem 0 !important;
+      align-items: center;
+    }
+    #faq .faq-toggle span:first-child {
+      padding-right: 1rem !important;
+      color: #fff7ee !important;
+      font-size: clamp(1.15rem, 2vw, 1.9rem) !important;
+      line-height: 1.28 !important;
+      letter-spacing: -.03em !important;
+      font-weight: 600 !important;
+    }
+    #faq .faq-icon {
+      width: 1.5rem;
+      height: 1.5rem;
+      color: #d9772e !important;
+      opacity: .96;
+    }
+    #faq .faq-content {
+      border-top: 0 !important;
+      padding: 0 3rem 1.7rem 0 !important;
+      color: rgba(245,234,223,.68) !important;
+      font-size: 1.02rem !important;
+      line-height: 1.9 !important;
+    }
+    @media (max-width: 640px) {
+      #faq .faq-toggle {
+        padding: 1.2rem 0 !important;
+      }
+      #faq .faq-toggle span:first-child {
+        font-size: 1.08rem !important;
+      }
+      #faq .faq-content {
+        padding: 0 1.6rem 1.2rem 0 !important;
+        font-size: .95rem !important;
+        line-height: 1.75 !important;
+      }
+    }
+    .accordion-icon,
+    .faq-icon {
+      color: var(--accent);
+    }
+    .footer-link {
+      color: rgba(247, 239, 228, .62);
+    }
+    .footer-link:hover {
+      color: #fff8ef;
+    }
+    .dark-footer {
+      border-top-color: rgba(255,243,228,.10) !important;
+    }
+    .dark-footer > div > div {
+      background: transparent !important;
+    }
+    .warm-panel,
+    .cta-panel {
+      border: 1px solid rgba(88, 64, 43, .12) !important;
+      background: linear-gradient(180deg, rgba(255,250,243,.96), rgba(242,231,217,.98)) !important;
+      box-shadow: var(--shadow-card) !important;
+    }
+    .cta-panel {
+      background: linear-gradient(180deg, rgba(255,246,235,.98), rgba(240,226,210,.98)) !important;
+    }
+    .cta-secondary-grid {
+      display: grid;
+      gap: 1rem;
+    }
+    .cta-btn-reviews,
+    .cta-btn-telegram {
+      min-height: 4.5rem;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-inline: 1.5rem;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .cta-btn-reviews {
+      background: linear-gradient(180deg, rgba(255,245,229,.96), rgba(248,232,205,.98));
+      border: 1px solid rgba(208,154,94,.22);
+      color: #5c3f27 !important;
+      box-shadow: 0 14px 28px rgba(115, 82, 46, .10);
+    }
+    .cta-btn-telegram {
+      background: linear-gradient(180deg, rgba(232,123,61,.96), rgba(205,93,39,.98));
+      border: 1px solid rgba(163,70,23,.16);
+      color: #fff8f0 !important;
+      box-shadow: 0 16px 30px rgba(197, 103, 42, .22);
+    }
+    .cta-btn-reviews:hover,
+    .cta-btn-telegram:hover {
+      transform: translateY(-1px);
+    }
+    @media (min-width: 640px) {
+      .cta-secondary-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .footer-panel {
+      background: transparent !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+    .footer-shell {
+      display: grid;
+      gap: 2.25rem;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto auto;
+      align-items: center;
+      gap: 2.5rem;
+    }
+    .footer-brand {
+      max-width: 22rem;
+    }
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+    .footer-social {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 1rem;
+    }
+    .footer-icon-link {
+      width: 2.6rem;
+      height: 2.6rem;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,243,228,.10);
+      background: transparent;
+      color: rgba(247,239,228,.72);
+      transition: transform .2s ease, border-color .2s ease, color .2s ease, background-color .2s ease;
+    }
+    .footer-icon-link:hover {
+      transform: translateY(-1px);
+      color: #fff8ef;
+      border-color: rgba(229,125,47,.22);
+      background: rgba(229,125,47,.08);
+    }
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,243,228,.12);
+      color: rgba(247,239,228,.46);
+      font-size: .92rem;
+    }
+    .footer-bottom-note {
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      font-size: .74rem;
+      color: rgba(247,239,228,.34);
+    }
+    @media (max-width: 767px) {
+      .hero-layout {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        text-align: center;
+      }
+      .hero-copy {
+        max-width: none;
+      }
+      .hero-actions {
+        justify-content: center;
+      }
+      .hero-stats {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      .hero-stat {
+        padding-right: 0;
+        padding-bottom: 1rem;
+        border-right: 0;
+        border-bottom: 1px solid rgba(49,36,28,.12);
+      }
+      .hero-stat:last-child {
+        padding-bottom: 0;
+        border-bottom: 0;
+      }
+      .hero-visual {
+        min-height: 21rem;
+      }
+      .hero-visual-orbit {
+        inset: 8% 0 10% 0;
+      }
+      .hero-floating-proof {
+        width: 100%;
+      }
+      .footer-top {
+        grid-template-columns: 1fr;
+      }
+      .footer-nav,
+      .footer-social {
+        justify-content: flex-start;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .site-header {
+        background: rgba(255, 249, 241, .94);
+      }
+      .dark-section::before,
+      .dark-footer::before,
+      .warm-section::before,
+      .warm-cta-section::before {
+        width: calc(100vw + 32px);
+      }
     }
     @media (max-width: 767px) {
       .mobile-panel {
@@ -234,7 +1754,7 @@
     <div class="hero-grid pointer-events-none absolute inset-0 opacity-30"></div>
     <div class="pointer-events-none absolute left-1/2 top-0 h-[22rem] w-[22rem] -translate-x-1/2 rounded-full bg-orange-500/10 blur-3xl sm:h-[26rem] sm:w-[26rem]"></div>
     <div class="fixed left-1/2 top-3 z-50 w-[calc(100%-1.25rem)] max-w-[76rem] -translate-x-1/2 px-0 sm:top-4 sm:w-[calc(100%-2rem)]">
-      <header class="glass relative rounded-[1.9rem] px-4 py-3 shadow-soft sm:px-5">
+      <header class="site-header glass relative rounded-[1.9rem] px-4 py-3 shadow-soft sm:px-5">
         <div class="flex items-center justify-between gap-4">
           <a href="#top" class="flex items-center gap-3">
             <span class="text-lg font-extrabold tracking-[-.04em] text-white sm:text-2xl">
@@ -244,12 +1764,13 @@
           <nav class="hidden items-center gap-1 text-sm md:flex">
             <a href="#top" class="nav-link rounded-full px-3 py-2 text-white/65">О курсе</a>
             <a href="#program" class="nav-link rounded-full px-3 py-2 text-white/65">Программа</a>
-            <a href="#results" class="nav-link rounded-full px-3 py-2 text-white/65">Результаты</a>
+            <a href="#results" class="nav-link rounded-full px-3 py-2 text-white/65">Кейсы</a>
             <a href="#pricing" class="nav-link rounded-full px-3 py-2 text-white/65">Тарифы</a>
-            <a href="#footer-contact" class="nav-link rounded-full px-3 py-2 text-white/65">Контакты</a>
+            <a href="#faq" class="nav-link rounded-full px-3 py-2 text-white/65">FAQ</a>
+            <a href="#reviews" class="nav-link rounded-full px-3 py-2 text-white/65">Отзывы</a>
           </nav>
           <div class="flex items-center gap-3">
-            <a href="#pricing" class="hidden rounded-full bg-orange-500 px-5 py-3 text-sm font-extrabold text-black shadow-glow transition hover:bg-orange-400 md:inline-flex">Начать обучение</a>
+            <a href="#pricing" class="header-cta hidden rounded-full bg-orange-500 px-5 py-3 text-sm font-extrabold text-black shadow-glow transition hover:bg-orange-400 md:inline-flex">Начать обучение</a>
             <button id="mobile-menu-button" type="button" class="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white md:hidden" aria-label="Открыть меню" aria-expanded="false">
               <svg id="mobile-menu-open" viewBox="0 0 24 24" class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
                 <path d="M4 7h16M4 12h16M4 17h16"></path>
@@ -260,64 +1781,153 @@
             </button>
           </div>
         </div>
-        <div id="mobile-menu-panel" class="mobile-panel hidden mt-4 overflow-hidden rounded-[1.8rem] border border-white/8 bg-[#111111] p-5 md:hidden">
+        <div id="mobile-menu-panel" class="site-mobile-panel mobile-panel hidden mt-4 overflow-hidden rounded-[1.8rem] border border-white/8 bg-[#111111] p-5 md:hidden">
           <div class="grid gap-6 text-[2rem] font-extrabold tracking-[-.04em] text-white/90">
             <a href="#top" class="mobile-nav-link">О курсе</a>
             <a href="#program" class="mobile-nav-link">Программа</a>
-            <a href="#results" class="mobile-nav-link">Результаты</a>
-            <a href="#pricing" class="mobile-nav-link">Тарифы</a>
-            <a href="#footer-contact" class="mobile-nav-link">Контакты</a>
+              <a href="#results" class="mobile-nav-link">Кейсы</a>
+              <a href="#pricing" class="mobile-nav-link">Тарифы</a>
+              <a href="#faq" class="mobile-nav-link">FAQ</a>
+              <a href="#reviews" class="mobile-nav-link">Отзывы</a>
           </div>
-          <a href="#pricing" class="glow-button mt-8 flex min-h-[78px] items-center justify-center rounded-[1.6rem] bg-orange-500 px-6 text-center text-2xl font-extrabold text-black shadow-glow">Начать обучение</a>
+          <a href="#pricing" class="mobile-cta glow-button mt-8 flex min-h-[78px] items-center justify-center rounded-[1.6rem] bg-orange-500 px-6 text-center text-2xl font-extrabold text-black shadow-glow">Начать обучение</a>
         </div>
       </header>
     </div>
-    <div class="mx-auto max-w-[76rem] px-5 pb-16 pt-24 sm:px-7 sm:pb-20 sm:pt-28 lg:px-10">
+    <div class="mx-auto max-w-[76rem] px-5 pb-0 pt-24 sm:px-7 sm:pb-0 sm:pt-28 lg:px-10">
       <main id="top" class="pt-4 sm:pt-6">
-        <section class="section-reveal py-8 sm:py-14">
-          <div class="mx-auto max-w-5xl text-center">
-            <div class="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-3 sm:gap-4">
-              <div class="hero-badge inline-flex min-h-12 items-center gap-3 rounded-full px-4 py-2 text-sm font-semibold uppercase tracking-[.18em] text-orange-300 sm:min-h-14 sm:px-6 sm:text-base">
-                <svg viewBox="0 0 24 24" class="chip-icon" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"></path></svg>
-                Пошаговая система запуска
+        <section class="hero-section section-reveal py-8 sm:py-14">
+          <div class="mx-auto max-w-6xl">
+            <div class="hero-layout">
+              <div class="hero-copy">
+                <div class="hero-kicker">Пошаговая система запуска</div>
+                <h1 class="hero-title">
+                  Запусти свою
+                  <span class="accent-text">AI-модель.</span>
+                </h1>
+                <p class="mt-6 max-w-2xl text-lg leading-8 text-white/62 sm:mt-8 sm:text-2xl sm:leading-10">
+                  Внутри обучения: создание модели, упаковка контента, трафик из соцсетей, продажи и масштабирование. Подходит даже если ты без опыта в нейросетях и запускаешь всё с нуля.
+                </p>
+                <div class="hero-actions">
+                  <a href="#pricing" class="hero-btn btn-dark glow-button inline-flex min-h-[78px] items-center justify-center px-8 text-center text-xl font-extrabold tracking-[-.03em] sm:min-h-[84px] sm:text-2xl"><span>Выбрать формат обучения</span><span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"></path><path d="M9 7h8v8"></path></svg></span></a>
+                  <a href="#advanced-form" class="hero-btn btn-light glow-button inline-flex min-h-[78px] items-center justify-center px-8 text-center text-lg font-bold sm:min-h-[84px] sm:text-xl"><span class="btn-copy"><span>Подать заявку</span><span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 5l7 7-7 7"></path></svg></span></span><span class="btn-meta">Заявка</span></a>
+                </div>
+                <div class="hero-stats">
+                  <div class="hero-stat">
+                    <strong>3</strong>
+                    <span>формата обучения</span>
+                  </div>
+                  <div class="hero-stat">
+                    <strong>1</strong>
+                    <span>система запуска</span>
+                  </div>
+                  <div class="hero-stat">
+                    <strong>0</strong>
+                    <span>лишней теории</span>
+                  </div>
+                </div>
               </div>
-              <div class="glass inline-flex min-h-12 items-center gap-3 rounded-full px-4 py-2 text-sm font-medium text-white/88 sm:min-h-14 sm:px-6 sm:text-base">
-                <svg viewBox="0 0 24 24" class="chip-icon" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M7 11V8a5 5 0 0 1 10 0v3"></path><rect x="5" y="11" width="14" height="10" rx="2"></rect></svg>
-                Анонимно
+              <div class="hero-visual" aria-hidden="true">
+                <div class="hero-visual-orbit"></div>
+                <div class="hero-proof-badge">Проверен</div>
+                <div class="hero-floating-proof">
+                  <div class="hero-proof-inner">
+                    <div class="hero-proof-meta">
+                      <div class="hero-proof-avatar">VO</div>
+                      <div>
+                        <div class="hero-proof-name">VADYA OFM</div>
+                        <div class="hero-proof-role">@preludik • Creator of AI Models</div>
+                      </div>
+                    </div>
+                    <div class="hero-proof-screen">
+                      <div class="hero-proof-screen-header">
+                        <span class="hero-proof-screen-label">Статистика</span>
+                        <span class="hero-proof-screen-pill">Кейс ученика</span>
+                      </div>
+                      <div class="hero-proof-stat">
+                        <div class="hero-proof-amount">
+                          <span>+$500</span>
+                          <span class="hero-proof-delta">за неделю</span>
+                        </div>
+                        <div class="hero-proof-subline">первые стабильные деньги после запуска связки</div>
+                      </div>
+                      <div class="hero-proof-feed">
+                        <div class="hero-proof-item">
+                          <div class="hero-proof-avatar-mini hero-proof-avatar-mini--money">$</div>
+                          <div>
+                            <div class="hero-proof-item-title">New Payment</div>
+                            <div class="hero-proof-item-meta">Новая выплата • 1 minute ago</div>
+                          </div>
+                          <div class="hero-proof-item-value">$500</div>
+                        </div>
+                        <div class="hero-proof-growth">
+                          <div class="hero-proof-growth-label">Рост дохода</div>
+                          <div class="hero-proof-growth-title">Стабильный доход: $1500</div>
+                          <div class="hero-proof-growth-text">Рост текущей модели после масштабирования, настройки процессов и более стабильной операционки.</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="hero-proof-note">
+                      «Спасибо Вадиму, помог с масштабированием текущей модели и вывел на стабильный доход в $1500.»
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="glass inline-flex min-h-12 items-center gap-3 rounded-full px-4 py-2 text-sm font-medium text-white/88 sm:min-h-14 sm:px-6 sm:text-base">
-                <svg viewBox="0 0 24 24" class="chip-icon" fill="none" stroke="currentColor" stroke-width="2.1"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg>
-                Из любой точки мира
-              </div>
-              <div class="glass inline-flex min-h-12 items-center gap-3 rounded-full px-4 py-2 text-sm font-medium text-white/88 sm:min-h-14 sm:px-6 sm:text-base">
-                <svg viewBox="0 0 24 24" class="chip-icon" fill="none" stroke="currentColor" stroke-width="2.1"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 10h18"></path></svg>
-                Минимум вложений
-              </div>
-            </div>
-            <h1 class="mx-auto mt-10 max-w-5xl text-5xl font-extrabold leading-[.94] tracking-[-.06em] sm:text-6xl lg:text-8xl">
-              Собери и<br class="hidden sm:block" />
-              монетизируй свою<br />
-              <span class="accent-text">AI-модель</span> по шагам
-            </h1>
-            <p class="mx-auto mt-6 max-w-3xl text-lg leading-8 text-white/62 sm:mt-8 sm:text-2xl sm:leading-10">
-              Пошаговая система от создания модели до продаж, которая подходит как новичкам, так и опытным.
-            </p>
-            <div class="mx-auto mt-10 grid max-w-3xl gap-4 sm:mt-12">
-              <a href="#pricing" class="glow-button soft-card flex min-h-[76px] items-center justify-center rounded-[1.75rem] px-6 text-center text-xl font-extrabold tracking-[-.03em] text-white sm:min-h-[88px] sm:text-2xl">Купить "Самостоятельный"</a>
-              <a href="#advanced-form" class="glow-button flex min-h-[84px] items-center justify-center rounded-[1.75rem] bg-orange-500 px-6 text-center text-xl font-extrabold tracking-[-.03em] text-black shadow-glow sm:min-h-[96px] sm:text-3xl">Подать заявку на "Продвинутый"</a>
             </div>
           </div>
         </section>
-        <section id="program" class="section-reveal py-14 sm:py-24">
+        <section class="light-section section-reveal py-10 sm:py-16">
+          <div class="mx-auto grid max-w-6xl gap-5 md:grid-cols-3">
+            <article class="soft-card trust-card rounded-[2rem] p-6 sm:p-7">
+              <div class="trust-icon mb-6">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16"></path><path d="M16 7.5c0-1.7-1.79-3-4-3s-4 1.3-4 3 1.79 3 4 3 4 1.3 4 3-1.79 3-4 3-4-1.3-4-3"></path></svg>
+              </div>
+              <h3 class="text-2xl font-extrabold tracking-[-.04em]">Не просто уроки, а путь к монетизации</h3>
+              <p class="mt-4 text-base leading-8 text-white/60">Ты не покупаешь набор роликов. Ты получаешь маршрут: от идеи модели и контента до трафика, продаж и первых повторных платежей.</p>
+            </article>
+            <article class="soft-card trust-card rounded-[2rem] p-6 sm:p-7">
+              <div class="trust-icon mb-6">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"></path></svg>
+              </div>
+              <h3 class="text-2xl font-extrabold tracking-[-.04em]">Быстрый старт без технического порога</h3>
+              <p class="mt-4 text-base leading-8 text-white/60">Если ты с нуля, тебе не нужно собирать информацию по кускам. Внутри уже есть порядок действий, инструменты и примеры.</p>
+            </article>
+            <article class="soft-card trust-card rounded-[2rem] p-6 sm:p-7">
+              <div class="trust-icon mb-6">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3.5"></circle><circle cx="12" cy="12" r="1"></circle></svg>
+              </div>
+              <h3 class="text-2xl font-extrabold tracking-[-.04em]">Разные форматы под разный уровень включённости</h3>
+              <p class="mt-4 text-base leading-8 text-white/60">Хочешь зайти сам и быстро? Берёшь базовый тариф. Нужен разбор, сопровождение и доступ ко мне? Тогда старшие форматы идут через отбор и созвон.</p>
+            </article>
+          </div>
+        </section>
+        <section id="program" class="light-section section-reveal py-14 sm:py-24">
           <div class="mx-auto max-w-3xl text-center">
             <p class="inline-flex rounded-full border border-orange-400/25 bg-orange-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-[.34em] text-orange-200 sm:text-sm">Программа обучения</p>
-            <h2 class="mt-6 text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">Освой систему<br /><span class="accent-text">по модулям</span></h2>
-            <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/56 sm:text-xl sm:leading-9">Комплексная программа из 7 модулей и эксклюзивных материалов для перехода от первых шагов к системному заработку на AI-моделях</p>
+            <h2 class="mt-6 text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">Что именно ты<br /><span class="accent-text">освоишь внутри</span></h2>
+            <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/56 sm:text-xl sm:leading-9">Вся программа выстроена как маршрут запуска: сначала собираешь модель и контент, потом получаешь трафик, затем превращаешь это в продажи и масштабирование.</p>
           </div>
-          <div class="mx-auto mt-10 max-w-5xl space-y-4">
+          <div class="mx-auto mt-10 grid max-w-6xl gap-5 lg:grid-cols-3">
+            <article class="soft-card pricing-card rounded-[2rem] p-6 sm:p-7">
+              <p class="text-xs font-extrabold uppercase tracking-[.26em] text-orange-300">Этап 1</p>
+              <h3 class="mt-3 text-2xl font-extrabold tracking-[-.04em]">Создать сильную модель и контент</h3>
+              <p class="mt-4 text-base leading-8 text-white/60">От референсов и генерации лица до фотосетов, видео и упаковки контента под продажи.</p>
+            </article>
+            <article class="soft-card pricing-card rounded-[2rem] p-6 sm:p-7">
+              <p class="text-xs font-extrabold uppercase tracking-[.26em] text-orange-300">Этап 2</p>
+              <h3 class="mt-3 text-2xl font-extrabold tracking-[-.04em]">Привести трафик и выстроить воронку</h3>
+              <p class="mt-4 text-base leading-8 text-white/60">Telegram, Instagram, TikTok, USA-трафик, оформление площадок и логика перевода внимания в оплату.</p>
+            </article>
+            <article class="soft-card rounded-[2rem] p-6 sm:p-7">
+              <p class="text-xs font-extrabold uppercase tracking-[.26em] text-orange-300">Этап 3</p>
+              <h3 class="mt-3 text-2xl font-extrabold tracking-[-.04em]">Начать продавать и масштабировать</h3>
+              <p class="mt-4 text-base leading-8 text-white/60">Скрипты, допродажи, кастомы, найм помощников, автоматизация и выход из ручного режима.</p>
+            </article>
+          </div>
+          <div class="faq-stack mx-auto mt-10 max-w-5xl space-y-4">
             <article class="module-card overflow-hidden rounded-[2rem]">
               <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
-                <span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm">МОДУЛЬ 1</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Создание уникальной AI-модели</span></span>
+                <span class="module-number-bg">1</span><span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm" style="color:#f08a3c !important;">МОДУЛЬ 1</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Создание уникальной AI-модели</span></span>
                 <span class="accordion-icon flex items-center justify-center">
                   <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
                 </span>
@@ -334,7 +1944,7 @@
             </article>
             <article class="module-card overflow-hidden rounded-[2rem]">
               <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
-                <span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm">МОДУЛЬ 2</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Генерация видео</span></span>
+                <span class="module-number-bg">2</span><span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm" style="color:#f08a3c !important;">МОДУЛЬ 2</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Генерация видео</span></span>
                 <span class="accordion-icon flex items-center justify-center">
                   <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
                 </span>
@@ -350,7 +1960,7 @@
             </article>
             <article class="module-card overflow-hidden rounded-[2rem]">
               <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
-                <span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm">МОДУЛЬ 3</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Площадки для монетизации</span></span>
+                <span class="module-number-bg">3</span><span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm" style="color:#f08a3c !important;">МОДУЛЬ 3</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Площадки для монетизации</span></span>
                 <span class="accordion-icon flex items-center justify-center">
                   <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
                 </span>
@@ -367,7 +1977,7 @@
             </article>
             <article class="module-card overflow-hidden rounded-[2rem]">
               <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
-                <span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm">МОДУЛЬ 4</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">NSFW-контент</span></span>
+                <span class="module-number-bg">4</span><span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm" style="color:#f08a3c !important;">МОДУЛЬ 4</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">NSFW-контент</span></span>
                 <span class="accordion-icon flex items-center justify-center">
                   <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
                 </span>
@@ -384,7 +1994,7 @@
             </article>
             <article class="module-card overflow-hidden rounded-[2rem]">
               <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
-                <span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm">МОДУЛЬ 5</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Трафик USA</span></span>
+                <span class="module-number-bg">5</span><span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm" style="color:#f08a3c !important;">МОДУЛЬ 5</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Трафик USA</span></span>
                 <span class="accordion-icon flex items-center justify-center">
                   <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
                 </span>
@@ -401,7 +2011,7 @@
             </article>
             <article class="module-card overflow-hidden rounded-[2rem]">
               <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
-                <span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm">МОДУЛЬ 6</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Продажи и коммуникация</span></span>
+                <span class="module-number-bg">6</span><span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm" style="color:#f08a3c !important;">МОДУЛЬ 6</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Продажи и коммуникация</span></span>
                 <span class="accordion-icon flex items-center justify-center">
                   <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
                 </span>
@@ -418,7 +2028,7 @@
             </article>
             <article class="module-card overflow-hidden rounded-[2rem]">
               <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
-                <span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm">МОДУЛЬ 7</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Масштабирование и автоматизация</span></span>
+                <span class="module-number-bg">7</span><span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm" style="color:#f08a3c !important;">МОДУЛЬ 7</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Масштабирование и автоматизация</span></span>
                 <span class="accordion-icon flex items-center justify-center">
                   <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
                 </span>
@@ -435,7 +2045,7 @@
             </article>
             <article class="module-card overflow-hidden rounded-[2rem]">
               <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
-                <span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm">БОНУСНЫЕ МАТЕРИАЛЫ</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Дополнительные инструменты для быстрого запуска</span></span>
+                <span class="module-number-bg">8</span><span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm" style="color:#f08a3c !important;">БОНУСНЫЕ МАТЕРИАЛЫ</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Дополнительные инструменты для быстрого запуска</span></span>
                 <span class="accordion-icon flex items-center justify-center">
                   <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
                 </span>
@@ -453,173 +2063,393 @@
             </article>
           </div>
         </section>
-        <section id="results" class="section-reveal py-14 sm:py-24">
+        <section id="results" class="dark-section section-reveal py-14 sm:py-24">
           <div class="mx-auto max-w-3xl text-center">
-            <h2 class="text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">Результаты<br /><span class="accent-text">учеников</span></h2>
-            <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/60 sm:text-xl sm:leading-9">Примеры реализации системы на практике</p>
+            <p class="inline-flex rounded-full border border-orange-400/25 bg-orange-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-[.34em] text-orange-200 sm:text-sm">Кейсы учеников</p>
+            <h2 class="mt-6 text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">Как это выглядит<br /><span class="accent-text">на практике</span></h2>
+            <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/60 sm:text-xl sm:leading-9">Не просто цифры в воздухе, а понятная логика результата: с какой точки человек заходил, что именно внедрил, за какой срок и что получил в итоге.</p>
           </div>
-          <div class="mx-auto mt-10 grid max-w-[72rem] gap-5 md:grid-cols-2 xl:grid-cols-3">
-            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7"><div class="result-icon mb-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"></circle><path d="M12 8v8M15 10.2c0-1.1-1.34-2-3-2s-3 .9-3 2 1.34 2 3 2 3 .9 3 2-1.34 2-3 2-3-.9-3-2"></path></svg></div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$200</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">за один день</p><p class="mt-6 text-lg leading-9 text-white/60">Спустя 3 недели после внедрения системы. До покупки программы модель уже была, но не было понимания, как на ней заработать.</p><p class="mt-auto pt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, 3 недели в VADYA OFM CLUB</p></article>
-            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7"><div class="result-icon mb-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16l5-5 3 3 6-6"></path><path d="M14 8h5v5"></path></svg></div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">+1,900</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">целевых подписчиков</p><p class="mt-6 text-lg leading-9 text-white/60">Через 3 дня после внедрения стратегии из раздела по трафику. Результат превзошел ожидания и дал сильный толчок в продажах.</p><p class="mt-auto pt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, 1 неделя в программе</p></article>
-            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7"><div class="result-icon mb-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16"></path><path d="M16 7.5c0-1.7-1.79-3-4-3s-4 1.3-4 3 1.79 3 4 3 4 1.3 4 3-1.79 3-4 3-4-1.3-4-3"></path></svg></div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$1,500/мес</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">на автопилоте</p><p class="mt-6 text-lg leading-9 text-white/60">За 3 месяца выстроил систему, подключил ассистента по инструкциям из раздела масштабирования и стабилизировал выплаты.</p><p class="mt-auto pt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, 3 месяца в системе</p></article>
-            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7"><div class="result-icon mb-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"></path></svg></div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">11 дней</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">до первой продажи</p><p class="mt-6 text-lg leading-9 text-white/60">Полный новичок в нейросетях. Следовал пошаговым инструкциям — и уже на 11-й день получил первый платёж.</p><p class="mt-auto pt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, новичок</p></article>
-            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7"><div class="result-icon mb-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"></circle><path d="M3.5 12h17"></path><path d="M12 4a14 14 0 0 1 0 16"></path><path d="M12 4a14 14 0 0 0 0 16"></path></svg></div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$2,400/мес</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">из СНГ на рынке USA</p><p class="mt-6 text-lg leading-9 text-white/60">Работает удалённо из России. Не понимал, как монетизировать трафик — всё решил с помощью одного раздела.</p><p class="mt-auto pt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, 3 месяца в VADYA OFM CLUB</p></article>
-            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7"><div class="result-icon mb-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3.5"></circle><circle cx="12" cy="12" r="1"></circle></svg></div><p class="text-5xl font-extrabold tracking-[-.05em] text-orange-400">$50</p><p class="mt-2 text-2xl font-extrabold tracking-[-.04em]">первый кастомный заказ</p><p class="mt-6 text-lg leading-9 text-white/60">Через 14 дней после старта. Следовал скриптам из раздела продаж — клиент сам попросил сделать кастомный сет.</p><p class="mt-auto pt-10 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Участник, 2 недели в VADYA OFM CLUB</p></article>
+          <div class="mx-auto mt-10 grid max-w-6xl gap-5 lg:grid-cols-3">
+            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7">
+              <div class="result-icon mb-7"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"></path></svg></div>
+              <h3 class="text-2xl font-extrabold tracking-[-.04em]">Кейс 01 — первая продажа с нуля</h3>
+              <div class="case-photo mt-6 rounded-[1.4rem]"><img src="case1.jpg" alt="Кейс 1" /></div>
+              <ul class="case-list mt-6 space-y-4 text-base leading-8 text-white/62">
+                <li><strong class="text-white">Было:</strong> не было опыта в нейросетях и понимания, как вообще выйти на первую продажу.</li>
+                <li><strong class="text-white">Что сделал:</strong> прошёл базовые модули по созданию модели, контенту и первым скриптам продаж.</li>
+                <li><strong class="text-white">За сколько дней:</strong> 11 дней с момента старта.</li>
+                <li><strong class="text-white">Что получил:</strong> первую продажу и первый платёж, после чего уже понимал, как повторить результат.</li>
+              </ul>
+              <p class="mt-auto pt-8 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Новичок • первый денежный результат</p>
+            </article>
+            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7">
+              <div class="result-icon mb-7"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16l5-5 3 3 6-6"></path><path d="M14 8h5v5"></path></svg></div>
+              <h3 class="text-2xl font-extrabold tracking-[-.04em]">Кейс 02 — рост трафика и подписчиков</h3>
+              <div class="case-photo mt-6 rounded-[1.4rem]"><img src="case2.jpg" alt="Кейс 2" /></div>
+              <ul class="case-list mt-6 space-y-4 text-base leading-8 text-white/62">
+                <li><strong class="text-white">Было:</strong> модель уже была, но трафик почти не давал продаж и не было системы продвижения.</li>
+                <li><strong class="text-white">Что сделал:</strong> внедрил стратегию из блока по трафику и перестроил подачу контента под нужную аудиторию.</li>
+                <li><strong class="text-white">За сколько дней:</strong> 3 дня после внедрения новой схемы.</li>
+                <li><strong class="text-white">Что получил:</strong> +1,900 целевых подписчиков и заметный рост входящего интереса к контенту и платным предложениям.</li>
+              </ul>
+              <p class="mt-auto pt-8 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Рост охватов • трафик начал конвертироваться</p>
+            </article>
+            <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7">
+              <div class="result-icon mb-7"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16"></path><path d="M16 7.5c0-1.7-1.79-3-4-3s-4 1.3-4 3 1.79 3 4 3 4 1.3 4 3-1.79 3-4 3-4-1.3-4-3"></path></svg></div>
+              <h3 class="text-2xl font-extrabold tracking-[-.04em]">Кейс 03 — системный доход и масштабирование</h3>
+              <div class="case-photo mt-6 rounded-[1.4rem]"><img src="case3.jpg" alt="Кейс 3" /></div>
+              <ul class="case-list mt-6 space-y-4 text-base leading-8 text-white/62">
+                <li><strong class="text-white">Было:</strong> уже были попытки продавать, но всё держалось на ручной работе и доход был нестабильным.</li>
+                <li><strong class="text-white">Что сделал:</strong> выстроил процессы, подключил ассистента и внедрил блок масштабирования и автоматизации.</li>
+                <li><strong class="text-white">За сколько дней:</strong> около 3 месяцев на полную перестройку системы.</li>
+                <li><strong class="text-white">Что получил:</strong> доход около $1,500 в месяц на более спокойной операционной модели, без постоянной ручной перегрузки.</li>
+              </ul>
+              <p class="mt-auto pt-8 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Стабилизация • переход от хаоса к системе</p>
+            </article>
           </div>
         </section>
-        <section id="pricing" class="section-reveal py-14 sm:py-24">
+        <section id="pricing" class="light-section section-reveal py-14 sm:py-24">
           <div class="mx-auto max-w-3xl text-center">
-            <h2 class="text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">Форматы<br /><span class="accent-text">обучения</span></h2>
-            <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/60 sm:text-xl sm:leading-9">Выбирай под свой темп и цели</p>
+            <p class="inline-flex rounded-full border border-orange-400/25 bg-orange-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-[.34em] text-orange-200 sm:text-sm">Тарифы</p>
+            <h2 class="mt-6 text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">Выбери формат<br /><span class="accent-text">под свой темп</span></h2>
+            <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/60 sm:text-xl sm:leading-9">Базовый тариф можно купить сразу. Два старших формата идут только после заявки и короткого созвона, чтобы не продавать сопровождение тем, кому оно не нужно.</p>
           </div>
-          <div class="mx-auto mt-10 grid max-w-[74rem] gap-6 xl:grid-cols-3">
-            <article class="soft-card flex h-full flex-col rounded-[2rem] p-6 sm:p-7">
-              <div class="mx-auto mb-6 inline-flex rounded-full bg-[#34313c] px-5 py-2 text-sm font-extrabold uppercase tracking-[.25em] text-white/90">Базовый</div>
-              <h3 class="text-4xl font-extrabold tracking-[-.05em]">Самостоятельный</h3>
-              <div class="mt-5"><p class="text-7xl font-extrabold tracking-[-.07em]">$249</p><p class="mt-1 text-3xl text-white/40">≈ 20,000 ₽</p></div>
-              <ul class="feature-list mt-8 space-y-4 text-lg text-white/82">
-                <li>Все 7 разделов обучения</li><li>500+ промптов для генерации</li><li>50 скриптов продаж</li><li>Контент-план на 30 дней</li><li>Чек-листы для каждого этапа</li><li>Доступ к материалам навсегда</li><li class="feature-off text-white/35"><span class="x-icon"><svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></span>Обновления программы</li><li class="feature-off text-white/35"><span class="x-icon"><svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></span>Личная поддержка</li><li class="feature-off text-white/35"><span class="x-icon"><svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></span>Общий чат с учениками</li>
+          <div class="mx-auto mt-10 grid max-w-6xl gap-5 xl:grid-cols-3">
+            <article class="soft-card pricing-card rounded-[2rem] p-6 sm:p-7">
+              <div class="pricing-kicker rounded-full px-4 py-2 text-xs font-extrabold uppercase tracking-[.24em] text-white/72">Моментальный доступ</div>
+              <h3 class="mt-5 text-3xl font-extrabold tracking-[-.04em]">Самостоятельный</h3>
+              <p class="pricing-card__intro mt-3 text-base leading-8 text-white/60">Для тех, кто хочет быстро зайти в тему, получить систему и пройти всё в своём темпе без ожидания одобрения.</p>
+              <div class="pricing-card__price mt-8"><p class="text-6xl font-extrabold tracking-[-.05em] text-orange-400">$249</p><p class="mt-2 text-lg text-white/58">≈ 20,000 ₽</p></div>
+              <ul class="pricing-card__list feature-list mt-8 space-y-4 text-base leading-8 text-white/64">
+                <li>Все 7 разделов обучения</li>
+                <li>500+ промптов для генерации</li>
+                <li>50 скриптов продаж</li>
+                <li>Контент-план на 30 дней</li>
+                <li>Чек-листы для каждого этапа</li>
+                <li>Доступ к материалам навсегда</li>
+                <li class="feature-off"><span class="x-icon">✕</span>Личная поддержка</li>
+                <li class="feature-off"><span class="x-icon">✕</span>Созвоны и разборы</li>
+                <li class="feature-off"><span class="x-icon">✕</span>Закрытый чат с учениками</li>
               </ul>
-              <div class="mt-auto pt-10 sm:pt-12">
-                <a href="https://web.tribute.tg/s/TcC" class="glow-button flex min-h-[76px] items-center justify-center rounded-[1.5rem] border border-white/10 bg-white/5 px-6 text-center text-xl font-extrabold text-white">Купить сейчас</a>
-              </div>
+              <p class="pricing-card__meta">Если тебе нужен самый быстрый вход без ожидания и ты готов проходить программу самостоятельно, это твой вариант.</p>
+              <div class="pricing-card__cta"><a href="https://web.tribute.tg/s/TcC" class="btn-dark glow-button flex min-h-[78px] items-center justify-center rounded-[1.6rem] bg-orange-500 px-6 text-center text-2xl font-extrabold text-black shadow-glow">Купить сразу</a></div>
             </article>
-            <article class="price-outline relative flex h-full rounded-[2rem] bg-[#161616] p-[1px] shadow-glow">
-              <div class="flex h-full flex-col rounded-[calc(2rem-1px)] bg-[#151515] p-6 sm:p-7">
-                <div class="mx-auto mb-6 inline-flex rounded-full border border-orange-400/30 bg-orange-500 px-5 py-2 text-sm font-extrabold uppercase tracking-[.25em] text-black">После отбора</div>
-                <h3 class="text-4xl font-extrabold tracking-[-.05em]">Продвинутый</h3>
-                <div class="mt-5"><p class="text-7xl font-extrabold tracking-[-.07em] text-white">$549</p><p class="mt-1 text-3xl text-white/40">≈ 49,000 ₽</p></div>
-                <ul class="feature-list mt-8 space-y-4 text-lg text-white/88">
-                  <li>Всё из тарифа "Самостоятельный"</li><li>Постоянные обновления программы</li><li>Новые уроки и материалы бесплатно</li><li>Личная поддержка в Telegram</li><li>Ответы на вопросы в течение 1 часа</li><li>Созвоны по запросу при необходимости</li><li>Доступ в закрытый чат учеников</li><li>Нетворкинг и обмен опытом</li><li>Дополнительные материалы и кейсы</li><li>Доступ навсегда</li>
+            <article class="soft-card pricing-card pricing-featured rounded-[2rem] p-6 sm:p-7">
+              <div class="pricing-kicker rounded-full px-4 py-2 text-xs font-extrabold uppercase tracking-[.24em] text-orange-200">Рекомендуемый формат</div>
+              <h3 class="mt-5 text-3xl font-extrabold tracking-[-.04em]">Продвинутый</h3>
+              <p class="pricing-card__intro mt-3 text-base leading-8 text-white/68">Для тех, кто хочет не просто доступ к материалам, а ускорение за счёт личной поддержки, обратной связи и доступа к закрытому окружению.</p>
+              <div class="pricing-card__price mt-8"><p class="text-6xl font-extrabold tracking-[-.05em] text-orange-300">$549</p><p class="mt-2 text-lg text-white/58">≈ 49,000 ₽</p></div>
+              <ul class="pricing-card__list feature-list mt-8 space-y-4 text-base leading-8 text-white/72">
+                <li>Всё из тарифа "Самостоятельный"</li>
+                <li>Постоянные обновления программы</li>
+                <li>Новые уроки и материалы бесплатно</li>
+                <li>Личная поддержка в Telegram</li>
+                <li>Ответы на вопросы в течение 1 часа</li>
+                <li>Созвоны по запросу при необходимости</li>
+                <li>Доступ в закрытый чат учеников</li>
+                <li>Нетворкинг и обмен опытом</li>
+                <li>Дополнительные материалы и кейсы</li>
+              </ul>
+              <p class="pricing-card__meta">Формат только после заявки и короткого созвона. Это нужно, чтобы понять твою точку старта и не продавать сопровождение вслепую.</p>
+              <div class="pricing-card__cta"><a href="#advanced-form" class="btn-light glow-button flex min-h-[78px] items-center justify-center rounded-[1.6rem] bg-white px-6 text-center text-2xl font-extrabold text-black">Подать заявку</a></div>
+            </article>
+            <article class="soft-card pricing-card rounded-[2rem] p-6 sm:p-7">
+              <div class="pricing-kicker rounded-full px-4 py-2 text-xs font-extrabold uppercase tracking-[.24em] text-white/72">1 на 1</div>
+              <h3 class="mt-5 text-3xl font-extrabold tracking-[-.04em]">Менторство</h3>
+              <p class="pricing-card__intro mt-3 text-base leading-8 text-white/60">Для тех, кому нужен максимально плотный формат работы: разборы, личная связь, коррекция шагов и движение к результату под твою ситуацию.</p>
+              <div class="pricing-card__price mt-8"><p class="text-6xl font-extrabold tracking-[-.05em] text-orange-400">$1,499</p><p class="mt-2 text-lg text-white/58">≈ 119,000 ₽</p></div>
+              <ul class="pricing-card__list feature-list mt-8 space-y-4 text-base leading-8 text-white/64">
+                <li>Всё из тарифа "Продвинутый"</li>
+                <li>Личная работа 1 на 1</li>
+                <li>Персональный план запуска модели</li>
+                <li>Созвоны раз в 2 дня по прогрессу</li>
+                <li>Проверка и корректировка контента</li>
+                <li>Помощь с настройкой аккаунтов</li>
+                <li>Работаем вместе до первого результата</li>
+                <li>Приоритетная поддержка 24/7</li>
+              </ul>
+              <p class="pricing-card__meta">Здесь уже важна совместимость по темпу, ожиданиям и загрузке. Поэтому формат открывается только после заявки и личного созвона.</p>
+              <div class="pricing-card__cta"><a href="#advanced-form" class="btn-dark glow-button flex min-h-[78px] items-center justify-center rounded-[1.6rem] border border-white/10 bg-[#121212] px-6 text-center text-2xl font-extrabold text-white">Оставить заявку</a></div>
+            </article>
+          </div>
+        </section>
+        <section class="dark-section section-reveal py-14 sm:py-24">
+          <div class="mx-auto max-w-3xl text-center">
+            <p class="inline-flex rounded-full border border-orange-400/25 bg-orange-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-[.34em] text-orange-200 sm:text-sm">Путь до покупки</p>
+            <h2 class="mt-6 text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">Как происходит<br /><span class="accent-text">вход в обучение</span></h2>
+            <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/60 sm:text-xl sm:leading-9">Мы разводим путь покупки специально, чтобы быстрый тариф можно было взять сразу, а сопровождение не превращалось в хаотичную продажу всем подряд.</p>
+          </div>
+          <div class="mx-auto mt-10 grid max-w-6xl gap-5 lg:grid-cols-3">
+            <article class="soft-card process-card rounded-[2rem] p-6 sm:p-7">
+              <div class="process-icon mb-6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h18"></path><rect x="3" y="6" width="18" height="12" rx="2"></rect></svg></div>
+              <h3 class="text-2xl font-extrabold tracking-[-.04em]">1. Хочешь зайти быстро</h3>
+              <ul class="process-list mt-5 space-y-4 text-base leading-8 text-white/60">
+                <li>Выбираешь "Самостоятельный".</li>
+                <li>Сразу оплачиваешь без анкеты и ожидания.</li>
+                <li>Получаешь доступ и начинаешь проходить программу.</li>
+              </ul>
+            </article>
+            <article class="soft-card process-card rounded-[2rem] p-6 sm:p-7">
+              <div class="process-icon mb-6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg></div>
+              <h3 class="text-2xl font-extrabold tracking-[-.04em]">2. Нужна поддержка или менторство</h3>
+              <ul class="process-list mt-5 space-y-4 text-base leading-8 text-white/60">
+                <li>Оставляешь заявку на старший формат.</li>
+                <li>Я смотрю твою ситуацию, цели и точку старта.</li>
+                <li>Если вижу, что формат тебе подходит, выходим на короткий созвон.</li>
+              </ul>
+            </article>
+            <article class="soft-card process-card rounded-[2rem] p-6 sm:p-7">
+              <div class="process-icon mb-6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3.5"></circle><circle cx="12" cy="12" r="1"></circle></svg></div>
+              <h3 class="text-2xl font-extrabold tracking-[-.04em]">3. После созвона фиксируем формат</h3>
+              <ul class="process-list mt-5 space-y-4 text-base leading-8 text-white/60">
+                <li>Выбираем подходящий уровень вовлечения.</li>
+                <li>Фиксируем место и только потом переходим к оплате.</li>
+                <li>Так ты не переплачиваешь за формат, который тебе не нужен.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+        <section id="advanced-form" class="warm-section section-reveal py-14 sm:py-24">
+          <div class="warm-panel mx-auto max-w-5xl rounded-[2.4rem] border border-orange-400/14 bg-[linear-gradient(180deg,rgba(255,122,26,.10),rgba(255,122,26,.04))] p-7 shadow-glow sm:p-10">
+            <div class="mx-auto max-w-3xl text-center">
+              <p class="inline-flex rounded-full border border-orange-400/25 bg-orange-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-[.34em] text-orange-200 sm:text-sm">Заявка на старшие форматы</p>
+              <h2 class="mt-6 text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">Продвинутый и менторство<br /><span class="accent-text">только после отбора</span></h2>
+              <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/70 sm:text-xl sm:leading-9">Если тебе нужен не просто доступ к урокам, а личное сопровождение, важно сначала понять, насколько формат тебе подходит и на чём мы реально можем тебя ускорить.</p>
+            </div>
+            <div class="mx-auto mt-10 grid max-w-5xl gap-5 md:grid-cols-2">
+              <article class="soft-card rounded-[2rem] p-6 sm:p-7">
+                <p class="text-xs font-extrabold uppercase tracking-[.26em] text-orange-300">Что проверяем</p>
+                <ul class="selection-list mt-5 space-y-4 text-base leading-8 text-white/62">
+                  <li>С какой точки ты заходишь: ноль, уже есть модель или уже есть продажи.</li>
+                  <li>Сколько времени готов вкладывать в запуск.</li>
+                  <li>Нужен тебе просто доступ к системе или реально требуется сопровождение.</li>
+                  <li>Подходит ли тебе продвинутый формат или лучше идти в самостоятельный.</li>
                 </ul>
-                <div class="mt-auto pt-10 sm:pt-12">
-                  <a href="#advanced-form" class="glow-button flex min-h-[84px] items-center justify-center rounded-[1.5rem] bg-orange-500 px-6 text-center text-2xl font-extrabold text-black shadow-glow">Подать заявку →</a>
-                </div>
-              </div>
-            </article>
-            <article class="soft-card flex h-full flex-col rounded-[2rem] p-6 sm:p-7">
-              <div class="mx-auto mb-6 inline-flex rounded-full bg-[#34313c] px-5 py-2 text-sm font-extrabold uppercase tracking-[.25em] text-white/90">Ограниченно</div>
-              <h3 class="text-4xl font-extrabold tracking-[-.05em]">Менторство</h3>
-              <div class="mt-5"><p class="text-7xl font-extrabold tracking-[-.07em]">$1,499</p><p class="mt-1 text-3xl text-white/40">≈ 119,000 ₽</p></div>
-              <ul class="feature-list mt-8 space-y-4 text-lg text-white/82">
-                <li>Всё из тарифа "Продвинутый"</li><li>Личная работа 1 на 1</li><li>Персональный план запуска модели</li><li>Созвоны раз в 2 дня по прогрессу</li><li>Проверка и корректировка контента</li><li>Помощь с настройкой аккаунтов</li><li>Работаем вместе до первого результата</li><li>Приоритетная поддержка 24/7</li><li>Гарантия успеха</li><li>Прямой доступ в личные сообщения</li>
-              </ul>
-              <div class="mt-auto pt-10 sm:pt-12">
-                <a href="https://t.me/m/1g3IeXGjOWQy" class="glow-button flex min-h-[76px] items-center justify-center rounded-[1.5rem] border border-orange-400/20 bg-orange-500/10 px-6 text-center text-xl font-extrabold text-orange-100">Обсудить формат</a>
-              </div>
-            </article>
-          </div>
-        </section>
-        <section class="section-reveal py-8 sm:py-12">
-          <div class="mx-auto max-w-4xl text-center">
-            <p class="mx-auto inline-flex rounded-full border border-white/12 bg-white/5 px-5 py-2 text-xs font-extrabold uppercase tracking-[.24em] text-white/70 sm:text-sm">Следующий этап</p>
-            <h2 class="mt-4 text-4xl font-extrabold tracking-[-.05em] text-white sm:text-6xl">Отбор на<br /><span class="accent-text">продвинутый формат</span></h2>
-            <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/56 sm:text-xl sm:leading-9">Переход на следующий уровень требует личного разбора. Ознакомься с условиями участия и оставь заявку на вступление</p>
-          </div>
-        </section>
-        <section id="advanced-form" class="section-reveal py-14 sm:py-24">
-          <div class="mx-auto max-w-4xl rounded-[2.2rem] border border-orange-400/20 bg-[#171717] p-7 shadow-glow sm:p-10">
-            <div class="mx-auto inline-flex rounded-full border border-orange-400/25 bg-orange-500/10 px-5 py-2 text-sm font-extrabold uppercase tracking-[.25em] text-orange-200">Отбор на продвинутый формат</div>
-            <div class="mx-auto mt-8 max-w-3xl text-center">
-              <h2 class="text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">Заявка на<br /><span class="accent-text">"Продвинутый"</span></h2>
-              <p class="mt-6 text-lg leading-9 text-white/62 sm:text-2xl">Чтобы сохранить качество поддержки, мы не берем всех. Процесс: анкета → решение → созвон → оплата. Мы можем отказать, если формат обучения вам не подходит.</p>
+              </article>
+              <article class="soft-card rounded-[2rem] p-6 sm:p-7">
+                <p class="text-xs font-extrabold uppercase tracking-[.26em] text-orange-300">Как это происходит</p>
+                <ul class="selection-list mt-5 space-y-4 text-base leading-8 text-white/62">
+                  <li>Заполняешь короткую анкету без лишней бюрократии.</li>
+                  <li>Я возвращаюсь с ответом и предложением по формату.</li>
+                  <li>Если идём дальше, созваниваемся и сверяем ожидания.</li>
+                  <li>После этого уже отправляю детали по оплате и старту.</li>
+                </ul>
+              </article>
             </div>
-            <div class="mx-auto mt-8 grid max-w-3xl gap-4 sm:grid-cols-2">
-              <div class="glass rounded-[1.6rem] p-5 transition duration-300 hover:border-orange-400/25 hover:shadow-glow"><div class="flex items-start gap-4"><span class="icon-badge mt-1"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></span><div><p class="text-lg font-extrabold text-white">Анкета за 2 минуты</p><p class="mt-2 text-sm leading-6 text-white/45">Короткая форма без лишних шагов.</p></div></div></div>
-              <div class="glass rounded-[1.6rem] p-5 transition duration-300 hover:border-orange-400/25 hover:shadow-glow"><div class="flex items-start gap-4"><span class="icon-badge mt-1"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></span><div><p class="text-lg font-extrabold text-white">Решение в течение часа</p><p class="mt-2 text-sm leading-6 text-white/45">Обычно возвращаемся с ответом быстро.</p></div></div></div>
-              <div class="glass rounded-[1.6rem] p-5 transition duration-300 hover:border-orange-400/25 hover:shadow-glow"><div class="flex items-start gap-4"><span class="icon-badge mt-1"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></span><div><p class="text-lg font-extrabold text-white">Короткий созвон-знакомство</p><p class="mt-2 text-sm leading-6 text-white/45">Сверяем ожидания и формат участия.</p></div></div></div>
-              <div class="glass rounded-[1.6rem] p-5 transition duration-300 hover:border-orange-400/25 hover:shadow-glow"><div class="flex items-start gap-4"><span class="icon-badge mt-1"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></span><div><p class="text-lg font-extrabold text-white">Разбор возможностей</p><p class="mt-2 text-sm leading-6 text-white/45">Понимаем, подходит ли формат именно вам.</p></div></div></div>
-            </div>
-            <ul class="selection-list mx-auto mt-8 max-w-2xl space-y-4 text-lg leading-8 text-[#b1b1b6]">
-              <li>Заполняете короткую анкету, чтобы мы увидели ваши цели и стартовую точку.</li>
-              <li>Возвращаемся с решением обычно в течение часа.</li>
-              <li>Если формат подходит, назначаем короткий созвон и подтверждаем участие.</li>
-              <li>После этого фиксируем место и отправляем детали по оплате.</li>
-            </ul>
-            <div class="mx-auto max-w-xl">
-              <a href="https://forms.gle/fzENGbVLnxN61Guh9" class="glow-button mx-auto mt-8 flex min-h-[84px] items-center justify-center rounded-[1.7rem] bg-orange-500 px-8 text-center text-2xl font-extrabold text-black shadow-glow">Заполнить анкету →</a>
-              <p class="mt-4 text-center text-sm text-white/40">Обычно отвечаем в течение часа</p>
+            <div class="mx-auto mt-10 max-w-xl">
+              <a href="https://forms.gle/fzENGbVLnxN61Guh9" class="btn-dark glow-button mx-auto flex min-h-[84px] items-center justify-center rounded-[1.7rem] bg-orange-500 px-8 text-center text-2xl font-extrabold text-black shadow-glow">Заполнить анкету</a>
+              <p class="mt-4 text-center text-sm text-white/48">Обычно отвечаю в течение часа, если заявка отправлена в рабочее время.</p>
             </div>
           </div>
         </section>
-        <section id="faq" class="section-reveal py-14 sm:py-24">
+        <section id="faq" class="dark-section section-reveal py-14 sm:py-24">
           <div class="mx-auto max-w-3xl text-center">
-            <h2 class="text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">Частые<br /><span class="accent-text">вопросы</span></h2>
-            <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/56 sm:text-xl sm:leading-9">Остались вопросы? У нас есть ответы</p>
+            <p class="inline-flex rounded-full border border-orange-400/25 bg-orange-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-[.34em] text-orange-200 sm:text-sm">FAQ</p>
+            <h2 class="mt-6 text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">Вопросы, которые реально<br /><span class="accent-text">мешают оплатить</span></h2>
+            <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/56 sm:text-xl sm:leading-9">Ниже собраны самые частые вопросы перед покупкой: по старту, выплатам, времени, формату участия и первым результатам.</p>
+          </div>
+          <div class="faq-note mx-auto mt-8 max-w-5xl rounded-[1.4rem] bg-white/5 px-5 py-4 text-sm leading-7 text-white/54 sm:px-6 sm:text-base">
+            Если у тебя остались сомнения по формату, стартовой точке или скорости результата, этот блок поможет быстро понять, подходит ли тебе обучение именно сейчас.
           </div>
           <div class="mx-auto mt-10 max-w-5xl space-y-4">
-            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Это легально?</span><span class="faq-icon flex items-center justify-center"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">Да. AI-модели — это цифровой продукт. Ты создаёшь уникальный образ с помощью нейросетей и монетизируешь контент. Это легальный онлайн-бизнес, который не нарушает законы.</div></article>
-            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Нужны ли технические знания и мощный компьютер?</span><span class="faq-icon flex items-center justify-center"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">Нет. Генерация и тренировка идут в облаке. Достаточно обычного телефона и браузера.</div></article>
-            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Сколько денег нужно на старт?</span><span class="faq-icon flex items-center justify-center"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">Минимальный старт около $15: базовые нейросети и личный VPN сервер. Рекламный бюджет на старте не обязателен.</div></article>
-            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Как получать выплаты, если я из СНГ?</span><span class="faq-icon flex items-center justify-center"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">В курсе подробно разобраны все способы: криптовалюта, иностранные карты, выплаты в рублях. Настройка занимает пару часов, всё показано пошагово.</div></article>
-            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Рынок не перегрет? Не поздно ли входить?</span><span class="faq-icon flex items-center justify-center"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">Платящая аудитория продолжает расти, а большинство конкурентов работают без стратегии и автоматизации. Хороший вход по-прежнему дает сильное преимущество.</div></article>
-            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Сколько времени нужно уделять в день?</span><span class="faq-icon flex items-center justify-center"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">На старте 2–4 часа в день, после настройки процессов и автоматизации обычно остается 30–60 минут на контроль.</div></article>
-            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Когда будут первые результаты?</span><span class="faq-icon flex items-center justify-center"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">Первых подписчиков можно получить уже в первую неделю. Первые продажи — в течение пары недель при активной работе. Некоторые ученики делают первую продажу уже на 5-7 день.</div></article>
+            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Я вообще с нуля. Этот формат мне подойдёт?</span><span class="faq-icon flex items-center justify-center"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">Да. Базовая программа выстроена так, чтобы ты не искал порядок действий сам. Если ты новичок, разумнее всего стартовать с самостоятельного тарифа или идти в продвинутый, если понимаешь, что тебе нужна обратная связь и ускорение.</div></article>
+            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Что мне нужно на старте по технике и бюджету?</span><span class="faq-icon flex items-center justify-center"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">Обычного телефона или ноутбука достаточно, потому что основной стек работает через облачные сервисы. На старте не нужен большой бюджет. Обычно хватает минимальных расходов на сервисы и инфраструктуру, чтобы начать тестировать модель и контент.</div></article>
+            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Почему продвинутый и менторство нельзя оплатить сразу?</span><span class="faq-icon flex items-center justify-center"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">Потому что сопровождение нельзя продавать как коробку. Мне важно понять твою точку старта, объём времени, задачи и ожидания. Иногда человеку реально хватает самостоятельного тарифа, и это честнее, чем сразу продавать более дорогой формат.</div></article>
+            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Когда обычно приходят первые результаты?</span><span class="faq-icon flex items-center justify-center"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">Зависит от стартовой точки и скорости внедрения. У кого-то первые продажи появляются в течение первой или второй недели, у кого-то путь длиннее. Главное не ждать магии, а пройти систему и реально внедрять шаги, а не только смотреть уроки.</div></article>
+            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Как получать выплаты, если я из СНГ?</span><span class="faq-icon flex items-center justify-center"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">Этот вопрос разбирается внутри программы отдельно. Рассматриваются рабочие варианты через крипту, иностранные карты и другие схемы получения выплат, чтобы не упираться в географию на старте.</div></article>
+            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Сколько времени нужно уделять каждый день?</span><span class="faq-icon flex items-center justify-center"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">На старте лучше закладывать 2–4 часа в день, чтобы пройти первые этапы без растягивания. Когда структура уже собрана и процессы настроены, времени на операционку обычно требуется меньше.</div></article>
+            <article class="question-card overflow-hidden rounded-[2rem] border border-white/8"><button class="faq-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false"><span class="pr-2 text-lg font-extrabold tracking-[-.035em] text-white sm:text-[1.9rem]">Что делать, если я не уверен, какой тариф мне подходит?</span><span class="faq-icon flex items-center justify-center"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></button><div class="faq-content hidden border-t border-white/10 px-5 pb-7 pt-2 text-[15px] leading-8 text-[#a8a8ad] sm:px-8 sm:text-lg sm:leading-9">Если хочешь просто начать и не ждать, бери самостоятельный. Если понимаешь, что тебе нужна поддержка, разборы и обратная связь, оставляй заявку на продвинутый или менторство. На созвоне уже станет ясно, какой формат тебе реально нужен.</div></article>
           </div>
         </section>
-        <section id="reviews" class="section-reveal py-14 sm:py-24">
+        <section id="reviews" class="light-section section-reveal py-14 sm:py-24">
           <div class="mx-auto max-w-3xl text-center">
-            <h2 class="text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">Отзывы<br /><span class="accent-text">участников</span></h2>
-            <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/60 sm:text-xl sm:leading-9">Результаты, которые говорят сами за себя</p>
+            <p class="inline-flex rounded-full border border-orange-400/25 bg-orange-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-[.34em] text-orange-200 sm:text-sm">Отзывы участников</p>
+            <h2 class="mt-6 text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">Реальные отзывы и<br /><span class="accent-text">живые сообщения</span></h2>
+            <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/60 sm:text-xl sm:leading-9">Здесь не обезличенные фразы, а настоящая обратная связь: первые результаты, рост метрик, впечатление от материала и ощущение ценности после прохождения.</p>
           </div>
-          <div class="mx-auto mt-10 grid max-w-6xl gap-5 md:grid-cols-2 xl:grid-cols-3">
-            <article class="soft-card review-card relative rounded-[2rem] p-7"><div class="quote-mark">“</div><div class="relative text-3xl text-orange-400">★★★★★</div><p class="review-text relative mt-6 text-[1.7rem] leading-[1.7] text-white/94">"Вообще начинал пробовать еще до покупки курса, собирал инфу по кускам. Здесь все максимально детально, и это сразу дало результат."</p><p class="mt-auto pt-8 text-xs font-semibold uppercase tracking-[.18em] text-white/30">Ученик курса • результат за 3 дня</p></article>
-            <article class="soft-card review-card relative rounded-[2rem] p-7"><div class="quote-mark">“</div><div class="relative text-3xl text-orange-400">★★★★★</div><p class="review-text relative mt-6 text-[1.7rem] leading-[1.7] text-white/94">"Это лучшее обучение, которое я покупал за последнее время. Столько информации, поэтапно, структурировано и понятно — просто невозможно что-то не понять. Дошёл до 4-го дня включительно, всё понятно. Очень благодарен!"</p><p class="mt-auto pt-8 text-xs font-semibold uppercase tracking-[.18em] text-white/30">Ученик курса • Тариф Продвинутый</p></article>
-            <article class="soft-card review-card relative rounded-[2rem] p-7"><div class="quote-mark">“</div><div class="relative text-3xl text-orange-400">★★★★★</div><p class="review-text relative mt-6 text-[1.7rem] leading-[1.7] text-white/94">"Хотел глубже разобраться в нейронках, прошёл уже большую часть и впечатлён объёмом материала! За такую цен�� честно не ожидал получить настолько детальный разбор. Всё разложено по полочкам, каждый день новый блок информации."</p><p class="mt-auto pt-8 text-xs font-semibold uppercase tracking-[.18em] text-white/30">Ученик • старт с нуля</p></article>
-            <article class="soft-card review-card relative rounded-[2rem] p-7"><div class="quote-mark">“</div><div class="relative text-3xl text-orange-400">★★★★★</div><p class="review-text relative mt-6 text-[1.7rem] leading-[1.7] text-white/94">"Взял обучение в самом начале, прошёл 7 дней обучения — уже продал первую подписку. Особенно зацепило то, что в обучении не просто теория, а каждый шаг разжёван. У меня вообще не было опыта с нейронками, но благодаря такой подаче научился с ними работать."</p><p class="mt-auto pt-8 text-xs font-semibold uppercase tracking-[.18em] text-white/30">Ученик курса • Первая продажа за 7 дней</p></article>
-            <article class="soft-card review-card relative rounded-[2rem] p-7"><div class="quote-mark">“</div><div class="relative text-3xl text-orange-400">★★★★★</div><p class="review-text relative mt-6 text-[1.7rem] leading-[1.7] text-white/94">"Брал платный курс по ИИ моделям — не пожалел от слова совсем. Продвинутый формат реально ускоряет. Всё настолько подробно расписано, что справится даже ребёнок. Рекомендую 100%"</p><p class="mt-auto pt-8 text-xs font-semibold uppercase tracking-[.18em] text-white/30">Ученик курса</p></article>
-            <article class="soft-card review-card relative rounded-[2rem] p-7"><div class="quote-mark">“</div><div class="relative text-3xl text-orange-400">★★★★★</div><p class="review-text relative mt-6 text-[1.7rem] leading-[1.7] text-white/94">"В целом всё очень понравилось, удивился такой поддержке на всех этапах и быстрыми, подробными ответами в личке. Самая сильная часть для меня была в автоматизации. Когда видишь, как это начинает работать почти без тебя, совсем иначе воспринимаешь данную нишу)."</p><p class="mt-auto pt-8 text-xs font-semibold uppercase tracking-[.18em] text-white/30">Участник • автоматизация</p></article>
+          <div class="mx-auto mt-10 grid max-w-6xl gap-5 xl:grid-cols-3">
+            <article class="soft-card review-card rounded-[2rem] p-6 sm:p-7">
+              <div class="review-photo rounded-[1.4rem]"><img src="review1.jpg" alt="Отзыв 1" /></div>
+              <div class="review-shell">
+                <p class="review-kicker text-xs font-extrabold uppercase tracking-[.26em] text-orange-300">Первые деньги за неделю</p>
+                <p class="review-quote">«С начала апреля пока что примерно 500$ вышло, это за неделю.»</p>
+                <p class="review-context">Живой апдейт от ученика: первые деньги уже пришли, и это видно прямо в переписке.</p>
+              </div>
+            </article>
+            <article class="soft-card review-card rounded-[2rem] p-6 sm:p-7">
+              <div class="review-photo rounded-[1.4rem]"><img src="review2.jpg" alt="Отзыв 2" /></div>
+              <div class="review-shell">
+                <p class="review-kicker text-xs font-extrabold uppercase tracking-[.26em] text-orange-300">Рост Threads почти до 500k</p>
+                <p class="review-quote">«Есть небольшие, но результаты.»</p>
+                <p class="review-context">Почти 478 тысяч просмотров за 30 дней. Уже видно, что контент начинает реально разгоняться.</p>
+              </div>
+            </article>
+            <article class="soft-card review-card rounded-[2rem] p-6 sm:p-7">
+              <div class="review-photo rounded-[1.4rem]"><img src="review3.jpg" alt="Отзыв 3" /></div>
+              <div class="review-shell">
+                <p class="review-kicker text-xs font-extrabold uppercase tracking-[.26em] text-orange-300">Ощущение ценности обучения</p>
+                <p class="review-quote">«За такой объём работы цену можно ставить выше.»</p>
+                <p class="review-context">Тут важен сам сигнал: человек чувствует ценность материала и пишет об этом без лишних просьб.</p>
+              </div>
+            </article>
           </div>
         </section>
-        <section class="section-reveal py-14 sm:py-24">
-          <div class="mx-auto max-w-5xl rounded-[2.4rem] border border-orange-400/20 bg-[linear-gradient(180deg,rgba(255,122,26,.12),rgba(255,122,26,.05))] p-7 shadow-glow sm:p-10">
+        <section class="warm-cta-section section-reveal py-14 sm:py-24">
+          <div class="cta-panel mx-auto max-w-5xl rounded-[2.4rem] border border-orange-400/20 bg-[linear-gradient(180deg,rgba(255,122,26,.12),rgba(255,122,26,.05))] p-7 shadow-glow sm:p-10">
             <div class="mx-auto max-w-3xl text-center">
-              <h2 class="text-4xl font-extrabold tracking-[-.05em] sm:text-6xl"><span class="text-white">Готов</span> <span class="accent-text">Начать?</span></h2>
-              <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/70 sm:text-xl sm:leading-9">Выбирай удобный формат и заходи в обучение. Если нужно быстро уточнить детали, можно сразу написать в Telegram.</p>
+              <h2 class="text-4xl font-extrabold tracking-[-.05em] sm:text-6xl"><span class="text-white">Готов</span> <span class="accent-text">зайти в обучение?</span></h2>
+              <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/70 sm:text-xl sm:leading-9">Если хочешь стартовать без ожидания, бери самостоятельный тариф. Если нужен формат с личным участием и обратной связью, оставляй заявку на старший уровень и созваниваемся.</p>
             </div>
             <div class="mx-auto mt-8 grid max-w-2xl gap-4">
-              <a href="#pricing" class="glow-button flex min-h-[82px] items-center justify-center rounded-[1.7rem] bg-orange-500 px-6 text-center text-2xl font-extrabold text-black shadow-glow">Выбрать тариф</a>
-              <a href="https://t.me/preludik" class="glow-button flex min-h-[72px] items-center justify-center rounded-[1.6rem] border border-white/10 bg-[#121212] px-6 text-center text-xl font-extrabold text-white">Связаться в TG</a>
+              <a href="#pricing" class="btn-dark glow-button flex min-h-[82px] items-center justify-center rounded-[1.7rem] bg-orange-500 px-6 text-center text-2xl font-extrabold text-black shadow-glow">Выбрать тариф</a>
+              <div class="cta-secondary-grid">
+                <a href="#reviews" class="cta-btn-reviews">Смотреть отзывы</a>
+                <a href="https://t.me/preludik" class="cta-btn-telegram">Написать в Telegram</a>
+              </div>
             </div>
           </div>
         </section>
       </main>
-      <footer id="footer-contact" class="section-reveal border-t border-white/8 py-10 sm:py-14">
-        <div class="mx-auto flex max-w-6xl flex-col gap-8 rounded-[2rem] bg-[#121212] px-6 py-8 sm:px-8 lg:flex-row lg:items-center lg:justify-between">
-          <div>
-            <p class="text-2xl font-extrabold tracking-[-.04em] text-white sm:text-3xl">VADYA <span class="text-orange-400">OFM</span> CLUB</p>
-            <p class="mt-3 text-sm text-white/38 sm:text-base">Пошаговая система запуска и монетизации AI-моделей.</p>
+      <footer id="footer-contact" class="dark-footer section-reveal border-t border-white/8 py-10 sm:py-14">
+        <div class="footer-panel footer-shell mx-auto max-w-6xl rounded-[2rem] bg-[#121212] px-6 py-8 sm:px-8">
+          <div class="footer-top">
+            <div class="footer-brand">
+              <p class="text-2xl font-extrabold tracking-[-.04em] text-white sm:text-3xl">VADYA <span class="text-orange-400">OFM</span> CLUB</p>
+              <p class="mt-3 text-sm text-white/38 sm:text-base">Пошаговая система запуска и монетизации AI-моделей.</p>
+            </div>
+            <div class="footer-nav text-sm font-semibold sm:text-base">
+              <a href="#top" class="footer-link">О курсе</a>
+              <a href="#program" class="footer-link">Программа</a>
+              <a href="#pricing" class="footer-link">Тарифы</a>
+              <a href="#faq" class="footer-link">FAQ</a>
+              <a href="#reviews" class="footer-link">Отзывы</a>
+            </div>
+            <div class="footer-social">
+              <a href="https://t.me/preludik" class="footer-icon-link" aria-label="Telegram">
+                <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 4L3.8 10.82c-.78.31-.75 1.43.05 1.69l4.38 1.44 1.69 5.12c.23.72 1.15.86 1.58.25l2.43-3.4 4.77 3.52c.58.43 1.41.12 1.57-.58L21 4z"></path>
+                  <path d="M8.23 13.95L17.84 6.63"></path>
+                </svg>
+              </a>
+            </div>
           </div>
-          <div class="flex flex-wrap gap-5 text-sm font-semibold uppercase tracking-[.16em] sm:text-base">
-            <a href="#top" class="footer-link">О курсе</a>
-            <a href="#program" class="footer-link">Программа</a>
-            <a href="#pricing" class="footer-link">Тарифы</a>
-            <a href="#footer-contact" class="footer-link">Контакты</a>
+          <div class="footer-bottom">
+            <span>© 2026 VADYA OFM CLUB. Все права защищены.</span>
+            <span class="footer-bottom-note">Пошаговая система запуска и монетизации AI-моделей.</span>
           </div>
         </div>
       </footer>
+      <div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Уведомление о файлах cookie">
+        <p class="cookie-banner__title">Наш сайт использует куки.</p>
+        <p class="cookie-banner__text">
+          Продолжая им пользоваться, вы соглашаетесь на обработку персональных данных в соответствии с
+          <span class="cookie-banner__link">политикой конфиденциальности.</span>
+        </p>
+        <div class="cookie-banner__actions">
+          <button id="cookie-banner-accept" type="button" class="cookie-banner__button">Согласен</button>
+        </div>
+      </div>
     </div>
   </div>
   <script>
+    function setAccordionContentState(content, isOpen) {
+      content.style.overflow = "hidden";
+      content.style.transition = "height .38s cubic-bezier(.22,1,.36,1), opacity .26s ease";
+      if (isOpen) {
+        content.classList.remove("hidden");
+        content.style.height = "auto";
+        content.style.opacity = "1";
+        return;
+      }
+      content.classList.add("hidden");
+      content.style.height = "0px";
+      content.style.opacity = "0";
+    }
+    function openAccordionContent(content) {
+      content.classList.remove("hidden");
+      content.style.overflow = "hidden";
+      content.style.transition = "height .38s cubic-bezier(.22,1,.36,1), opacity .26s ease";
+      content.style.height = "0px";
+      content.style.opacity = "0";
+      requestAnimationFrame(() => {
+        content.style.height = `${content.scrollHeight}px`;
+        content.style.opacity = "1";
+      });
+      const onEnd = (event) => {
+        if (event.propertyName !== "height") return;
+        content.style.height = "auto";
+        content.removeEventListener("transitionend", onEnd);
+      };
+      content.addEventListener("transitionend", onEnd);
+    }
+    function closeAccordionContent(content) {
+      const currentHeight = content.scrollHeight;
+      content.style.overflow = "hidden";
+      content.style.transition = "height .34s cubic-bezier(.4,0,.2,1), opacity .2s ease";
+      content.style.height = `${currentHeight}px`;
+      content.style.opacity = "1";
+      content.offsetHeight;
+      requestAnimationFrame(() => {
+        content.style.height = "0px";
+        content.style.opacity = "0";
+      });
+      const onEnd = (event) => {
+        if (event.propertyName !== "height") return;
+        content.classList.add("hidden");
+        content.removeEventListener("transitionend", onEnd);
+      };
+      content.addEventListener("transitionend", onEnd);
+    }
     function setupAccordion(buttonSelector, iconSelector) {
       const buttons = document.querySelectorAll(buttonSelector);
       buttons.forEach((button) => {
+        const content = button.nextElementSibling;
+        setAccordionContentState(content, false);
         button.addEventListener("click", () => {
-          const content = button.nextElementSibling;
           const icon = button.querySelector(iconSelector);
           const isOpen = button.getAttribute("aria-expanded") === "true";
+          const openContentsToClose = [];
           buttons.forEach((otherButton) => {
             const otherContent = otherButton.nextElementSibling;
             const otherIcon = otherButton.querySelector(iconSelector);
+            if (otherButton === button) return;
             otherButton.setAttribute("aria-expanded", "false");
-            otherContent.classList.add("hidden");
             otherIcon.style.transform = "rotate(0deg)";
+            if (!otherContent.classList.contains("hidden")) {
+              openContentsToClose.push(otherContent);
+            }
           });
-          if (!isOpen) {
-            button.setAttribute("aria-expanded", "true");
-            content.classList.remove("hidden");
-            icon.style.transform = "rotate(180deg)";
+          if (isOpen) {
+            button.setAttribute("aria-expanded", "false");
+            icon.style.transform = "rotate(0deg)";
+            closeAccordionContent(content);
+            return;
           }
+          const openNewContent = () => {
+            button.setAttribute("aria-expanded", "true");
+            icon.style.transform = "rotate(180deg)";
+            openAccordionContent(content);
+          };
+          if (openContentsToClose.length) {
+            let remaining = openContentsToClose.length;
+            const handleClosed = () => {
+              remaining -= 1;
+              if (remaining === 0) {
+                openNewContent();
+              }
+            };
+            openContentsToClose.forEach((otherContent) => {
+              const onEnd = (event) => {
+                if (event.propertyName !== "height") return;
+                otherContent.removeEventListener("transitionend", onEnd);
+                handleClosed();
+              };
+              otherContent.addEventListener("transitionend", onEnd);
+              closeAccordionContent(otherContent);
+            });
+            return;
+          }
+          openNewContent();
         });
       });
     }
@@ -649,12 +2479,74 @@
     }
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add("is-visible");
+        entry.target.classList.toggle("is-visible", entry.isIntersecting);
       });
     }, { threshold: 0.12 });
     document.querySelectorAll(".section-reveal").forEach((section) => observer.observe(section));
+ 
+    const cookieBanner = document.getElementById("cookie-banner");
+    const cookieBannerAccept = document.getElementById("cookie-banner-accept");
+    const cookieConsentKey = "vadya_ofm_cookie_consent_v1";
+    if (cookieBanner && !localStorage.getItem(cookieConsentKey)) {
+      requestAnimationFrame(() => cookieBanner.classList.add("is-visible"));
+    }
+    if (cookieBannerAccept && cookieBanner) {
+      cookieBannerAccept.addEventListener("click", () => {
+        localStorage.setItem(cookieConsentKey, "accepted");
+        cookieBanner.classList.remove("is-visible");
+      });
+    }
+  
+    const modal = document.getElementById("image-modal");
+    const modalImg = document.getElementById("image-modal-img");
+    const modalClose = document.getElementById("image-modal-close");
+    const modalInner = document.querySelector(".image-modal__inner");
+    const zoomableImages = document.querySelectorAll(".proof-shot img, .case-photo img, .review-photo img");
+
+    function closeImageModal() {
+      if (!modal || !modalImg) return;
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      modalImg.src = "";
+      modalImg.alt = "";
+      document.body.style.overflow = "";
+    }
+
+    function openImageModal(src, alt) {
+      if (!modal || !modalImg) return;
+      modalImg.src = src;
+      modalImg.alt = alt || "";
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    zoomableImages.forEach((img) => {
+      img.addEventListener("click", () => openImageModal(img.src, img.alt));
+    });
+
+    if (modalClose) modalClose.addEventListener("click", closeImageModal);
+    if (modal) {
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) closeImageModal();
+      });
+    }
+    if (modalInner) {
+      modalInner.addEventListener("click", (event) => {
+        if (event.target !== modalImg && event.target !== modalClose) {
+          closeImageModal();
+        }
+      });
+    }
+    if (modalImg) {
+      modalImg.addEventListener("click", (event) => event.stopPropagation());
+    }
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeImageModal();
+    });
   </script>
 </body>
 </html>
+
 
 
