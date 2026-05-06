@@ -213,27 +213,42 @@
     }
     .review-card .review-kicker {
       margin-top: 0;
-      margin-bottom: .95rem;
+      margin-bottom: .7rem;
     }
     .review-quote {
       min-height: 0;
-      font-size: 1.02rem !important;
-      line-height: 1.62 !important;
-      color: #4a3b31 !important;
-      max-width: 18ch;
+      font-size: 1.16rem !important;
+      line-height: 1.48 !important;
+      color: #2f241d !important;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      max-width: 24ch;
     }
     .review-context {
       margin-top: 1rem;
-      font-size: .96rem !important;
-      line-height: 1.78 !important;
-      color: rgba(110,98,88,.92) !important;
-      max-width: 31ch;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(102, 74, 49, .12);
+      font-size: .95rem !important;
+      line-height: 1.72 !important;
+      color: rgba(94,77,64,.96) !important;
+      max-width: 34ch;
     }
     .review-card .review-shell {
       display: flex;
       flex-direction: column;
       gap: 0;
       flex: 1 1 auto;
+    }
+    .review-note {
+      margin-top: .7rem;
+      font-size: .9rem;
+      line-height: 1.68;
+      color: rgba(124,93,67,.96);
+      max-width: 34ch;
+    }
+    .review-note strong {
+      color: #5e3f27;
+      font-weight: 700;
     }
     .pricing-card {
       position: relative;
@@ -260,6 +275,25 @@
     .pricing-card__cta {
       margin-top: auto;
       padding-top: 2rem;
+    }
+    .pricing-upgrade-note {
+      margin-top: 1.35rem;
+      padding: .95rem 1rem;
+      border-radius: 1.15rem;
+      border: 1px solid rgba(88, 64, 43, .10);
+      background: rgba(255,255,255,.54);
+      color: rgba(73, 57, 45, .82);
+      font-size: .93rem;
+      line-height: 1.6;
+    }
+    .pricing-upgrade-note strong {
+      color: #b56227;
+      font-weight: 800;
+    }
+    .pricing-featured .pricing-upgrade-note {
+      background: rgba(255,248,241,.72);
+      border-color: rgba(229,125,47,.18);
+      color: rgba(31, 19, 13, .80);
     }
     .result-icon {
       display: inline-flex;
@@ -331,61 +365,62 @@
       aspect-ratio: 4 / 3;
       overflow: hidden;
       background:
-        linear-gradient(180deg, rgba(255,255,255,.96), rgba(247,243,238,.96));
-      border: 1px solid rgba(24, 20, 18, .10);
-      padding: 18px;
+        radial-gradient(circle at 15% 18%, rgba(231,123,63,.34) 0 12%, transparent 12.5%),
+        radial-gradient(circle at 84% 18%, rgba(33,30,28,.24) 0 10%, transparent 10.5%),
+        radial-gradient(circle at 84% 82%, rgba(214,170,112,.32) 0 14%, transparent 14.5%),
+        linear-gradient(140deg, rgba(251,240,227,.98), rgba(241,228,212,.98));
+      border: 1px solid rgba(63, 47, 35, .12);
+      padding: 22px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.8);
+      box-shadow: 0 16px 30px rgba(74, 53, 35, .08), inset 0 0 0 1px rgba(255,255,255,.72);
     }
     .review-photo {
       position: relative;
       aspect-ratio: 4 / 3;
       overflow: hidden;
-      padding: 18px;
+      padding: 22px;
       background:
-        linear-gradient(180deg, rgba(255,255,255,.96), rgba(247,243,238,.96));
-      border: 1px solid rgba(24, 20, 18, .10);
+        radial-gradient(circle at 18% 84%, rgba(33,30,28,.18) 0 10%, transparent 10.5%),
+        radial-gradient(circle at 82% 20%, rgba(231,123,63,.30) 0 12%, transparent 12.5%),
+        radial-gradient(circle at 30% 18%, rgba(214,170,112,.26) 0 16%, transparent 16.5%),
+        linear-gradient(155deg, rgba(252,243,232,.98), rgba(241,228,212,.98));
+      border: 1px solid rgba(63, 47, 35, .12);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.8);
+      box-shadow: 0 16px 30px rgba(74, 53, 35, .08), inset 0 0 0 1px rgba(255,255,255,.72);
     }
     .case-photo::before,
     .review-photo::before {
       content: "";
       position: absolute;
-      inset: 10px;
-      border-radius: 1.15rem;
-      border: 1px solid rgba(18, 18, 18, .08);
+      inset: 8px;
+      border-radius: 1.25rem;
+      background:
+        linear-gradient(115deg, rgba(255,255,255,.68), rgba(255,255,255,0) 45%),
+        radial-gradient(circle at 12% 88%, rgba(255,255,255,.5) 0 9%, transparent 9.5%),
+        radial-gradient(circle at 88% 12%, rgba(33,30,28,.08) 0 8%, transparent 8.5%);
       pointer-events: none;
+      z-index: 0;
     }
     .case-photo::after,
     .review-photo::after {
       content: "";
       position: absolute;
-      inset: 10px;
-      border-radius: 1.15rem;
+      inset: 8px;
+      border-radius: 1.25rem;
       pointer-events: none;
       background:
-        linear-gradient(#11100f, #11100f) left 4px top 4px / 30px 1px no-repeat,
-        linear-gradient(#11100f, #11100f) left 4px top 4px / 1px 30px no-repeat,
-        linear-gradient(#11100f, #11100f) right 4px top 4px / 30px 1px no-repeat,
-        linear-gradient(#11100f, #11100f) right 4px top 4px / 1px 30px no-repeat,
-        linear-gradient(#11100f, #11100f) left 4px bottom 4px / 30px 1px no-repeat,
-        linear-gradient(#11100f, #11100f) left 4px bottom 4px / 1px 30px no-repeat,
-        linear-gradient(#11100f, #11100f) right 4px bottom 4px / 30px 1px no-repeat,
-        linear-gradient(#11100f, #11100f) right 4px bottom 4px / 1px 30px no-repeat,
-        linear-gradient(90deg, rgba(17,16,15,.0), rgba(17,16,15,.58), rgba(255,255,255,.92), rgba(17,16,15,.58), rgba(17,16,15,.0)) center top 16px / 84px 1px no-repeat,
-        linear-gradient(90deg, rgba(17,16,15,.0), rgba(17,16,15,.58), rgba(255,255,255,.92), rgba(17,16,15,.58), rgba(17,16,15,.0)) center bottom 16px / 84px 1px no-repeat,
-        linear-gradient(180deg, rgba(17,16,15,.0), rgba(17,16,15,.58), rgba(255,255,255,.92), rgba(17,16,15,.58), rgba(17,16,15,.0)) left 16px center / 1px 84px no-repeat,
-        linear-gradient(180deg, rgba(17,16,15,.0), rgba(17,16,15,.58), rgba(255,255,255,.92), rgba(17,16,15,.58), rgba(17,16,15,.0)) right 16px center / 1px 84px no-repeat,
-        radial-gradient(circle at 16px 16px, rgba(255,255,255,.95) 0 2px, transparent 2.5px),
-        radial-gradient(circle at calc(100% - 16px) 16px, rgba(255,255,255,.95) 0 2px, transparent 2.5px),
-        radial-gradient(circle at 16px calc(100% - 16px), rgba(255,255,255,.95) 0 2px, transparent 2.5px),
-        radial-gradient(circle at calc(100% - 16px) calc(100% - 16px), rgba(255,255,255,.95) 0 2px, transparent 2.5px);
-      opacity: .76;
+        linear-gradient(90deg, rgba(17,16,15,.78), rgba(17,16,15,.78)) left 16px top 18px / 52px 2px no-repeat,
+        linear-gradient(90deg, rgba(231,123,63,.9), rgba(231,123,63,.9)) left 16px top 26px / 26px 4px no-repeat,
+        linear-gradient(90deg, rgba(17,16,15,.58), rgba(17,16,15,.58)) right 16px bottom 18px / 46px 2px no-repeat,
+        linear-gradient(90deg, rgba(214,170,112,.92), rgba(214,170,112,.92)) right 16px bottom 26px / 20px 4px no-repeat,
+        linear-gradient(180deg, rgba(17,16,15,.24), rgba(17,16,15,.24)) right 22px top 18px / 2px 48px no-repeat,
+        linear-gradient(180deg, rgba(231,123,63,.24), rgba(231,123,63,.24)) left 22px bottom 18px / 2px 48px no-repeat;
+      opacity: .95;
+      z-index: 1;
     }
     .review-photo img,
     .proof-shot img,
@@ -394,7 +429,9 @@
       height: 100%;
       display: block;
       border-radius: 1rem;
-      background: transparent;
+      position: relative;
+      z-index: 2;
+      background: rgba(255,255,255,.2);
       cursor: zoom-in;
       object-fit: contain;
       object-position: center;
@@ -1193,55 +1230,163 @@
       box-shadow: var(--shadow-dark);
     }
     .light-section .module-card h3,
-    .light-section .module-card .accordion-toggle span,
-    .light-section .module-card .accordion-content,
-    .light-section .module-card [class~="text-white"],
-    .light-section .module-card [class*="text-white/"] {
-      color: #f7efe4 !important;
+    .light-section .module-card .accordion-toggle .text-white,
+    .light-section .module-card .accordion-toggle [class*="text-white/"] {
+      color: var(--text-main) !important;
     }
-    .light-section .module-card .module-list li,
-    .light-section .module-card .accordion-content {
-      color: rgba(247,239,228,.72) !important;
+    .light-section .module-card .accordion-content,
+    .light-section .module-card .module-list li {
+      color: rgba(73, 57, 45, .82) !important;
+    }
+    .program-rail {
+      position: relative;
+    }
+    .program-phases {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .program-phase-card {
+      position: relative;
+      min-height: 100%;
+      padding: 1.5rem 1.45rem 1.4rem;
+      border-radius: 1.5rem;
+      background: linear-gradient(180deg, rgba(31,25,21,.98), rgba(20,16,13,.98));
+      border: 1px solid rgba(255, 243, 228, .08);
+      box-shadow: 0 18px 34px rgba(24, 18, 14, .16);
+      overflow: hidden;
+    }
+    .program-phase-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(229,125,47,.18), transparent 34%),
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,0) 46%);
+      pointer-events: none;
+    }
+    .program-phase-top {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .program-phase-label {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2rem;
+      padding: 0 .7rem;
+      border-radius: 999px;
+      background: rgba(229,125,47,.14);
+      border: 1px solid rgba(229,125,47,.18);
+      color: #f1a76b;
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    .program-phase-index {
+      color: rgba(255,255,255,.12);
+      font-size: 2.5rem;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -.05em;
+    }
+    .program-phase-card h3 {
+      position: relative;
+      z-index: 1;
+      margin: 1.15rem 0 0;
+      color: #fff4e8 !important;
+      font-size: 1.45rem;
+      line-height: 1.1;
+      letter-spacing: -.04em;
+    }
+    .program-phase-card p {
+      position: relative;
+      z-index: 1;
+      margin: .9rem 0 0;
+      color: rgba(247, 239, 228, .70) !important;
+      font-size: .98rem;
+      line-height: 1.65;
+    }
+    .program-overview-divider {
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      margin: 2rem auto 0;
+      max-width: 72rem;
+      color: rgba(110,98,88,.72);
+      font-size: .82rem;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    .program-overview-divider::before,
+    .program-overview-divider::after {
+      content: "";
+      height: 1px;
+      flex: 1 1 auto;
+      background: linear-gradient(90deg, rgba(88,64,43,0), rgba(88,64,43,.14), rgba(88,64,43,0));
+    }
+    .program-rail::before {
+      content: "";
+      position: absolute;
+      left: 1.35rem;
+      top: .85rem;
+      bottom: .85rem;
+      width: 2px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(229,125,47,.22), rgba(229,125,47,.06));
+      pointer-events: none;
     }
     .module-card {
-      overflow: hidden;
-      border-radius: 2rem;
+      position: relative;
+      overflow: visible;
+      border-radius: 1.75rem;
+      background: #fffaf4;
+      border: 1px solid rgba(88, 64, 43, .10);
+      box-shadow: 0 18px 36px rgba(59, 42, 29, .06);
+    }
+    .module-card::before {
+      content: "";
+      position: absolute;
+      left: -.1rem;
+      top: 2rem;
+      width: .9rem;
+      height: .9rem;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #f0a05d 0%, #db7325 100%);
+      box-shadow: 0 0 0 6px rgba(229, 125, 47, .10);
+      z-index: 2;
     }
     .module-card .accordion-toggle {
       position: relative;
-      min-height: 7.8rem;
-      padding-top: 1.7rem;
-      padding-bottom: 1.7rem;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.015), rgba(255,255,255,0)),
-        linear-gradient(180deg, rgba(21,18,16,.98), rgba(18,15,13,.98));
+      min-height: 0;
+      padding: 1.5rem 1.55rem 1.35rem 2rem;
+      align-items: flex-start;
+      background: transparent;
+      transition: background-color .24s ease;
     }
-    .module-card .accordion-toggle::before {
-      content: "";
-      position: absolute;
-      left: 2rem;
-      right: 7rem;
-      top: 1.7rem;
-      height: 1rem;
-      border-radius: .2rem;
-      background: linear-gradient(90deg, rgba(111,77,52,.42), rgba(111,77,52,.12));
-      pointer-events: none;
+    .module-card .accordion-toggle:hover {
+      background: rgba(255, 247, 238, .72);
     }
     .module-card .accordion-toggle .min-w-0 {
       position: relative;
       z-index: 1;
+      display: grid;
+      gap: .8rem;
     }
     .module-number-bg {
       position: absolute;
-      right: 6.2rem;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: clamp(4.4rem, 8vw, 6.8rem);
+      right: 5.6rem;
+      top: 1.15rem;
+      font-size: clamp(3rem, 5.5vw, 4.6rem);
       line-height: 1;
       font-weight: 800;
       letter-spacing: -.08em;
-      color: #ffffff;
-      opacity: .04;
+      color: rgba(88, 64, 43, .07) !important;
       pointer-events: none;
       z-index: 0;
       user-select: none;
@@ -1249,12 +1394,15 @@
     .module-card .accordion-toggle .module-kicker {
       display: inline-flex;
       align-items: center;
-      padding: .14rem .3rem .14rem 0;
-      font-size: .78rem;
-      letter-spacing: .22em;
-      color: #f08a3c !important;
-      text-shadow: none;
-      background: transparent !important;
+      width: fit-content;
+      min-height: 1.9rem;
+      padding: 0 .72rem;
+      border-radius: 999px;
+      border: 1px solid rgba(229, 125, 47, .16);
+      background: rgba(229, 125, 47, .06) !important;
+      font-size: .73rem;
+      letter-spacing: .20em;
+      color: #b56227 !important;
       position: relative;
       z-index: 2;
       opacity: 1 !important;
@@ -1262,37 +1410,105 @@
     .module-card .accordion-toggle .min-w-0 > span:last-child,
     .module-card .accordion-toggle .text-white,
     .module-card .accordion-toggle [class*="text-white"] {
-      margin-top: .95rem !important;
       display: block;
-      font-size: clamp(1.7rem, 2.2vw, 2.55rem);
-      line-height: 1.02;
-      letter-spacing: -.045em;
-      color: #fff3e4 !important;
+      margin-top: 0 !important;
+      padding-right: 1rem;
+      font-size: clamp(1.34rem, 1.7vw, 1.95rem);
+      line-height: 1.14;
+      letter-spacing: -.04em;
+      color: #231b17 !important;
       text-wrap: balance;
     }
-    .module-card .accordion-icon {
-      width: 2.8rem;
-      height: 2.8rem;
+    .module-preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .55rem;
+      position: relative;
+      z-index: 1;
+    }
+    .module-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2rem;
+      padding: 0 .82rem;
       border-radius: 999px;
-      border: 1px solid rgba(255,243,228,.08);
-      background: rgba(255,255,255,.02);
-      color: #ffb26f;
+      background: #fffdf9 !important;
+      border: 1px solid rgba(88, 64, 43, .10);
+      color: rgba(73, 57, 45, .84) !important;
+      font-size: .84rem;
+      line-height: 1.2;
+      box-shadow: none;
+    }
+    .module-summary {
+      display: block;
+      position: relative;
+      z-index: 1;
+      max-width: 44rem;
+      color: rgba(45, 34, 27, .92) !important;
+      font-size: 1.02rem;
+      line-height: 1.45;
+      font-weight: 500;
+    }
+    .module-card .accordion-icon {
+      position: relative;
+      z-index: 1;
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(88, 64, 43, .12);
+      background: #fffdf9;
+      color: #b56227;
+      box-shadow: none;
+      margin-top: .15rem;
     }
     .module-card .accordion-content {
-      background: linear-gradient(180deg, rgba(24,20,18,.98), rgba(18,15,13,.98));
-      color: rgba(247,239,228,.74) !important;
+      background: #fff8f1;
+      color: rgba(73, 57, 45, .86) !important;
+      border-top: 1px solid rgba(88, 64, 43, .10) !important;
+      padding-top: 0 !important;
+    }
+    .module-grid {
+      display: grid;
+      gap: 1.2rem;
+      grid-template-columns: minmax(0, 1.7fr) minmax(15rem, .9fr);
+      padding-top: 1rem;
     }
     .module-card .module-list li {
-      padding-left: 1.45rem;
-      color: rgba(247,239,228,.76) !important;
+      padding-left: 1.2rem;
+      color: rgba(50, 39, 31, .92) !important;
+      font-size: .98rem;
+      line-height: 1.65;
     }
     .module-card .module-list li::before {
-      width: .38rem;
-      height: .38rem;
-      top: .92rem;
+      width: .42rem;
+      height: .42rem;
+      top: .68rem;
       left: 0;
-      background: rgba(255,255,255,.26);
+      background: #d9772e;
       box-shadow: none;
+    }
+    .module-notes {
+      align-self: start;
+      padding: 1rem 1.05rem;
+      border-radius: 1.15rem;
+      background: #fffdf9;
+      border: 1px solid rgba(88, 64, 43, .08);
+      box-shadow: none;
+    }
+    .module-notes-label {
+      display: block;
+      margin-bottom: .55rem;
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: #bb6220 !important;
+    }
+    .module-notes p {
+      margin: 0;
+      color: rgba(73, 57, 45, .78) !important;
+      font-size: .95rem;
+      line-height: 1.7;
     }
     .question-card .faq-content {
       color: rgba(247,239,228,.72) !important;
@@ -1444,23 +1660,10 @@
       background: #1a1512 !important;
       color: #fff7ed !important;
     }
-    .proof-shot,
-    .case-photo,
-    .review-photo {
+    .proof-shot {
       background: #fffdf9;
       border: 1px solid rgba(73, 57, 45, .10);
       box-shadow: inset 0 1px 0 rgba(255,255,255,.9);
-    }
-    .dark-section .case-photo,
-    .dark-section .review-photo,
-    .dark-section .proof-shot {
-      background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(244,239,232,.96));
-      border-color: rgba(255,255,255,.12);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.8);
-    }
-    .dark-section .case-photo::before,
-    .dark-section .review-photo::before {
-      border-color: rgba(18, 18, 18, .08);
     }
     .pricing-featured {
       background: linear-gradient(180deg, rgba(255,245,233,.99), rgba(245,229,210,.99));
@@ -1524,6 +1727,87 @@
         color: var(--text-soft) !important;
         backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
+    }
+    .advanced-panel {
+      position: relative;
+      border: 1px solid rgba(88, 64, 43, .10) !important;
+      background:
+        radial-gradient(circle at top right, rgba(229,125,47,.12), transparent 28%),
+        linear-gradient(180deg, rgba(248,241,232,.98), rgba(241,232,221,.98));
+      box-shadow: 0 24px 48px rgba(59, 42, 29, .08);
+      overflow: hidden;
+    }
+    .advanced-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(229,125,47,0), rgba(229,125,47,.10), rgba(229,125,47,0)) top / 100% 1px no-repeat,
+        linear-gradient(180deg, rgba(255,255,255,.45), rgba(255,255,255,0) 22%);
+    }
+    .advanced-panel .inline-flex {
+      position: relative;
+      padding: 0 .95rem !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      letter-spacing: .28em;
+      color: #d9772e !important;
+    }
+    .advanced-panel .inline-flex::before,
+    .advanced-panel .inline-flex::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 2rem;
+      height: 1px;
+      background: rgba(217,119,46,.58);
+      transform: translateY(-50%);
+    }
+    .advanced-panel .inline-flex::before {
+      right: 100%;
+      margin-right: .8rem;
+    }
+    .advanced-panel .inline-flex::after {
+      left: 100%;
+      margin-left: .8rem;
+    }
+    .advanced-lead {
+      color: rgba(73, 57, 45, .76) !important;
+    }
+    .advanced-title {
+      color: #221a16 !important;
+    }
+    .advanced-grid {
+      gap: 1rem;
+    }
+    .advanced-card {
+      position: relative;
+      min-height: 100%;
+      border-radius: 1.7rem;
+      border: 1px solid rgba(88, 64, 43, .08);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.32)),
+        rgba(255,255,255,.42) !important;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.45);
+    }
+    .advanced-card p:first-child {
+      color: #c56a28 !important;
+    }
+    .advanced-card .selection-list li {
+      color: rgba(73, 57, 45, .82) !important;
+    }
+    .advanced-card .selection-list li::before {
+      background: linear-gradient(180deg, #f0a05d 0%, #d9772e 100%);
+      box-shadow: 0 0 0 4px rgba(229,125,47,.10);
+    }
+    .advanced-cta-wrap {
+      border-top: 1px solid rgba(88,64,43,.10);
+      padding-top: 1.7rem;
+    }
+    .advanced-cta-note {
+      color: rgba(73,57,45,.52) !important;
     }
     .dark-section .faq-note {
       background: rgba(255,255,255,.04) !important;
@@ -2140,51 +2424,148 @@
       .grid {
         gap: 1rem !important;
       }
-      .module-card .accordion-toggle {
-        min-height: 0 !important;
-        padding: .95rem 1rem !important;
-        gap: .6rem !important;
+      .program-rail::before {
+        left: .8rem !important;
       }
-      .module-card .accordion-toggle::before {
-        left: 1rem !important;
-        right: 4.6rem !important;
-        top: 1rem !important;
-        height: .72rem !important;
+      .program-phases {
+        grid-template-columns: 1fr !important;
+        gap: .85rem !important;
+      }
+      .program-phase-card {
+        padding: 1.1rem 1rem 1rem !important;
+        border-radius: 1.25rem !important;
+      }
+      .program-phase-label {
+        min-height: 1.8rem !important;
+        padding-inline: .62rem !important;
+        font-size: .66rem !important;
+      }
+      .program-phase-index {
+        font-size: 2rem !important;
+      }
+      .program-phase-card h3 {
+        margin-top: .85rem !important;
+        font-size: 1.14rem !important;
+        line-height: 1.12 !important;
+      }
+      .program-phase-card p {
+        font-size: .9rem !important;
+        line-height: 1.55 !important;
+      }
+      .advanced-panel {
+        border-radius: 1.35rem !important;
+        padding: 1.15rem !important;
+      }
+      .advanced-panel .inline-flex {
+        padding: 0 .7rem !important;
+        letter-spacing: .18em !important;
+      }
+      .advanced-panel .inline-flex::before,
+      .advanced-panel .inline-flex::after {
+        width: 1.15rem !important;
+      }
+      .advanced-lead {
+        font-size: .96rem !important;
+        line-height: 1.65 !important;
+      }
+      .advanced-card {
+        border-radius: 1.2rem !important;
+        padding: 1rem !important;
+      }
+      .advanced-card .selection-list li {
+        font-size: .92rem !important;
+        line-height: 1.55 !important;
+      }
+      .advanced-cta-wrap {
+        padding-top: 1.1rem !important;
+      }
+      .advanced-cta-note {
+        font-size: .78rem !important;
+        line-height: 1.45 !important;
+      }
+      .program-overview-divider {
+        margin-top: 1.35rem !important;
+        gap: .7rem !important;
+        font-size: .7rem !important;
+        letter-spacing: .14em !important;
+      }
+      .module-card::before {
+        left: -.12rem !important;
+        top: 1.45rem !important;
+        width: .78rem !important;
+        height: .78rem !important;
+        box-shadow: 0 0 0 5px rgba(229, 125, 47, .10) !important;
+      }
+      .module-card .accordion-toggle {
+        padding: 1.05rem .95rem .95rem 1.3rem !important;
+        gap: .75rem !important;
       }
       .module-card .accordion-toggle .module-kicker {
-        font-size: .72rem !important;
-        letter-spacing: .18em !important;
+        min-height: 1.8rem !important;
+        padding-inline: .68rem !important;
+        font-size: .68rem !important;
+        letter-spacing: .16em !important;
+      }
+      .module-card .accordion-toggle .min-w-0 {
+        gap: .72rem !important;
       }
       .module-card .accordion-toggle .min-w-0 > span:last-child,
       .module-card .accordion-toggle .text-white,
       .module-card .accordion-toggle [class*="text-white"] {
-        margin-top: .62rem !important;
-        font-size: 1.22rem !important;
-        line-height: 1.02 !important;
+        font-size: 1.08rem !important;
+        line-height: 1.12 !important;
+        padding-right: 0 !important;
+      }
+      .module-preview {
+        gap: .45rem !important;
+      }
+      .module-chip {
+        min-height: 1.8rem !important;
+        padding-inline: .66rem !important;
+        font-size: .76rem !important;
+      }
+      .module-summary {
+        font-size: .92rem !important;
+        line-height: 1.45 !important;
       }
       .module-card .accordion-icon {
-        width: 2rem;
-        height: 2rem;
+        width: 2.15rem !important;
+        height: 2.15rem !important;
+        margin-top: .1rem !important;
       }
       .module-number-bg {
-        font-size: 4rem !important;
-        right: 2.95rem !important;
+        right: 2.65rem !important;
+        top: .85rem !important;
+        font-size: 2.3rem !important;
       }
       .accordion-content {
         padding-left: 1rem !important;
         padding-right: 1rem !important;
         padding-bottom: 1rem !important;
       }
+      .module-grid {
+        grid-template-columns: 1fr !important;
+        gap: .95rem !important;
+        padding-top: 1rem !important;
+      }
       .module-card .module-list {
         gap: .7rem !important;
       }
       .module-card .module-list li {
-        padding-left: 1.1rem !important;
+        padding-left: 1rem !important;
         font-size: .92rem !important;
         line-height: 1.55 !important;
       }
       .module-card .module-list li::before {
-        top: .74rem !important;
+        top: .7rem !important;
+      }
+      .module-notes {
+        padding: .9rem !important;
+        border-radius: 1rem !important;
+      }
+      .module-notes p {
+        font-size: .88rem !important;
+        line-height: 1.58 !important;
       }
       .trust-icon,
       .process-icon,
@@ -2197,6 +2578,13 @@
       .pricing-card__price,
       .pricing-card__list {
         min-height: auto;
+      }
+      .pricing-upgrade-note {
+        margin-top: 1rem !important;
+        padding: .85rem .9rem !important;
+        border-radius: 1rem !important;
+        font-size: .86rem !important;
+        line-height: 1.5 !important;
       }
       .pricing-card__price p:first-child {
         font-size: 3.25rem !important;
@@ -2216,6 +2604,17 @@
         font-size: 1rem !important;
         border-radius: 999px !important;
       }
+      .cta-secondary-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: .8rem !important;
+      }
+      .cta-btn-reviews,
+      .cta-btn-telegram {
+        min-height: 3.55rem !important;
+        font-size: .9rem !important;
+        padding-inline: .85rem !important;
+        line-height: 1.2 !important;
+      }
       .case-photo,
       .review-photo {
         padding: 12px;
@@ -2227,13 +2626,30 @@
       .review-photo::after {
         inset: 8px;
       }
+      .case-photo::after,
+      .review-photo::after {
+        background:
+          linear-gradient(90deg, rgba(17,16,15,.72), rgba(17,16,15,.72)) left 12px top 14px / 36px 2px no-repeat,
+          linear-gradient(90deg, rgba(231,123,63,.9), rgba(231,123,63,.9)) left 12px top 21px / 18px 4px no-repeat,
+          linear-gradient(90deg, rgba(17,16,15,.52), rgba(17,16,15,.52)) right 12px bottom 14px / 32px 2px no-repeat,
+          linear-gradient(90deg, rgba(214,170,112,.9), rgba(214,170,112,.9)) right 12px bottom 21px / 16px 4px no-repeat,
+          linear-gradient(180deg, rgba(17,16,15,.22), rgba(17,16,15,.22)) right 16px top 14px / 2px 34px no-repeat,
+          linear-gradient(180deg, rgba(231,123,63,.22), rgba(231,123,63,.22)) left 16px bottom 14px / 2px 34px no-repeat;
+      }
       .review-quote {
-        font-size: .96rem !important;
-        line-height: 1.55 !important;
+        font-size: 1rem !important;
+        line-height: 1.5 !important;
       }
       .review-context {
+        margin-top: .85rem;
+        padding-top: .85rem;
         font-size: .88rem !important;
         line-height: 1.65 !important;
+      }
+      .review-note {
+        margin-top: .6rem;
+        font-size: .84rem !important;
+        line-height: 1.58 !important;
       }
       #faq .faq-toggle {
         padding: 1rem 0 !important;
@@ -2475,158 +2891,216 @@
             <h2 class="mt-6 text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">Что именно ты<br /><span class="accent-text">освоишь внутри</span></h2>
             <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/56 sm:text-xl sm:leading-9">Вся программа выстроена как маршрут запуска: сначала собираешь модель и контент, потом получаешь трафик, затем превращаешь это в продажи и масштабирование.</p>
           </div>
-          <div class="mx-auto mt-10 grid max-w-6xl gap-5 lg:grid-cols-3">
-            <article class="soft-card pricing-card rounded-[2rem] p-6 sm:p-7">
-              <p class="text-xs font-extrabold uppercase tracking-[.26em] text-orange-300">Этап 1</p>
-              <h3 class="mt-3 text-2xl font-extrabold tracking-[-.04em]">Создать сильную модель и контент</h3>
-              <p class="mt-4 text-base leading-8 text-white/60">От референсов и генерации лица до фотосетов, видео и упаковки контента под продажи.</p>
+          <div class="program-phases mx-auto mt-10 max-w-6xl">
+            <article class="program-phase-card">
+              <div class="program-phase-top">
+                <p class="program-phase-label">Этап 1</p>
+                <span class="program-phase-index">01</span>
+              </div>
+              <h3>Создать сильную модель и контент</h3>
+              <p>От референсов и генерации лица до фотосетов, видео и упаковки контента под продажи.</p>
             </article>
-            <article class="soft-card pricing-card rounded-[2rem] p-6 sm:p-7">
-              <p class="text-xs font-extrabold uppercase tracking-[.26em] text-orange-300">Этап 2</p>
-              <h3 class="mt-3 text-2xl font-extrabold tracking-[-.04em]">Привести трафик и выстроить воронку</h3>
-              <p class="mt-4 text-base leading-8 text-white/60">Telegram, Instagram, TikTok, USA-трафик, оформление площадок и логика перевода внимания в оплату.</p>
+            <article class="program-phase-card">
+              <div class="program-phase-top">
+                <p class="program-phase-label">Этап 2</p>
+                <span class="program-phase-index">02</span>
+              </div>
+              <h3>Привести трафик и выстроить воронку</h3>
+              <p>Telegram, Instagram, TikTok, USA-трафик, оформление площадок и логика перевода внимания в оплату.</p>
             </article>
-            <article class="soft-card rounded-[2rem] p-6 sm:p-7">
-              <p class="text-xs font-extrabold uppercase tracking-[.26em] text-orange-300">Этап 3</p>
-              <h3 class="mt-3 text-2xl font-extrabold tracking-[-.04em]">Начать продавать и масштабировать</h3>
-              <p class="mt-4 text-base leading-8 text-white/60">Скрипты, допродажи, кастомы, найм помощников, автоматизация и выход из ручного режима.</p>
+            <article class="program-phase-card">
+              <div class="program-phase-top">
+                <p class="program-phase-label">Этап 3</p>
+                <span class="program-phase-index">03</span>
+              </div>
+              <h3>Начать продавать и масштабировать</h3>
+              <p>Скрипты, допродажи, кастомы, найм помощников, автоматизация и выход из ручного режима.</p>
             </article>
           </div>
-          <div class="faq-stack mx-auto mt-10 max-w-5xl space-y-4">
+          <div class="program-overview-divider">Содержание модулей</div>
+          <div class="program-rail faq-stack mx-auto mt-10 max-w-5xl space-y-4">
             <article class="module-card overflow-hidden rounded-[2rem]">
               <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
-                <span class="module-number-bg">1</span><span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm" style="color:#f08a3c !important;">МОДУЛЬ 1</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Создание уникальной AI-модели</span></span>
+                <span class="module-number-bg">1</span><span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm" style="color:#f08a3c !important;">МОДУЛЬ 1</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Создание уникальной AI-модели</span><span class="module-preview"><span class="module-chip">Референсы</span><span class="module-chip">FaceSwap</span><span class="module-chip">Фотосеты</span></span><span class="module-summary">Собираешь визуальную основу проекта: от поиска удачных лиц и промптов до первых полноценных съёмок для будущей упаковки.</span></span>
                 <span class="accordion-icon flex items-center justify-center">
                   <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
                 </span>
               </button>
               <div class="accordion-content hidden border-t border-white/10 px-5 pb-7 pt-2 sm:px-8">
-                <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
-                  <li>Поиск референсов реальных моделей</li>
-                  <li>Генерация уникального лица через текстовые промпты</li>
-                  <li>Технология FaceSwap</li>
-                  <li>Работа с первыми нейросетями</li>
-                  <li>Создание фотосессий</li>
-                </ul>
+                <div class="module-grid">
+                  <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
+                    <li>Поиск референсов реальных моделей</li>
+                    <li>Генерация уникального лица через текстовые промпты</li>
+                    <li>Технология FaceSwap</li>
+                    <li>Работа с первыми нейросетями</li>
+                    <li>Создание фотосессий</li>
+                  </ul>
+                  <aside class="module-notes">
+                    <span class="module-notes-label">Результат</span>
+                    <p>На выходе у тебя уже есть не просто идея, а визуально цельный персонаж, готовый к контенту и монетизации.</p>
+                  </aside>
+                </div>
               </div>
             </article>
             <article class="module-card overflow-hidden rounded-[2rem]">
               <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
-                <span class="module-number-bg">2</span><span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm" style="color:#f08a3c !important;">МОДУЛЬ 2</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Генерация видео</span></span>
+                <span class="module-number-bg">2</span><span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm" style="color:#f08a3c !important;">МОДУЛЬ 2</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Генерация видео</span><span class="module-preview"><span class="module-chip">Reels</span><span class="module-chip">TikTok</span><span class="module-chip">Premium video</span></span><span class="module-summary">Переходишь от статичных изображений к роликам, которые удерживают внимание и дают материал для органического охвата.</span></span>
                 <span class="accordion-icon flex items-center justify-center">
                   <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
                 </span>
               </button>
               <div class="accordion-content hidden border-t border-white/10 px-5 pb-7 pt-2 sm:px-8">
-                <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
-                  <li>Введение в AI-видео</li>
-                  <li>Работа с нейросетями для видео</li>
-                  <li>Создание видео для Reels/TikTok</li>
-                  <li>Создание премиум видео для продаж</li>
-                </ul>
+                <div class="module-grid">
+                  <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
+                    <li>Введение в AI-видео</li>
+                    <li>Работа с нейросетями для видео</li>
+                    <li>Создание видео для Reels/TikTok</li>
+                    <li>Создание премиум видео для продаж</li>
+                  </ul>
+                  <aside class="module-notes">
+                    <span class="module-notes-label">Фокус</span>
+                    <p>Не просто “сделать ролик”, а научиться выпускать контент под конкретную площадку и нужный формат спроса.</p>
+                  </aside>
+                </div>
               </div>
             </article>
             <article class="module-card overflow-hidden rounded-[2rem]">
               <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
-                <span class="module-number-bg">3</span><span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm" style="color:#f08a3c !important;">МОДУЛЬ 3</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Площадки для монетизации</span></span>
+                <span class="module-number-bg">3</span><span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm" style="color:#f08a3c !important;">МОДУЛЬ 3</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Площадки для монетизации</span><span class="module-preview"><span class="module-chip">Telegram</span><span class="module-chip">Instagram</span><span class="module-chip">Платформы</span></span><span class="module-summary">Разбираешь, куда вести аудиторию, как оформлять точки входа и как не терять деньги на слабой структуре площадок.</span></span>
                 <span class="accordion-icon flex items-center justify-center">
                   <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
                 </span>
               </button>
               <div class="accordion-content hidden border-t border-white/10 px-5 pb-7 pt-2 sm:px-8">
-                <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
-                  <li>Обзор платформ монетизации</li>
-                  <li>Создание и настройка Telegram-канала</li>
-                  <li>Западная платформа для AI-моделей</li>
-                  <li>Instagram как воронка трафика</li>
-                  <li>TikTok — генератор вирусного трафика</li>
-                </ul>
+                <div class="module-grid">
+                  <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
+                    <li>Обзор платформ монетизации</li>
+                    <li>Создание и настройка Telegram-канала</li>
+                    <li>Западная платформа для AI-моделей</li>
+                    <li>Instagram как воронка трафика</li>
+                    <li>TikTok — генератор вирусного трафика</li>
+                  </ul>
+                  <aside class="module-notes">
+                    <span class="module-notes-label">Смысл</span>
+                    <p>Этот блок связывает контент с деньгами: ты понимаешь, где именно аудитория конвертируется лучше всего и почему.</p>
+                  </aside>
+                </div>
               </div>
             </article>
             <article class="module-card overflow-hidden rounded-[2rem]">
               <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
-                <span class="module-number-bg">4</span><span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm" style="color:#f08a3c !important;">МОДУЛЬ 4</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">NSFW-контент</span></span>
+                <span class="module-number-bg">4</span><span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm" style="color:#f08a3c !important;">МОДУЛЬ 4</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">NSFW-контент</span><span class="module-preview"><span class="module-chip">Storytelling</span><span class="module-chip">Сеты</span><span class="module-chip">Кастомы</span></span><span class="module-summary">Отдельный блок про спрос, психологию покупателя и создание материалов, которые реально хочется покупать, а не просто смотреть.</span></span>
                 <span class="accordion-icon flex items-center justify-center">
                   <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
                 </span>
               </button>
               <div class="accordion-content hidden border-t border-white/10 px-5 pb-7 pt-2 sm:px-8">
-                <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
-                  <li>Психология покупателей премиум-контента</li>
-                  <li>Создание откровенного контента и Implied Nude</li>
-                  <li>Storytelling и сценарии для продаж</li>
-                  <li>Создание тематических сетов</li>
-                  <li>Работа с кастомными заказами</li>
-                </ul>
+                <div class="module-grid">
+                  <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
+                    <li>Психология покупателей премиум-контента</li>
+                    <li>Создание откровенного контента и Implied Nude</li>
+                    <li>Storytelling и сценарии для продаж</li>
+                    <li>Создание тематических сетов</li>
+                    <li>Работа с кастомными заказами</li>
+                  </ul>
+                  <aside class="module-notes">
+                    <span class="module-notes-label">Практика</span>
+                    <p>Материал помогает строить продукт с пониманием мотивации клиента, а не на случайных догадках.</p>
+                  </aside>
+                </div>
               </div>
             </article>
             <article class="module-card overflow-hidden rounded-[2rem]">
               <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
-                <span class="module-number-bg">5</span><span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm" style="color:#f08a3c !important;">МОДУЛЬ 5</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Трафик USA</span></span>
+                <span class="module-number-bg">5</span><span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm" style="color:#f08a3c !important;">МОДУЛЬ 5</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Трафик USA</span><span class="module-preview"><span class="module-chip">VPN</span><span class="module-chip">Алгоритмы</span><span class="module-chip">Конверсия</span></span><span class="module-summary">Показывает, как правильно заходить в американский рынок: от технической настройки до перевода охватов в платёжеспособный трафик.</span></span>
                 <span class="accordion-icon flex items-center justify-center">
                   <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
                 </span>
               </button>
               <div class="accordion-content hidden border-t border-white/10 px-5 pb-7 pt-2 sm:px-8">
-                <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
-                  <li>Настройка VPN и американской личности</li>
-                  <li>Instagram для USA-аудитории</li>
-                  <li>TikTok — захват американского рынка</li>
-                  <li>Хештеги и алгоритмы для USA</li>
-                  <li>Конвертация трафика в деньги</li>
-                </ul>
+                <div class="module-grid">
+                  <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
+                    <li>Настройка VPN и американской личности</li>
+                    <li>Instagram для USA-аудитории</li>
+                    <li>TikTok — захват американского рынка</li>
+                    <li>Хештеги и алгоритмы для USA</li>
+                    <li>Конвертация трафика в деньги</li>
+                  </ul>
+                  <aside class="module-notes">
+                    <span class="module-notes-label">Задача</span>
+                    <p>Не просто получить просмотры, а выстроить заход в рынок с понятной логикой масштабирования и окупаемости.</p>
+                  </aside>
+                </div>
               </div>
             </article>
             <article class="module-card overflow-hidden rounded-[2rem]">
               <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
-                <span class="module-number-bg">6</span><span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm" style="color:#f08a3c !important;">МОДУЛЬ 6</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Продажи и коммуникация</span></span>
+                <span class="module-number-bg">6</span><span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm" style="color:#f08a3c !important;">МОДУЛЬ 6</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Продажи и коммуникация</span><span class="module-preview"><span class="module-chip">Скрипты</span><span class="module-chip">Возражения</span><span class="module-chip">Допродажи</span></span><span class="module-summary">Здесь вся коммерческая часть: как вести диалог, доводить до оплаты и делать так, чтобы клиент возвращался снова.</span></span>
                 <span class="accordion-icon flex items-center justify-center">
                   <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
                 </span>
               </button>
               <div class="accordion-content hidden border-t border-white/10 px-5 pb-7 pt-2 sm:px-8">
-                <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
-                  <li>Психология покупателя Adult-контента</li>
-                  <li>Структура продающего диалога</li>
-                  <li>Готовые скрипты для продаж</li>
-                  <li>Работа с возражениями</li>
-                  <li>Допродажи и удержание</li>
-                </ul>
+                <div class="module-grid">
+                  <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
+                    <li>Психология покупателя Adult-контента</li>
+                    <li>Структура продающего диалога</li>
+                    <li>Готовые скрипты для продаж</li>
+                    <li>Работа с возражениями</li>
+                    <li>Допродажи и удержание</li>
+                  </ul>
+                  <aside class="module-notes">
+                    <span class="module-notes-label">Выгода</span>
+                    <p>Блок закрывает типичную проблему “трафик есть, но денег мало” и переводит проект в реальную коммерцию.</p>
+                  </aside>
+                </div>
               </div>
             </article>
             <article class="module-card overflow-hidden rounded-[2rem]">
               <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
-                <span class="module-number-bg">7</span><span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm" style="color:#f08a3c !important;">МОДУЛЬ 7</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Масштабирование и автоматизация</span></span>
+                <span class="module-number-bg">7</span><span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm" style="color:#f08a3c !important;">МОДУЛЬ 7</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Масштабирование и автоматизация</span><span class="module-preview"><span class="module-chip">Команда</span><span class="module-chip">Найм</span><span class="module-chip">Системы</span></span><span class="module-summary">Когда ручной режим уже не тянет, этот этап помогает разложить процессы, подключить людей и выйти на объём без хаоса.</span></span>
                 <span class="accordion-icon flex items-center justify-center">
                   <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
                 </span>
               </button>
               <div class="accordion-content hidden border-t border-white/10 px-5 pb-7 pt-2 sm:px-8">
-                <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
-                  <li>Построение команды</li>
-                  <li>Где искать и как нанимать ассистентов</li>
-                  <li>Собеседование и обучение персонала</li>
-                  <li>Автоматизация процессов</li>
-                  <li>Масштабирование до нескольких моделей</li>
-                </ul>
+                <div class="module-grid">
+                  <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
+                    <li>Построение команды</li>
+                    <li>Где искать и как нанимать ассистентов</li>
+                    <li>Собеседование и обучение персонала</li>
+                    <li>Автоматизация процессов</li>
+                    <li>Масштабирование до нескольких моделей</li>
+                  </ul>
+                  <aside class="module-notes">
+                    <span class="module-notes-label">Следующий шаг</span>
+                    <p>После этого модуля проект уже можно собирать как систему, а не как набор разрозненных действий одного человека.</p>
+                  </aside>
+                </div>
               </div>
             </article>
             <article class="module-card overflow-hidden rounded-[2rem]">
               <button class="accordion-toggle flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-8 sm:py-7" aria-expanded="false">
-                <span class="module-number-bg">8</span><span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm" style="color:#f08a3c !important;">БОНУСНЫЕ МАТЕРИАЛЫ</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Дополнительные инструменты для быстрого запуска</span></span>
+                <span class="module-number-bg">8</span><span class="min-w-0 pr-2"><span class="module-kicker block text-xs font-extrabold sm:text-sm" style="color:#f08a3c !important;">БОНУСНЫЕ МАТЕРИАЛЫ</span><span class="mt-3 block text-xl font-extrabold tracking-[-.04em] text-white sm:text-[2rem]">Дополнительные инструменты для быстрого запуска</span><span class="module-preview"><span class="module-chip">500+ промптов</span><span class="module-chip">Скрипты</span><span class="module-chip">Чек-листы</span></span><span class="module-summary">Готовая база материалов, которая сокращает путь до первого запуска и экономит недели на ручной сборке всего с нуля.</span></span>
                 <span class="accordion-icon flex items-center justify-center">
                   <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
                 </span>
               </button>
               <div class="accordion-content hidden border-t border-white/10 px-5 pb-7 pt-2 sm:px-8">
-                <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
-                  <li>500+ работающих промптов для генерации</li>
-                  <li>База из 50 скриптов продаж на английском</li>
-                  <li>Excel-калькулятор доходности проекта</li>
-                  <li>Контент-план на 30 дней</li>
-                  <li>Чек-листы для каждого этапа</li>
-                  <li>Таблица ценообразования для разных рынков</li>
-                </ul>
+                <div class="module-grid">
+                  <ul class="module-list space-y-4 text-[15px] leading-8 text-[#a3a3a8] sm:text-lg sm:leading-9">
+                    <li>500+ работающих промптов для генерации</li>
+                    <li>База из 50 скриптов продаж на английском</li>
+                    <li>Excel-калькулятор доходности проекта</li>
+                    <li>Контент-план на 30 дней</li>
+                    <li>Чек-листы для каждого этапа</li>
+                    <li>Таблица ценообразования для разных рынков</li>
+                  </ul>
+                  <aside class="module-notes">
+                    <span class="module-notes-label">Бонус</span>
+                    <p>Эти материалы делают старт заметно легче: меньше рутины, меньше пустого поиска и больше готовых опор для запуска.</p>
+                  </aside>
+                </div>
               </div>
             </article>
           </div>
@@ -2699,6 +3173,7 @@
                 <li class="feature-off"><span class="x-icon">✕</span>Созвоны и разборы</li>
                 <li class="feature-off"><span class="x-icon">✕</span>Закрытый чат с учениками</li>
               </ul>
+              <div class="pricing-upgrade-note"><strong>Можно вырасти позже:</strong> если начнёшь с этого тарифа, потом сможешь перейти на более дорогой формат с доплатой разницы.</div>
               <p class="pricing-card__meta">Если тебе нужен самый быстрый вход без ожидания и ты готов проходить программу самостоятельно, это твой вариант.</p>
               <div class="pricing-card__cta"><a href="https://web.tribute.tg/s/TcC" class="btn-dark glow-button flex min-h-[78px] items-center justify-center rounded-[1.6rem] bg-orange-500 px-6 text-center text-2xl font-extrabold text-black shadow-glow">Купить сразу</a></div>
             </article>
@@ -2777,15 +3252,15 @@
             </article>
           </div>
         </section>
-        <section id="advanced-form" class="warm-section section-reveal py-14 sm:py-24">
-          <div class="warm-panel mx-auto max-w-5xl rounded-[2.4rem] border border-orange-400/14 bg-[linear-gradient(180deg,rgba(255,122,26,.10),rgba(255,122,26,.04))] p-7 shadow-glow sm:p-10">
+        <section id="advanced-form" class="section-reveal py-14 sm:py-24">
+          <div class="advanced-panel mx-auto max-w-5xl rounded-[2.4rem] p-7 sm:p-10">
             <div class="mx-auto max-w-3xl text-center">
               <p class="inline-flex rounded-full border border-orange-400/25 bg-orange-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-[.34em] text-orange-200 sm:text-sm">Заявка на старшие форматы</p>
-              <h2 class="mt-6 text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">Продвинутый и менторство<br /><span class="accent-text">только после отбора</span></h2>
-              <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/70 sm:text-xl sm:leading-9">Если тебе нужен не просто доступ к урокам, а личное сопровождение, важно сначала понять, насколько формат тебе подходит и на чём мы реально можем тебя ускорить.</p>
+              <h2 class="advanced-title mt-6 text-4xl font-extrabold tracking-[-.05em] sm:text-6xl">Продвинутый и менторство<br /><span class="accent-text">только после отбора</span></h2>
+              <p class="advanced-lead mx-auto mt-5 max-w-2xl text-base leading-7 text-white/70 sm:text-xl sm:leading-9">Если тебе нужен не просто доступ к урокам, а личное сопровождение, важно сначала понять, насколько формат тебе подходит и на чём мы реально можем тебя ускорить.</p>
             </div>
-            <div class="mx-auto mt-10 grid max-w-5xl gap-5 md:grid-cols-2">
-              <article class="soft-card rounded-[2rem] p-6 sm:p-7">
+            <div class="advanced-grid mx-auto mt-10 grid max-w-5xl md:grid-cols-2">
+              <article class="advanced-card rounded-[2rem] p-6 sm:p-7">
                 <p class="text-xs font-extrabold uppercase tracking-[.26em] text-orange-300">Что проверяем</p>
                 <ul class="selection-list mt-5 space-y-4 text-base leading-8 text-white/62">
                   <li>С какой точки ты заходишь: ноль, уже есть модель или уже есть продажи.</li>
@@ -2794,7 +3269,7 @@
                   <li>Подходит ли тебе продвинутый формат или лучше идти в самостоятельный.</li>
                 </ul>
               </article>
-              <article class="soft-card rounded-[2rem] p-6 sm:p-7">
+              <article class="advanced-card rounded-[2rem] p-6 sm:p-7">
                 <p class="text-xs font-extrabold uppercase tracking-[.26em] text-orange-300">Как это происходит</p>
                 <ul class="selection-list mt-5 space-y-4 text-base leading-8 text-white/62">
                   <li>Заполняешь короткую анкету без лишней бюрократии.</li>
@@ -2804,9 +3279,9 @@
                 </ul>
               </article>
             </div>
-            <div class="mx-auto mt-10 max-w-xl">
+            <div class="advanced-cta-wrap mx-auto mt-10 max-w-xl">
               <a href="https://forms.gle/fzENGbVLnxN61Guh9" class="btn-dark glow-button mx-auto flex min-h-[84px] items-center justify-center rounded-[1.7rem] bg-orange-500 px-8 text-center text-2xl font-extrabold text-black shadow-glow">Заполнить анкету</a>
-              <p class="mt-4 text-center text-sm text-white/48">Обычно отвечаю в течение часа, если заявка отправлена в рабочее время.</p>
+              <p class="advanced-cta-note mt-4 text-center text-sm text-white/48">Обычно отвечаю в течение часа, если заявка отправлена в рабочее время.</p>
             </div>
           </div>
         </section>
@@ -2839,25 +3314,28 @@
             <article class="soft-card review-card rounded-[2rem] p-6 sm:p-7">
               <div class="review-photo rounded-[1.4rem]"><img src="images/review1.jpg" alt="Отзыв 1" /></div>
               <div class="review-shell">
-                <p class="review-kicker text-xs font-extrabold uppercase tracking-[.26em] text-orange-300">Первые деньги за неделю</p>
+                <p class="review-kicker text-xs font-extrabold uppercase tracking-[.26em] text-orange-300">С нуля до первых денег</p>
                 <p class="review-quote">«С начала апреля пока что примерно 500$ вышло, это за неделю.»</p>
-                <p class="review-context">Живой апдейт от ученика: первые деньги уже пришли, и это видно прямо в переписке.</p>
+                <p class="review-note"><strong>С чем пришёл:</strong> был без системы и без понимания, как вообще собрать запуск так, чтобы не топтаться на месте.</p>
+                <p class="review-context">Сначала провели бесплатный созвон, спокойно разобрали его точку старта, что делать в первую неделю и куда не сливать время. В итоге человек не завис в теории, а вышел на первые $500 уже за неделю.</p>
               </div>
             </article>
             <article class="soft-card review-card rounded-[2rem] p-6 sm:p-7">
               <div class="review-photo rounded-[1.4rem]"><img src="images/review2.jpg" alt="Отзыв 2" /></div>
               <div class="review-shell">
-                <p class="review-kicker text-xs font-extrabold uppercase tracking-[.26em] text-orange-300">Рост Threads почти до 500k</p>
+                <p class="review-kicker text-xs font-extrabold uppercase tracking-[.26em] text-orange-300">Охваты, которые можно монетизировать</p>
                 <p class="review-quote">«Есть небольшие, но результаты.»</p>
-                <p class="review-context">Почти 478 тысяч просмотров за 30 дней. Уже видно, что контент начинает реально разгоняться.</p>
+                <p class="review-note"><strong>Какая была боль:</strong> человек уже пробовал сам, но не понимал, как разогнать Threads так, чтобы это было не просто “что-то постить”, а реальный трафик.</p>
+                <p class="review-context">Разобрали упаковку, формат контента и логику публикаций под его стартовую ситуацию. За месяц аккаунт дошёл почти до 478 тысяч просмотров, а это уже не абстрактная активность, а база для продаж и дальнейшего роста.</p>
               </div>
             </article>
             <article class="soft-card review-card rounded-[2rem] p-6 sm:p-7">
               <div class="review-photo rounded-[1.4rem]"><img src="images/review3.jpg" alt="Отзыв 3" /></div>
               <div class="review-shell">
-                <p class="review-kicker text-xs font-extrabold uppercase tracking-[.26em] text-orange-300">Ощущение ценности обучения</p>
+                <p class="review-kicker text-xs font-extrabold uppercase tracking-[.26em] text-orange-300">Когда исчезает ощущение хаоса</p>
                 <p class="review-quote">«За такой объём работы цену можно ставить выше.»</p>
-                <p class="review-context">Тут важен сам сигнал: человек чувствует ценность материала и пишет об этом без лишних просьб.</p>
+                <p class="review-note"><strong>Что закрыло боль:</strong> не очередная мотивация, а ощущение, что внутри реально сильный материал, который помогает по-другому смотреть на продукт и на свои действия.</p>
+                <p class="review-context">С таким отзывом важна не только фраза про цену. Важно, что человек почувствовал ценность обучения сам, без давления и без попытки “понравиться”. Обычно именно так и выглядит нормальная обратная связь, когда материал действительно помогает.</p>
               </div>
             </article>
           </div>
@@ -3022,6 +3500,12 @@
     const mobileMenuClose = document.querySelector("#mobile-menu-close");
     const mobileDrawerClose = document.querySelector("#mobile-drawer-close");
     const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+    if (mobileMenuOverlay && mobileMenuOverlay.parentElement !== document.body) {
+      document.body.appendChild(mobileMenuOverlay);
+    }
+    if (mobileMenuPanel && mobileMenuPanel.parentElement !== document.body) {
+      document.body.appendChild(mobileMenuPanel);
+    }
     function setMobileMenuState(isOpen) {
       if (!mobileMenuButton || !mobileMenuPanel) return;
       mobileMenuButton.setAttribute("aria-expanded", String(isOpen));
@@ -3039,6 +3523,12 @@
       });
       mobileDrawerClose?.addEventListener("click", () => setMobileMenuState(false));
       mobileMenuOverlay?.addEventListener("click", () => setMobileMenuState(false));
+      document.addEventListener("click", (event) => {
+        const isOpen = mobileMenuButton.getAttribute("aria-expanded") === "true";
+        if (!isOpen || !mobileMenuPanel) return;
+        if (mobileMenuPanel.contains(event.target) || mobileMenuButton.contains(event.target)) return;
+        setMobileMenuState(false);
+      });
       mobileNavLinks.forEach((link) => {
         link.addEventListener("click", () => setMobileMenuState(false));
       });
