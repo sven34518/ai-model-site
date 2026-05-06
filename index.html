@@ -617,7 +617,6 @@
       color: var(--text-main);
     }
     .header-cta {
-      display: inline-flex !important;
       align-items: center !important;
       justify-content: center !important;
       min-height: 3.5rem;
@@ -1311,6 +1310,112 @@
       background: rgba(255,255,255,.58) !important;
       border-color: rgba(78,61,46,.10) !important;
     }
+    .mobile-header-left {
+      display: none;
+      align-items: center;
+      gap: .75rem;
+      min-width: 0;
+    }
+    .mobile-brand {
+      display: flex;
+      align-items: center;
+      min-width: 0;
+    }
+    .mobile-brand-text {
+      display: block;
+      font-size: 1.05rem;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -.04em;
+      color: var(--text-main);
+      white-space: nowrap;
+    }
+    .mobile-header-cta {
+      display: none;
+    }
+    .mobile-drawer-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 70;
+      background: rgba(20, 16, 14, .34);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .28s ease;
+    }
+    .mobile-drawer-overlay.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .site-mobile-drawer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 80;
+      width: min(68vw, 20rem);
+      height: 100dvh;
+      padding: 1.1rem 1rem 1.25rem;
+      border-right: 1px solid rgba(78, 61, 46, .10);
+      background: linear-gradient(180deg, rgba(255,250,243,.98), rgba(245,236,225,.98)) !important;
+      box-shadow: 0 22px 54px rgba(38, 28, 22, .16);
+      transform: translateX(-104%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform .32s cubic-bezier(.22,1,.36,1), opacity .24s ease;
+      overflow-y: auto;
+    }
+    .site-mobile-drawer.is-open {
+      transform: translateX(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .mobile-drawer-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .75rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(73, 57, 45, .10);
+    }
+    .mobile-drawer-title {
+      font-size: 1.1rem;
+      line-height: 1.1;
+      font-weight: 800;
+      letter-spacing: -.04em;
+      color: var(--text-main);
+    }
+    .mobile-drawer-close {
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(78,61,46,.10);
+      background: rgba(255,255,255,.56);
+      color: var(--text-main);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .mobile-nav-stack {
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+      padding-top: 1rem;
+    }
+    .mobile-nav-link {
+      display: block;
+      padding: .85rem .15rem;
+      font-size: 1.15rem;
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: -.03em;
+      color: var(--text-main);
+      border-bottom: 1px solid rgba(73, 57, 45, .08);
+    }
+    .mobile-nav-link:last-child {
+      border-bottom: 0;
+    }
     .trust-icon,
     .process-icon,
     .result-icon {
@@ -1359,8 +1464,8 @@
     }
     .pricing-featured {
       background: linear-gradient(180deg, rgba(255,245,233,.99), rgba(245,229,210,.99));
-      border-color: rgba(229,125,47,.72);
-      box-shadow: 0 34px 84px rgba(90, 61, 39, .22), 0 0 0 1px rgba(229,125,47,.18);
+      border-color: rgba(229,125,47,.86);
+      box-shadow: 0 36px 88px rgba(90, 61, 39, .24), 0 0 0 1px rgba(229,125,47,.26);
       transform: translateY(-14px) scale(1.03);
     }
     .pricing-featured::before {
@@ -1369,7 +1474,7 @@
       inset: 0;
       border-radius: inherit;
       pointer-events: none;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.52);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.62);
     }
     .pricing-featured::after {
       content: "";
@@ -1377,15 +1482,32 @@
       inset: -1px;
       border-radius: inherit;
       pointer-events: none;
-      box-shadow: 0 0 0 2px rgba(229,125,47,.16);
+      box-shadow: 0 0 0 2px rgba(229,125,47,.28);
+    }
+    .pricing-featured .pricing-card__cta::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: .1rem;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(229,125,47,0), rgba(229,125,47,.42), rgba(229,125,47,0));
+      opacity: .9;
+      pointer-events: none;
     }
     .pricing-featured .pricing-kicker {
       background: rgba(229,125,47,.16);
-      border-color: rgba(229,125,47,.24);
+      border-color: rgba(229,125,47,.34);
       color: #b85d24 !important;
     }
     .pricing-featured h3 {
       color: #1f130d;
+    }
+    .pricing-featured .pricing-card__price p:last-child {
+      color: rgba(31, 19, 13, .72) !important;
+    }
+    .pricing-featured .pricing-card__list li {
+      color: rgba(31, 19, 13, .82) !important;
     }
     .pricing-featured .pricing-card__price p:first-child {
       color: #d56f2a !important;
@@ -1393,8 +1515,8 @@
     #pricing .pricing-featured .pricing-card__cta .glow-button {
         background: var(--accent) !important;
         color: #1d130e !important;
-        border-color: rgba(229,125,47,.24);
-        box-shadow: 0 18px 34px rgba(229,125,47,.24) !important;
+        border-color: rgba(229,125,47,.34);
+        box-shadow: 0 20px 36px rgba(229,125,47,.28) !important;
       }
     .faq-note {
         background: rgba(255, 250, 243, .72) !important;
@@ -1735,16 +1857,446 @@
       }
     }
     @media (max-width: 767px) {
-      .mobile-panel {
-        transform: translateY(-12px);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity .3s ease, transform .3s ease;
+      .dark-footer {
+        padding-top: 1.35rem !important;
+        padding-bottom: 0 !important;
       }
-      .mobile-panel.is-open {
-        transform: translateY(0);
-        opacity: 1;
-        pointer-events: auto;
+      .footer-shell {
+        gap: 1.1rem;
+        padding-top: .25rem !important;
+        padding-bottom: .8rem !important;
+      }
+      .site-header a.header-cta {
+        display: none !important;
+      }
+      .mobile-header-left {
+        display: flex;
+      }
+      .site-header {
+        padding: .8rem .95rem !important;
+      }
+      .site-header > .flex {
+        gap: .75rem;
+      }
+      .mobile-brand-text {
+        font-size: .98rem;
+      }
+      .mobile-header-cta {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        min-height: 2.8rem;
+        padding: 0 1rem !important;
+        border-radius: 999px !important;
+        border: 1px solid rgba(188, 98, 39, .12) !important;
+        background: linear-gradient(180deg, rgba(232,123,61,.98), rgba(205,93,39,.98)) !important;
+        color: #fff8ef !important;
+        box-shadow: 0 14px 26px rgba(197,103,42,.18) !important;
+        font-size: .82rem !important;
+        line-height: 1 !important;
+        font-weight: 800 !important;
+        white-space: nowrap;
+      }
+      .site-header #mobile-menu-button {
+        width: 2.9rem;
+        height: 2.9rem;
+        border-radius: 1rem;
+        flex-shrink: 0;
+      }
+      body {
+        font-size: 15px;
+      }
+      .fixed.left-1\/2.top-3 {
+        width: calc(100% - 1.6rem) !important;
+        top: .65rem !important;
+      }
+      .mx-auto.max-w-\[76rem\] {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        padding-top: 5.9rem !important;
+      }
+      main {
+        padding-top: .3rem !important;
+      }
+      section {
+        padding-top: 2.8rem !important;
+        padding-bottom: 2.8rem !important;
+      }
+      .hero-section {
+        min-height: auto;
+        padding-top: 1.4rem !important;
+      }
+      .hero-layout {
+        gap: 1.65rem;
+      }
+      .hero-title {
+        font-size: 3rem;
+        line-height: .9;
+      }
+      .hero-subtitle {
+        font-size: .98rem !important;
+        line-height: 1.65 !important;
+        margin-top: 1.1rem !important;
+      }
+      .hero-actions {
+        gap: .75rem;
+        margin-top: 1.35rem;
+      }
+      .hero-actions a {
+        min-height: 3.6rem !important;
+        font-size: 1rem !important;
+        padding-inline: 1.15rem !important;
+      }
+      .hero-stats {
+        margin-top: 1.4rem;
+        padding-top: 1rem;
+        gap: .75rem;
+      }
+      .hero-stat-value {
+        font-size: 1.8rem;
+      }
+      .hero-stat-label {
+        font-size: .62rem;
+        letter-spacing: .14em;
+      }
+      .hero-visual {
+        min-height: 18.25rem;
+        transform: scale(.88);
+        transform-origin: top center;
+        margin-bottom: -2.25rem;
+      }
+      .hero-visual-orbit {
+        inset: 10% 10% 15% 15%;
+        border-radius: 1.9rem;
+      }
+      .hero-floating-proof {
+        width: min(100%, 21rem);
+        padding: .72rem;
+        border-radius: 1.4rem;
+      }
+      .hero-proof-inner {
+        padding: .88rem;
+        border-radius: 1.1rem;
+      }
+      .hero-proof-screen {
+        min-height: auto;
+        margin-top: .8rem;
+        padding: .9rem;
+        border-radius: 1rem;
+      }
+      .hero-proof-name {
+        font-size: 1rem;
+        line-height: 1.05;
+      }
+      .hero-proof-role {
+        margin-top: .12rem;
+        font-size: .68rem;
+        line-height: 1.35;
+      }
+      .hero-proof-avatar {
+        width: 2.35rem;
+        height: 2.35rem;
+      }
+      .hero-proof-avatar::before {
+        width: .92rem;
+        height: .92rem;
+        top: .5rem;
+      }
+      .hero-proof-avatar::after {
+        width: 1.3rem;
+        height: .72rem;
+        bottom: .42rem;
+      }
+      .hero-proof-badge {
+        top: -.7rem;
+        right: .85rem;
+        font-size: .62rem;
+        padding: .42rem .72rem;
+        letter-spacing: .08em;
+      }
+      .hero-proof-meta {
+        gap: .7rem;
+      }
+      .hero-proof-screen-header {
+        gap: .7rem;
+        margin-bottom: .72rem;
+      }
+      .hero-proof-screen-label,
+      .hero-proof-growth-label {
+        font-size: .6rem;
+        letter-spacing: .14em;
+      }
+      .hero-proof-screen-pill {
+        padding: .34rem .58rem;
+        font-size: .6rem;
+        letter-spacing: .05em;
+      }
+      .hero-proof-stat {
+        padding: .82rem .88rem;
+        border-radius: .9rem;
+      }
+      .hero-proof-amount {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: .5rem;
+        font-size: 2rem;
+      }
+      .hero-proof-delta {
+        justify-self: end;
+        text-align: center;
+        min-width: 4.8rem;
+        padding: .34rem .42rem;
+        font-size: .64rem;
+        line-height: 1.05;
+        letter-spacing: .04em;
+      }
+      .hero-proof-subline {
+        margin-top: .5rem;
+        font-size: .66rem;
+        line-height: 1.45;
+        letter-spacing: .07em;
+      }
+      .hero-proof-feed {
+        margin-top: .65rem;
+        gap: .55rem;
+      }
+      .hero-proof-item {
+        gap: .62rem;
+        padding: .62rem .68rem;
+        border-radius: .85rem;
+      }
+      .hero-proof-avatar-mini {
+        width: 2rem;
+        height: 2rem;
+        font-size: .82rem;
+      }
+      .hero-proof-item-title {
+        font-size: .88rem;
+      }
+      .hero-proof-item-meta {
+        margin-top: .08rem;
+        font-size: .68rem;
+        line-height: 1.35;
+      }
+      .hero-proof-item-value {
+        font-size: .92rem;
+      }
+      .hero-proof-growth {
+        gap: .28rem;
+        padding: .78rem .82rem;
+        border-radius: .9rem;
+      }
+      .hero-proof-growth-title {
+        font-size: .9rem;
+        line-height: 1.2;
+      }
+      .hero-proof-growth-text {
+        font-size: .72rem;
+        line-height: 1.45;
+      }
+      .hero-proof-note {
+        margin-top: .72rem;
+        padding-left: .72rem;
+        font-size: .84rem;
+        line-height: 1.55;
+      }
+      .light-section h2,
+      .dark-section h2,
+      .warm-section h2,
+      .warm-cta-section h2 {
+        font-size: 2.35rem !important;
+        line-height: .98 !important;
+      }
+      .light-section h3,
+      .dark-section h3,
+      .warm-section h3,
+      .warm-cta-section h3 {
+        font-size: 1.35rem !important;
+        line-height: 1.15 !important;
+      }
+      .light-section p,
+      .dark-section p,
+      .warm-section p,
+      .warm-cta-section p,
+      .light-section li,
+      .dark-section li,
+      .warm-section li {
+        font-size: .95rem !important;
+        line-height: 1.7 !important;
+      }
+      .soft-card,
+      .module-card,
+      .review-card,
+      .results-card,
+      .pricing-card,
+      .process-card,
+      .trust-card,
+      .warm-panel,
+      .cta-panel {
+        border-radius: 1.35rem !important;
+        padding: 1.15rem !important;
+      }
+      .grid {
+        gap: 1rem !important;
+      }
+      .module-card .accordion-toggle {
+        min-height: 0 !important;
+        padding: .95rem 1rem !important;
+        gap: .6rem !important;
+      }
+      .module-card .accordion-toggle::before {
+        left: 1rem !important;
+        right: 4.6rem !important;
+        top: 1rem !important;
+        height: .72rem !important;
+      }
+      .module-card .accordion-toggle .module-kicker {
+        font-size: .72rem !important;
+        letter-spacing: .18em !important;
+      }
+      .module-card .accordion-toggle .min-w-0 > span:last-child,
+      .module-card .accordion-toggle .text-white,
+      .module-card .accordion-toggle [class*="text-white"] {
+        margin-top: .62rem !important;
+        font-size: 1.22rem !important;
+        line-height: 1.02 !important;
+      }
+      .module-card .accordion-icon {
+        width: 2rem;
+        height: 2rem;
+      }
+      .module-number-bg {
+        font-size: 4rem !important;
+        right: 2.95rem !important;
+      }
+      .accordion-content {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        padding-bottom: 1rem !important;
+      }
+      .module-card .module-list {
+        gap: .7rem !important;
+      }
+      .module-card .module-list li {
+        padding-left: 1.1rem !important;
+        font-size: .92rem !important;
+        line-height: 1.55 !important;
+      }
+      .module-card .module-list li::before {
+        top: .74rem !important;
+      }
+      .trust-icon,
+      .process-icon,
+      .result-icon {
+        width: 3.15rem;
+        height: 3.15rem;
+        margin-bottom: 1rem !important;
+      }
+      .pricing-card__intro,
+      .pricing-card__price,
+      .pricing-card__list {
+        min-height: auto;
+      }
+      .pricing-card__price p:first-child {
+        font-size: 3.25rem !important;
+      }
+      .pricing-featured {
+        transform: translateY(-6px);
+        border-color: rgba(229,125,47,.8) !important;
+        box-shadow: 0 20px 42px rgba(90, 61, 39, .18), 0 0 0 1px rgba(229,125,47,.22) !important;
+      }
+      .pricing-featured::after {
+        box-shadow: 0 0 0 2px rgba(229,125,47,.22);
+      }
+      .pricing-card__cta a,
+      .warm-panel a,
+      .cta-panel a {
+        min-height: 3.65rem !important;
+        font-size: 1rem !important;
+        border-radius: 999px !important;
+      }
+      .case-photo,
+      .review-photo {
+        padding: 12px;
+        border-radius: 1.1rem !important;
+      }
+      .case-photo::before,
+      .review-photo::before,
+      .case-photo::after,
+      .review-photo::after {
+        inset: 8px;
+      }
+      .review-quote {
+        font-size: .96rem !important;
+        line-height: 1.55 !important;
+      }
+      .review-context {
+        font-size: .88rem !important;
+        line-height: 1.65 !important;
+      }
+      #faq .faq-toggle {
+        padding: 1rem 0 !important;
+      }
+      #faq .faq-toggle span:first-child {
+        font-size: 1rem !important;
+      }
+      #faq .faq-content {
+        font-size: .88rem !important;
+        line-height: 1.65 !important;
+      }
+      .footer-top {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: .75rem 1rem;
+        align-items: start;
+      }
+      .footer-brand {
+        grid-column: 1 / -1;
+        max-width: 18rem;
+      }
+      .footer-brand p:first-child {
+        font-size: 1.35rem !important;
+        line-height: 1.1 !important;
+      }
+      .footer-brand p:last-child {
+        margin-top: .55rem !important;
+        font-size: .86rem !important;
+        line-height: 1.45 !important;
+        max-width: 17rem;
+      }
+      .footer-nav {
+        justify-content: flex-start !important;
+        gap: .7rem 1rem !important;
+        font-size: .86rem !important;
+        line-height: 1.2;
+        align-self: center;
+      }
+      .footer-social {
+        justify-content: flex-start !important;
+        align-self: center;
+        margin-left: -.15rem;
+      }
+      .footer-icon-link {
+        width: 2.15rem;
+        height: 2.15rem;
+      }
+      .footer-icon-link svg {
+        width: .82rem;
+        height: .82rem;
+      }
+      .footer-bottom {
+        gap: .65rem;
+        margin-top: .15rem;
+        padding-top: .9rem;
+        padding-bottom: 0;
+        font-size: .78rem;
+        line-height: 1.38;
+      }
+      .footer-bottom-note {
+        font-size: .62rem;
+        line-height: 1.45;
+        letter-spacing: .12em;
       }
     }
   </style>
@@ -1755,12 +2307,27 @@
     <div class="pointer-events-none absolute left-1/2 top-0 h-[22rem] w-[22rem] -translate-x-1/2 rounded-full bg-orange-500/10 blur-3xl sm:h-[26rem] sm:w-[26rem]"></div>
     <div class="fixed left-1/2 top-3 z-50 w-[calc(100%-1.25rem)] max-w-[76rem] -translate-x-1/2 px-0 sm:top-4 sm:w-[calc(100%-2rem)]">
       <header class="site-header glass relative rounded-[1.9rem] px-4 py-3 shadow-soft sm:px-5">
-        <div class="flex items-center justify-between gap-4">
-          <a href="#top" class="flex items-center gap-3">
-            <span class="text-lg font-extrabold tracking-[-.04em] text-white sm:text-2xl">
-              VADYA <span class="text-orange-400">OFM</span> CLUB
-            </span>
-          </a>
+          <div class="flex items-center justify-between gap-4">
+            <div class="mobile-header-left">
+              <button id="mobile-menu-button" type="button" class="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white md:hidden" aria-label="Открыть меню" aria-expanded="false">
+                <svg id="mobile-menu-open" viewBox="0 0 24 24" class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+                  <path d="M4 7h16M4 12h16M4 17h16"></path>
+                </svg>
+                <svg id="mobile-menu-close" viewBox="0 0 24 24" class="hidden h-7 w-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+                  <path d="M6 6l12 12M18 6L6 18"></path>
+                </svg>
+              </button>
+              <a href="#top" class="mobile-brand">
+                <span class="mobile-brand-text">
+                  VADYA <span class="text-orange-400">OFM</span> CLUB
+                </span>
+              </a>
+            </div>
+            <a href="#top" class="hidden items-center gap-3 md:flex">
+              <span class="text-lg font-extrabold tracking-[-.04em] text-white sm:text-2xl">
+                VADYA <span class="text-orange-400">OFM</span> CLUB
+              </span>
+            </a>
           <nav class="hidden items-center gap-1 text-sm md:flex">
             <a href="#top" class="nav-link rounded-full px-3 py-2 text-white/65">О курсе</a>
             <a href="#program" class="nav-link rounded-full px-3 py-2 text-white/65">Программа</a>
@@ -1768,31 +2335,32 @@
             <a href="#pricing" class="nav-link rounded-full px-3 py-2 text-white/65">Тарифы</a>
             <a href="#faq" class="nav-link rounded-full px-3 py-2 text-white/65">FAQ</a>
             <a href="#reviews" class="nav-link rounded-full px-3 py-2 text-white/65">Отзывы</a>
-          </nav>
-          <div class="flex items-center gap-3">
-            <a href="#pricing" class="header-cta hidden rounded-full bg-orange-500 px-5 py-3 text-sm font-extrabold text-black shadow-glow transition hover:bg-orange-400 md:inline-flex">Начать обучение</a>
-            <button id="mobile-menu-button" type="button" class="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white md:hidden" aria-label="Открыть меню" aria-expanded="false">
-              <svg id="mobile-menu-open" viewBox="0 0 24 24" class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
-                <path d="M4 7h16M4 12h16M4 17h16"></path>
-              </svg>
-              <svg id="mobile-menu-close" viewBox="0 0 24 24" class="hidden h-7 w-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
-                <path d="M6 6l12 12M18 6L6 18"></path>
-              </svg>
-            </button>
+            </nav>
+            <div class="flex items-center gap-3">
+              <a href="#pricing" class="header-cta hidden rounded-full bg-orange-500 px-5 py-3 text-sm font-extrabold text-black shadow-glow transition hover:bg-orange-400 md:inline-flex">Начать обучение</a>
+              <a href="#pricing" class="mobile-header-cta md:hidden">Начать обучение</a>
+            </div>
           </div>
-        </div>
-        <div id="mobile-menu-panel" class="site-mobile-panel mobile-panel hidden mt-4 overflow-hidden rounded-[1.8rem] border border-white/8 bg-[#111111] p-5 md:hidden">
-          <div class="grid gap-6 text-[2rem] font-extrabold tracking-[-.04em] text-white/90">
-            <a href="#top" class="mobile-nav-link">О курсе</a>
-            <a href="#program" class="mobile-nav-link">Программа</a>
+          <div id="mobile-menu-overlay" class="mobile-drawer-overlay md:hidden" aria-hidden="true"></div>
+          <aside id="mobile-menu-panel" class="site-mobile-drawer md:hidden" aria-label="Мобильное меню">
+            <div class="mobile-drawer-head">
+              <p class="mobile-drawer-title">VADYA <span class="text-orange-400">OFM</span> CLUB</p>
+              <button id="mobile-drawer-close" type="button" class="mobile-drawer-close" aria-label="Закрыть меню">
+                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                  <path d="M6 6l12 12M18 6L6 18"></path>
+                </svg>
+              </button>
+            </div>
+            <nav class="mobile-nav-stack">
+              <a href="#top" class="mobile-nav-link">О курсе</a>
+              <a href="#program" class="mobile-nav-link">Программа</a>
               <a href="#results" class="mobile-nav-link">Кейсы</a>
               <a href="#pricing" class="mobile-nav-link">Тарифы</a>
               <a href="#faq" class="mobile-nav-link">FAQ</a>
               <a href="#reviews" class="mobile-nav-link">Отзывы</a>
-          </div>
-          <a href="#pricing" class="mobile-cta glow-button mt-8 flex min-h-[78px] items-center justify-center rounded-[1.6rem] bg-orange-500 px-6 text-center text-2xl font-extrabold text-black shadow-glow">Начать обучение</a>
-        </div>
-      </header>
+            </nav>
+          </aside>
+        </header>
     </div>
     <div class="mx-auto max-w-[76rem] px-5 pb-0 pt-24 sm:px-7 sm:pb-0 sm:pt-28 lg:px-10">
       <main id="top" class="pt-4 sm:pt-6">
@@ -1814,16 +2382,16 @@
                 </div>
                 <div class="hero-stats">
                   <div class="hero-stat">
-                    <strong>3</strong>
-                    <span>формата обучения</span>
+                    <strong class="hero-stat-value" data-target="20" data-suffix="+">0</strong>
+                    <span class="hero-stat-label">запущенных моделей</span>
                   </div>
                   <div class="hero-stat">
-                    <strong>1</strong>
-                    <span>система запуска</span>
+                    <strong class="hero-stat-value" data-target="10" data-suffix="+">0</strong>
+                    <span class="hero-stat-label">довольных клиентов</span>
                   </div>
                   <div class="hero-stat">
-                    <strong>0</strong>
-                    <span>лишней теории</span>
+                    <strong class="hero-stat-value" data-target="7">0</strong>
+                    <span class="hero-stat-label">дней до продаж</span>
                   </div>
                 </div>
               </div>
@@ -2073,7 +2641,7 @@
             <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7">
               <div class="result-icon mb-7"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"></path></svg></div>
               <h3 class="text-2xl font-extrabold tracking-[-.04em]">Кейс 01 — первая продажа с нуля</h3>
-              <div class="case-photo mt-6 rounded-[1.4rem]"><img src="images/case1.jpg" alt="Кейс 1" /></div>
+              <div class="case-photo mt-6 rounded-[1.4rem]"><img src="case1.jpg" alt="Кейс 1" /></div>
               <ul class="case-list mt-6 space-y-4 text-base leading-8 text-white/62">
                 <li><strong class="text-white">Было:</strong> не было опыта в нейросетях и понимания, как вообще выйти на первую продажу.</li>
                 <li><strong class="text-white">Что сделал:</strong> прошёл базовые модули по созданию модели, контенту и первым скриптам продаж.</li>
@@ -2085,7 +2653,7 @@
             <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7">
               <div class="result-icon mb-7"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16l5-5 3 3 6-6"></path><path d="M14 8h5v5"></path></svg></div>
               <h3 class="text-2xl font-extrabold tracking-[-.04em]">Кейс 02 — рост трафика и подписчиков</h3>
-              <div class="case-photo mt-6 rounded-[1.4rem]"><img src="images/case2.jpg" alt="Кейс 2" /></div>
+              <div class="case-photo mt-6 rounded-[1.4rem]"><img src="case2.jpg" alt="Кейс 2" /></div>
               <ul class="case-list mt-6 space-y-4 text-base leading-8 text-white/62">
                 <li><strong class="text-white">Было:</strong> модель уже была, но трафик почти не давал продаж и не было системы продвижения.</li>
                 <li><strong class="text-white">Что сделал:</strong> внедрил стратегию из блока по трафику и перестроил подачу контента под нужную аудиторию.</li>
@@ -2097,7 +2665,7 @@
             <article class="soft-card results-card rounded-[2rem] p-6 sm:p-7">
               <div class="result-icon mb-7"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16"></path><path d="M16 7.5c0-1.7-1.79-3-4-3s-4 1.3-4 3 1.79 3 4 3 4 1.3 4 3-1.79 3-4 3-4-1.3-4-3"></path></svg></div>
               <h3 class="text-2xl font-extrabold tracking-[-.04em]">Кейс 03 — системный доход и масштабирование</h3>
-              <div class="case-photo mt-6 rounded-[1.4rem]"><img src="images/case3.jpg" alt="Кейс 3" /></div>
+              <div class="case-photo mt-6 rounded-[1.4rem]"><img src="case3.jpg" alt="Кейс 3" /></div>
               <ul class="case-list mt-6 space-y-4 text-base leading-8 text-white/62">
                 <li><strong class="text-white">Было:</strong> уже были попытки продавать, но всё держалось на ручной работе и доход был нестабильным.</li>
                 <li><strong class="text-white">Что сделал:</strong> выстроил процессы, подключил ассистента и внедрил блок масштабирования и автоматизации.</li>
@@ -2269,7 +2837,7 @@
           </div>
           <div class="mx-auto mt-10 grid max-w-6xl gap-5 xl:grid-cols-3">
             <article class="soft-card review-card rounded-[2rem] p-6 sm:p-7">
-              <div class="review-photo rounded-[1.4rem]"><img src="images/review1.jpg" alt="Отзыв 1" /></div>
+              <div class="review-photo rounded-[1.4rem]"><img src="review1.jpg" alt="Отзыв 1" /></div>
               <div class="review-shell">
                 <p class="review-kicker text-xs font-extrabold uppercase tracking-[.26em] text-orange-300">Первые деньги за неделю</p>
                 <p class="review-quote">«С начала апреля пока что примерно 500$ вышло, это за неделю.»</p>
@@ -2277,7 +2845,7 @@
               </div>
             </article>
             <article class="soft-card review-card rounded-[2rem] p-6 sm:p-7">
-              <div class="review-photo rounded-[1.4rem]"><img src="images/review2.jpg" alt="Отзыв 2" /></div>
+              <div class="review-photo rounded-[1.4rem]"><img src="review2.jpg" alt="Отзыв 2" /></div>
               <div class="review-shell">
                 <p class="review-kicker text-xs font-extrabold uppercase tracking-[.26em] text-orange-300">Рост Threads почти до 500k</p>
                 <p class="review-quote">«Есть небольшие, но результаты.»</p>
@@ -2285,7 +2853,7 @@
               </div>
             </article>
             <article class="soft-card review-card rounded-[2rem] p-6 sm:p-7">
-              <div class="review-photo rounded-[1.4rem]"><img src="images/review3.jpg" alt="Отзыв 3" /></div>
+              <div class="review-photo rounded-[1.4rem]"><img src="review3.jpg" alt="Отзыв 3" /></div>
               <div class="review-shell">
                 <p class="review-kicker text-xs font-extrabold uppercase tracking-[.26em] text-orange-300">Ощущение ценности обучения</p>
                 <p class="review-quote">«За такой объём работы цену можно ставить выше.»</p>
@@ -2382,7 +2950,11 @@
       };
       content.addEventListener("transitionend", onEnd);
     }
-    function closeAccordionContent(content) {
+    function closeAccordionContent(content, onDone) {
+      if (content.classList.contains("hidden")) {
+        onDone?.();
+        return;
+      }
       const currentHeight = content.scrollHeight;
       content.style.overflow = "hidden";
       content.style.transition = "height .34s cubic-bezier(.4,0,.2,1), opacity .2s ease";
@@ -2396,7 +2968,9 @@
       const onEnd = (event) => {
         if (event.propertyName !== "height") return;
         content.classList.add("hidden");
+        content.style.height = "0px";
         content.removeEventListener("transitionend", onEnd);
+        onDone?.();
       };
       content.addEventListener("transitionend", onEnd);
     }
@@ -2408,15 +2982,13 @@
         button.addEventListener("click", () => {
           const icon = button.querySelector(iconSelector);
           const isOpen = button.getAttribute("aria-expanded") === "true";
-          const openContentsToClose = [];
+          const openButtonsToClose = [];
           buttons.forEach((otherButton) => {
             const otherContent = otherButton.nextElementSibling;
             const otherIcon = otherButton.querySelector(iconSelector);
             if (otherButton === button) return;
-            otherButton.setAttribute("aria-expanded", "false");
-            otherIcon.style.transform = "rotate(0deg)";
             if (!otherContent.classList.contains("hidden")) {
-              openContentsToClose.push(otherContent);
+              openButtonsToClose.push({ button: otherButton, content: otherContent, icon: otherIcon });
             }
           });
           if (isOpen) {
@@ -2430,23 +3002,11 @@
             icon.style.transform = "rotate(180deg)";
             openAccordionContent(content);
           };
-          if (openContentsToClose.length) {
-            let remaining = openContentsToClose.length;
-            const handleClosed = () => {
-              remaining -= 1;
-              if (remaining === 0) {
-                openNewContent();
-              }
-            };
-            openContentsToClose.forEach((otherContent) => {
-              const onEnd = (event) => {
-                if (event.propertyName !== "height") return;
-                otherContent.removeEventListener("transitionend", onEnd);
-                handleClosed();
-              };
-              otherContent.addEventListener("transitionend", onEnd);
-              closeAccordionContent(otherContent);
-            });
+          if (openButtonsToClose.length) {
+            const { button: activeButton, content: activeContent, icon: activeIcon } = openButtonsToClose[0];
+            activeButton.setAttribute("aria-expanded", "false");
+            activeIcon.style.transform = "rotate(0deg)";
+            closeAccordionContent(activeContent, openNewContent);
             return;
           }
           openNewContent();
@@ -2457,25 +3017,69 @@
     setupAccordion(".faq-toggle", ".faq-icon");
     const mobileMenuButton = document.querySelector("#mobile-menu-button");
     const mobileMenuPanel = document.querySelector("#mobile-menu-panel");
+    const mobileMenuOverlay = document.querySelector("#mobile-menu-overlay");
     const mobileMenuOpen = document.querySelector("#mobile-menu-open");
     const mobileMenuClose = document.querySelector("#mobile-menu-close");
+    const mobileDrawerClose = document.querySelector("#mobile-drawer-close");
     const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
     function setMobileMenuState(isOpen) {
       if (!mobileMenuButton || !mobileMenuPanel) return;
       mobileMenuButton.setAttribute("aria-expanded", String(isOpen));
-      mobileMenuPanel.classList.toggle("hidden", !isOpen);
       mobileMenuPanel.classList.toggle("is-open", isOpen);
+      mobileMenuOverlay?.classList.toggle("is-open", isOpen);
+      mobileMenuOverlay?.setAttribute("aria-hidden", String(!isOpen));
       mobileMenuOpen.classList.toggle("hidden", isOpen);
       mobileMenuClose.classList.toggle("hidden", !isOpen);
+      document.body.style.overflow = isOpen ? "hidden" : "";
     }
     if (mobileMenuButton) {
       mobileMenuButton.addEventListener("click", () => {
         const isOpen = mobileMenuButton.getAttribute("aria-expanded") === "true";
         setMobileMenuState(!isOpen);
       });
+      mobileDrawerClose?.addEventListener("click", () => setMobileMenuState(false));
+      mobileMenuOverlay?.addEventListener("click", () => setMobileMenuState(false));
       mobileNavLinks.forEach((link) => {
         link.addEventListener("click", () => setMobileMenuState(false));
       });
+    }
+    function animateCountUp(element, duration, delay = 0) {
+      const target = Number(element.dataset.target || 0);
+      const suffix = element.dataset.suffix || "";
+      let startTime = null;
+      function tick(now) {
+        if (startTime === null) {
+          startTime = now + delay;
+        }
+        if (now < startTime) {
+          requestAnimationFrame(tick);
+          return;
+        }
+        const progress = Math.min((now - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const value = Math.round(target * eased);
+        element.textContent = `${value}${suffix}`;
+        if (progress < 1) {
+          requestAnimationFrame(tick);
+        } else {
+          element.textContent = `${target}${suffix}`;
+        }
+      }
+      requestAnimationFrame(tick);
+    }
+    const heroStatsBlock = document.querySelector(".hero-stats");
+    const heroStatValues = document.querySelectorAll(".hero-stat-value");
+    if (heroStatsBlock && heroStatValues.length) {
+      const heroStatsObserver = new IntersectionObserver((entries, observerInstance) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const durations = [1450, 1650, 1820];
+          const delays = [0, 520, 1120];
+          heroStatValues.forEach((value, index) => animateCountUp(value, durations[index] || 1600, delays[index] || 0));
+          observerInstance.unobserve(entry.target);
+        });
+      }, { threshold: 0.55 });
+      heroStatsObserver.observe(heroStatsBlock);
     }
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
