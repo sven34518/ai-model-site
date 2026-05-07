@@ -1870,11 +1870,10 @@
     }
     .advanced-panel {
       position: relative;
-      border: 1px solid rgba(88, 64, 43, .10) !important;
+      border: 1px solid rgba(88, 64, 43, .14) !important;
       background:
-        radial-gradient(circle at top right, rgba(229,125,47,.12), transparent 28%),
-        linear-gradient(180deg, rgba(248,241,232,.98), rgba(241,232,221,.98));
-      box-shadow: 0 24px 48px rgba(59, 42, 29, .08);
+        linear-gradient(180deg, rgba(252,247,241,.99), rgba(244,236,226,.99));
+      box-shadow: 0 22px 46px rgba(59, 42, 29, .07), inset 0 0 0 1px rgba(255,255,255,.38);
       overflow: hidden;
     }
     .advanced-panel::before {
@@ -1883,8 +1882,9 @@
       inset: 0;
       pointer-events: none;
       background:
-        linear-gradient(90deg, rgba(229,125,47,0), rgba(229,125,47,.10), rgba(229,125,47,0)) top / 100% 1px no-repeat,
+        linear-gradient(90deg, rgba(229,125,47,0), rgba(229,125,47,.14), rgba(229,125,47,0)) top / 100% 1px no-repeat,
         linear-gradient(180deg, rgba(255,255,255,.45), rgba(255,255,255,0) 22%);
+      border-radius: inherit;
     }
     .advanced-panel .inline-flex {
       position: relative;
@@ -1914,10 +1914,11 @@
       margin-left: .8rem;
     }
     .advanced-lead {
-      color: rgba(73, 57, 45, .76) !important;
+      color: rgba(67, 52, 41, .84) !important;
     }
     .advanced-title {
       color: #221a16 !important;
+      text-shadow: none !important;
     }
     .advanced-grid {
       gap: 1rem;
@@ -1926,14 +1927,20 @@
       position: relative;
       min-height: 100%;
       border-radius: 1.7rem;
-      border: 1px solid rgba(88, 64, 43, .08);
+      border: 1px solid rgba(88, 64, 43, .10);
       background:
-        linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.32)),
-        rgba(255,255,255,.42) !important;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.45);
+        linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.58)),
+        rgba(255,255,255,.72) !important;
+      box-shadow: 0 10px 24px rgba(83, 62, 46, .06), inset 0 1px 0 rgba(255,255,255,.55);
     }
     .advanced-card p:first-child {
       color: #c56a28 !important;
+    }
+    .advanced-card .selection-list li {
+      color: rgba(67, 52, 41, .84) !important;
+    }
+    .advanced-cta-note {
+      color: rgba(73, 57, 45, .62) !important;
     }
     .advanced-card .selection-list li {
       color: rgba(73, 57, 45, .82) !important;
@@ -3373,7 +3380,7 @@
                 <li><strong class="text-white">Было:</strong> уже были попытки продавать, но всё держалось на ручной работе и доход был нестабильным.</li>
                 <li><strong class="text-white">Что сделал:</strong> выстроил процессы, подключил ассистента и внедрил блок масштабирования и автоматизации.</li>
                 <li><strong class="text-white">За сколько дней:</strong> около 3 месяцев на полную перестройку системы.</li>
-                <li><strong class="text-white">Что получил:</strong> доход около $1,500 в месяц на более спокойной операционной модели, без постоянной ручной перегрузки.</li>
+                <li><strong class="text-white">Что получил:</strong> доход около $5,000 в месяц на более спокойной операционной модели, без постоянной ручной перегрузки.</li>
               </ul>
               <p class="mt-auto pt-8 text-sm font-semibold uppercase tracking-[.18em] text-white/28">Стабилизация • переход от хаоса к системе</p>
             </article>
