@@ -1870,10 +1870,9 @@
     }
     .advanced-panel {
       position: relative;
-      border: 1px solid rgba(88, 64, 43, .14) !important;
-      background:
-        linear-gradient(180deg, rgba(252,247,241,.99), rgba(244,236,226,.99));
-      box-shadow: 0 22px 46px rgba(59, 42, 29, .07), inset 0 0 0 1px rgba(255,255,255,.38);
+      border: 1px solid rgba(88, 64, 43, .16) !important;
+      background: rgba(248, 243, 236, .98);
+      box-shadow: 0 18px 34px rgba(59, 42, 29, .06), inset 0 0 0 1px rgba(255,255,255,.52);
       overflow: hidden;
     }
     .advanced-panel::before {
@@ -1882,9 +1881,9 @@
       inset: 0;
       pointer-events: none;
       background:
-        linear-gradient(90deg, rgba(229,125,47,0), rgba(229,125,47,.14), rgba(229,125,47,0)) top / 100% 1px no-repeat,
-        linear-gradient(180deg, rgba(255,255,255,.45), rgba(255,255,255,0) 22%);
+        linear-gradient(90deg, rgba(229,125,47,0), rgba(229,125,47,.16), rgba(229,125,47,0)) top / 100% 1px no-repeat;
       border-radius: inherit;
+      opacity: .95;
     }
     .advanced-panel .inline-flex {
       position: relative;
@@ -1920,6 +1919,12 @@
       color: #221a16 !important;
       text-shadow: none !important;
     }
+    .advanced-title .accent-text {
+      background: none !important;
+      -webkit-background-clip: initial !important;
+      background-clip: initial !important;
+      color: #e18845 !important;
+    }
     .advanced-grid {
       gap: 1rem;
     }
@@ -1927,11 +1932,9 @@
       position: relative;
       min-height: 100%;
       border-radius: 1.7rem;
-      border: 1px solid rgba(88, 64, 43, .10);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.58)),
-        rgba(255,255,255,.72) !important;
-      box-shadow: 0 10px 24px rgba(83, 62, 46, .06), inset 0 1px 0 rgba(255,255,255,.55);
+      border: 1px solid rgba(88, 64, 43, .12);
+      background: rgba(255,255,255,.94) !important;
+      box-shadow: 0 8px 18px rgba(83, 62, 46, .04), inset 0 1px 0 rgba(255,255,255,.62);
     }
     .advanced-card p:first-child {
       color: #c56a28 !important;
@@ -1950,7 +1953,7 @@
       box-shadow: 0 0 0 4px rgba(229,125,47,.10);
     }
     .advanced-cta-wrap {
-      border-top: 1px solid rgba(88,64,43,.10);
+      border-top: 1px solid rgba(88,64,43,.12);
       padding-top: 1.7rem;
     }
     .advanced-cta-note {
