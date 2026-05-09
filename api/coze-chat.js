@@ -19,14 +19,22 @@ module.exports = async function handler(req, res) {
   }
 
   const safeHistory = Array.isArray(history) ? history.slice(-6) : [];
-  const additionalMessages = safeHistory
-    .filter((item) => item && typeof item.content === "string" && item.content.trim())
-    .map((item) => ({
-      role: item.role === "assistant" ? "assistant" : "user",
-      type: item.role === "assistant" ? "answer" : "question",
+  const additionalMessages = [
+    ...safeHistory
+      .filter((item) => item && typeof item.content === "string" && item.content.trim())
+      .map((item) => ({
+        role: item.role === "assistant" ? "assistant" : "user",
+        type: item.role === "assistant" ? "answer" : "question",
+        content_type: "text",
+        content: item.content.trim()
+      })),
+    {
+      role: "user",
+      type: "question",
       content_type: "text",
-      content: item.content.trim()
-    }));
+      content: message.trim()
+    }
+  ];
 
   const userId =
     req.headers["x-forwarded-for"]?.toString().split(",")[0]?.trim() ||
@@ -43,7 +51,7 @@ module.exports = async function handler(req, res) {
       body: JSON.stringify({
         bot_id: botId,
         user_id: userId,
-        stream: false,
+        stream: true,
         auto_save_history: false,
         additional_messages: additionalMessages
       })
@@ -57,9 +65,11 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    const reply = readCozeResponse(responseText);
+    const reply = readCozeStreamText(responseText);
     if (!reply) {
-      return res.status(502).json({ error: `Could not parse Coze reply: ${responseText}` });
+      return res.status(502).json({
+        error: `Could not parse Coze reply: ${responseText}`
+      });
     }
 
     return res.status(200).json({ reply });
@@ -70,34 +80,67 @@ module.exports = async function handler(req, res) {
   }
 };
 
-function readCozeResponse(rawText) {
-  let payload;
-  try {
-    payload = JSON.parse(rawText);
-  } catch {
-    return "";
-  }
+function readCozeStreamText(rawText) {
+  const chunks = rawText.split("\n\n");
+  let finalReply = "";
 
-  const directReply =
-    payload.data?.content ||
-    payload.data?.message?.content ||
-    payload.message?.content ||
-    payload.content ||
-    "";
+  for (const chunk of chunks) {
+    const lines = chunk
+      .split("\n")
+      .map((line) => line.trim())
+      .filter(Boolean);
 
-  if (typeof directReply === "string" && directReply.trim()) {
-    return normalizeReply(directReply);
-  }
+    let eventName = "";
+    let dataLine = "";
 
-  const messages = payload.data?.messages || payload.messages || [];
-  if (Array.isArray(messages)) {
-    for (const item of messages) {
-      const candidate = extractVisibleText(item);
-      if (candidate) return normalizeReply(candidate);
+    for (const line of lines) {
+      if (line.startsWith("event:")) {
+        eventName = line.slice(6).trim();
+      } else if (line.startsWith("data:")) {
+        dataLine += line.slice(5).trim();
+      }
     }
+
+    if (!dataLine || dataLine === "[DONE]") continue;
+
+    let payload;
+    try {
+      payload = JSON.parse(dataLine);
+    } catch {
+      continue;
+    }
+
+    if (isServiceEvent(eventName, payload)) continue;
+
+    const candidate = extractVisibleText(payload);
+    if (!candidate) continue;
+
+    finalReply = candidate;
   }
 
-  return "";
+  return normalizeReply(finalReply);
+}
+
+function isServiceEvent(eventName, payload) {
+  const joined = [
+    eventName,
+    payload?.msg_type,
+    payload?.type,
+    payload?.event,
+    payload?.message?.type,
+    payload?.data?.type
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+
+  return (
+    joined.includes("knowledge") ||
+    joined.includes("recall") ||
+    joined.includes("debug") ||
+    joined.includes("tool") ||
+    joined.includes("workflow")
+  );
 }
 
 function extractVisibleText(payload) {
@@ -124,23 +167,25 @@ function looksLikeServicePayload(text) {
 
   try {
     const parsed = JSON.parse(text);
-    const msgType =
-      parsed?.msg_type ||
-      parsed?.type ||
-      parsed?.event ||
-      parsed?.message?.type ||
-      parsed?.data?.type ||
-      "";
+    const joined = [
+      parsed?.msg_type,
+      parsed?.type,
+      parsed?.event,
+      parsed?.message?.type,
+      parsed?.data?.type
+    ]
+      .filter(Boolean)
+      .join(" ")
+      .toLowerCase();
 
-    if (typeof msgType === "string") {
-      const normalizedType = msgType.toLowerCase();
-      return (
-        normalizedType.includes("knowledge") ||
-        normalizedType.includes("recall") ||
-        normalizedType.includes("debug") ||
-        normalizedType.includes("tool") ||
-        normalizedType.includes("workflow")
-      );
+    if (
+      joined.includes("knowledge") ||
+      joined.includes("recall") ||
+      joined.includes("debug") ||
+      joined.includes("tool") ||
+      joined.includes("workflow")
+    ) {
+      return true;
     }
 
     return Boolean(parsed?.chunks || parsed?.ori_req || parsed?.status_code !== undefined);
@@ -151,8 +196,8 @@ function looksLikeServicePayload(text) {
 
 function normalizeReply(text) {
   return text
+    .replace(/\s+/g, " ")
     .replace(/\s+([.,!?;:])/g, "$1")
     .replace(/([.,!?;:])(?=\S)/g, "$1 ")
-    .replace(/\s{2,}/g, " ")
     .trim();
 }
