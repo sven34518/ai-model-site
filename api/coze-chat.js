@@ -19,22 +19,14 @@ module.exports = async function handler(req, res) {
   }
 
   const safeHistory = Array.isArray(history) ? history.slice(-6) : [];
-  const additionalMessages = [
-    ...safeHistory
-      .filter((item) => item && typeof item.content === "string" && item.content.trim())
-      .map((item) => ({
-        role: item.role === "assistant" ? "assistant" : "user",
-        type: item.role === "assistant" ? "answer" : "question",
-        content_type: "text",
-        content: item.content.trim()
-      })),
-    {
-      role: "user",
-      type: "question",
+  const additionalMessages = safeHistory
+    .filter((item) => item && typeof item.content === "string" && item.content.trim())
+    .map((item) => ({
+      role: item.role === "assistant" ? "assistant" : "user",
+      type: item.role === "assistant" ? "answer" : "question",
       content_type: "text",
-      content: message.trim()
-    }
-  ];
+      content: item.content.trim()
+    }));
 
   const userId =
     req.headers["x-forwarded-for"]?.toString().split(",")[0]?.trim() ||
@@ -51,23 +43,26 @@ module.exports = async function handler(req, res) {
       body: JSON.stringify({
         bot_id: botId,
         user_id: userId,
-        stream: true,
+        stream: false,
         auto_save_history: false,
         additional_messages: additionalMessages
       })
     });
 
     const responseText = await cozeResponse.text();
+    const fallbackReply = "Сейчас я не смог получить точный ответ. Напишите владельцу в Telegram: @preludik.";
 
     if (!cozeResponse.ok) {
       return res.status(cozeResponse.status || 502).json({
+        reply: fallbackReply,
         error: responseText || "Coze request failed."
       });
     }
 
-    const reply = readCozeStreamText(responseText);
+    const reply = readCozeResponse(responseText);
     if (!reply) {
-      return res.status(502).json({
+      return res.status(200).json({
+        reply: fallbackReply,
         error: `Could not parse Coze reply: ${responseText}`
       });
     }
@@ -80,96 +75,71 @@ module.exports = async function handler(req, res) {
   }
 };
 
-function readCozeStreamText(rawText) {
-  const chunks = rawText.split("\n\n");
-  let finalReply = "";
+function readCozeResponse(rawText) {
+  let payload;
+  try {
+    payload = JSON.parse(rawText);
+  } catch {
+    return "";
+  }
 
-  for (const chunk of chunks) {
-    const lines = chunk
-      .split("\n")
-      .map((line) => line.trim())
-      .filter(Boolean);
+  if (isServicePayload(payload)) {
+    return "";
+  }
 
-    let eventName = "";
-    let dataLine = "";
+  const directReply =
+    extractVisibleText(payload.data) ||
+    extractVisibleText(payload.message) ||
+    extractVisibleText(payload);
 
-    for (const line of lines) {
-      if (line.startsWith("event:")) {
-        eventName = line.slice(6).trim();
-      } else if (line.startsWith("data:")) {
-        dataLine += line.slice(5).trim();
-      }
-    }
+  if (typeof directReply === "string" && directReply.trim()) {
+    return normalizeReply(directReply);
+  }
 
-    if (!dataLine || dataLine === "[DONE]") continue;
+  const dataObject = parsePossiblyStringifiedJson(payload.data);
+  if (dataObject && !isServicePayload(dataObject)) {
+    const nestedReply =
+      extractVisibleText(dataObject) ||
+      extractVisibleText(dataObject.message) ||
+      extractVisibleText(dataObject.data);
+    if (nestedReply) return normalizeReply(nestedReply);
+  }
 
-    let payload;
-    try {
-      payload = JSON.parse(dataLine);
-    } catch {
-      continue;
-    }
-
-    if (isServiceEvent(eventName, payload)) continue;
-
-        const candidate = extractVisibleText(payload);
-    if (!candidate) continue;
-
-    const joinedMeta = [
-      eventName,
-      payload?.msg_type,
-      payload?.type,
-      payload?.event,
-      payload?.message?.type,
-      payload?.data?.type
-    ]
-      .filter(Boolean)
-      .join(" ")
-      .toLowerCase();
-
-    const looksLikeSuggestion =
-      joinedMeta.includes("suggest") ||
-      joinedMeta.includes("question") ||
-      joinedMeta.includes("follow_up");
-
-    if (looksLikeSuggestion) continue;
-
-    if (!finalReply || candidate.length > finalReply.length) {
-      finalReply = candidate;
+  const messages = payload.data?.messages || payload.messages || [];
+  if (Array.isArray(messages)) {
+    for (const item of messages) {
+      const candidate = extractVisibleText(item);
+      if (candidate) return normalizeReply(candidate);
     }
   }
 
-  return normalizeReply(finalReply);
+  return "";
 }
 
-function isServiceEvent(eventName, payload) {
-  const joined = [
-    eventName,
-    payload?.msg_type,
-    payload?.type,
-    payload?.event,
-    payload?.message?.type,
-    payload?.data?.type
-  ]
-    .filter(Boolean)
-    .join(" ")
-    .toLowerCase();
-
-  return (
-    joined.includes("knowledge") ||
-    joined.includes("recall") ||
-    joined.includes("debug") ||
-    joined.includes("tool") ||
-    joined.includes("workflow")
-  );
+function parsePossiblyStringifiedJson(value) {
+  if (typeof value !== "string") return value && typeof value === "object" ? value : null;
+  try {
+    return JSON.parse(value);
+  } catch {
+    return null;
+  }
 }
 
 function extractVisibleText(payload) {
+  if (!payload || typeof payload !== "object") return "";
   const candidates = [
     payload.content,
+    payload.answer,
+    payload.reply,
+    payload.output,
+    payload.text,
     payload.message?.content,
     payload.data?.content,
-    payload.data?.message?.content
+    payload.data?.message?.content,
+    payload.data?.answer,
+    payload.data?.reply,
+    payload.data?.output,
+    payload.data?.text
   ];
 
   for (const value of candidates) {
@@ -188,25 +158,25 @@ function looksLikeServicePayload(text) {
 
   try {
     const parsed = JSON.parse(text);
-    const joined = [
-      parsed?.msg_type,
-      parsed?.type,
-      parsed?.event,
-      parsed?.message?.type,
-      parsed?.data?.type
-    ]
-      .filter(Boolean)
-      .join(" ")
-      .toLowerCase();
+    const msgType =
+      parsed?.msg_type ||
+      parsed?.type ||
+      parsed?.event ||
+      parsed?.message?.type ||
+      parsed?.data?.type ||
+      "";
 
-    if (
-      joined.includes("knowledge") ||
-      joined.includes("recall") ||
-      joined.includes("debug") ||
-      joined.includes("tool") ||
-      joined.includes("workflow")
-    ) {
-      return true;
+    if (typeof msgType === "string") {
+      const normalizedType = msgType.toLowerCase();
+      return (
+        normalizedType.includes("knowledge") ||
+        normalizedType.includes("recall") ||
+        normalizedType.includes("debug") ||
+        normalizedType.includes("tool") ||
+        normalizedType.includes("workflow") ||
+        normalizedType.includes("generate_answer_finish") ||
+        normalizedType.includes("message_finish")
+      );
     }
 
     return Boolean(parsed?.chunks || parsed?.ori_req || parsed?.status_code !== undefined);
@@ -215,10 +185,44 @@ function looksLikeServicePayload(text) {
   }
 }
 
+function isServicePayload(payload) {
+  if (!payload || typeof payload !== "object") return false;
+
+  const msgType = String(
+    payload.msg_type ||
+    payload.type ||
+    payload.event ||
+    payload.message?.type ||
+    payload.data?.type ||
+    ""
+  ).toLowerCase();
+
+  if (
+    msgType.includes("knowledge") ||
+    msgType.includes("recall") ||
+    msgType.includes("debug") ||
+    msgType.includes("tool") ||
+    msgType.includes("workflow") ||
+    msgType.includes("generate_answer_finish") ||
+    msgType.includes("message_finish")
+  ) {
+    return true;
+  }
+
+  const dataText = typeof payload.data === "string" ? payload.data : "";
+  if (dataText && looksLikeServicePayload(dataText)) return true;
+
+  return Boolean(
+    payload.finish_reason !== undefined ||
+    payload.FinData !== undefined ||
+    payload.ori_req !== undefined
+  );
+}
+
 function normalizeReply(text) {
   return text
-    .replace(/\s+/g, " ")
     .replace(/\s+([.,!?;:])/g, "$1")
     .replace(/([.,!?;:])(?=\S)/g, "$1 ")
+    .replace(/\s{2,}/g, " ")
     .trim();
 }
