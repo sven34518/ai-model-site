@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="yapl-verification" content="5027962331" />
   <title>VADYA OFM CLUB — пошаговая система запуска</title>
-  <link rel="shortcut icon" href="/images/favicon3.png" type="image/png">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -687,6 +686,262 @@
       transform: translateY(-1px);
       box-shadow: 0 18px 30px rgba(17, 15, 13, .18);
     }
+    .support-chat {
+      position: fixed;
+      right: 1.25rem;
+      bottom: 1.25rem;
+      z-index: 55;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: .85rem;
+    }
+    .support-chat__panel {
+      width: min(24rem, calc(100vw - 1.5rem));
+      height: min(38rem, calc(100vh - 6.5rem));
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border-radius: 1.7rem;
+      border: 1px solid rgba(88, 64, 43, .12);
+      background: rgba(255, 249, 242, .98);
+      box-shadow: 0 24px 56px rgba(53, 39, 29, .18), inset 0 0 0 1px rgba(255,255,255,.42);
+      opacity: 0;
+      transform: translateY(16px) scale(.98);
+      pointer-events: none;
+      transition: opacity .22s ease, transform .22s ease;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .support-chat.is-open .support-chat__panel {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+    .support-chat__button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .7rem;
+      min-height: 4rem;
+      padding: 0 1.3rem;
+      border: 1px solid rgba(163, 70, 23, .14);
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(232,123,61,.98), rgba(205,93,39,.98));
+      color: #fff8ef;
+      box-shadow: 0 16px 34px rgba(197,103,42,.22);
+      font-size: .98rem;
+      font-weight: 800;
+      letter-spacing: -.01em;
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .support-chat__button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 38px rgba(197,103,42,.28);
+    }
+    .support-chat__button svg {
+      width: 1.15rem;
+      height: 1.15rem;
+      flex-shrink: 0;
+    }
+    .support-chat__head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1rem .9rem;
+      border-bottom: 1px solid rgba(88, 64, 43, .08);
+      background: linear-gradient(180deg, rgba(255,255,255,.58), rgba(255,255,255,.2));
+    }
+    .support-chat__title {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      min-width: 0;
+    }
+    .support-chat__logo {
+      width: 2.4rem;
+      height: 2.4rem;
+      border-radius: .92rem;
+      background: #13110f;
+      color: #f08a3c;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 900;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.05);
+      flex-shrink: 0;
+    }
+    .support-chat__name {
+      color: #231b16;
+      font-size: 1rem;
+      font-weight: 800;
+      line-height: 1.15;
+    }
+    .support-chat__meta {
+      margin-top: .18rem;
+      color: rgba(89, 70, 55, .66);
+      font-size: .78rem;
+      line-height: 1.35;
+    }
+    .support-chat__close {
+      width: 2.3rem;
+      height: 2.3rem;
+      border: 1px solid rgba(88, 64, 43, .1);
+      border-radius: 999px;
+      background: rgba(255,255,255,.7);
+      color: #5c4738;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .support-chat__messages {
+      flex: 1 1 auto;
+      min-height: 0;
+      padding: 1rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: .85rem;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.42), rgba(255,255,255,0)),
+        rgba(248, 243, 236, .9);
+    }
+    .support-chat__welcome {
+      margin: 0;
+      padding: .95rem 1rem;
+      border-radius: 1.15rem 1.15rem 1.15rem .5rem;
+      background: rgba(255,255,255,.82);
+      border: 1px solid rgba(88, 64, 43, .08);
+      color: rgba(62, 50, 41, .86);
+      font-size: .92rem;
+      line-height: 1.62;
+    }
+    .support-chat__quick {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+    .support-chat__chip {
+      min-height: 2rem;
+      padding: 0 .82rem;
+      border-radius: 999px;
+      border: 1px solid rgba(229,125,47,.18);
+      background: rgba(255,255,255,.76);
+      color: #b96329;
+      font-size: .8rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .support-chat__row {
+      display: flex;
+    }
+    .support-chat__row--user {
+      justify-content: flex-end;
+    }
+    .support-chat__bubble {
+      max-width: min(88%, 18rem);
+      padding: .88rem 1rem;
+      border-radius: 1.15rem;
+      font-size: .92rem;
+      line-height: 1.6;
+      word-break: break-word;
+      white-space: pre-wrap;
+    }
+    .support-chat__row--bot .support-chat__bubble {
+      border-radius: 1.15rem 1.15rem 1.15rem .42rem;
+      background: rgba(255,255,255,.88);
+      border: 1px solid rgba(88, 64, 43, .08);
+      color: rgba(45, 36, 29, .88);
+    }
+    .support-chat__row--user .support-chat__bubble {
+      border-radius: 1.15rem 1.15rem .42rem 1.15rem;
+      background: linear-gradient(180deg, rgba(232,123,61,.98), rgba(205,93,39,.98));
+      color: #fff9f1;
+      box-shadow: 0 14px 24px rgba(197,103,42,.16);
+    }
+    .support-chat__composer {
+      padding: .85rem 1rem 1rem;
+      border-top: 1px solid rgba(88, 64, 43, .08);
+      background: rgba(255, 249, 242, .98);
+    }
+    .support-chat__form {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: .65rem;
+      align-items: end;
+    }
+    .support-chat__input {
+      width: 100%;
+      min-height: 3.2rem;
+      max-height: 9rem;
+      resize: none;
+      padding: .95rem 1rem;
+      border: 1px solid rgba(88, 64, 43, .1);
+      border-radius: 1.15rem;
+      background: rgba(255,255,255,.9);
+      color: #211915;
+      font: inherit;
+      line-height: 1.5;
+      outline: none;
+    }
+    .support-chat__input:focus {
+      border-color: rgba(217,119,46,.32);
+      box-shadow: 0 0 0 4px rgba(229,125,47,.08);
+    }
+    .support-chat__send {
+      width: 3.2rem;
+      height: 3.2rem;
+      border: 0;
+      border-radius: 999px;
+      background: #171311;
+      color: #fff7ee;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+    .support-chat__send:disabled {
+      opacity: .42;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .support-chat__send svg {
+      width: 1rem;
+      height: 1rem;
+    }
+    .support-chat__footnote {
+      margin-top: .55rem;
+      color: rgba(89, 70, 55, .62);
+      font-size: .74rem;
+      line-height: 1.45;
+    }
+    .support-chat__typing {
+      display: inline-flex;
+      align-items: center;
+      gap: .32rem;
+      padding: .72rem .85rem;
+      border-radius: 1rem 1rem 1rem .42rem;
+      border: 1px solid rgba(88, 64, 43, .08);
+      background: rgba(255,255,255,.88);
+    }
+    .support-chat__typing span {
+      width: .42rem;
+      height: .42rem;
+      border-radius: 999px;
+      background: rgba(217,119,46,.62);
+      animation: supportChatPulse 1s infinite ease-in-out;
+    }
+    .support-chat__typing span:nth-child(2) { animation-delay: .14s; }
+    .support-chat__typing span:nth-child(3) { animation-delay: .28s; }
+    @keyframes supportChatPulse {
+      0%, 80%, 100% { transform: translateY(0); opacity: .46; }
+      40% { transform: translateY(-2px); opacity: 1; }
+    }
     @media (max-width: 640px) {
       .cookie-banner {
         left: 1rem;
@@ -705,6 +960,19 @@
       }
       .cookie-banner__button {
         width: 100%;
+      }
+      .support-chat {
+        right: .85rem;
+        bottom: 6.9rem;
+        left: .85rem;
+        align-items: stretch;
+      }
+      .support-chat__panel {
+        width: 100%;
+        height: min(33rem, calc(100vh - 8.5rem));
+      }
+      .support-chat__button {
+        align-self: flex-end;
       }
     }
     .pricing-featured {
@@ -3626,6 +3894,41 @@
           </div>
         </div>
       </footer>
+      <div id="support-chat" class="support-chat" aria-live="polite">
+        <div class="support-chat__panel" aria-hidden="true">
+          <div class="support-chat__head">
+            <div class="support-chat__title">
+              <div class="support-chat__logo">V</div>
+              <div>
+                <div class="support-chat__name">Поддержка VADYA OFM</div>
+                <div class="support-chat__meta">Быстрые ответы по тарифам, программе и заявке</div>
+              </div>
+            </div>
+            <button id="support-chat-close" class="support-chat__close" type="button" aria-label="Закрыть чат">×</button>
+          </div>
+          <div id="support-chat-messages" class="support-chat__messages">
+            <p class="support-chat__welcome">Привет. Я помогу с вопросами по обучению, тарифам, программе и заявке на старшие форматы.</p>
+            <div class="support-chat__quick">
+              <button class="support-chat__chip" type="button" data-chat-prompt="Какой тариф мне выбрать?">Какой тариф выбрать?</button>
+              <button class="support-chat__chip" type="button" data-chat-prompt="Я с нуля, мне подойдёт?">Я с нуля, мне подойдёт?</button>
+              <button class="support-chat__chip" type="button" data-chat-prompt="Как попасть на продвинутый формат?">Как попасть на продвинутый?</button>
+            </div>
+          </div>
+          <div class="support-chat__composer">
+            <form id="support-chat-form" class="support-chat__form">
+              <textarea id="support-chat-input" class="support-chat__input" rows="1" maxlength="1200" placeholder="Напиши свой вопрос..."></textarea>
+              <button id="support-chat-send" class="support-chat__send" type="submit" aria-label="Отправить сообщение">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"></path><path d="M22 2L15 22l-4-9-9-4 20-7z"></path></svg>
+              </button>
+            </form>
+            <div class="support-chat__footnote">Не отправляй сюда карты, пароли и другие чувствительные данные.</div>
+          </div>
+        </div>
+        <button id="support-chat-toggle" class="support-chat__button" type="button" aria-expanded="false" aria-controls="support-chat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          Поддержка
+        </button>
+      </div>
       <div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Уведомление о файлах cookie">
         <p class="cookie-banner__title">Наш сайт использует куки.</p>
         <p class="cookie-banner__text">
@@ -3863,6 +4166,135 @@
         cookieBanner.classList.remove("is-visible");
       });
     }
+
+    const supportChat = document.getElementById("support-chat");
+    const supportChatPanel = supportChat?.querySelector(".support-chat__panel");
+    const supportChatToggle = document.getElementById("support-chat-toggle");
+    const supportChatClose = document.getElementById("support-chat-close");
+    const supportChatMessages = document.getElementById("support-chat-messages");
+    const supportChatForm = document.getElementById("support-chat-form");
+    const supportChatInput = document.getElementById("support-chat-input");
+    const supportChatSend = document.getElementById("support-chat-send");
+    const supportChatQuickButtons = document.querySelectorAll("[data-chat-prompt]");
+    const supportChatHistory = [];
+    let supportChatRequestInFlight = false;
+
+    function setSupportChatState(isOpen) {
+      if (!supportChat || !supportChatPanel || !supportChatToggle) return;
+      supportChat.classList.toggle("is-open", isOpen);
+      supportChatPanel.setAttribute("aria-hidden", String(!isOpen));
+      supportChatToggle.setAttribute("aria-expanded", String(isOpen));
+      if (isOpen) {
+        setTimeout(() => supportChatInput?.focus(), 120);
+      }
+    }
+
+    function escapeHtml(value) {
+      return value
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/\"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function appendSupportChatMessage(role, text) {
+      if (!supportChatMessages) return;
+      const row = document.createElement("div");
+      row.className = `support-chat__row support-chat__row--${role}`;
+      const bubble = document.createElement("div");
+      bubble.className = "support-chat__bubble";
+      bubble.innerHTML = escapeHtml(text);
+      row.appendChild(bubble);
+      supportChatMessages.appendChild(row);
+      supportChatMessages.scrollTop = supportChatMessages.scrollHeight;
+    }
+
+    function appendSupportTyping() {
+      if (!supportChatMessages) return null;
+      const row = document.createElement("div");
+      row.className = "support-chat__row support-chat__row--bot";
+      row.dataset.typing = "true";
+      row.innerHTML = '<div class="support-chat__typing"><span></span><span></span><span></span></div>';
+      supportChatMessages.appendChild(row);
+      supportChatMessages.scrollTop = supportChatMessages.scrollHeight;
+      return row;
+    }
+
+    function resizeSupportChatInput() {
+      if (!supportChatInput) return;
+      supportChatInput.style.height = "auto";
+      supportChatInput.style.height = `${Math.min(supportChatInput.scrollHeight, 144)}px`;
+    }
+
+    async function sendSupportChatMessage(rawMessage) {
+      const message = rawMessage.trim();
+      if (!message || supportChatRequestInFlight) return;
+      supportChatRequestInFlight = true;
+      if (supportChatSend) supportChatSend.disabled = true;
+      appendSupportChatMessage("user", message);
+      supportChatHistory.push({ role: "user", content: message });
+      const typingRow = appendSupportTyping();
+      try {
+        const response = await fetch("/api/coze-chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            message,
+            history: supportChatHistory.slice(-6)
+          })
+        });
+        const payload = await response.json();
+        typingRow?.remove();
+        if (!response.ok || !payload.reply) {
+          throw new Error(payload.error || "Сервис временно недоступен.");
+        }
+        appendSupportChatMessage("bot", payload.reply);
+        supportChatHistory.push({ role: "assistant", content: payload.reply });
+      } catch (error) {
+        typingRow?.remove();
+        const fallback = "Сейчас чат временно недоступен. Напиши напрямую в Telegram: @preludik";
+        appendSupportChatMessage("bot", fallback);
+      } finally {
+        supportChatRequestInFlight = false;
+        if (supportChatSend) supportChatSend.disabled = false;
+      }
+    }
+
+    supportChatToggle?.addEventListener("click", () => {
+      const isOpen = supportChat?.classList.contains("is-open");
+      setSupportChatState(!isOpen);
+    });
+    supportChatClose?.addEventListener("click", () => setSupportChatState(false));
+    supportChatQuickButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const prompt = button.getAttribute("data-chat-prompt");
+        if (!prompt) return;
+        setSupportChatState(true);
+        sendSupportChatMessage(prompt);
+      });
+    });
+    supportChatInput?.addEventListener("input", resizeSupportChatInput);
+    supportChatInput?.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        supportChatForm?.requestSubmit();
+      }
+    });
+    supportChatForm?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const value = supportChatInput?.value || "";
+      if (!value.trim()) return;
+      supportChatInput.value = "";
+      resizeSupportChatInput();
+      sendSupportChatMessage(value);
+    });
+    document.addEventListener("click", (event) => {
+      if (!supportChat?.classList.contains("is-open")) return;
+      if (supportChat.contains(event.target)) return;
+      setSupportChatState(false);
+    });
+    resizeSupportChatInput();
   
     const modal = document.getElementById("image-modal");
     const modalImg = document.getElementById("image-modal-img");
