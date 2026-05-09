@@ -112,10 +112,31 @@ function readCozeStreamText(rawText) {
 
     if (isServiceEvent(eventName, payload)) continue;
 
-    const candidate = extractVisibleText(payload);
+        const candidate = extractVisibleText(payload);
     if (!candidate) continue;
 
-    finalReply = candidate;
+    const joinedMeta = [
+      eventName,
+      payload?.msg_type,
+      payload?.type,
+      payload?.event,
+      payload?.message?.type,
+      payload?.data?.type
+    ]
+      .filter(Boolean)
+      .join(" ")
+      .toLowerCase();
+
+    const looksLikeSuggestion =
+      joinedMeta.includes("suggest") ||
+      joinedMeta.includes("question") ||
+      joinedMeta.includes("follow_up");
+
+    if (looksLikeSuggestion) continue;
+
+    if (!finalReply || candidate.length > finalReply.length) {
+      finalReply = candidate;
+    }
   }
 
   return normalizeReply(finalReply);
