@@ -83,37 +83,17 @@ function readCozeResponse(rawText) {
     return "";
   }
 
-  if (isServicePayload(payload)) {
+  const candidates = collectReplyCandidates(payload);
+  if (!candidates.length) {
     return "";
   }
 
-  const directReply =
-    extractVisibleText(payload.data) ||
-    extractVisibleText(payload.message) ||
-    extractVisibleText(payload);
+  const best = candidates
+    .map((text) => normalizeReply(text))
+    .filter(Boolean)
+    .sort((a, b) => b.length - a.length)[0];
 
-  if (typeof directReply === "string" && directReply.trim()) {
-    return normalizeReply(directReply);
-  }
-
-  const dataObject = parsePossiblyStringifiedJson(payload.data);
-  if (dataObject && !isServicePayload(dataObject)) {
-    const nestedReply =
-      extractVisibleText(dataObject) ||
-      extractVisibleText(dataObject.message) ||
-      extractVisibleText(dataObject.data);
-    if (nestedReply) return normalizeReply(nestedReply);
-  }
-
-  const messages = payload.data?.messages || payload.messages || [];
-  if (Array.isArray(messages)) {
-    for (const item of messages) {
-      const candidate = extractVisibleText(item);
-      if (candidate) return normalizeReply(candidate);
-    }
-  }
-
-  return "";
+  return best || "";
 }
 
 function parsePossiblyStringifiedJson(value) {
@@ -151,6 +131,62 @@ function extractVisibleText(payload) {
   }
 
   return "";
+}
+
+function collectReplyCandidates(root) {
+  const results = [];
+  const seen = new Set();
+
+  function walk(value) {
+    if (value === null || value === undefined) return;
+    if (typeof value === "string") {
+      const trimmed = value.trim();
+      if (!trimmed || seen.has(trimmed)) return;
+      seen.add(trimmed);
+
+      if (looksLikeServicePayload(trimmed)) {
+        const parsed = parsePossiblyStringifiedJson(trimmed);
+        if (parsed && typeof parsed === "object") walk(parsed);
+        return;
+      }
+
+      results.push(trimmed);
+      return;
+    }
+
+    if (Array.isArray(value)) {
+      value.forEach(walk);
+      return;
+    }
+
+    if (typeof value === "object") {
+      if (isServicePayload(value)) return;
+      const orderedKeys = [
+        "content",
+        "answer",
+        "reply",
+        "output",
+        "text",
+        "message",
+        "data",
+        "messages"
+      ];
+
+      for (const key of orderedKeys) {
+        if (Object.prototype.hasOwnProperty.call(value, key)) {
+          walk(value[key]);
+        }
+      }
+
+      for (const [key, nested] of Object.entries(value)) {
+        if (orderedKeys.includes(key)) continue;
+        walk(nested);
+      }
+    }
+  }
+
+  walk(root);
+  return results.filter((text) => !looksLikeServicePayload(text));
 }
 
 function looksLikeServicePayload(text) {
