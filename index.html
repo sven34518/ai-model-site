@@ -698,33 +698,39 @@
     }
     .support-chat__panel {
       width: min(24rem, calc(100vw - 1.5rem));
-      height: min(38rem, calc(100vh - 6.5rem));
+      height: min(39rem, calc(100vh - 3.2rem));
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      border-radius: 1.7rem;
-      border: 1px solid rgba(88, 64, 43, .12);
-      background: rgba(255, 249, 242, .98);
-      box-shadow: 0 24px 56px rgba(53, 39, 29, .18), inset 0 0 0 1px rgba(255,255,255,.42);
+      border-radius: 1.9rem;
+      border: 1px solid rgba(88, 64, 43, .1);
+      background: rgba(255, 251, 246, .98);
+      box-shadow: 0 28px 70px rgba(53, 39, 29, .18), inset 0 0 0 1px rgba(255,255,255,.48);
       opacity: 0;
-      transform: translateY(16px) scale(.98);
+      transform: translateY(28px) scale(.98);
       pointer-events: none;
       transition: opacity .22s ease, transform .22s ease;
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
+      margin-bottom: -4rem;
     }
     .support-chat.is-open .support-chat__panel {
       opacity: 1;
       transform: translateY(0) scale(1);
       pointer-events: auto;
     }
+    .support-chat.is-open .support-chat__button {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px) scale(.96);
+    }
     .support-chat__button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: .7rem;
-      min-height: 4rem;
-      padding: 0 1.3rem;
+      min-height: 4.15rem;
+      padding: 0 1.4rem;
       border: 1px solid rgba(163, 70, 23, .14);
       border-radius: 999px;
       background: linear-gradient(180deg, rgba(232,123,61,.98), rgba(205,93,39,.98));
@@ -750,9 +756,11 @@
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      padding: 1rem 1rem .9rem;
+      padding: 1.05rem 1.05rem .95rem;
       border-bottom: 1px solid rgba(88, 64, 43, .08);
-      background: linear-gradient(180deg, rgba(255,255,255,.58), rgba(255,255,255,.2));
+      background:
+        radial-gradient(circle at top right, rgba(232,123,61,.12), transparent 36%),
+        linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.28));
     }
     .support-chat__title {
       display: flex;
@@ -761,18 +769,36 @@
       min-width: 0;
     }
     .support-chat__logo {
-      width: 2.4rem;
-      height: 2.4rem;
-      border-radius: .92rem;
-      background: #13110f;
-      color: #f08a3c;
+      position: relative;
+      width: 2.7rem;
+      height: 2.7rem;
+      border-radius: 1rem;
+      background:
+        radial-gradient(circle at 30% 28%, rgba(255,255,255,.9), rgba(255,255,255,0) 32%),
+        linear-gradient(145deg, #ffb676 0%, #eb7b3d 52%, #c95d27 100%);
+      color: #fffaf4;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 1rem;
-      font-weight: 900;
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.05);
+      box-shadow: 0 12px 24px rgba(197,103,42,.2), inset 0 1px 0 rgba(255,255,255,.3);
       flex-shrink: 0;
+    }
+    .support-chat__logo::after {
+      content: "";
+      position: absolute;
+      right: -.1rem;
+      bottom: -.08rem;
+      width: .72rem;
+      height: .72rem;
+      border-radius: 999px;
+      background: #16a34a;
+      box-shadow: 0 0 0 3px rgba(255,251,246,.96);
+    }
+    .support-chat__logo-mark {
+      position: relative;
+      z-index: 1;
+      width: 1.2rem;
+      height: 1.2rem;
     }
     .support-chat__name {
       color: #231b16;
@@ -781,10 +807,16 @@
       line-height: 1.15;
     }
     .support-chat__meta {
-      margin-top: .18rem;
-      color: rgba(89, 70, 55, .66);
-      font-size: .78rem;
-      line-height: 1.35;
+      display: inline-flex;
+      align-items: center;
+      margin-top: .28rem;
+      padding: .16rem .5rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,.7);
+      color: rgba(89, 70, 55, .7);
+      font-size: .72rem;
+      font-weight: 700;
+      line-height: 1.2;
     }
     .support-chat__close {
       width: 2.3rem;
@@ -801,24 +833,25 @@
     .support-chat__messages {
       flex: 1 1 auto;
       min-height: 0;
-      padding: 1rem;
+      padding: 1rem 1rem .85rem;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: .85rem;
+      gap: .78rem;
       background:
-        linear-gradient(180deg, rgba(255,255,255,.42), rgba(255,255,255,0)),
-        rgba(248, 243, 236, .9);
+        linear-gradient(180deg, rgba(255,255,255,.52), rgba(255,255,255,0)),
+        rgba(248, 243, 236, .92);
     }
     .support-chat__welcome {
       margin: 0;
-      padding: .95rem 1rem;
-      border-radius: 1.15rem 1.15rem 1.15rem .5rem;
-      background: rgba(255,255,255,.82);
+      padding: 1rem 1.02rem;
+      border-radius: 1.25rem 1.25rem 1.25rem .56rem;
+      background: rgba(255,255,255,.88);
       border: 1px solid rgba(88, 64, 43, .08);
       color: rgba(62, 50, 41, .86);
       font-size: .92rem;
-      line-height: 1.62;
+      line-height: 1.58;
+      box-shadow: 0 8px 20px rgba(83, 62, 46, .04);
     }
     .support-chat__quick {
       display: flex;
@@ -827,14 +860,20 @@
     }
     .support-chat__chip {
       min-height: 2rem;
-      padding: 0 .82rem;
-      border-radius: 999px;
+      padding: 0 .9rem;
+      border-radius: 1rem;
       border: 1px solid rgba(229,125,47,.18);
-      background: rgba(255,255,255,.76);
-      color: #b96329;
+      background: rgba(255,255,255,.82);
+      color: #a95b25;
       font-size: .8rem;
       font-weight: 700;
       cursor: pointer;
+      transition: transform .18s ease, border-color .18s ease, background-color .18s ease;
+    }
+    .support-chat__chip:hover {
+      transform: translateY(-1px);
+      border-color: rgba(229,125,47,.3);
+      background: rgba(255,248,241,.92);
     }
     .support-chat__row {
       display: flex;
@@ -844,27 +883,28 @@
     }
     .support-chat__bubble {
       max-width: min(88%, 18rem);
-      padding: .88rem 1rem;
-      border-radius: 1.15rem;
+      padding: .92rem 1rem;
+      border-radius: 1.18rem;
       font-size: .92rem;
-      line-height: 1.6;
+      line-height: 1.58;
       word-break: break-word;
       white-space: pre-wrap;
     }
     .support-chat__row--bot .support-chat__bubble {
-      border-radius: 1.15rem 1.15rem 1.15rem .42rem;
+      border-radius: 1.18rem 1.18rem 1.18rem .46rem;
       background: rgba(255,255,255,.88);
       border: 1px solid rgba(88, 64, 43, .08);
       color: rgba(45, 36, 29, .88);
+      box-shadow: 0 8px 20px rgba(83, 62, 46, .04);
     }
     .support-chat__row--user .support-chat__bubble {
-      border-radius: 1.15rem 1.15rem .42rem 1.15rem;
+      border-radius: 1.18rem 1.18rem .46rem 1.18rem;
       background: linear-gradient(180deg, rgba(232,123,61,.98), rgba(205,93,39,.98));
       color: #fff9f1;
       box-shadow: 0 14px 24px rgba(197,103,42,.16);
     }
     .support-chat__composer {
-      padding: .85rem 1rem 1rem;
+      padding: .8rem 1rem 1rem;
       border-top: 1px solid rgba(88, 64, 43, .08);
       background: rgba(255, 249, 242, .98);
     }
@@ -877,8 +917,11 @@
     .support-chat__input {
       width: 100%;
       min-height: 3.2rem;
-      max-height: 9rem;
+      height: 3.2rem;
+      max-height: 3.2rem;
       resize: none;
+      overflow: hidden;
+      scrollbar-width: none;
       padding: .95rem 1rem;
       border: 1px solid rgba(88, 64, 43, .1);
       border-radius: 1.15rem;
@@ -887,6 +930,9 @@
       font: inherit;
       line-height: 1.5;
       outline: none;
+    }
+    .support-chat__input::-webkit-scrollbar {
+      display: none;
     }
     .support-chat__input:focus {
       border-color: rgba(217,119,46,.32);
@@ -914,10 +960,10 @@
       width: 1rem;
       height: 1rem;
     }
-    .support-chat__footnote {
-      margin-top: .55rem;
-      color: rgba(89, 70, 55, .62);
-      font-size: .74rem;
+    .support-chat__hint {
+      margin-top: .58rem;
+      color: rgba(89, 70, 55, .66);
+      font-size: .78rem;
       line-height: 1.45;
     }
     .support-chat__typing {
@@ -963,16 +1009,56 @@
       }
       .support-chat {
         right: .85rem;
-        bottom: 6.9rem;
-        left: .85rem;
-        align-items: stretch;
+        bottom: .95rem;
+        left: auto;
+        align-items: flex-end;
       }
       .support-chat__panel {
-        width: 100%;
-        height: min(33rem, calc(100vh - 8.5rem));
+        width: min(100vw - 1.25rem, 23rem);
+        height: min(31rem, calc(100vh - 1rem));
+        border-radius: 1.5rem 1.5rem 1.1rem 1.1rem;
+        transform: translateY(26px);
+        margin-bottom: -4.2rem;
       }
       .support-chat__button {
+        min-height: 3.8rem;
+        padding-inline: 1.15rem;
+        font-size: .92rem;
         align-self: flex-end;
+      }
+      .support-chat__head {
+        padding: .95rem .95rem .88rem;
+      }
+      .support-chat__messages {
+        padding: .85rem .85rem .78rem;
+      }
+      .support-chat__welcome,
+      .support-chat__bubble {
+        font-size: .9rem;
+      }
+      .support-chat__quick {
+        gap: .42rem;
+      }
+      .support-chat__chip {
+        font-size: .76rem;
+        min-height: 1.9rem;
+        padding-inline: .78rem;
+      }
+      .support-chat__composer {
+        padding: .72rem .85rem .9rem;
+      }
+      .support-chat__input {
+        min-height: 3rem;
+        height: 3rem;
+        max-height: 3rem;
+        padding: .86rem .92rem;
+      }
+      .support-chat__send {
+        width: 3rem;
+        height: 3rem;
+      }
+      .support-chat__hint {
+        font-size: .74rem;
       }
     }
     .pricing-featured {
@@ -3898,20 +3984,26 @@
         <div class="support-chat__panel" aria-hidden="true">
           <div class="support-chat__head">
             <div class="support-chat__title">
-              <div class="support-chat__logo">V</div>
+              <div class="support-chat__logo">
+                <svg class="support-chat__logo-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 9.5c0-2.5 2-4.5 4.5-4.5h5c2.49 0 4.5 2.01 4.5 4.5v3c0 2.49-2.01 4.5-4.5 4.5H11l-3.5 2.8V17H9.5C7 17 5 14.99 5 12.5v-3Z"></path>
+                  <path d="M9.5 10.5h5"></path>
+                  <path d="M9.5 13h3.5"></path>
+                </svg>
+              </div>
               <div>
                 <div class="support-chat__name">Поддержка VADYA OFM</div>
-                <div class="support-chat__meta">Быстрые ответы по тарифам, программе и заявке</div>
+                <div class="support-chat__meta">Онлайн сейчас</div>
               </div>
             </div>
             <button id="support-chat-close" class="support-chat__close" type="button" aria-label="Закрыть чат">×</button>
           </div>
           <div id="support-chat-messages" class="support-chat__messages">
-            <p class="support-chat__welcome">Привет. Я помогу с вопросами по обучению, тарифам, программе и заявке на старшие форматы.</p>
+            <p class="support-chat__welcome">Привет. Здесь можно задать любой вопрос по программе, тарифам, заявке на старшие форматы и старту обучения.</p>
             <div class="support-chat__quick">
-              <button class="support-chat__chip" type="button" data-chat-prompt="Какой тариф мне выбрать?">Какой тариф выбрать?</button>
-              <button class="support-chat__chip" type="button" data-chat-prompt="Я с нуля, мне подойдёт?">Я с нуля, мне подойдёт?</button>
-              <button class="support-chat__chip" type="button" data-chat-prompt="Как попасть на продвинутый формат?">Как попасть на продвинутый?</button>
+              <button class="support-chat__chip" type="button" data-chat-prompt="Я с нуля. С чего мне лучше начать?">С чего начать с нуля?</button>
+              <button class="support-chat__chip" type="button" data-chat-prompt="Что входит в самостоятельный тариф и кому он подходит?">Что внутри базового тарифа?</button>
+              <button class="support-chat__chip" type="button" data-chat-prompt="Почему продвинутый формат идёт только через заявку и созвон?">Почему старший формат через созвон?</button>
             </div>
           </div>
           <div class="support-chat__composer">
@@ -3921,7 +4013,7 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"></path><path d="M22 2L15 22l-4-9-9-4 20-7z"></path></svg>
               </button>
             </form>
-            <div class="support-chat__footnote">Не отправляй сюда карты, пароли и другие чувствительные данные.</div>
+            <div class="support-chat__hint">Можно задать любой вопрос по обучению, даже если ты ещё просто присматриваешься.</div>
           </div>
         </div>
         <button id="support-chat-toggle" class="support-chat__button" type="button" aria-expanded="false" aria-controls="support-chat">
