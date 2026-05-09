@@ -133,10 +133,20 @@ async function readCozeStream(stream) {
       if (!candidate) continue;
 
       if (lastEvent.includes("delta")) {
-        fullReply += candidate;
-      } else if (!fullReply) {
-        fullReply = candidate;
-      }
+  if (!fullReply) {
+    fullReply = candidate;
+  } else {
+    const needSpace =
+      !fullReply.endsWith(" ") &&
+      !candidate.startsWith(" ") &&
+      !/[.,!?;:)]$/.test(fullReply) &&
+      !/^[.,!?;:)]/.test(candidate);
+
+    fullReply += needSpace ? ` ${candidate}` : candidate;
+  }
+} else if (!fullReply) {
+  fullReply = candidate;
+}
     }
   }
 
