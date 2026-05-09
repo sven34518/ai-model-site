@@ -43,7 +43,7 @@ module.exports = async function handler(req, res) {
       body: JSON.stringify({
         bot_id: botId,
         user_id: userId,
-        stream: false,
+        stream: true,
         auto_save_history: false,
         additional_messages: additionalMessages
       })
@@ -76,6 +76,10 @@ module.exports = async function handler(req, res) {
 };
 
 function readCozeResponse(rawText) {
+  if (rawText.includes('event:')) {
+    return readCozeStreamText(rawText);
+  }
+
   let payload;
   try {
     payload = JSON.parse(rawText);
@@ -94,6 +98,54 @@ function readCozeResponse(rawText) {
     .sort((a, b) => b.length - a.length)[0];
 
   return best || "";
+}
+
+function readCozeStreamText(rawText) {
+  const chunks = rawText.split("\n\n");
+  const candidates = [];
+
+  for (const chunk of chunks) {
+    const lines = chunk
+      .split("\n")
+      .map((line) => line.trim())
+      .filter(Boolean);
+
+    let eventName = "";
+    let dataLine = "";
+
+    for (const line of lines) {
+      if (line.startsWith("event:")) {
+        eventName = line.slice(6).trim().toLowerCase();
+      } else if (line.startsWith("data:")) {
+        dataLine += line.slice(5).trim();
+      }
+    }
+
+    if (!dataLine || dataLine === "[DONE]") continue;
+
+    let payload;
+    try {
+      payload = JSON.parse(dataLine);
+    } catch {
+      continue;
+    }
+
+    if (isServiceEventName(eventName) || isServicePayload(payload)) continue;
+
+    collectReplyCandidates(payload).forEach((text) => {
+      if (text && !looksLikeServicePayload(text)) {
+        candidates.push(text);
+      }
+    });
+  }
+
+  if (!candidates.length) return "";
+  return normalizeReply(
+    candidates
+      .map((text) => normalizeReply(text))
+      .filter(Boolean)
+      .sort((a, b) => b.length - a.length)[0] || ""
+  );
 }
 
 function parsePossiblyStringifiedJson(value) {
@@ -252,6 +304,20 @@ function isServicePayload(payload) {
     payload.finish_reason !== undefined ||
     payload.FinData !== undefined ||
     payload.ori_req !== undefined
+  );
+}
+
+function isServiceEventName(eventName) {
+  if (!eventName) return false;
+  return (
+    eventName.includes("knowledge") ||
+    eventName.includes("recall") ||
+    eventName.includes("debug") ||
+    eventName.includes("tool") ||
+    eventName.includes("workflow") ||
+    eventName.includes("generate_answer_finish") ||
+    eventName.includes("message_finish") ||
+    eventName.includes("finish")
   );
 }
 
