@@ -50,7 +50,7 @@ module.exports = async function handler(req, res) {
     });
 
     const responseText = await cozeResponse.text();
-    const fallbackReply = "Сейчас я не смог получить точный ответ. Напишите владельцу в Telegram: @preludik.";
+    const fallbackReply = "Я помогаю только с вопросами по VADYA OFM CLUB: программа, тарифы, заявка и старт обучения. Если вопрос по теме, сформулируй его чуть точнее.";
 
     if (!cozeResponse.ok) {
       return res.status(cozeResponse.status || 502).json({
