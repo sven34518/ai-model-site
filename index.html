@@ -4253,7 +4253,7 @@
         supportChatHistory.push({ role: "assistant", content: payload.reply });
       } catch (error) {
         typingRow?.remove();
-        const fallback = "Сейчас чат временно недоступен. Напиши напрямую в Telegram: @preludik";
+        const fallback = `Ошибка чата: ${error instanceof Error ? error.message : "неизвестная ошибка"}`;
         appendSupportChatMessage("bot", fallback);
       } finally {
         supportChatRequestInFlight = false;
