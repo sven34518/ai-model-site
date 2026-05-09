@@ -43,22 +43,23 @@ module.exports = async function handler(req, res) {
       body: JSON.stringify({
         bot_id: botId,
         user_id: userId,
-        stream: true,
+        stream: false,
         auto_save_history: false,
         additional_messages: additionalMessages
       })
     });
 
-    if (!cozeResponse.ok || !cozeResponse.body) {
-      const errorText = await cozeResponse.text();
+    const responseText = await cozeResponse.text();
+
+    if (!cozeResponse.ok) {
       return res.status(cozeResponse.status || 502).json({
-        error: errorText || "Coze request failed."
+        error: responseText || "Coze request failed."
       });
     }
 
-    const reply = await readCozeStream(cozeResponse.body);
+    const reply = readCozeResponse(responseText);
     if (!reply) {
-      return res.status(502).json({ error: "Empty response from Coze." });
+      return res.status(502).json({ error: `Could not parse Coze reply: ${responseText}` });
     }
 
     return res.status(200).json({ reply });
@@ -69,88 +70,34 @@ module.exports = async function handler(req, res) {
   }
 };
 
-async function readCozeStream(stream) {
-  const reader = stream.getReader();
-  const decoder = new TextDecoder();
-  let buffer = "";
-  let fullReply = "";
-  let lastEvent = "";
-
-  while (true) {
-    const { value, done } = await reader.read();
-    if (done) break;
-    buffer += decoder.decode(value, { stream: true });
-    const chunks = buffer.split("\n\n");
-    buffer = chunks.pop() || "";
-
-    for (const chunk of chunks) {
-      const lines = chunk
-        .split("\n")
-        .map((line) => line.trim())
-        .filter(Boolean);
-
-      let dataLine = "";
-      for (const line of lines) {
-        if (line.startsWith("event:")) {
-          lastEvent = line.slice(6).trim();
-        } else if (line.startsWith("data:")) {
-          dataLine += line.slice(5).trim();
-        }
-      }
-
-      if (!dataLine || dataLine === "[DONE]") continue;
-
-      let payload;
-      try {
-        payload = JSON.parse(dataLine);
-      } catch {
-        continue;
-      }
-
-      const msgType =
-        payload.msg_type ||
-        payload.type ||
-        payload.event ||
-        payload.message?.type ||
-        payload.data?.type ||
-        "";
-
-      if (typeof msgType === "string") {
-        const normalizedType = msgType.toLowerCase();
-        if (
-          normalizedType.includes("knowledge") ||
-          normalizedType.includes("recall") ||
-          normalizedType.includes("debug") ||
-          normalizedType.includes("tool") ||
-          normalizedType.includes("workflow")
-        ) {
-          continue;
-        }
-      }
-
-      const candidate = extractVisibleText(payload);
-
-      if (!candidate) continue;
-
-      if (lastEvent.includes("delta")) {
-  if (!fullReply) {
-    fullReply = candidate;
-  } else {
-    const needSpace =
-      !fullReply.endsWith(" ") &&
-      !candidate.startsWith(" ") &&
-      !/[.,!?;:)]$/.test(fullReply) &&
-      !/^[.,!?;:)]/.test(candidate);
-
-    fullReply += needSpace ? ` ${candidate}` : candidate;
+function readCozeResponse(rawText) {
+  let payload;
+  try {
+    payload = JSON.parse(rawText);
+  } catch {
+    return "";
   }
-} else if (!fullReply) {
-  fullReply = candidate;
-}
+
+  const directReply =
+    payload.data?.content ||
+    payload.data?.message?.content ||
+    payload.message?.content ||
+    payload.content ||
+    "";
+
+  if (typeof directReply === "string" && directReply.trim()) {
+    return normalizeReply(directReply);
+  }
+
+  const messages = payload.data?.messages || payload.messages || [];
+  if (Array.isArray(messages)) {
+    for (const item of messages) {
+      const candidate = extractVisibleText(item);
+      if (candidate) return normalizeReply(candidate);
     }
   }
 
-  return fullReply.trim();
+  return "";
 }
 
 function extractVisibleText(payload) {
@@ -200,4 +147,12 @@ function looksLikeServicePayload(text) {
   } catch {
     return false;
   }
+}
+
+function normalizeReply(text) {
+  return text
+    .replace(/\s+([.,!?;:])/g, "$1")
+    .replace(/([.,!?;:])(?=\S)/g, "$1 ")
+    .replace(/\s{2,}/g, " ")
+    .trim();
 }
