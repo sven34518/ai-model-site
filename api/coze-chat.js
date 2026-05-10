@@ -32,8 +32,16 @@ module.exports = async function handler(req, res) {
     req.headers["x-forwarded-for"]?.toString().split(",")[0]?.trim() ||
     req.headers["x-real-ip"]?.toString() ||
     "anonymous-visitor";
+  const patFingerprint = pat ? `...${pat.slice(-4)}` : "missing";
 
   try {
+    console.log("Coze request config:", {
+      botId,
+      patFingerprint,
+      userId,
+      historyCount: additionalMessages.length
+    });
+
     const cozeResponse = await fetch("https://api.coze.com/v3/chat", {
       method: "POST",
       headers: {
