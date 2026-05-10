@@ -52,7 +52,11 @@ module.exports = async function handler(req, res) {
     const responseText = await cozeResponse.text();
     const fallbackReply = "Я помогаю только с вопросами по VADYA OFM CLUB: программа, тарифы, заявка и старт обучения. Если вопрос по теме, сформулируй его чуть точнее.";
 
+    console.log("Coze response status:", cozeResponse.status);
+    console.log("Coze raw response preview:", responseText.slice(0, 2000));
+
     if (!cozeResponse.ok) {
+      console.log("Coze returned non-OK response, using fallback.");
       return res.status(cozeResponse.status || 502).json({
         reply: fallbackReply,
         error: responseText || "Coze request failed."
@@ -61,14 +65,18 @@ module.exports = async function handler(req, res) {
 
     const reply = readCozeResponse(responseText);
     if (!reply) {
+      console.log("Parsed reply is empty, using fallback.");
       return res.status(200).json({
         reply: fallbackReply,
         error: `Could not parse Coze reply: ${responseText}`
       });
     }
 
+    console.log("Parsed reply:", reply);
+
     return res.status(200).json({ reply });
   } catch (error) {
+    console.error("Unexpected error in /api/coze-chat:", error);
     return res.status(500).json({
       error: error instanceof Error ? error.message : "Unknown server error."
     });
