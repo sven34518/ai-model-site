@@ -58,7 +58,7 @@ module.exports = async function handler(req, res) {
     if (!cozeResponse.ok) {
       console.log("Coze returned non-OK response, using fallback.");
       return res.status(cozeResponse.status || 502).json({
-        reply: fallbackReply,
+        reply: `${fallbackReply}\n\nТехническая ошибка Coze: ${responseText || "Coze request failed."}`,
         error: responseText || "Coze request failed."
       });
     }
@@ -67,7 +67,7 @@ module.exports = async function handler(req, res) {
     if (!reply) {
       console.log("Parsed reply is empty, using fallback.");
       return res.status(200).json({
-        reply: fallbackReply,
+        reply: `${fallbackReply}\n\nНе удалось разобрать ответ Coze: ${responseText}`,
         error: `Could not parse Coze reply: ${responseText}`
       });
     }
