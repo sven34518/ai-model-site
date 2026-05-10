@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="yapl-verification" content="5027962331" />
-  <title>VADYA OFM CLUB — пошаговая система запуска</title>
+  <title>VADYA OFM CLUB | Обучение AI-моделям, трафику и продажам</title>
+  <meta name="description" content="Пошаговая система запуска и монетизации AI-моделей: создание образа, контент, трафик, продажи, масштабирование и заявки на старшие форматы." />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -4341,8 +4342,13 @@
         if (!response.ok || !payload.reply) {
           throw new Error(payload.error || "Сервис временно недоступен.");
         }
-        appendSupportChatMessage("bot", payload.reply);
-        supportChatHistory.push({ role: "assistant", content: payload.reply });
+        const visibleReply = String(payload.reply || "").trim();
+        if (visibleReply) {
+          appendSupportChatMessage("bot", visibleReply);
+          supportChatHistory.push({ role: "assistant", content: visibleReply });
+        } else {
+          throw new Error(payload.error || "Сервис временно недоступен.");
+        }
       } catch (error) {
         typingRow?.remove();
         const fallback = `Ошибка чата: ${error instanceof Error ? error.message : "неизвестная ошибка"}`;
