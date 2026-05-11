@@ -11,12 +11,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <!-- Vercel Web Analytics -->
-  <div id="image-modal" class="image-modal" aria-hidden="true">
-    <div class="image-modal__inner">
-      <button id="image-modal-close" class="image-modal__close" type="button" aria-label="Закрыть изображение">×</button>
-      <img id="image-modal-img" class="image-modal__img" src="" alt="" />
-    </div>
-  </div>
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
@@ -3502,6 +3496,7 @@
       color: rgba(255, 255, 255, .94);
       isolation: isolate;
       opacity: 1;
+      pointer-events: auto;
       will-change: opacity;
     }
     .vof-intro[aria-hidden="true"] { display: none; }
@@ -3703,6 +3698,40 @@
       .vof-intro { display: none !important; }
     }
 
+    @media (max-width: 768px), (pointer: coarse) {
+      .vof-intro {
+        display: none !important;
+        visibility: hidden !important;
+        pointer-events: none;
+      }
+      #vof-particles {
+        display: none !important;
+      }
+      .hero-grid {
+        display: none !important;
+      }
+      .cookie-banner,
+      .support-chat,
+      #image-modal {
+        display: none !important;
+      }
+      .site-header,
+      .support-chat,
+      .cookie-banner,
+      #image-modal {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+      }
+      html, body {
+        height: auto !important;
+        min-height: 100% !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        touch-action: pan-y;
+        overscroll-behavior-y: auto;
+      }
+    }
+
     /* Floating particles canvas (lightweight, behind all content) */
     #vof-particles {
       position: fixed;
@@ -3748,6 +3777,13 @@
 
   <!-- Floating particles canvas (behind content) -->
   <canvas id="vof-particles" aria-hidden="true"></canvas>
+
+  <div id="image-modal" class="image-modal" aria-hidden="true">
+    <div class="image-modal__inner">
+      <button id="image-modal-close" class="image-modal__close" type="button" aria-label="������� �����������">?</button>
+      <img id="image-modal-img" class="image-modal__img" src="" alt="" />
+    </div>
+  </div>
 
   <div class="relative overflow-hidden">
     <div class="hero-grid pointer-events-none absolute inset-0 opacity-30"></div>
@@ -4490,6 +4526,15 @@
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       if (reduceMotion) {
         intro.setAttribute("aria-hidden", "true");
+        return;
+      }
+
+      const isTouchDevice = window.matchMedia("(pointer: coarse)").matches || window.innerWidth <= 768;
+      if (isTouchDevice) {
+        intro.setAttribute("aria-hidden", "true");
+        intro.remove();
+        document.body.style.overflow = "";
+        document.body.style.paddingRight = "";
         return;
       }
 
@@ -5411,3 +5456,6 @@
   </script>
 </body>
 </html>
+
+
+
