@@ -35,7 +35,7 @@
   </script>
   <style>
     :root { color-scheme: dark; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scrollbar-gutter: stable; }
     body {
       margin: 0;
       font-family: "Manrope", sans-serif;
@@ -81,8 +81,8 @@
     .glow-button:focus-visible::after { opacity: 1; }
     .section-reveal {
       opacity: 0;
-      transform: translateY(34px);
-      transition: opacity .7s ease, transform .7s ease;
+      transform: translateY(26px);
+      transition: opacity .58s cubic-bezier(.22,.61,.36,1), transform .58s cubic-bezier(.22,.61,.36,1);
     }
     .section-reveal.is-visible {
       opacity: 1;
@@ -1829,7 +1829,7 @@
       bottom: .85rem;
       width: 2px;
       border-radius: 999px;
-      background: linear-gradient(180deg, rgba(229,125,47,.22), rgba(229,125,47,.06));
+      background: linear-gradient(180deg, rgba(229,125,47,.12), rgba(229,125,47,.05));
       pointer-events: none;
     }
     .module-card {
@@ -2006,6 +2006,191 @@
       color: rgba(73, 57, 45, .78) !important;
       font-size: .95rem;
       line-height: 1.7;
+    }
+
+    /* Program modules cinematic flow (zig-zag + animated side connectors) */
+    #program .program-rail {
+      --module-rail-line: rgba(217, 119, 46, .22);
+      --module-rail-line-active: rgba(217, 119, 46, .62);
+      --module-connector-len: 132px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 1.45rem;
+      padding-block: .2rem;
+    }
+    #program .program-rail > .module-card + .module-card {
+      margin-top: 0 !important;
+    }
+    #program .program-rail::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: .8rem;
+      bottom: .8rem;
+      width: 2px;
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--module-rail-line), rgba(217,119,46,.08));
+      transition: background .5s ease;
+      pointer-events: none;
+    }
+    #program .program-rail.is-active::before {
+      background: linear-gradient(180deg, var(--module-rail-line-active), rgba(217,119,46,.18));
+    }
+
+    #program .program-rail .module-card {
+      position: relative;
+      width: min(100%, 41rem);
+      --connector-alpha: .18;
+      opacity: 0;
+      transform: translateY(20px) scale(.99);
+      filter: blur(5px);
+      transition:
+        opacity .58s cubic-bezier(.22,.61,.36,1),
+        transform .58s cubic-bezier(.22,.61,.36,1),
+        filter .52s ease,
+        box-shadow .4s ease,
+        border-color .4s ease;
+      border-left: 2px solid rgba(217, 119, 46, .14);
+      overflow: visible;
+    }
+    #program .program-rail .module-card:nth-child(odd) {
+      align-self: flex-start;
+      margin-left: .6rem;
+    }
+    #program .program-rail .module-card:nth-child(even) {
+      align-self: flex-end;
+      margin-right: .6rem;
+    }
+
+    /* Main curved connectors between cards and center rail */
+    #program .program-rail .module-card::before {
+      content: "";
+      display: block !important;
+      position: absolute;
+      top: .92rem;
+      width: var(--module-connector-len);
+      height: 86px;
+      pointer-events: none;
+      opacity: .96;
+      z-index: 0;
+      border-top: 2px solid rgba(217,119,46,var(--connector-alpha));
+      transform: scaleX(0);
+      transition: transform .62s cubic-bezier(.22,.61,.36,1), border-color .25s linear, filter .45s ease, opacity .3s ease;
+      filter: drop-shadow(0 0 0 rgba(217,119,46,0));
+    }
+    #program .program-rail .module-card:nth-child(odd)::before {
+      right: calc(var(--module-connector-len) * -1 + 2px);
+      border-right: 2px solid rgba(217,119,46,var(--connector-alpha));
+      border-top-right-radius: 82px;
+      transform-origin: 100% 100%;
+    }
+    #program .program-rail .module-card:nth-child(even)::before {
+      left: calc(var(--module-connector-len) * -1 + 2px);
+      border-left: 2px solid rgba(217,119,46,var(--connector-alpha));
+      border-top-left-radius: 82px;
+      transform-origin: 0% 100%;
+    }
+
+    /* Remove side decorative dots for cleaner route */
+    #program .program-rail .module-card::after {
+      display: none !important;
+    }
+
+    #program .program-rail .module-card.module-in-view {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+    #program .program-rail .module-card.module-in-view::before {
+      transform: scaleX(1);
+      filter: drop-shadow(0 0 8px rgba(217,119,46,.24));
+    }
+
+    @media (max-width: 1024px) {
+      #program .program-rail {
+        --module-connector-len: 106px;
+      }
+      #program .program-rail .module-card {
+        width: min(100%, 38rem);
+      }
+    }
+    @media (max-width: 768px) {
+      #program .program-rail {
+        --module-connector-len: 48px;
+        gap: .95rem;
+      }
+      #program .program-rail::before {
+        left: .85rem;
+        transform: none;
+      }
+      #program .program-rail .module-card {
+        width: 100%;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        align-self: stretch;
+        transform: translateY(14px) scale(.994);
+        filter: blur(3px);
+        transition-duration: .46s;
+      }
+      #program .program-rail .module-card::before {
+        top: 1.2rem;
+        left: calc(var(--module-connector-len) * -1 + 2px) !important;
+        right: auto !important;
+        width: var(--module-connector-len);
+        height: 36px;
+        border-left: 2px solid rgba(217,119,46,var(--connector-alpha)) !important;
+        border-right: 0 !important;
+        border-top-left-radius: 28px;
+        border-top-right-radius: 0;
+        transform-origin: 0% 100% !important;
+      }
+    }
+
+    /* Single continuous serpentine SVG line between modules */
+    #program .program-rail::before,
+    #program .program-rail::after,
+    #program .program-rail .module-card::before,
+    #program .program-rail .module-card::after {
+      display: none !important;
+    }
+    #program .program-rail {
+      position: relative;
+      isolation: isolate;
+    }
+    #program .program-flow {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: visible;
+    }
+    #program .program-flow__track {
+      fill: none;
+      stroke: rgba(88, 64, 43, .20);
+      stroke-width: 2.25;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+      shape-rendering: geometricPrecision;
+    }
+    #program .program-flow__active {
+      fill: none;
+      stroke: url(#program-flow-gradient);
+      stroke-width: 2.9;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+      shape-rendering: geometricPrecision;
+      filter: drop-shadow(0 0 7px rgba(255, 122, 26, .12));
+      opacity: 1;
+    }
+    #program .program-rail .module-card {
+      position: relative;
+      z-index: 2;
     }
     .question-card .faq-content {
       color: rgba(247,239,228,.72) !important;
@@ -3301,9 +3486,269 @@
         letter-spacing: .12em;
       }
     }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       CINEMATIC LOADER (always on refresh)
+       “Doors open into the room” exit
+       Vanilla CSS + JS
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    .vof-intro {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: grid;
+      place-items: center;
+      background: #000;
+      color: rgba(255, 255, 255, .94);
+      isolation: isolate;
+      opacity: 1;
+      will-change: opacity;
+    }
+    .vof-intro[aria-hidden="true"] { display: none; }
+
+    .vof-intro__doors {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      pointer-events: none;
+    }
+    .vof-intro__door {
+      background:
+        radial-gradient(circle at 28% 38%, rgba(255, 176, 102, .075), transparent 60%),
+        radial-gradient(circle at 68% 56%, rgba(245, 247, 255, .060), transparent 62%),
+        radial-gradient(circle at 50% 112%, rgba(255, 122, 26, .060), transparent 58%),
+        linear-gradient(180deg, #07070b, #000);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+      will-change: transform;
+    }
+    .vof-intro__door--left { transform-origin: 0% 50%; }
+    .vof-intro__door--right { transform-origin: 100% 50%; }
+
+    .vof-intro__inner {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 2.25rem;
+      transform: translateZ(0);
+      will-change: transform, filter, opacity;
+    }
+    .vof-intro__word {
+      display: inline-flex;
+      gap: .02em;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      font-size: clamp(2.1rem, 6.2vw, 5rem);
+      line-height: 1.02;
+    }
+    .vof-intro__letter {
+      display: inline-block;
+      position: relative;
+      clip-path: inset(0 100% 0 0);
+      color: transparent;
+      background-image:
+        linear-gradient(180deg,
+          rgba(255, 255, 255, .99) 0%,
+          rgba(248, 250, 255, .94) 22%,
+          rgba(212, 222, 244, .88) 52%,
+          rgba(255, 176, 102, .52) 78%,
+          rgba(255, 255, 255, .96) 100%
+        );
+      background-size: 100% 220%;
+      background-position: 0% 25%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      transform: translate3d(0, 12px, 0) scale(.985) rotateX(8deg) skewX(-6deg);
+      filter: blur(7px);
+      opacity: .92;
+      text-shadow:
+        0 0 18px rgba(245, 247, 255, .14),
+        0 0 16px rgba(255, 176, 102, .10),
+        0 0 0 rgba(0,0,0,0);
+      will-change: clip-path, transform, filter, opacity, background-position;
+    }
+    .vof-intro__letter::before {
+      content: "";
+      position: absolute;
+      inset: -14% -10%;
+      pointer-events: none;
+      opacity: 0;
+      background: radial-gradient(closest-side, rgba(255, 176, 102, .16), transparent 70%);
+      filter: blur(10px);
+      transform: translateZ(0);
+      will-change: opacity;
+    }
+    .vof-intro__letter::after {
+      content: "";
+      position: absolute;
+      inset: -16% -10%;
+      pointer-events: none;
+      opacity: 0;
+      background:
+        linear-gradient(110deg,
+          transparent 0%,
+          rgba(245, 247, 255, .70) 18%,
+          rgba(255, 176, 102, .36) 26%,
+          rgba(245, 247, 255, .70) 34%,
+          transparent 52%
+        );
+      transform: translateX(-160%);
+      mix-blend-mode: screen;
+      will-change: transform, opacity;
+    }
+    @keyframes vofLetterIn {
+      0% {
+        clip-path: inset(0 100% 0 0);
+        transform: translate3d(0, -52px, 0) scale(1.045) rotateX(14deg) skewX(-7deg);
+        filter: blur(9px);
+        opacity: .62;
+        background-position: 0% 30%;
+      }
+      52% {
+        clip-path: inset(0 0% 0 0);
+        transform: translate3d(0, 6px, 0) scaleX(1.06) scaleY(.93) rotateX(0deg) skewX(0deg);
+        filter: blur(0px);
+        opacity: 1;
+        background-position: 0% 62%;
+      }
+      68% {
+        transform: translate3d(0, -3px, 0) scaleX(.992) scaleY(1.01);
+      }
+      84% {
+        transform: translate3d(0, 1px, 0) scaleX(1.006) scaleY(.996);
+      }
+      100% {
+        clip-path: inset(0 0% 0 0);
+        transform: translate3d(0, 0, 0) scale(1);
+        filter: blur(0px);
+        opacity: 1;
+        background-position: 0% 72%;
+      }
+    }
+
+    @keyframes vofImpactPulse {
+      0% { opacity: 0; transform: scale(.94); }
+      45% { opacity: .82; transform: scale(1.015); }
+      100% { opacity: .50; transform: scale(1); }
+    }
+    @keyframes vofLetterShimmer {
+      0% { transform: translateX(-160%); opacity: 0; }
+      20% { opacity: .85; }
+      100% { transform: translateX(160%); opacity: 0; }
+    }
+    .vof-intro__letter.is-in {
+      animation: vofLetterIn 780ms cubic-bezier(.16, 1, .22, 1) forwards;
+    }
+    .vof-intro__letter.is-in::before { animation: vofImpactPulse 520ms cubic-bezier(.22, 1, .24, 1) both; }
+    .vof-intro__letter.is-in::after { opacity: 1; animation: vofLetterShimmer 900ms cubic-bezier(.22, 1, .24, 1) both; }
+
+    .vof-intro__line {
+      position: absolute;
+      left: 50%;
+      top: calc(100% + .60rem);
+      width: min(560px, 86vw);
+      height: 1px;
+      transform: translateX(-50%);
+      opacity: 0;
+      overflow: hidden;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,176,102,.95) 18%, rgba(255,122,26,.95) 50%, rgba(255,176,102,.95) 82%, transparent 100%);
+    }
+    .vof-intro__line::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      transform: translateX(-110%);
+      background: linear-gradient(90deg, transparent 0%, #fff 22%, #ffb066 42%, #ff7a1a 50%, #ffb066 58%, #fff 78%, transparent 100%);
+      filter: drop-shadow(0 0 18px rgba(255, 122, 26, .26));
+      will-change: transform;
+    }
+    @keyframes vofLineSweep {
+      from { transform: translateX(-110%); }
+      to { transform: translateX(110%); }
+    }
+    .vof-intro__line.is-on { opacity: 1; }
+    .vof-intro__line.is-on::before {
+      animation: vofLineSweep 520ms cubic-bezier(.22, 1, .26, 1) forwards;
+    }
+
+    @keyframes vofDoorsOpenL {
+      0% { transform: translate3d(0,0,0) skewY(0deg); }
+      100% { transform: translate3d(-52vw,0,0) skewY(-1deg); }
+    }
+    @keyframes vofDoorsOpenR {
+      0% { transform: translate3d(0,0,0) skewY(0deg); }
+      100% { transform: translate3d(52vw,0,0) skewY(1deg); }
+    }
+    @keyframes vofInnerLift {
+      0% { transform: translate3d(0,0,0) scale(1); opacity: 1; filter: blur(0px); }
+      100% { transform: translate3d(0,-8px,0) scale(1.02); opacity: 0; filter: blur(8px); }
+    }
+    @keyframes vofIntroFade {
+      0% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    .vof-intro.is-exit .vof-intro__door--left { animation: vofDoorsOpenL 760ms cubic-bezier(.22, 1, .18, 1) forwards; }
+    .vof-intro.is-exit .vof-intro__door--right { animation: vofDoorsOpenR 760ms cubic-bezier(.22, 1, .18, 1) forwards; }
+    .vof-intro.is-exit .vof-intro__inner { animation: vofInnerLift 520ms cubic-bezier(.2, 1, .2, 1) forwards; }
+    .vof-intro.is-exit { animation: vofIntroFade 320ms ease forwards; animation-delay: 620ms; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .vof-intro__letter,
+      .vof-intro__line::before,
+      .vof-intro__door,
+      .vof-intro__inner,
+      .vof-intro { animation: none !important; transition: none !important; }
+      .vof-intro { display: none !important; }
+    }
+
+    /* Floating particles canvas (lightweight, behind all content) */
+    #vof-particles {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      width: 100%;
+      height: 100%;
+      opacity: 1;
+    }
+    /* keep particles above section background layers, but below real content */
+    .light-section > *,
+    .hero-section > *,
+    .warm-section > *,
+    .dark-section > *,
+    .warm-cta-section > *,
+    .dark-footer > * {
+      z-index: 2 !important;
+    }
+    @media (max-width: 768px), (hover: none), (pointer: coarse) {
+      #vof-particles { opacity: .68; }
+    }
+    @media (max-width: 768px) {
+      .section-reveal {
+        transform: translateY(18px);
+        transition: opacity .46s cubic-bezier(.22,.61,.36,1), transform .46s cubic-bezier(.22,.61,.36,1);
+      }
+    }
   </style>
 </head>
 <body class="text-white antialiased">
+  <!-- Cinematic Loader (always on refresh) -->
+  <div id="vof-intro" class="vof-intro" aria-hidden="false">
+    <div class="vof-intro__doors" aria-hidden="true">
+      <div class="vof-intro__door vof-intro__door--left"></div>
+      <div class="vof-intro__door vof-intro__door--right"></div>
+    </div>
+    <div class="vof-intro__inner" role="status" aria-live="polite" aria-label="Загрузка">
+      <div id="vof-intro-word" class="vof-intro__word" aria-label="VADYA OFM"></div>
+      <div id="vof-intro-line" class="vof-intro__line" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <!-- Floating particles canvas (behind content) -->
+  <canvas id="vof-particles" aria-hidden="true"></canvas>
+
   <div class="relative overflow-hidden">
     <div class="hero-grid pointer-events-none absolute inset-0 opacity-30"></div>
     <div class="pointer-events-none absolute left-1/2 top-0 h-[22rem] w-[22rem] -translate-x-1/2 rounded-full bg-orange-500/10 blur-3xl sm:h-[26rem] sm:w-[26rem]"></div>
@@ -4035,32 +4480,272 @@
     </div>
   </div>
   <script>
+    /* Cinematic Loader (always on refresh) */
+    (function () {
+      const intro = document.getElementById("vof-intro");
+      const word = document.getElementById("vof-intro-word");
+      const line = document.getElementById("vof-intro-line");
+      if (!intro || !word || !line) return;
+
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduceMotion) {
+        intro.setAttribute("aria-hidden", "true");
+        return;
+      }
+
+      const text = "VADYA OFM";
+
+      // lock scroll during intro
+      const prevOverflow = document.body.style.overflow;
+      const prevPadRight = document.body.style.paddingRight;
+      const supportsStableGutter = typeof CSS !== "undefined" && typeof CSS.supports === "function"
+        ? CSS.supports("scrollbar-gutter: stable")
+        : false;
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = "hidden";
+      if (!supportsStableGutter && scrollbarWidth > 0) {
+        document.body.style.paddingRight = `${scrollbarWidth}px`;
+      }
+
+      // build letters
+      word.innerHTML = "";
+      const letters = [];
+      for (const ch of text) {
+        const s = document.createElement("span");
+        s.className = "vof-intro__letter";
+        s.textContent = ch === " " ? "\u00A0" : ch;
+        word.appendChild(s);
+        letters.push(s);
+      }
+
+      const baseDelay = 120;
+      const stagger = 60;
+      const letterAnim = 640;
+
+      letters.forEach((el, i) => {
+        window.setTimeout(() => el.classList.add("is-in"), baseDelay + i * stagger);
+      });
+
+      const afterLetters = baseDelay + (letters.length - 1) * stagger + letterAnim + 90;
+      window.setTimeout(() => {
+        line.classList.add("is-on");
+      }, afterLetters);
+
+      const afterLine = afterLetters + 560;
+
+      // "Doors opening" exit
+      window.setTimeout(() => {
+        intro.classList.add("is-exit");
+      }, afterLine + 220);
+
+      window.setTimeout(() => {
+        intro.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = prevOverflow;
+        document.body.style.paddingRight = prevPadRight;
+      }, afterLine + 220 + 980);
+    })();
+
+    /* Floating particles (no Three.js) */
+    (function () {
+      const canvas = document.getElementById("vof-particles");
+      if (!canvas) return;
+
+      const isCoarse = window.matchMedia("(pointer: coarse)").matches || window.matchMedia("(hover: none)").matches;
+      const isSmall = window.matchMedia("(max-width: 768px)").matches;
+      const isMobileLike = isCoarse || isSmall;
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduceMotion) return;
+
+      const ctx = canvas.getContext("2d", { alpha: true });
+      if (!ctx) return;
+
+      const state = {
+        w: 0, h: 0,
+        t: 0,
+        mx: -9999, my: -9999,
+        lastScrollY: window.scrollY,
+        scrollVel: 0,
+        visible: !document.hidden
+      };
+
+      document.addEventListener("visibilitychange", () => {
+        state.visible = !document.hidden;
+      }, { passive: true });
+
+      const rand = (a, b) => a + Math.random() * (b - a);
+      const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
+
+      const particleCount = isMobileLike ? 22 : 52;
+      const particles = Array.from({ length: particleCount }).map((_, i) => {
+        const warm = Math.random() < 0.42;
+        const size = rand(1, 4);
+        return {
+          x: rand(0, 1),
+          y: rand(0, 1),
+          s: size,
+          warm,
+          a: warm ? rand(0.16, 0.36) : rand(0.06, 0.14),
+          sp: rand(0.15, 0.4),
+          ang: rand(0, Math.PI * 2),
+          wob: rand(0, Math.PI * 2),
+          id: i
+        };
+      });
+
+      function resize() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        state.w = Math.floor(window.innerWidth);
+        state.h = Math.floor(window.innerHeight);
+        canvas.width = Math.floor(state.w * dpr);
+        canvas.height = Math.floor(state.h * dpr);
+        canvas.style.width = `${state.w}px`;
+        canvas.style.height = `${state.h}px`;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+      resize();
+      window.addEventListener("resize", resize, { passive: true });
+
+      if (!isMobileLike) {
+        window.addEventListener("mousemove", (e) => {
+          state.mx = e.clientX;
+          state.my = e.clientY;
+        }, { passive: true });
+      }
+
+      window.addEventListener("scroll", () => {
+        const y = window.scrollY;
+        const dy = y - state.lastScrollY;
+        state.scrollVel = state.scrollVel * 0.82 + dy * 0.18;
+        state.lastScrollY = y;
+      }, { passive: true });
+
+      function loop() {
+        state.t += 1;
+        if (!state.visible) {
+          requestAnimationFrame(loop);
+          return;
+        }
+
+        ctx.clearRect(0, 0, state.w, state.h);
+        ctx.globalCompositeOperation = "lighter";
+        const sv = clamp(state.scrollVel, -24, 24) * 0.018;
+        state.scrollVel *= 0.88;
+
+        for (const p of particles) {
+          // organic drift
+          p.ang += rand(-0.02, 0.02);
+          const vx = Math.cos(p.ang) * p.sp;
+          const vy = Math.sin(p.ang) * p.sp + sv;
+
+          // cursor repulsion within 120px
+          const px = p.x * state.w;
+          const py = p.y * state.h;
+          const dx = px - state.mx;
+          const dy = py - state.my;
+          const dist = Math.hypot(dx, dy);
+          if (!isMobileLike && dist < 120) {
+            const push = (1 - dist / 120) * 0.3;
+            p.x += (dx / (dist || 1)) * (push / state.w);
+            p.y += (dy / (dist || 1)) * (push / state.h);
+          }
+
+          p.x += vx / state.w;
+          p.y += vy / state.h;
+
+          // wrap
+          if (p.x < -0.05) p.x = 1.05;
+          if (p.x > 1.05) p.x = -0.05;
+          if (p.y < -0.05) p.y = 1.05;
+          if (p.y > 1.05) p.y = -0.05;
+
+          const pulse = 0.55 + 0.45 * Math.sin(state.t * 0.008 + p.wob);
+          const alpha = p.a * pulse;
+
+          const cx = p.x * state.w;
+          const cy = p.y * state.h;
+
+          ctx.beginPath();
+          ctx.arc(cx, cy, p.s, 0, Math.PI * 2);
+
+          if (p.warm) {
+            ctx.fillStyle = `rgba(255,122,26,${clamp(alpha, 0, 1)})`;
+            if (p.s >= 3) {
+              ctx.shadowBlur = 8;
+              ctx.shadowColor = "#ff7a1a";
+            } else {
+              ctx.shadowBlur = 0;
+            }
+          } else {
+            ctx.shadowBlur = 0;
+            ctx.fillStyle = `rgba(245,248,255,${clamp(alpha, 0, 1)})`;
+          }
+          ctx.fill();
+        }
+        ctx.globalCompositeOperation = "source-over";
+        requestAnimationFrame(loop);
+      }
+      requestAnimationFrame(loop);
+    })();
+
     function setAccordionContentState(content, isOpen) {
+      if (!content.dataset.apInit) {
+        const styles = window.getComputedStyle(content);
+        content.dataset.apPt = styles.paddingTop;
+        content.dataset.apPb = styles.paddingBottom;
+        content.dataset.apInit = "1";
+      }
+      const openPt = content.dataset.apPt || "0px";
+      const openPb = content.dataset.apPb || "0px";
       content.style.overflow = "hidden";
-      content.style.transition = "height .38s cubic-bezier(.22,1,.36,1), opacity .26s ease";
+      content.style.boxSizing = "border-box";
+      content.style.willChange = "height, opacity, transform";
+      content.style.transition = "height .50s cubic-bezier(.2,.72,.2,1), opacity .36s ease-out, padding-top .50s cubic-bezier(.2,.72,.2,1), padding-bottom .50s cubic-bezier(.2,.72,.2,1)";
       if (isOpen) {
         content.classList.remove("hidden");
         content.style.height = "auto";
         content.style.opacity = "1";
+        content.style.paddingTop = openPt;
+        content.style.paddingBottom = openPb;
+        content.style.transform = "none";
         return;
       }
       content.classList.add("hidden");
       content.style.height = "0px";
       content.style.opacity = "0";
+      content.style.paddingTop = "0px";
+      content.style.paddingBottom = "0px";
+      content.style.transform = "none";
     }
     function openAccordionContent(content) {
+      if (!content.dataset.apInit) {
+        const styles = window.getComputedStyle(content);
+        content.dataset.apPt = styles.paddingTop;
+        content.dataset.apPb = styles.paddingBottom;
+        content.dataset.apInit = "1";
+      }
+      const openPt = content.dataset.apPt || "0px";
+      const openPb = content.dataset.apPb || "0px";
       content.classList.remove("hidden");
       content.style.overflow = "hidden";
-      content.style.transition = "height .38s cubic-bezier(.22,1,.36,1), opacity .26s ease";
+      content.style.willChange = "height, opacity, transform";
+      content.style.transition = "height .50s cubic-bezier(.2,.72,.2,1), opacity .36s ease-out, padding-top .50s cubic-bezier(.2,.72,.2,1), padding-bottom .50s cubic-bezier(.2,.72,.2,1)";
       content.style.height = "0px";
       content.style.opacity = "0";
+      content.style.paddingTop = "0px";
+      content.style.paddingBottom = "0px";
+      content.style.transform = "none";
       requestAnimationFrame(() => {
+        content.style.paddingTop = openPt;
+        content.style.paddingBottom = openPb;
         content.style.height = `${content.scrollHeight}px`;
         content.style.opacity = "1";
       });
       const onEnd = (event) => {
         if (event.propertyName !== "height") return;
-        content.style.height = "auto";
+        // Keep explicit pixel height to avoid micro-jump on height->auto switch.
+        content.style.height = `${content.scrollHeight}px`;
+        content.style.willChange = "auto";
+        window.__vofProgramFlowRefresh?.();
         content.removeEventListener("transitionend", onEnd);
       };
       content.addEventListener("transitionend", onEnd);
@@ -4071,26 +4756,60 @@
         return;
       }
       const currentHeight = content.scrollHeight;
+      const openPt = content.dataset.apPt || window.getComputedStyle(content).paddingTop;
+      const openPb = content.dataset.apPb || window.getComputedStyle(content).paddingBottom;
       content.style.overflow = "hidden";
-      content.style.transition = "height .34s cubic-bezier(.4,0,.2,1), opacity .2s ease";
+      content.style.willChange = "height, opacity, transform";
+      content.style.transition = "height .42s cubic-bezier(.32,.05,.2,1), opacity .30s ease-out, padding-top .42s cubic-bezier(.32,.05,.2,1), padding-bottom .42s cubic-bezier(.32,.05,.2,1)";
       content.style.height = `${currentHeight}px`;
       content.style.opacity = "1";
+      content.style.paddingTop = openPt;
+      content.style.paddingBottom = openPb;
+      content.style.transform = "none";
       content.offsetHeight;
       requestAnimationFrame(() => {
         content.style.height = "0px";
         content.style.opacity = "0";
+        content.style.paddingTop = "0px";
+        content.style.paddingBottom = "0px";
       });
       const onEnd = (event) => {
         if (event.propertyName !== "height") return;
         content.classList.add("hidden");
         content.style.height = "0px";
+        content.style.willChange = "auto";
+        window.__vofProgramFlowRefresh?.();
         content.removeEventListener("transitionend", onEnd);
         onDone?.();
       };
       content.addEventListener("transitionend", onEnd);
     }
-    function setupAccordion(buttonSelector, iconSelector) {
+    function setupAccordion(buttonSelector, iconSelector, options = {}) {
+      const { followCamera = false } = options;
       const buttons = document.querySelectorAll(buttonSelector);
+      const followToCenter = (button, content) => {
+        const headerShell = document.querySelector(".site-header")?.parentElement;
+        const headerBottom = headerShell ? headerShell.getBoundingClientRect().bottom : 0;
+        const topLimit = Math.max(headerBottom + 10, 10);
+        const bottomLimit = window.innerHeight - 14;
+
+        const move = () => {
+          const b = button.getBoundingClientRect();
+          const c = content.getBoundingClientRect();
+          const panelTop = Math.max(b.top, topLimit);
+          const panelBottom = Math.min(c.bottom, bottomLimit);
+          const panelCenter = panelTop + Math.max(panelBottom - panelTop, b.height) * 0.5;
+          const viewportCenter = topLimit + (bottomLimit - topLimit) * 0.5;
+          const delta = panelCenter - viewportCenter;
+          if (Math.abs(delta) > 2) {
+            window.scrollTo({ top: Math.max(window.scrollY + delta, 0), behavior: "smooth" });
+          }
+        };
+
+        // one pass early + one pass after layout settles
+        requestAnimationFrame(move);
+        window.setTimeout(move, 220);
+      };
       buttons.forEach((button) => {
         const content = button.nextElementSibling;
         setAccordionContentState(content, false);
@@ -4116,20 +4835,37 @@
             button.setAttribute("aria-expanded", "true");
             icon.style.transform = "rotate(180deg)";
             openAccordionContent(content);
+            if (followCamera) {
+              followToCenter(button, content);
+            }
+            window.requestAnimationFrame(() => {
+              window.__vofProgramFlowRefresh?.();
+            });
+            window.setTimeout(() => {
+              window.__vofProgramFlowRefresh?.();
+            }, 180);
           };
           if (openButtonsToClose.length) {
             const { button: activeButton, content: activeContent, icon: activeIcon } = openButtonsToClose[0];
             activeButton.setAttribute("aria-expanded", "false");
             activeIcon.style.transform = "rotate(0deg)";
-            closeAccordionContent(activeContent, openNewContent);
+            // Sequential transition: close active first, then open target.
+            // This avoids layout contention and visual jumps in long FAQ blocks.
+            closeAccordionContent(activeContent, () => {
+              openNewContent();
+              window.setTimeout(() => {
+                window.__vofProgramFlowRefresh?.();
+              }, 120);
+            });
             return;
           }
           openNewContent();
         });
       });
     }
-    setupAccordion(".accordion-toggle", ".accordion-icon");
-    setupAccordion(".faq-toggle", ".faq-icon");
+    setupAccordion(".accordion-toggle", ".accordion-icon", { followCamera: true });
+    setupAccordion(".faq-toggle", ".faq-icon", { followCamera: false });
+
     const mobileMenuButton = document.querySelector("#mobile-menu-button");
     const mobileMenuPanel = document.querySelector("#mobile-menu-panel");
     const mobileMenuOverlay = document.querySelector("#mobile-menu-overlay");
@@ -4208,20 +4944,251 @@
       }, { threshold: 0.55 });
       heroStatsObserver.observe(heroStatsBlock);
     }
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        const ratio = entry.intersectionRatio;
-        if (ratio >= 0.18) {
-          entry.target.classList.add("is-visible");
-        } else if (ratio <= 0.03) {
-          entry.target.classList.remove("is-visible");
+    const revealSections = Array.from(document.querySelectorAll(".section-reveal"));
+    const revealIsMobile = window.matchMedia("(max-width: 768px)").matches;
+    const revealEnterRatio = revealIsMobile ? 0.10 : 0.14;
+    const revealLeaveRatio = revealIsMobile ? 0.015 : 0.025;
+    const revealThresholds = revealIsMobile ? [0, 0.015, 0.10, 0.22] : [0, 0.025, 0.14, 0.28];
+
+    const applyRevealByViewport = () => {
+      const vh = window.innerHeight || document.documentElement.clientHeight || 0;
+      revealSections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        const visibleTop = rect.top < vh * 0.94;
+        const visibleBottom = rect.bottom > vh * 0.06;
+        if (visibleTop && visibleBottom) {
+          section.classList.add("is-visible");
+        } else {
+          section.classList.remove("is-visible");
         }
       });
-    }, {
-      threshold: [0, 0.03, 0.18, 0.32],
-      rootMargin: "0px 0px -4% 0px"
-    });
-    document.querySelectorAll(".section-reveal").forEach((section) => observer.observe(section));
+    };
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          const ratio = entry.intersectionRatio;
+          if (ratio >= revealEnterRatio) {
+            entry.target.classList.add("is-visible");
+          } else if (ratio <= revealLeaveRatio) {
+            entry.target.classList.remove("is-visible");
+          }
+        });
+      }, {
+        threshold: revealThresholds,
+        rootMargin: revealIsMobile ? "0px 0px -2% 0px" : "0px 0px -1% 0px"
+      });
+      revealSections.forEach((section) => observer.observe(section));
+      // First paint sync to avoid delayed first reveal on some devices.
+      requestAnimationFrame(applyRevealByViewport);
+    } else {
+      // Fallback for older devices/browsers.
+      applyRevealByViewport();
+      window.addEventListener("scroll", applyRevealByViewport, { passive: true });
+      window.addEventListener("resize", applyRevealByViewport, { passive: true });
+    }
+
+    // Program modules: continuous SVG path with scroll-synced dash offset.
+    (function setupProgramModulesFlow() {
+      const rail = document.querySelector("#program .program-rail");
+      if (!rail) return;
+      const cards = Array.from(rail.querySelectorAll(".module-card"));
+      if (!cards.length) return;
+
+      const isMobile = window.matchMedia("(max-width: 768px)").matches;
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const inDelay = isMobile ? 70 : 95;
+      const svgNS = "http://www.w3.org/2000/svg";
+
+      // Keep the module entrance reveal, but decouple it from line progress.
+      if ("IntersectionObserver" in window) {
+        const visible = new WeakMap();
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            const card = entry.target;
+            const idx = Number(card.dataset.moduleIndex || "0");
+            if (entry.isIntersecting) {
+              visible.set(card, true);
+              window.setTimeout(() => {
+                if (visible.get(card)) card.classList.add("module-in-view");
+              }, idx * inDelay);
+            } else if (entry.intersectionRatio < 0.03) {
+              visible.set(card, false);
+              card.classList.remove("module-in-view");
+            }
+          });
+        }, {
+          threshold: [0, 0.03, 0.14, 0.24],
+          rootMargin: isMobile ? "0px 0px -6% 0px" : "0px 0px -10% 0px"
+        });
+        cards.forEach((card, idx) => {
+          card.dataset.moduleIndex = String(idx);
+          observer.observe(card);
+        });
+      } else {
+        cards.forEach((card, idx) => {
+          card.dataset.moduleIndex = String(idx);
+          window.setTimeout(() => card.classList.add("module-in-view"), idx * inDelay);
+        });
+      }
+
+      const flowSvg = document.createElementNS(svgNS, "svg");
+      const flowDefs = document.createElementNS(svgNS, "defs");
+      const flowGradient = document.createElementNS(svgNS, "linearGradient");
+      const flowTrack = document.createElementNS(svgNS, "path");
+      const flowActive = document.createElementNS(svgNS, "path");
+      let flowLength = 0;
+      let targetProgress = 0;
+      let paintRaf = 0;
+      let rebuildRaf = 0;
+
+      flowSvg.setAttribute("class", "program-flow");
+      flowSvg.setAttribute("aria-hidden", "true");
+      flowSvg.setAttribute("preserveAspectRatio", "none");
+      flowSvg.setAttribute("focusable", "false");
+
+      flowGradient.setAttribute("id", "program-flow-gradient");
+      flowGradient.setAttribute("gradientUnits", "userSpaceOnUse");
+      flowGradient.innerHTML = `
+        <stop offset="0%" stop-color="#ff7a1a" />
+        <stop offset="54%" stop-color="#ffb066" />
+        <stop offset="100%" stop-color="#ff7a1a" />
+      `;
+
+      flowTrack.setAttribute("class", "program-flow__track");
+      flowActive.setAttribute("class", "program-flow__active");
+
+      flowDefs.appendChild(flowGradient);
+      flowSvg.appendChild(flowDefs);
+      flowSvg.appendChild(flowTrack);
+      flowSvg.appendChild(flowActive);
+      rail.prepend(flowSvg);
+
+      const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+
+      const setPath = () => {
+        const railRect = rail.getBoundingClientRect();
+        const h = Math.max(1, rail.scrollHeight);
+        flowSvg.style.height = `${h}px`;
+
+        const points = cards.map((card, idx) => {
+          const rect = card.getBoundingClientRect();
+          const y = (rect.top - railRect.top) + Math.min(60, rect.height * 0.34);
+          const connectorOffset = isMobile ? 12 : 24;
+          const x = idx % 2 === 0
+            ? (rect.right - railRect.left) + connectorOffset
+            : (rect.left - railRect.left) - connectorOffset;
+          return { x, y };
+        });
+
+        if (points.length < 2) return;
+
+        const pad = isMobile ? 34 : 46;
+        const minX = Math.min(...points.map((p) => p.x)) - pad;
+        const maxX = Math.max(...points.map((p) => p.x)) + pad;
+        const vbW = Math.max(1, maxX - minX);
+
+        flowSvg.setAttribute("viewBox", `${minX.toFixed(1)} 0 ${vbW.toFixed(1)} ${h.toFixed(1)}`);
+        flowGradient.setAttribute("x1", minX.toFixed(1));
+        flowGradient.setAttribute("y1", "0");
+        flowGradient.setAttribute("x2", minX.toFixed(1));
+        flowGradient.setAttribute("y2", h.toFixed(1));
+
+        let d = `M ${points[0].x.toFixed(1)} ${points[0].y.toFixed(1)} `;
+        for (let i = 1; i < points.length; i += 1) {
+          const p0 = points[i - 1];
+          const p1 = points[i];
+          const midY = (p0.y + p1.y) / 2;
+          d += `C ${p0.x.toFixed(1)} ${midY.toFixed(1)} ${p1.x.toFixed(1)} ${midY.toFixed(1)} ${p1.x.toFixed(1)} ${p1.y.toFixed(1)} `;
+        }
+
+        flowTrack.setAttribute("d", d);
+        flowActive.setAttribute("d", d);
+
+        try {
+          flowLength = flowActive.getTotalLength();
+          flowActive.style.strokeDasharray = `${flowLength} ${flowLength}`;
+          flowActive.style.strokeDashoffset = `${flowLength}`;
+        } catch {
+          flowLength = 0;
+        }
+      };
+
+      const updateTargetProgress = () => {
+        const vh = window.innerHeight || document.documentElement.clientHeight || 1;
+        const railRect = rail.getBoundingClientRect();
+        const start = vh * 0.90;
+        const span = railRect.height + vh * 0.60;
+        targetProgress = clamp((start - railRect.top) / Math.max(span, 1), 0, 1);
+      };
+
+      const paint = () => {
+        paintRaf = 0;
+        if (!flowLength) return;
+
+        if (reduceMotion) {
+          flowActive.style.strokeDashoffset = "0";
+          return;
+        }
+
+        flowActive.style.strokeDashoffset = `${flowLength * (1 - targetProgress)}`;
+      };
+
+      const schedulePaint = () => {
+        if (paintRaf) return;
+        paintRaf = window.requestAnimationFrame(paint);
+      };
+
+      const rebuild = () => {
+        rebuildRaf = 0;
+        setPath();
+        updateTargetProgress();
+        schedulePaint();
+      };
+
+      const scheduleRebuild = () => {
+        if (rebuildRaf) return;
+        rebuildRaf = window.requestAnimationFrame(rebuild);
+      };
+
+      rebuild();
+      window.addEventListener("scroll", () => {
+        updateTargetProgress();
+        schedulePaint();
+      }, { passive: true });
+      window.addEventListener("resize", scheduleRebuild, { passive: true });
+      document.addEventListener("visibilitychange", () => {
+        if (!document.hidden) {
+          updateTargetProgress();
+          schedulePaint();
+        }
+      }, { passive: true });
+
+      if ("ResizeObserver" in window) {
+        const ro = new ResizeObserver(() => scheduleRebuild());
+        ro.observe(rail);
+        cards.forEach((card) => ro.observe(card));
+      } else {
+        document.addEventListener("transitionend", (event) => {
+          if (!(event.target instanceof HTMLElement)) return;
+          if (!rail.contains(event.target)) return;
+          if (event.propertyName !== "height" && event.propertyName !== "transform") return;
+          scheduleRebuild();
+        }, { passive: true });
+      }
+
+      window.__vofProgramFlowRefresh = () => {
+        scheduleRebuild();
+        window.requestAnimationFrame(() => {
+          updateTargetProgress();
+          paint();
+        });
+        window.setTimeout(() => {
+          updateTargetProgress();
+          paint();
+        }, 90);
+      };
+    })();
 
     function getAnchorScrollOffset() {
       const headerShell = document.querySelector(".site-header")?.parentElement;
@@ -4444,6 +5411,3 @@
   </script>
 </body>
 </html>
-
-
-
