@@ -30,6 +30,19 @@
   <style>
     :root { color-scheme: dark; }
     html { scroll-behavior: smooth; scrollbar-gutter: stable; }
+    a, button, input, textarea, select, summary, [role="button"] {
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .module-card .accordion-toggle,
+    .faq-toggle,
+    .support-chat__button,
+    .support-chat__close,
+    .cookie-banner__button,
+    .mobile-nav-link {
+      touch-action: manipulation;
+      pointer-events: auto;
+    }
     body {
       margin: 0;
       font-family: "Manrope", sans-serif;
@@ -3140,6 +3153,7 @@
         overscroll-behavior-x: contain;
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
+        touch-action: pan-x;
         padding: .85rem 1rem 1rem !important;
         scroll-padding-left: 1rem !important;
         scroll-padding-right: 1rem !important;
@@ -3269,6 +3283,7 @@
         gap: .42rem !important;
         padding-bottom: .1rem !important;
         scrollbar-width: none;
+        touch-action: pan-x;
       }
       .module-preview::-webkit-scrollbar {
         display: none;
@@ -3710,7 +3725,6 @@
       .hero-grid {
         display: none !important;
       }
-      .cookie-banner,
       #image-modal {
         display: none !important;
       }
@@ -3725,7 +3739,6 @@
         min-height: 100% !important;
         overflow-y: auto !important;
         overflow-x: hidden !important;
-        touch-action: pan-y;
         overscroll-behavior-y: auto;
       }
     }
@@ -5260,12 +5273,52 @@
     const cookieBanner = document.getElementById("cookie-banner");
     const cookieBannerAccept = document.getElementById("cookie-banner-accept");
     const cookieConsentKey = "vadya_ofm_cookie_consent_v1";
-    if (cookieBanner && !sessionStorage.getItem(cookieConsentKey)) {
+    const cookieSessionPrefix = "__vof_cookie__:";
+
+    function readCookieConsent() {
+      try {
+        const value = sessionStorage.getItem(cookieConsentKey);
+        if (value) return value;
+      } catch (error) {}
+
+      try {
+        if (typeof window.name === "string" && window.name.startsWith(cookieSessionPrefix)) {
+          const stored = JSON.parse(window.name.slice(cookieSessionPrefix.length));
+          return stored[cookieConsentKey] || null;
+        }
+      } catch (error) {}
+
+      return null;
+    }
+
+    function writeCookieConsent(value) {
+      try {
+        sessionStorage.setItem(cookieConsentKey, value);
+        return;
+      } catch (error) {}
+
+      try {
+        const stored = (() => {
+          if (typeof window.name === "string" && window.name.startsWith(cookieSessionPrefix)) {
+            try {
+              return JSON.parse(window.name.slice(cookieSessionPrefix.length));
+            } catch (error) {
+              return {};
+            }
+          }
+          return {};
+        })();
+        stored[cookieConsentKey] = value;
+        window.name = `${cookieSessionPrefix}${JSON.stringify(stored)}`;
+      } catch (error) {}
+    }
+
+    if (cookieBanner && !readCookieConsent()) {
       requestAnimationFrame(() => cookieBanner.classList.add("is-visible"));
     }
     if (cookieBannerAccept && cookieBanner) {
       cookieBannerAccept.addEventListener("click", () => {
-        sessionStorage.setItem(cookieConsentKey, "accepted");
+        writeCookieConsent("accepted");
         cookieBanner.classList.remove("is-visible");
       });
     }
