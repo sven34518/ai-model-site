@@ -704,13 +704,13 @@
       display: block;
       width: 0;
       height: 0;
-      --support-chat-offset: 20px;
+      --support-chat-offset: 8px;
       --support-chat-button-height: 4.15rem;
     }
     .support-chat__panel {
       position: fixed;
       right: 1.25rem;
-      bottom: calc(var(--support-chat-offset) + var(--support-chat-button-height) + .85rem);
+      bottom: var(--support-chat-offset);
       z-index: 1000;
       width: min(24rem, calc(100vw - 1.5rem));
       height: min(39rem, calc(100vh - 3.2rem));
@@ -1024,7 +1024,7 @@
         width: 100%;
       }
       .support-chat {
-        --support-chat-offset: 15px;
+        --support-chat-offset: 8px;
         --support-chat-button-height: 3.8rem;
       }
       .support-chat__panel {
@@ -1032,7 +1032,7 @@
         width: min(100vw - 1.25rem, 23rem);
         height: min(31rem, calc(100vh - 1rem));
         border-radius: 1.5rem 1.5rem 1.1rem 1.1rem;
-        bottom: calc(var(--support-chat-offset) + var(--support-chat-button-height) + .75rem);
+        bottom: var(--support-chat-offset);
       }
       .support-chat__button {
         right: .85rem;
@@ -5350,12 +5350,8 @@
     function syncSupportChatOffset() {
       if (!supportChat) return;
       const isMobile = window.innerWidth <= 640;
-      const baseOffset = isMobile ? 15 : 20;
-      if (!isMobile || !cookieBanner || !cookieBanner.classList.contains("is-visible")) {
-        supportChat.style.setProperty("--support-chat-offset", `${baseOffset}px`);
-        return;
-      }
-      supportChat.style.setProperty("--support-chat-offset", `${Math.ceil(cookieBanner.offsetHeight + 26)}px`);
+      const baseOffset = isMobile ? 8 : 8;
+      supportChat.style.setProperty("--support-chat-offset", `${baseOffset}px`);
     }
 
     if (cookieBanner && !readCookieConsent()) {
