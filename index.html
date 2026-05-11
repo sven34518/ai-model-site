@@ -3711,12 +3711,10 @@
         display: none !important;
       }
       .cookie-banner,
-      .support-chat,
       #image-modal {
         display: none !important;
       }
       .site-header,
-      .support-chat,
       .cookie-banner,
       #image-modal {
         -webkit-transform: translateZ(0);
@@ -5262,12 +5260,12 @@
     const cookieBanner = document.getElementById("cookie-banner");
     const cookieBannerAccept = document.getElementById("cookie-banner-accept");
     const cookieConsentKey = "vadya_ofm_cookie_consent_v1";
-    if (cookieBanner && !localStorage.getItem(cookieConsentKey)) {
+    if (cookieBanner && !sessionStorage.getItem(cookieConsentKey)) {
       requestAnimationFrame(() => cookieBanner.classList.add("is-visible"));
     }
     if (cookieBannerAccept && cookieBanner) {
       cookieBannerAccept.addEventListener("click", () => {
-        localStorage.setItem(cookieConsentKey, "accepted");
+        sessionStorage.setItem(cookieConsentKey, "accepted");
         cookieBanner.classList.remove("is-visible");
       });
     }
