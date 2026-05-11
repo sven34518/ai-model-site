@@ -82,6 +82,7 @@
       inset: -140%;
       background: radial-gradient(circle, rgba(255,255,255,.22) 0%, transparent 55%);
       opacity: 0;
+      pointer-events: none;
       transition: opacity .3s ease;
     }
     .glow-button:hover::after,
@@ -389,6 +390,7 @@
       font-size: .78rem;
       font-weight: 700;
       letter-spacing: .08em;
+      pointer-events: none;
     }
     .trust-showcase__swipe svg {
       width: 1rem;
@@ -404,6 +406,7 @@
       overscroll-behavior-x: contain;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
+      touch-action: pan-x;
       scrollbar-width: none;
       padding: .95rem 1rem 1rem;
       scroll-padding-left: 1rem;
@@ -649,7 +652,6 @@
     .cookie-banner.is-visible {
       opacity: 1;
       transform: translateY(0);
-      pointer-events: auto;
     }
     .cookie-banner__title {
       margin: 0;
@@ -676,6 +678,7 @@
       display: flex;
       align-items: center;
       gap: .75rem;
+      pointer-events: auto;
     }
     .cookie-banner__button {
       min-height: 3rem;
@@ -688,6 +691,7 @@
       font-weight: 800;
       box-shadow: 0 14px 26px rgba(17, 15, 13, .14);
       cursor: pointer;
+      pointer-events: auto;
       transition: transform .2s ease, box-shadow .2s ease;
     }
     .cookie-banner__button:hover {
@@ -695,36 +699,34 @@
       box-shadow: 0 18px 30px rgba(17, 15, 13, .18);
     }
     .support-chat {
-      position: fixed;
-      right: 1.25rem;
-      bottom: 1.25rem;
-      z-index: 55;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: .85rem;
+      position: static;
+      z-index: auto;
+      display: block;
+      width: 0;
+      height: 0;
+      --support-chat-offset: 20px;
+      --support-chat-button-height: 4.15rem;
     }
     .support-chat__panel {
+      position: fixed;
+      right: 1.25rem;
+      bottom: calc(var(--support-chat-offset) + var(--support-chat-button-height) + .85rem);
+      z-index: 1000;
       width: min(24rem, calc(100vw - 1.5rem));
       height: min(39rem, calc(100vh - 3.2rem));
-      display: flex;
+      display: none;
       flex-direction: column;
       overflow: hidden;
       border-radius: 1.9rem;
       border: 1px solid rgba(88, 64, 43, .1);
       background: rgba(255, 251, 246, .98);
       box-shadow: 0 28px 70px rgba(53, 39, 29, .18), inset 0 0 0 1px rgba(255,255,255,.48);
-      opacity: 0;
-      transform: translateY(28px) scale(.98);
       pointer-events: none;
-      transition: opacity .22s ease, transform .22s ease;
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      margin-bottom: -4rem;
     }
     .support-chat.is-open .support-chat__panel {
-      opacity: 1;
-      transform: translateY(0) scale(1);
+      display: flex;
       pointer-events: auto;
     }
     .support-chat.is-open .support-chat__button {
@@ -733,6 +735,10 @@
       transform: translateY(8px) scale(.96);
     }
     .support-chat__button {
+      position: fixed;
+      right: 1.25rem;
+      bottom: var(--support-chat-offset);
+      z-index: 1001;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -748,6 +754,7 @@
       font-weight: 800;
       letter-spacing: -.01em;
       cursor: pointer;
+      pointer-events: auto;
       transition: transform .2s ease, box-shadow .2s ease;
     }
     .support-chat__button:hover {
@@ -801,6 +808,7 @@
       border-radius: 999px;
       background: #16a34a;
       box-shadow: 0 0 0 3px rgba(255,251,246,.96);
+      pointer-events: none;
     }
     .support-chat__logo-mark {
       position: relative;
@@ -1016,23 +1024,21 @@
         width: 100%;
       }
       .support-chat {
-        right: .85rem;
-        bottom: .95rem;
-        left: auto;
-        align-items: flex-end;
+        --support-chat-offset: 15px;
+        --support-chat-button-height: 3.8rem;
       }
       .support-chat__panel {
+        right: .85rem;
         width: min(100vw - 1.25rem, 23rem);
         height: min(31rem, calc(100vh - 1rem));
         border-radius: 1.5rem 1.5rem 1.1rem 1.1rem;
-        transform: translateY(26px);
-        margin-bottom: -4.2rem;
+        bottom: calc(var(--support-chat-offset) + var(--support-chat-button-height) + .75rem);
       }
       .support-chat__button {
+        right: .85rem;
         min-height: 3.8rem;
         padding-inline: 1.15rem;
         font-size: .92rem;
-        align-self: flex-end;
       }
       .support-chat__head {
         padding: .95rem .95rem .88rem;
@@ -1393,6 +1399,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      pointer-events: none;
     }
     .hero-visual-orbit {
       position: absolute;
@@ -1403,6 +1410,7 @@
         linear-gradient(180deg, #141110 0%, #0f0c0a 100%);
       box-shadow: 0 34px 70px rgba(24, 17, 13, .22);
       transform: rotate(-2.4deg);
+      pointer-events: none;
     }
     .hero-floating-proof {
       position: relative;
@@ -1415,6 +1423,7 @@
       box-shadow: 0 28px 56px rgba(0,0,0,.28);
       transform: rotate(4.6deg) translateY(.35rem);
       animation: heroFloat 6.5s ease-in-out infinite;
+      pointer-events: none;
     }
     .hero-floating-proof::before {
       content: "";
@@ -1438,12 +1447,14 @@
       letter-spacing: .1em;
       text-transform: uppercase;
       box-shadow: 0 12px 24px rgba(229,125,47,.22);
+      pointer-events: none;
     }
     .hero-proof-inner {
       border-radius: 1.55rem;
       background: linear-gradient(180deg, rgba(39,32,28,.94), rgba(23,19,16,.96));
       border: 1px solid rgba(255,255,255,.06);
       padding: 1.3rem;
+      pointer-events: none;
     }
     .hero-proof-meta {
       display: flex;
@@ -2452,6 +2463,7 @@
       height: 1px;
       background: rgba(217,119,46,.58);
       transform: translateY(-50%);
+      pointer-events: none;
     }
     .advanced-panel .inline-flex::before {
       right: 100%;
@@ -2538,6 +2550,7 @@
       height: 1px;
       background: rgba(217,119,46,.74);
       transform: translateY(-50%);
+      pointer-events: none;
     }
     #faq .inline-flex::before {
       right: 100%;
@@ -2574,6 +2587,7 @@
       height: 1px;
       background: rgba(217,119,46,.74);
       transform: translateY(-50%);
+      pointer-events: none;
     }
     #program .inline-flex::before,
     #results .inline-flex::before,
@@ -3514,7 +3528,11 @@
       pointer-events: auto;
       will-change: opacity;
     }
-    .vof-intro[aria-hidden="true"] { display: none; }
+    .vof-intro[aria-hidden="true"] {
+      display: none;
+      visibility: hidden;
+      pointer-events: none;
+    }
 
     .vof-intro__doors {
       position: absolute;
@@ -3702,7 +3720,11 @@
     .vof-intro.is-exit .vof-intro__door--left { animation: vofDoorsOpenL 760ms cubic-bezier(.22, 1, .18, 1) forwards; }
     .vof-intro.is-exit .vof-intro__door--right { animation: vofDoorsOpenR 760ms cubic-bezier(.22, 1, .18, 1) forwards; }
     .vof-intro.is-exit .vof-intro__inner { animation: vofInnerLift 520ms cubic-bezier(.2, 1, .2, 1) forwards; }
-    .vof-intro.is-exit { animation: vofIntroFade 320ms ease forwards; animation-delay: 620ms; }
+    .vof-intro.is-exit {
+      animation: vofIntroFade 320ms ease forwards;
+      animation-delay: 620ms;
+      pointer-events: none;
+    }
 
     @media (prefers-reduced-motion: reduce) {
       .vof-intro__letter,
@@ -4536,12 +4558,14 @@
 
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       if (reduceMotion) {
+        intro.style.pointerEvents = "none";
         intro.setAttribute("aria-hidden", "true");
         return;
       }
 
       const isTouchDevice = window.matchMedia("(pointer: coarse)").matches || window.innerWidth <= 768;
       if (isTouchDevice) {
+        intro.style.pointerEvents = "none";
         intro.setAttribute("aria-hidden", "true");
         intro.remove();
         document.body.style.overflow = "";
@@ -4591,10 +4615,12 @@
 
       // "Doors opening" exit
       window.setTimeout(() => {
+        intro.style.pointerEvents = "none";
         intro.classList.add("is-exit");
       }, afterLine + 220);
 
       window.setTimeout(() => {
+        intro.style.pointerEvents = "none";
         intro.setAttribute("aria-hidden", "true");
         document.body.style.overflow = prevOverflow;
         document.body.style.paddingRight = prevPadRight;
@@ -5274,6 +5300,14 @@
     const cookieBannerAccept = document.getElementById("cookie-banner-accept");
     const cookieConsentKey = "vadya_ofm_cookie_consent_v1";
     const cookieSessionPrefix = "__vof_cookie__:";
+    const supportChat = document.getElementById("support-chat");
+
+    if (supportChat && supportChat.parentElement !== document.body) {
+      document.body.appendChild(supportChat);
+    }
+    if (cookieBanner && cookieBanner.parentElement !== document.body) {
+      document.body.appendChild(cookieBanner);
+    }
 
     function readCookieConsent() {
       try {
@@ -5313,17 +5347,32 @@
       } catch (error) {}
     }
 
+    function syncSupportChatOffset() {
+      if (!supportChat) return;
+      const isMobile = window.innerWidth <= 640;
+      const baseOffset = isMobile ? 15 : 20;
+      if (!isMobile || !cookieBanner || !cookieBanner.classList.contains("is-visible")) {
+        supportChat.style.setProperty("--support-chat-offset", `${baseOffset}px`);
+        return;
+      }
+      supportChat.style.setProperty("--support-chat-offset", `${Math.ceil(cookieBanner.offsetHeight + 26)}px`);
+    }
+
     if (cookieBanner && !readCookieConsent()) {
-      requestAnimationFrame(() => cookieBanner.classList.add("is-visible"));
+      requestAnimationFrame(() => {
+        cookieBanner.classList.add("is-visible");
+        syncSupportChatOffset();
+      });
     }
     if (cookieBannerAccept && cookieBanner) {
       cookieBannerAccept.addEventListener("click", () => {
         writeCookieConsent("accepted");
         cookieBanner.classList.remove("is-visible");
+        syncSupportChatOffset();
       });
     }
+    window.addEventListener("resize", syncSupportChatOffset);
 
-    const supportChat = document.getElementById("support-chat");
     const supportChatPanel = supportChat?.querySelector(".support-chat__panel");
     const supportChatToggle = document.getElementById("support-chat-toggle");
     const supportChatClose = document.getElementById("support-chat-close");
