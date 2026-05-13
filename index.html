@@ -28,6 +28,9 @@
     };
   </script>
   <style>
+    /* ==========================================================================
+       TOKENS
+       ========================================================================== */
     :root {
       color-scheme: light;
       --font-body: "Manrope", sans-serif;
@@ -46,11 +49,28 @@
       --line-dark: rgba(255, 243, 228, .12);
       --accent: #e57d2f;
       --accent-soft: rgba(229, 125, 47, .12);
+      --radius-pill: 999px;
+      --radius-card: 2rem;
+      --radius-card-sm: 1.35rem;
       --shadow-soft: 0 16px 34px rgba(45, 31, 20, .075);
       --shadow-card: 0 22px 46px rgba(38, 28, 22, .095);
       --shadow-dark: 0 22px 48px rgba(0, 0, 0, .24);
+      --z-header: 50;
+      --z-overlay: 70;
+      --z-drawer: 80;
+      --z-modal: 100;
+      --z-cookie: 120;
+      --z-chat: 1000;
+      --z-chat-button: 1001;
+      --z-intro: 10000;
       --ease-out: cubic-bezier(.22, .61, .36, 1);
+      --transition-fast: .2s ease;
+      --transition-ui: .28s ease;
     }
+
+    /* ==========================================================================
+       RESET / BASE
+       ========================================================================== */
     html { scroll-behavior: smooth; scrollbar-gutter: stable; }
     a, button, input, textarea, select, summary, [role="button"] {
       touch-action: manipulation;
@@ -79,6 +99,10 @@
         linear-gradient(180deg, #f9f3ea 0%, #f4eee5 38%, #efe6da 100%);
       background-color: var(--page-bg);
     }
+
+    /* ==========================================================================
+       UTILITIES
+       ========================================================================== */
     .hero-grid {
       background-image:
         linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
@@ -89,7 +113,7 @@
     .glow-button {
       position: relative;
       overflow: hidden;
-      transition: transform .3s ease, box-shadow .3s ease, background-color .3s ease;
+      transition: transform var(--transition-ui), box-shadow var(--transition-ui), background-color var(--transition-ui);
     }
     .glow-button:hover { transform: translateY(-2px); }
     .glow-button::after {
@@ -99,7 +123,7 @@
       background: radial-gradient(circle, rgba(255,255,255,.22) 0%, transparent 55%);
       opacity: 0;
       pointer-events: none;
-      transition: opacity .3s ease;
+      transition: opacity var(--transition-ui);
     }
     .glow-button:hover::after,
     .glow-button:focus-visible::after { opacity: 1; }
@@ -119,7 +143,7 @@
       color: transparent;
     }
     .nav-link {
-      transition: color .3s ease, opacity .3s ease;
+      transition: color var(--transition-ui), opacity var(--transition-ui);
     }
     .nav-link:hover { color: #fff; }
     .module-kicker {
@@ -169,14 +193,14 @@
       width: 2.25rem;
       height: 2.25rem;
       color: rgba(158,158,165,.84);
-      transition: transform .3s ease, color .3s ease;
+      transition: transform var(--transition-ui), color var(--transition-ui);
     }
     .question-card {
       background: linear-gradient(180deg, rgba(24,24,24,.98), rgba(16,16,16,.98));
     }
     .footer-link {
       color: rgba(255,255,255,.55);
-      transition: color .2s ease;
+      transition: color var(--transition-fast);
     }
     .footer-link:hover { color: #fff; }
     .results-card {
@@ -425,6 +449,9 @@
     .trust-card p {
       color: rgba(73,57,45,.76) !important;
     }
+    /* ==========================================================================
+       RESPONSIVE
+       ========================================================================== */
     @media (min-width: 768px) {
       .trust-showcase__hint {
         display: none;
@@ -558,10 +585,13 @@
       transform: translateY(-2px);
       opacity: .96;
     }
+    /* ==========================================================================
+       OVERLAYS
+       ========================================================================== */
     .image-modal {
       position: fixed;
       inset: 0;
-      z-index: 100;
+      z-index: var(--z-modal);
       display: none;
       align-items: center;
       justify-content: center;
@@ -605,7 +635,7 @@
       position: fixed;
       left: 1.25rem;
       bottom: 1.25rem;
-      z-index: 120;
+      z-index: var(--z-cookie);
       width: min(30rem, calc(100vw - 2rem));
       padding: 1.35rem 1.35rem 1.2rem;
       border-radius: 1.55rem;
@@ -668,6 +698,9 @@
       transform: translateY(-1px);
       box-shadow: 0 18px 30px rgba(17, 15, 13, .18);
     }
+    /* ==========================================================================
+       FLOATING SUPPORT CHAT
+       ========================================================================== */
     .support-chat {
       position: static;
       z-index: auto;
@@ -681,7 +714,7 @@
       position: fixed;
       right: 1.25rem;
       bottom: var(--support-chat-offset);
-      z-index: 1000;
+      z-index: var(--z-chat);
       width: min(24rem, calc(100vw - 1.5rem));
       height: min(39rem, calc(100vh - 3.2rem));
       display: none;
@@ -706,7 +739,7 @@
       position: fixed;
       right: 1.25rem;
       bottom: var(--support-chat-offset);
-      z-index: 1001;
+      z-index: var(--z-chat-button);
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -1072,10 +1105,13 @@
       font-weight: 600;
       letter-spacing: -.03em;
     }
+    /* ==========================================================================
+       HEADER
+       ========================================================================== */
     .site-header-shell {
       position: fixed;
       inset: 0 0 auto 0;
-      z-index: 50;
+      z-index: var(--z-header);
     }
     .site-header {
       position: relative;
@@ -1108,7 +1144,7 @@
       right: 11rem;
       width: 18rem;
       height: 10rem;
-      border-radius: 999px;
+      border-radius: var(--radius-pill);
       background: radial-gradient(circle, rgba(229,125,47,.18), rgba(229,125,47,0) 70%);
       pointer-events: none;
     }
@@ -1183,7 +1219,6 @@
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent !important;
-      text-shadow: none;
       text-shadow: 0 8px 16px rgba(229,125,47,.18);
     }
     .site-brand::after {
@@ -1232,7 +1267,7 @@
     button.btn-dark,
     .btn-dark {
       border: 1px solid rgba(17, 15, 13, .12);
-      border-radius: 999px !important;
+      border-radius: var(--radius-pill) !important;
       background: #11100f !important;
       color: #f8efe4 !important;
       box-shadow: 0 14px 30px rgba(17, 15, 13, .14) !important;
@@ -1241,7 +1276,7 @@
     button.btn-light,
     .btn-light {
       border: 1px solid rgba(17, 15, 13, .12) !important;
-      border-radius: 999px !important;
+      border-radius: var(--radius-pill) !important;
       background: rgba(255, 250, 243, .96) !important;
       color: var(--text-main) !important;
       box-shadow: 0 12px 24px rgba(70, 49, 34, .08) !important;
@@ -1337,6 +1372,9 @@
     .warm-cta-section [class~="text-white"] {
       color: var(--text-main) !important;
     }
+    /* ==========================================================================
+       HERO
+       ========================================================================== */
     .hero-section {
       min-height: calc(100svh - 6.75rem);
       padding-top: 1.5rem;
@@ -1431,7 +1469,7 @@
       position: relative;
       z-index: 2;
       width: min(100%, 26rem);
-      border-radius: 2rem;
+      border-radius: var(--radius-card);
       padding: 1.15rem;
       background: linear-gradient(180deg, rgba(30,25,22,.98), rgba(18,15,13,.98));
       border: 1px solid rgba(255, 243, 228, .10);
@@ -1752,6 +1790,9 @@
     .light-section .module-card .module-list li {
       color: rgba(73, 57, 45, .82) !important;
     }
+    /* ==========================================================================
+       PROGRAM
+       ========================================================================== */
     .program-rail {
       position: relative;
     }
@@ -2286,7 +2327,7 @@
     .mobile-drawer-overlay {
       position: fixed;
       inset: 0;
-      z-index: 70;
+      z-index: var(--z-overlay);
       background: rgba(20, 16, 14, .34);
       opacity: 0;
       pointer-events: none;
@@ -2300,7 +2341,7 @@
       position: fixed;
       top: 0;
       left: 0;
-      z-index: 80;
+      z-index: var(--z-drawer);
       width: min(78vw, 24rem);
       height: 100dvh;
       padding: 1.15rem 1.05rem 1.25rem;
@@ -2375,6 +2416,9 @@
       color: var(--accent);
     }
     .module-kicker,
+    /* ==========================================================================
+       PRICING
+       ========================================================================== */
     .pricing-kicker {
       color: var(--accent);
       border-color: rgba(229,125,47,.22);
@@ -3554,15 +3598,13 @@
       }
     }
 
-    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       CINEMATIC LOADER (always on refresh)
-       “Doors open into the room” exit
-       Vanilla CSS + JS
-       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    /* ==========================================================================
+       LOADER / ANIMATIONS
+       ========================================================================== */
     .vof-intro {
       position: fixed;
       inset: 0;
-      z-index: 10000;
+      z-index: var(--z-intro);
       display: grid;
       place-items: center;
       background: #000;
@@ -4585,6 +4627,19 @@
     </div>
   </div>
   <script>
+    /* ==========================================================================
+       DOM HELPERS
+       ========================================================================== */
+    const $ = (selector, root = document) => root.querySelector(selector);
+    const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
+    const on = (target, event, handler, options) => target?.addEventListener(event, handler, options);
+    const onAll = (targets, event, handler, options) => {
+      targets.forEach((target) => target.addEventListener(event, handler, options));
+    };
+
+    /* ==========================================================================
+       GLOBAL UI STATE
+       ========================================================================== */
     const pageScrollLocks = new Set();
     let pageScrollState = null;
 
@@ -4618,9 +4673,9 @@
 
     /* Cinematic Loader (always on refresh) */
     (function () {
-      const intro = document.getElementById("vof-intro");
-      const word = document.getElementById("vof-intro-word");
-      const line = document.getElementById("vof-intro-line");
+      const intro = $("#vof-intro");
+      const word = $("#vof-intro-word");
+      const line = $("#vof-intro-line");
       if (!intro || !word || !line) return;
 
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -4684,7 +4739,7 @@
 
     /* Floating particles (no Three.js) */
     (function () {
-      const canvas = document.getElementById("vof-particles");
+      const canvas = $("#vof-particles");
       if (!canvas) return;
 
       const isCoarse = window.matchMedia("(pointer: coarse)").matches || window.matchMedia("(hover: none)").matches;
@@ -4742,12 +4797,10 @@
       resize();
       window.addEventListener("resize", resize, { passive: true });
 
-      if (!isMobileLike) {
-        window.addEventListener("mousemove", (e) => {
-          state.mx = e.clientX;
-          state.my = e.clientY;
-        }, { passive: true });
-      }
+      window.addEventListener("mousemove", (e) => {
+        state.mx = e.clientX;
+        state.my = e.clientY;
+      }, { passive: true });
 
       window.addEventListener("scroll", () => {
         const y = window.scrollY;
@@ -4835,7 +4888,7 @@
       const openPb = content.dataset.apPb || "0px";
       content.style.overflow = "hidden";
       content.style.boxSizing = "border-box";
-      content.style.willChange = "height, opacity, transform";
+      content.style.willChange = "height, opacity, padding";
       content.style.transition = "height .50s cubic-bezier(.2,.72,.2,1), opacity .36s ease-out, padding-top .50s cubic-bezier(.2,.72,.2,1), padding-bottom .50s cubic-bezier(.2,.72,.2,1)";
       if (isOpen) {
         content.classList.remove("hidden");
@@ -4843,7 +4896,6 @@
         content.style.opacity = "1";
         content.style.paddingTop = openPt;
         content.style.paddingBottom = openPb;
-        content.style.transform = "none";
         return;
       }
       content.classList.add("hidden");
@@ -4851,7 +4903,6 @@
       content.style.opacity = "0";
       content.style.paddingTop = "0px";
       content.style.paddingBottom = "0px";
-      content.style.transform = "none";
     }
     function openAccordionContent(content) {
       if (!content.dataset.apInit) {
@@ -4864,13 +4915,12 @@
       const openPb = content.dataset.apPb || "0px";
       content.classList.remove("hidden");
       content.style.overflow = "hidden";
-      content.style.willChange = "height, opacity, transform";
+      content.style.willChange = "height, opacity, padding";
       content.style.transition = "height .50s cubic-bezier(.2,.72,.2,1), opacity .36s ease-out, padding-top .50s cubic-bezier(.2,.72,.2,1), padding-bottom .50s cubic-bezier(.2,.72,.2,1)";
       content.style.height = "0px";
       content.style.opacity = "0";
       content.style.paddingTop = "0px";
       content.style.paddingBottom = "0px";
-      content.style.transform = "none";
       requestAnimationFrame(() => {
         content.style.paddingTop = openPt;
         content.style.paddingBottom = openPb;
@@ -4896,14 +4946,13 @@
       const openPt = content.dataset.apPt || window.getComputedStyle(content).paddingTop;
       const openPb = content.dataset.apPb || window.getComputedStyle(content).paddingBottom;
       content.style.overflow = "hidden";
-      content.style.willChange = "height, opacity, transform";
+      content.style.willChange = "height, opacity, padding";
       content.style.transition = "height .42s cubic-bezier(.32,.05,.2,1), opacity .30s ease-out, padding-top .42s cubic-bezier(.32,.05,.2,1), padding-bottom .42s cubic-bezier(.32,.05,.2,1)";
       content.style.height = `${currentHeight}px`;
       content.style.opacity = "1";
       content.style.paddingTop = openPt;
       content.style.paddingBottom = openPb;
-      content.style.transform = "none";
-      content.offsetHeight;
+      void content.offsetHeight;
       requestAnimationFrame(() => {
         content.style.height = "0px";
         content.style.opacity = "0";
@@ -5003,13 +5052,16 @@
     setupAccordion(".accordion-toggle", ".accordion-icon", { followCamera: true });
     setupAccordion(".faq-toggle", ".faq-icon", { followCamera: false });
 
-    const mobileMenuButton = document.querySelector("#mobile-menu-button");
-    const mobileMenuPanel = document.querySelector("#mobile-menu-panel");
-    const mobileMenuOverlay = document.querySelector("#mobile-menu-overlay");
-    const mobileMenuOpen = document.querySelector("#mobile-menu-open");
-    const mobileMenuClose = document.querySelector("#mobile-menu-close");
-    const mobileDrawerClose = document.querySelector("#mobile-drawer-close");
-    const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+    /* ==========================================================================
+       MOBILE NAVIGATION
+       ========================================================================== */
+    const mobileMenuButton = $("#mobile-menu-button");
+    const mobileMenuPanel = $("#mobile-menu-panel");
+    const mobileMenuOverlay = $("#mobile-menu-overlay");
+    const mobileMenuOpen = $("#mobile-menu-open");
+    const mobileMenuClose = $("#mobile-menu-close");
+    const mobileDrawerClose = $("#mobile-drawer-close");
+    const mobileNavLinks = $$(".mobile-nav-link");
     if (mobileMenuOverlay && mobileMenuOverlay.parentElement !== document.body) {
       document.body.appendChild(mobileMenuOverlay);
     }
@@ -5035,18 +5087,16 @@
         const isOpen = mobileMenuButton.getAttribute("aria-expanded") === "true";
         setMobileMenuState(!isOpen);
       });
-      mobileDrawerClose?.addEventListener("click", () => setMobileMenuState(false));
-      mobileMenuOverlay?.addEventListener("click", () => setMobileMenuState(false));
-      document.addEventListener("click", (event) => {
+      on(mobileDrawerClose, "click", () => setMobileMenuState(false));
+      on(mobileMenuOverlay, "click", () => setMobileMenuState(false));
+      on(document, "click", (event) => {
         const isOpen = mobileMenuButton.getAttribute("aria-expanded") === "true";
         if (!isOpen || !mobileMenuPanel) return;
         if (mobileMenuPanel.contains(event.target) || mobileMenuButton.contains(event.target)) return;
         setMobileMenuState(false);
       });
-      mobileNavLinks.forEach((link) => {
-        link.addEventListener("click", () => setMobileMenuState(false));
-      });
-      document.addEventListener("keydown", (event) => {
+      onAll(mobileNavLinks, "click", () => setMobileMenuState(false));
+      on(document, "keydown", (event) => {
         if (event.key === "Escape") setMobileMenuState(false);
       });
     }
@@ -5074,8 +5124,8 @@
       }
       requestAnimationFrame(tick);
     }
-    const heroStatsBlock = document.querySelector(".hero-stats");
-    const heroStatValues = document.querySelectorAll(".hero-stat-value");
+    const heroStatsBlock = $(".hero-stats");
+    const heroStatValues = $$(".hero-stat-value");
     if (heroStatsBlock && heroStatValues.length) {
       const heroStatsObserver = new IntersectionObserver((entries, observerInstance) => {
         entries.forEach((entry) => {
@@ -5088,7 +5138,7 @@
       }, { threshold: 0.55 });
       heroStatsObserver.observe(heroStatsBlock);
     }
-    const revealSections = Array.from(document.querySelectorAll(".section-reveal"));
+    const revealSections = $$(".section-reveal");
     const revealIsMobile = window.matchMedia("(max-width: 768px)").matches;
     const revealEnterRatio = revealIsMobile ? 0.10 : 0.14;
     const revealLeaveRatio = revealIsMobile ? 0.015 : 0.025;
@@ -5133,10 +5183,13 @@
     }
 
     // Program modules: continuous SVG path with scroll-synced dash offset.
+    /* ==========================================================================
+       PROGRAM FLOW
+       ========================================================================== */
     (function setupProgramModulesFlow() {
-      const rail = document.querySelector("#program .program-rail");
+      const rail = $("#program .program-rail");
       if (!rail) return;
-      const cards = Array.from(rail.querySelectorAll(".module-card"));
+      const cards = $$(".module-card", rail);
       if (!cards.length) return;
 
       const isMobile = window.matchMedia("(max-width: 768px)").matches;
@@ -5347,7 +5400,10 @@
       return window.innerWidth < 768 ? 92 : 108;
     }
 
-    const internalAnchorLinks = document.querySelectorAll("[data-scroll-target]");
+    /* ==========================================================================
+       ANCHOR NAVIGATION
+       ========================================================================== */
+    const internalAnchorLinks = $$("[data-scroll-target]");
     internalAnchorLinks.forEach((link) => {
       const handleInternalAnchorLink = (event) => {
         if (event.type === "keydown" && event.key !== "Enter" && event.key !== " ") return;
@@ -5366,11 +5422,14 @@
       link.addEventListener("keydown", handleInternalAnchorLink);
     });
  
-    const cookieBanner = document.getElementById("cookie-banner");
-    const cookieBannerAccept = document.getElementById("cookie-banner-accept");
+    /* ==========================================================================
+       COOKIE BANNER + SUPPORT CHAT
+       ========================================================================== */
+    const cookieBanner = $("#cookie-banner");
+    const cookieBannerAccept = $("#cookie-banner-accept");
     const cookieConsentKey = "vadya_ofm_cookie_consent_v1";
     const cookieSessionPrefix = "__vof_cookie__:";
-    const supportChat = document.getElementById("support-chat");
+    const supportChat = $("#support-chat");
 
     if (supportChat && supportChat.parentElement !== document.body) {
       document.body.appendChild(supportChat);
@@ -5419,9 +5478,7 @@
 
     function syncSupportChatOffset() {
       if (!supportChat) return;
-      const isMobile = window.innerWidth <= 640;
-      const baseOffset = isMobile ? 8 : 8;
-      supportChat.style.setProperty("--support-chat-offset", `${baseOffset}px`);
+      supportChat.style.setProperty("--support-chat-offset", "8px");
     }
 
     if (cookieBanner && !readCookieConsent()) {
@@ -5439,14 +5496,14 @@
     }
     window.addEventListener("resize", syncSupportChatOffset);
 
-    const supportChatPanel = supportChat?.querySelector(".support-chat__panel");
-    const supportChatToggle = document.getElementById("support-chat-toggle");
-    const supportChatClose = document.getElementById("support-chat-close");
-    const supportChatMessages = document.getElementById("support-chat-messages");
-    const supportChatForm = document.getElementById("support-chat-form");
-    const supportChatInput = document.getElementById("support-chat-input");
-    const supportChatSend = document.getElementById("support-chat-send");
-    const supportChatQuickButtons = document.querySelectorAll("[data-chat-prompt]");
+    const supportChatPanel = $(".support-chat__panel", supportChat);
+    const supportChatToggle = $("#support-chat-toggle");
+    const supportChatClose = $("#support-chat-close");
+    const supportChatMessages = $("#support-chat-messages");
+    const supportChatForm = $("#support-chat-form");
+    const supportChatInput = $("#support-chat-input");
+    const supportChatSend = $("#support-chat-send");
+    const supportChatQuickButtons = $$("[data-chat-prompt]");
     const supportChatHistory = [];
     let supportChatRequestInFlight = false;
     let supportChatResizeRaf = 0;
@@ -5546,23 +5603,22 @@
       const isOpen = supportChat?.classList.contains("is-open");
       setSupportChatState(!isOpen);
     });
-    supportChatClose?.addEventListener("click", () => setSupportChatState(false));
-    supportChatQuickButtons.forEach((button) => {
-      button.addEventListener("click", () => {
+    on(supportChatClose, "click", () => setSupportChatState(false));
+    onAll(supportChatQuickButtons, "click", (event) => {
+      const button = event.currentTarget;
         const prompt = button.getAttribute("data-chat-prompt");
         if (!prompt) return;
         setSupportChatState(true);
         sendSupportChatMessage(prompt);
-      });
     });
-    supportChatInput?.addEventListener("input", scheduleSupportChatInputResize);
-    supportChatInput?.addEventListener("keydown", (event) => {
+    on(supportChatInput, "input", scheduleSupportChatInputResize);
+    on(supportChatInput, "keydown", (event) => {
       if (event.key === "Enter" && !event.shiftKey) {
         event.preventDefault();
         supportChatForm?.requestSubmit();
       }
     });
-    supportChatForm?.addEventListener("submit", (event) => {
+    on(supportChatForm, "submit", (event) => {
       event.preventDefault();
       const value = supportChatInput?.value || "";
       if (!value.trim()) return;
@@ -5570,18 +5626,21 @@
       resizeSupportChatInput();
       sendSupportChatMessage(value);
     });
-    document.addEventListener("click", (event) => {
+    on(document, "click", (event) => {
       if (!supportChat?.classList.contains("is-open")) return;
       if (supportChat.contains(event.target)) return;
       setSupportChatState(false);
     });
     resizeSupportChatInput();
   
-    const modal = document.getElementById("image-modal");
-    const modalImg = document.getElementById("image-modal-img");
-    const modalClose = document.getElementById("image-modal-close");
-    const modalInner = document.querySelector(".image-modal__inner");
-    const zoomableImages = document.querySelectorAll(".proof-shot img, .case-photo img, .review-photo img");
+    /* ==========================================================================
+       IMAGE MODAL
+       ========================================================================== */
+    const modal = $("#image-modal");
+    const modalImg = $("#image-modal-img");
+    const modalClose = $("#image-modal-close");
+    const modalInner = $(".image-modal__inner");
+    const zoomableImages = $$(".proof-shot img, .case-photo img, .review-photo img");
     let lastFocusedBeforeImageModal = null;
 
     function closeImageModal() {
